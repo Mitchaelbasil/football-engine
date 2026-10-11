@@ -16,7 +16,7 @@ import soundfile as sf
 
 from voice import SR, norm
 
-MAX_GAP = 2.7          # hard limit is 3.0; keep headroom
+MAX_GAP = 2.4          # hard limit is 3.0; changes must be clearly felt, so keep real headroom
 HARD_LIMIT = 3.0
 ROBOT_TOL = 0.3
 MIN_SPACING = 0.45     # don't cram changes closer than this
@@ -160,18 +160,19 @@ def _in_speech(tl, t):
 
 
 class _Kinds:
+    """Visible changes only: content accents (template-specific), strong zoom punches/pulls, light sweeps."""
     def __init__(self):
         self.prev, self.n, self.zoom, self.dir = None, 0, {}, 1
 
     def pick(self, scene_id, emph, silent):
         z = self.zoom.get(scene_id, 0)
         if emph:
-            pool = ["punch", "glow"] if z < 2 else ["glow", "pull"]
+            pool = ["punch", "accent"] if z < 1 else ["accent", "pull"]
         elif silent:
-            pool = ["drift", "tilt", "sweep"]
+            pool = ["accent", "sweep"]
         else:
-            pool = ["drift", "punch", "tilt", "glow", "pull", "sweep"] if z < 2 else ["pull", "drift", "tilt", "glow"]
-        k = next((p for p in pool[self.n % len(pool):] + pool if p != self.prev), pool[0])
+            pool = ["accent", "punch", "accent", "sweep"] if z < 1 else ["accent", "pull", "accent", "sweep"]
+        k = next((p for p in pool[self.n % len(pool):] + pool if p != self.prev or p == "accent"), pool[0])
         self.n += 1
         self.prev = k
         if k == "punch":

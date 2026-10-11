@@ -407,3 +407,27 @@ TPL.endcard = {
     return '';
   }
 };
+
+// ---------- accents: planner-inserted visible changes, specific to each scene type ----------
+const PULSE = (el, k, amt) => { if (el && k > 0) el.style.transform += ` scale(${1 + amt * k})`; };
+TPL.counter.accent = (r, ac) => { PULSE(r.num, ac.k, .14); if (ac.k > 0) r.num.style.filter = `brightness(${1 + .3 * ac.k}) drop-shadow(0 0 ${30 * ac.k}px rgba(255,180,60,.9))`; };
+TPL.checklist.accent = (r, ac) => { const it = r.items[ac.i % r.items.length]; PULSE(it, ac.k, .09); if (it) it.firstChild.style.transform += ` rotate(${360 * (1 - ac.k)}deg)`; };
+TPL.slam.accent = (r, ac) => { if (ac.k > 0) S(r.ring, ac.k, 0, 0, lerp(.6, 7, 1 - ac.k)); PULSE(r.word, ac.k, .07); return shake(0, 0, 0); };
+TPL.arc.accent = (r, ac) => { PULSE(r.lines, ac.k, .3); PULSE(r.t2, ac.k, .07); };
+TPL.scan.accent = (r, ac) => { PULSE(r.ring1, ac.k, .22); PULSE(r.ring2, ac.k, -.18); [r.num1, r.num2].forEach(e => PULSE(e, ac.k, .1)); };
+TPL.h2h.accent = (r, ac) => {
+  r.rows.forEach(x => x.lab.style.color = '');
+  const o = r.rows[ac.i % r.rows.length]; if (!o || ac.k <= 0) return;
+  [o.bl, o.br].forEach(b => { b.style.transform += ` scaleY(${1 + .45 * ac.k})`; b.style.filter = `brightness(${1 + .35 * ac.k}) drop-shadow(0 0 ${24 * ac.k}px rgba(255,255,255,.95))`; });
+  [o.vl, o.vr].forEach(v => PULSE(v, ac.k, .4)); PULSE(o.lab, ac.k, .06); o.lab.style.color = 'var(--accent)';
+};
+TPL.photo.accent = (r, ac, t, s) => {  // each accent re-frames the photo: alternate push-in / pull-back
+  let z = 0; s.accT.forEach((a, j) => { z += (j % 2 ? -.08 : .11) * eo(clamp((t - a) / .35)); });
+  r.pin.style.transform += ` scale(${1 + z})`;
+};
+TPL.aura.accent = (r, ac) => { PULSE(r.glow, ac.k, .35); PULSE(r.rays, ac.k, .12); if (r.card) PULSE(r.card, ac.k, .04); };
+TPL.timeline.accent = (r, ac) => { PULSE(r.score, ac.k, .22); r.ev.forEach(e => PULSE(e.dot, ac.k, .6)); };
+TPL.table.accent = (r, ac) => { PULSE(r.rows[ac.i % r.rows.length], ac.k, .06); };
+TPL.grid.accent = (r, ac, t) => { if (ac.k <= 0) return; const n = r.tiles.length; r.tiles.forEach((d, i) => { const w = Math.max(0, 1 - Math.abs(i / n - (1 - ac.k)) * 4); PULSE(d, w, .14); }); };
+TPL.shootout.accent = (r, ac) => { r.k.forEach(k => PULSE(k.c, ac.k, .18)); };
+TPL.endcard.accent = (r, ac) => { PULSE(r.t, ac.k, .08); };

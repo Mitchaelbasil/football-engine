@@ -37,6 +37,12 @@ jobs:
           pip install -q torch --index-url https://download.pytorch.org/whl/cpu
           pip install -q -r 0004/requirements.txt
           python -m playwright install --with-deps chromium > /dev/null
+      - name: Restore voice cache (skip re-voicing unchanged sentences)
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.VID }}/build/voice_chatterbox
+          key: voice-${{ inputs.video }}-${{ github.run_id }}
+          restore-keys: voice-${{ inputs.video }}-
       - name: Build video
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}

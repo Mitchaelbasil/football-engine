@@ -95,14 +95,13 @@ function drawBG(T) {
 function camera(s, t) {
   let z = 1 + .02 * clamp(t / s.D), x = 0, y = 0, r = 0;
   for (const m of s.micro) {
-    const p = P(t, m.t, m.k === 'drift' ? 1.1 : .32, m.k === 'drift' ? eio : eo);
+    const p = P(t, m.t, .24, eo);
     if (p <= 0) continue;
-    if (m.k === 'punch') z += .065 * p;
-    else if (m.k === 'pull') z -= .05 * p;
-    else if (m.k === 'drift') { x += m.dir * 46 * p; y += (m.dir > 0 ? -1 : 1) * 18 * p; }
-    else if (m.k === 'tilt') r += m.dir * 1.3 * p;
+    if (m.k === 'punch') z += .12 * p;
+    else if (m.k === 'pull') z -= .09 * p;
+    else if (m.k === 'accent') z += .025 * p;
   }
-  return `translate(${x}px,${y}px) rotate(${r}deg) scale(${z})`;
+  return `translate(${x}px,${y}px) rotate(${r}deg) scale(${Math.max(.8, z)})` + s.micro.filter(m => m.k === 'punch').map(m => shake(t, m.t, 9, .25)).join('');
 }
 let bloom, sweep;
 function initFX() {
@@ -184,6 +183,8 @@ function initScenes() {
     for (const k in ev) ev[k].sort((a, b) => a - b);
     s.A = (name, j = 0, dflt = NEVER) => (ev[name] && ev[name][j] !== undefined) ? ev[name][j] : dflt;
     s.micro = TL.micro.filter(m => m.t >= s.start - .01 && m.t < s.end).map(m => ({ ...m, t: m.t - s.start }));
+    s.accT = s.micro.filter(m => m.k === 'accent').map(m => m.t);
+    s.acc = t => { let i = -1; for (let j = 0; j < s.accT.length; j++) if (s.accT[j] <= t) i = j; return { i, k: i < 0 ? 0 : eo(clamp(1 - (t - s.accT[i]) / .6)) }; };
     const tpl = TPL[s.type]; if (!tpl) throw new Error('Unknown template: ' + s.type);
     s.r = tpl.build(L, s.data || {}, s);
   });
@@ -219,7 +220,8 @@ window.renderFrame = function (T) {
     s.L.style.display = 'block';
     const tin = transitionIn(s, T), po = s.i < last ? P(T, s.end, outD, eio) : 0;
     s.L.style.opacity = tin.o * (1 - po);
-    const extra = TPL[s.type].update(t, s.A, s.r, s.L, s) || '';
+    let extra = TPL[s.type].update(t, s.A, s.r, s.L, s) || '';
+    if (s.accT.length && TPL[s.type].accent) { const ac = s.acc(t); if (ac.i >= 0) extra += TPL[s.type].accent(s.r, ac, t, s) || ''; }
     s.L.style.transform = `${tin.tf} scale(${lerp(1, .94, po)}) ${camera(s, t)}${extra}`;
   }
   $('layers').style.transform = roomShift(T);
