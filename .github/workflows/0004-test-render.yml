@@ -78,4 +78,4 @@ jobs:
           cp "$VID/build/timeline.json" plan.json 2>/dev/null || true
           if [ -f "$VID/out/final.mp4" ]; then NOTE="🎬 0004 test render ready: ${{ inputs.video }}"; grep -q 'VOICE FALLBACK' build.log && NOTE="$NOTE (⚠️ Kokoro fallback voice)"; else NOTE="❌ 0004 test render failed: ${{ inputs.video }}"; fi
           python 0004/pipeline/deliver.py --drive-path "football-engine/0004/tests/${{ inputs.video }}" --note "$NOTE" \
-            "$VID"/out/*.mp4 "$VID"/out/thumb_*.png "$VID"/out/thumb_instructions.txt build.log | tail -1 | sed 's/^/::notice title=drive::/'
+            "$VID"/out/*.mp4 "$VID"/out/thumb_*.png "$VID"/out/*.txt build.log | tail -1 | sed 's/^/::notice title=drive::/'

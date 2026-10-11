@@ -81,7 +81,21 @@ def _music(T):
     return sosfilt(butter(2, 3200, "low", fs=SR, output="sos"), music)
 
 
-def mix(tl: dict, voice_wav: Path, out: Path, music_gain=0.75):
+def _load_music(N: int, music_dir) -> np.ndarray:
+    """Loop a royalty-free track from music_dir (picked deterministically) under the whole video."""
+    tracks = sorted(p for p in Path(music_dir).glob("*") if p.suffix.lower() in (".mp3", ".wav", ".m4a", ".ogg", ".flac"))
+    if not tracks:
+        return np.zeros(N)
+    import subprocess as sp
+    raw = sp.run(["ffmpeg", "-v", "error", "-i", str(tracks[N % len(tracks)]), "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
+    m = np.frombuffer(raw, dtype=np.float32).astype(np.float64)
+    if not len(m):
+        return np.zeros(N)
+    m = np.tile(m, N // len(m) + 1)[:N]
+    return m / max(np.max(np.abs(m)), 1e-6) * .25
+
+
+def mix(tl: dict, voice_wav: Path, out: Path, music_gain=0.75, music_dir=None):
     T = tl["total"]; N = int((T + 1) * SR)
     v, vsr = sf.read(voice_wav, dtype="float32")
     if vsr != SR:
@@ -100,7 +114,7 @@ def mix(tl: dict, voice_wav: Path, out: Path, music_gain=0.75):
         elif k == "react": _place(sfx, at - .25, _whoosh(.35, 800, 5000), .3); _place(sfx, at, _hit(), .35)
         elif k == "ticks":
             for i in range(10): _place(sfx, at + i * .1, _tick(1400 + i * 50), .16)
-    music = _music(T)[:N] * music_gain
+    music = _load_music(N, music_dir) * music_gain if music_dir else np.zeros(N)
     env = np.convolve(np.abs(voice), np.ones(int(.25 * SR)) / int(.25 * SR), mode="same")
     music *= 1 - .6 * np.clip(env / .02, 0, 1)
     music *= np.clip(np.arange(N) / SR / 2, 0, 1) * np.clip((T + .5 - np.arange(N) / SR) / 2, 0, 1)

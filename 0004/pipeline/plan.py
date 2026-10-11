@@ -252,25 +252,29 @@ def _plan_motion(tl):
 
 
 def _plan_sfx(tl):
-    """SFX only on payoffs. No transition whooshes, no micro-motion sounds (scenes change too often)."""
-    s = tl["sfx"]
+    """Built-in SFX ONLY on mundane moments (number ticks, list-item hits). Anime-worthy moments get NO built-in
+    sound: they are listed as cues (tl['cues']) for Mitchael's anime SFX / reaction clips, tested by hand first."""
+    s, cues = tl["sfx"], tl.setdefault("cues", [])
     for sc in tl["scenes"]:
-        locked = False
         for e in sc["ev"]:
             a = e["a"]
-            if a in ("slam", "burst"):
-                s.append({"t": e["t"], "k": "boom"})
-            elif a in ("count", "read", "rread"):
+            if a in ("count", "read", "rread"):
                 s.append({"t": e["t"], "k": "ticks"})
-            elif a == "charge":
-                s.append({"t": e["t"], "k": "riser"})
-            elif a == "lock" and not locked:
-                s.append({"t": e["t"], "k": "scan"}); locked = True
-            elif a.startswith("item") or a == "title":
+            elif a.startswith("item"):
                 s.append({"t": e["t"], "k": "hit"})
+            if a in ("slam", "stamp"):
+                cues.append({"t": e["t"], "what": "SLAM", "idea": "impact hit / dramatic sting"})
+            elif a == "burst":
+                cues.append({"t": e["t"], "what": "AURA", "idea": "aura / power-up sound"})
+            elif a == "charge":
+                cues.append({"t": e["t"], "what": "AURA CHARGE", "idea": "charging / energy build"})
+            elif a in ("lock", "rival"):
+                cues.append({"t": e["t"], "what": "SCANNER", "idea": "scouter beep"})
+            elif a == "title":
+                cues.append({"t": e["t"], "what": "ARC TITLE", "idea": "anime title-card sting"})
     for o in tl["overlays"]:
-        s.append({"t": o["t"], "k": "react"})
-    s.sort(key=lambda x: x["t"])
+        cues.append({"t": o["t"], "what": f"REACTION ({o['emo']})", "idea": "anime reaction clip / sound"})
+    s.sort(key=lambda x: x["t"]); cues.sort(key=lambda x: x["t"])
 
 
 def assemble_voice(tl, out: Path):

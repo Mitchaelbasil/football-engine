@@ -42,16 +42,16 @@ def _fake(text: str):
     return np.zeros(int(dur * SR), dtype=np.float32), words
 
 
-_kokoro = None
+_kokoro = {}
 
 
 def _kokoro_synth(text: str, voice: str = "bm_george", speed: float = 0.95):
-    global _kokoro
-    if _kokoro is None:
+    lang = "b" if voice.startswith("b") else "a"
+    if lang not in _kokoro:
         from kokoro import KPipeline
-        _kokoro = KPipeline(lang_code="b" if voice.startswith("b") else "a")
+        _kokoro[lang] = KPipeline(lang_code=lang)
     chunks, words, off = [], [], 0.0
-    for res in _kokoro(text, voice=voice, speed=speed):
+    for res in _kokoro[lang](text, voice=voice, speed=speed):
         audio = res.audio.cpu().numpy() if hasattr(res.audio, "cpu") else np.asarray(res.audio)
         for tok in res.tokens or []:
             if tok.start_ts is None or not _WORD.search(tok.text or ""):

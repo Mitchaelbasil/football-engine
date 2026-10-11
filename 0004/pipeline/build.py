@@ -128,6 +128,9 @@ def main():
 
     if a.video:
         final = render_full(tl, main_build, out / "final.mp4")
+        cues = ["ANIME SFX CUES - built-in sound is OFF at these moments; test your anime sounds/clips here", ""]
+        cues += [f"{int(c['t'] // 60)}:{c['t'] % 60:05.2f}  {c['what']:<20} {c['idea']}" for c in tl.get("cues", [])]
+        (out / "sfx_cues.txt").write_text("\n".join(cues))
         contact_sheet(final, out / "contact.jpg")
         print(f"done: {final}")
 
