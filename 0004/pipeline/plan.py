@@ -249,26 +249,24 @@ def _plan_motion(tl):
 
 
 def _plan_sfx(tl):
+    """SFX only on payoffs. No transition whooshes, no micro-motion sounds (scenes change too often)."""
     s = tl["sfx"]
-    for i, sc in enumerate(tl["scenes"]):
-        if i:
-            s.append({"t": sc["start"], "k": "whoosh"})
+    for sc in tl["scenes"]:
+        locked = False
         for e in sc["ev"]:
-            if e["a"] in ("slam", "burst"):
+            a = e["a"]
+            if a in ("slam", "burst"):
                 s.append({"t": e["t"], "k": "boom"})
-            elif e["a"] in ("count", "read", "rread"):
+            elif a in ("count", "read", "rread"):
                 s.append({"t": e["t"], "k": "ticks"})
-            elif e["a"].startswith("item") or e["a"] in ("title", "open"):
-                s.append({"t": e["t"], "k": "hit"})
-            elif e["a"] == "charge":
+            elif a == "charge":
                 s.append({"t": e["t"], "k": "riser"})
-            elif e["a"] in ("lock", "rival"):
-                s.append({"t": e["t"], "k": "scan"})
+            elif a == "lock" and not locked:
+                s.append({"t": e["t"], "k": "scan"}); locked = True
+            elif a.startswith("item") or a == "title":
+                s.append({"t": e["t"], "k": "hit"})
     for o in tl["overlays"]:
         s.append({"t": o["t"], "k": "react"})
-    for m in tl["micro"]:
-        if m["k"] in ("punch", "sweep"):
-            s.append({"t": m["t"], "k": "swish" if m["k"] == "sweep" else "thump"})
     s.sort(key=lambda x: x["t"])
 
 

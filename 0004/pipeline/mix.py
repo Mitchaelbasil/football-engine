@@ -94,7 +94,7 @@ def mix(tl: dict, voice_wav: Path, out: Path, music_gain=0.75):
         elif k == "whoosh": _place(sfx, at - .45, _whoosh(), .32)
         elif k == "swish": _place(sfx, at - .2, _whoosh(.45, 1500, 6000), .14)
         elif k == "thump": _place(sfx, at, _hit(), .10)
-        elif k == "hit": _place(sfx, at, _hit(), .28)
+        elif k == "hit": _place(sfx, at, _hit(), .18)
         elif k == "riser": _place(sfx, at, _riser(), .35)
         elif k == "scan": _place(sfx, at, _scan(), .25)
         elif k == "react": _place(sfx, at - .25, _whoosh(.35, 800, 5000), .3); _place(sfx, at, _hit(), .35)

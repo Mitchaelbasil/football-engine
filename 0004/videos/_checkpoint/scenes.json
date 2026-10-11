@@ -1,68 +1,376 @@
 {
-  "meta": {
-    "title": "Engine v2 checkpoint — Ronaldo's 60-goal arc",
-    "note": "Test render for review. Facts from the verified pilot (Ronaldo 2011-12)."
+ "meta": {
+  "title": "Engine v2 checkpoint — Ronaldo's 60-goal arc",
+  "note": "Test render for review. Facts from the verified pilot (Ronaldo 2011-12)."
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "type": "counter",
+   "palette": "madrid",
+   "hud": false,
+   "data": {
+    "value": 60,
+    "label": "GOALS",
+    "sub": "IN 55 GAMES · 2011–12"
+   },
+   "beats": [
+    {
+     "say": "Sixty goals.",
+     "emph": [
+      "Sixty"
+     ],
+     "do": [
+      {
+       "a": "count",
+       "at": "Sixty"
+      }
+     ],
+     "hold": 0.2
+    },
+    {
+     "say": "In fifty-five games.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "fifty"
+      }
+     ]
+    }
+   ]
   },
-  "scenes": [
-    {"id": "hook", "type": "counter", "palette": "madrid", "hud": false,
-     "data": {"value": 60, "label": "GOALS", "sub": "IN 55 GAMES · 2011–12"},
-     "beats": [
-       {"say": "Sixty goals.", "emph": ["Sixty"], "do": [{"a": "count", "at": "Sixty"}], "hold": 0.2},
-       {"say": "In fifty-five games.", "do": [{"a": "sub", "at": "fifty"}]}
-     ]},
-    {"id": "list", "type": "checklist", "palette": "mint", "hud": false,
-     "data": {"items": ["RECORDS BROKEN", "LA LIGA CHAMPION", "SCORED VS ALL 19 TEAMS"]},
-     "beats": [
-       {"say": "He broke records.", "do": [{"a": "item0", "at": "broke"}]},
-       {"say": "He won the league.", "do": [{"a": "item1", "at": "won"}]},
-       {"say": "He scored against every single team.", "emph": ["every"], "do": [{"a": "item2", "at": "every"}]}
-     ]},
-    {"id": "second", "type": "slam", "palette": "gold", "hud": false,
-     "data": {"pre": "BALLON D'OR 2012", "word": "2ND"},
-     "beats": [
-       {"say": "And he still finished second.", "emph": ["second"], "do": ["pre", {"a": "slam", "at": "second"}],
-        "react": {"emo": "shock", "cap": "SECOND?!"}, "hold": 1.2}
-     ]},
-    {"id": "arc", "type": "arc", "palette": "violet",
-     "data": {"kicker": "ARC 01", "title": ["THE ARC WHERE", "60 WASN'T ENOUGH"], "sub": "CRISTIANO RONALDO · REAL MADRID · 2011–12"},
-     "beats": [
-       {"say": "This is the arc where sixty wasn't enough.", "emph": ["sixty"], "do": ["open", {"a": "title", "at": "sixty"}], "hold": 0.4}
-     ]},
-    {"id": "scan", "type": "scan", "palette": "madrid",
-     "data": {"name": "CRISTIANO RONALDO", "initials": "CR", "value": 60, "max": 70,
-              "rival": {"name": "LIONEL MESSI", "initials": "LM", "value": 73}},
-     "beats": [
-       {"say": "Scan Ronaldo at his peak, and the reading is absurd.", "do": [{"a": "lock", "at": "Scan"}], "emph": ["absurd"]},
-       {"say": "Sixty goals in all competitions.", "emph": ["Sixty"], "do": [{"a": "read", "at": "Sixty"}], "hold": 0.3},
-       {"say": "Then you scan the other guy.", "do": [{"a": "rival", "at": "other"}]},
-       {"say": "Seventy-three.", "emph": ["Seventy"], "do": [{"a": "rread", "at": "Seventy"}],
-        "react": {"emo": "shock", "text": "OVER 70?!", "cap": "THE SCANNER BROKE"}, "hold": 1.0}
-     ]},
-    {"id": "h2h", "type": "h2h", "palette": "barca",
-     "data": {"left": {"name": "RONALDO"}, "right": {"name": "MESSI"},
-              "rows": [["ALL COMPETITIONS", 60, 73, 0], ["LA LIGA GOALS", 46, 50, 0], ["GAMES", 55, 60, 0]]},
-     "beats": [
-       {"say": "Ronaldo: sixty, and forty-six in the league.", "do": [{"a": "left", "at": "sixty"}]},
-       {"say": "Messi: seventy-three, and fifty in the league. The first man ever to hit fifty in La Liga.", "emph": ["fifty"],
-        "do": [{"a": "right", "at": "seventy"}]}
-     ]},
-    {"id": "night", "type": "photo", "palette": "clasico",
-     "data": {"slot": 3, "desc": "Ronaldo 'calma' celebration · Camp Nou · 21 April 2012", "cap": "CAMP NOU · 21.04.2012"},
-     "beats": [
-       {"say": "But titles aren't decided on spreadsheets.", "do": [{"a": "crop1", "at": "spreadsheets"}]},
-       {"say": "April twenty-first. Madrid go to the Camp Now with the league on the line.", "do": [{"a": "crop2", "at": "Camp"}, {"a": "cap", "at": "April"}]}
-     ]},
-    {"id": "calma", "type": "aura", "palette": "gold",
-     "data": {"slot": 3, "desc": "Ronaldo 'calma' celebration · Camp Nou · 21 April 2012", "word": "CALMA.", "sub": "73' · BARCELONA 1–2 REAL MADRID"},
-     "beats": [
-       {"say": "Seventy-third minute. Ronaldo runs through, scores, and turns to the crowd.", "do": [{"a": "charge", "at": "Ronaldo"}]},
-       {"say": "Calm down.", "emph": ["Calm"], "do": [{"a": "burst", "at": "Calm"}], "react": {"emo": "aura", "text": "AURA +1000", "cap": "FARMING AURA"}, "hold": 1.4}
-     ]},
-    {"id": "verdict", "type": "slam", "palette": "sunset",
-     "data": {"pre": "SIXTY GOALS · A LEAGUE TITLE · 19 OUT OF 19", "word": "STILL 2ND", "fs": 300, "sub": "SO WHO WAS BETTER IN 2011–12? COMMENTS ↓"},
-     "beats": [
-       {"say": "Sixty goals. A league title. Nineteen out of nineteen.", "do": ["pre"]},
-       {"say": "And still, second.", "emph": ["second"], "do": [{"a": "slam", "at": "second"}, {"a": "sub", "at": "second", "dt": 1.0}], "hold": 2.0}
-     ]}
-  ]
+  {
+   "id": "list",
+   "type": "checklist",
+   "palette": "mint",
+   "hud": false,
+   "data": {
+    "items": [
+     "RECORDS BROKEN",
+     "LA LIGA CHAMPION",
+     "SCORED VS ALL 19 TEAMS"
+    ]
+   },
+   "beats": [
+    {
+     "say": "He broke records.",
+     "do": [
+      {
+       "a": "item0",
+       "at": "broke"
+      }
+     ]
+    },
+    {
+     "say": "He won the league.",
+     "do": [
+      {
+       "a": "item1",
+       "at": "won"
+      }
+     ]
+    },
+    {
+     "say": "He scored against every single team.",
+     "emph": [
+      "every"
+     ],
+     "do": [
+      {
+       "a": "item2",
+       "at": "every"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "second",
+   "type": "slam",
+   "palette": "gold",
+   "hud": false,
+   "data": {
+    "pre": "BALLON D'OR 2012",
+    "word": "2ND"
+   },
+   "beats": [
+    {
+     "say": "And he still finished second.",
+     "emph": [
+      "second"
+     ],
+     "do": [
+      "pre",
+      {
+       "a": "slam",
+       "at": "second"
+      }
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "SECOND?!"
+     },
+     "hold": 1.2
+    }
+   ]
+  },
+  {
+   "id": "arc",
+   "type": "arc",
+   "palette": "violet",
+   "data": {
+    "kicker": "ARC 01",
+    "title": [
+     "THE ARC WHERE",
+     "60 WASN'T ENOUGH"
+    ],
+    "sub": "CRISTIANO RONALDO · REAL MADRID · 2011–12"
+   },
+   "beats": [
+    {
+     "say": "This is the arc where sixty wasn't enough.",
+     "emph": [
+      "sixty"
+     ],
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "sixty"
+      }
+     ],
+     "hold": 0.4
+    }
+   ]
+  },
+  {
+   "id": "scan",
+   "type": "scan",
+   "palette": "madrid",
+   "data": {
+    "name": "CRISTIANO RONALDO",
+    "initials": "CR",
+    "value": 60,
+    "max": 70,
+    "rival": {
+     "name": "LIONEL MESSI",
+     "initials": "LM",
+     "value": 73
+    }
+   },
+   "beats": [
+    {
+     "say": "For almost any player in history, sixty goals would be the season of a lifetime.",
+     "emph": [
+      "sixty"
+     ],
+     "do": [
+      {
+       "a": "lock",
+       "at": "almost"
+      },
+      {
+       "a": "read",
+       "at": "sixty"
+      }
+     ],
+     "hold": 0.3
+    },
+    {
+     "say": "But five hundred kilometres away, someone was playing a different game.",
+     "do": [
+      {
+       "a": "rival",
+       "at": "someone"
+      }
+     ]
+    },
+    {
+     "say": "Lionel Messi. Seventy-three goals.",
+     "emph": [
+      "Seventy"
+     ],
+     "do": [
+      {
+       "a": "rread",
+       "at": "Seventy"
+      }
+     ],
+     "react": {
+      "emo": "shock",
+      "text": "OVER 70?!",
+      "cap": "THE SCANNER BROKE"
+     },
+     "hold": 0.6
+    }
+   ]
+  },
+  {
+   "id": "h2h",
+   "type": "h2h",
+   "palette": "barca",
+   "data": {
+    "left": {
+     "name": "RONALDO"
+    },
+    "right": {
+     "name": "MESSI"
+    },
+    "rows": [
+     [
+      "ALL COMPETITIONS",
+      60,
+      73,
+      0
+     ],
+     [
+      "LA LIGA GOALS",
+      46,
+      50,
+      0
+     ],
+     [
+      "GAMES",
+      55,
+      60,
+      0
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "say": "On paper, Ronaldo's season was historic.",
+     "do": [
+      {
+       "a": "left",
+       "at": "Ronaldo"
+      }
+     ]
+    },
+    {
+     "say": "Messi's was absurd. More goals in the league, more goals overall, and the first man ever to score fifty in a La Liga season.",
+     "emph": [
+      "fifty"
+     ],
+     "do": [
+      {
+       "a": "right",
+       "at": "absurd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "night",
+   "type": "photo",
+   "palette": "clasico",
+   "data": {
+    "slot": 3,
+    "desc": "Ronaldo 'calma' celebration · Camp Nou · 21 April 2012",
+    "cap": "CAMP NOU · 21.04.2012"
+   },
+   "beats": [
+    {
+     "say": "But titles aren't decided on spreadsheets.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "spreadsheets"
+      }
+     ]
+    },
+    {
+     "say": "April twenty-first. Madrid go to the Camp Now with the league on the line.",
+     "do": [
+      {
+       "a": "crop2",
+       "at": "Camp"
+      },
+      {
+       "a": "cap",
+       "at": "April"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "calma",
+   "type": "aura",
+   "palette": "gold",
+   "data": {
+    "slot": 3,
+    "desc": "Ronaldo 'calma' celebration · Camp Nou · 21 April 2012",
+    "word": "CALMA.",
+    "sub": "73' · BARCELONA 1–2 REAL MADRID"
+   },
+   "beats": [
+    {
+     "say": "Seventy-third minute. Ronaldo runs through, scores, and turns to the crowd.",
+     "do": [
+      {
+       "a": "charge",
+       "at": "Ronaldo"
+      }
+     ]
+    },
+    {
+     "say": "Calm down.",
+     "emph": [
+      "Calm"
+     ],
+     "do": [
+      {
+       "a": "burst",
+       "at": "Calm"
+      }
+     ],
+     "react": {
+      "emo": "aura",
+      "text": "AURA +1000",
+      "cap": "FARMING AURA"
+     },
+     "hold": 1.4
+    }
+   ]
+  },
+  {
+   "id": "verdict",
+   "type": "slam",
+   "palette": "sunset",
+   "data": {
+    "pre": "SIXTY GOALS · A LEAGUE TITLE · 19 OUT OF 19",
+    "word": "STILL 2ND",
+    "fs": 300,
+    "sub": "SO WHO WAS BETTER IN 2011–12? COMMENTS ↓"
+   },
+   "beats": [
+    {
+     "say": "Sixty goals. A league title. Nineteen out of nineteen.",
+     "do": [
+      "pre"
+     ]
+    },
+    {
+     "say": "And still, second.",
+     "emph": [
+      "second"
+     ],
+     "do": [
+      {
+       "a": "slam",
+       "at": "second"
+      },
+      {
+       "a": "sub",
+       "at": "second",
+       "dt": 1.0
+      }
+     ],
+     "hold": 2.0
+    }
+   ]
+  }
+ ]
 }
