@@ -1,0 +1,1046 @@
+{
+ "w": 1920,
+ "h": 1080,
+ "fps": 30,
+ "total": 52.071,
+ "scenes": [
+  {
+   "id": "grid",
+   "type": "grid",
+   "palette": "madrid",
+   "start": 0.0,
+   "end": 12.757,
+   "data": {
+    "title": "LA LIGA 2011\u201312 \u00b7 EVERY OPPONENT",
+    "count": "SCORED AGAINST",
+    "stamp": "FIRST IN LA LIGA HISTORY",
+    "items": [
+     "ATHLETIC CLUB",
+     "ATL\u00c9TICO MADRID",
+     "BARCELONA",
+     "BETIS",
+     "ESPANYOL",
+     "GETAFE",
+     "GRANADA",
+     "LEVANTE",
+     "M\u00c1LAGA",
+     "MALLORCA",
+     "OSASUNA",
+     "RACING",
+     "RAYO VALLECANO",
+     "REAL SOCIEDAD",
+     "SEVILLA",
+     "SPORTING GIJ\u00d3N",
+     "VALENCIA",
+     "VILLARREAL",
+     "ZARAGOZA"
+    ]
+   },
+   "ev": [
+    {
+     "a": "show",
+     "t": 0.25
+    },
+    {
+     "a": "light",
+     "t": 5.889
+    },
+    {
+     "a": "stamp",
+     "t": 9.531
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "clasico",
+   "type": "timeline",
+   "palette": "clasico",
+   "start": 12.757,
+   "end": 28.053,
+   "data": {
+    "header": "LA LIGA \u00b7 CAMP NOU \u00b7 21.04.2012",
+    "home": "BARCELONA",
+    "away": "REAL MADRID",
+    "events": [
+     [
+      17,
+      "KHEDIRA",
+      "a"
+     ],
+     [
+      70,
+      "ALEXIS",
+      "h"
+     ],
+     [
+      73,
+      "RONALDO",
+      "a"
+     ]
+    ],
+    "hero": "a"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 13.107
+    },
+    {
+     "a": "ev0",
+     "t": 19.431
+    },
+    {
+     "a": "ev1",
+     "t": 23.018
+    },
+    {
+     "a": "ev2",
+     "t": 26.052
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "table",
+   "type": "table",
+   "palette": "gold",
+   "start": 28.053,
+   "end": 35.015,
+   "data": {
+    "title": "LA LIGA 2011\u201312 \u00b7 FINAL TABLE",
+    "cols": [
+     "W",
+     "D",
+     "L",
+     "GF",
+     "GA",
+     "PTS"
+    ],
+    "short": [
+     3,
+     5
+    ],
+    "rows": [
+     [
+      1,
+      "REAL MADRID",
+      [
+       32,
+       4,
+       2,
+       121,
+       32,
+       100
+      ],
+      true
+     ],
+     [
+      2,
+      "BARCELONA",
+      [
+       28,
+       7,
+       3,
+       114,
+       29,
+       91
+      ],
+      false
+     ]
+    ],
+    "badge": "+9 POINTS"
+   },
+   "ev": [
+    {
+     "a": "rows",
+     "t": 28.403
+    },
+    {
+     "a": "hl",
+     "t": 30.303
+    },
+    {
+     "a": "badge",
+     "t": 31.696
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "shootout",
+   "type": "shootout",
+   "palette": "bayern",
+   "start": 35.015,
+   "end": 51.671,
+   "data": {
+    "teams": [
+     "BAYERN",
+     "REAL MADRID"
+    ],
+    "result": "BAYERN WIN 3\u20131 ON PENALTIES",
+    "kicks": [
+     [
+      0,
+      true,
+      "ALABA"
+     ],
+     [
+      1,
+      false,
+      "RONALDO"
+     ],
+     [
+      0,
+      true,
+      "G\u00d3MEZ"
+     ],
+     [
+      1,
+      false,
+      "KAK\u00c1"
+     ],
+     [
+      0,
+      false,
+      "KROOS"
+     ],
+     [
+      1,
+      true,
+      "ALONSO"
+     ],
+     [
+      0,
+      false,
+      "LAHM"
+     ],
+     [
+      1,
+      false,
+      "RAMOS"
+     ],
+     [
+      0,
+      true,
+      "SCHWEINSTEIGER"
+     ]
+    ]
+   },
+   "ev": [
+    {
+     "a": "show",
+     "t": 35.365
+    },
+    {
+     "a": "k0",
+     "t": 40.107
+    },
+    {
+     "a": "k1",
+     "t": 43.277
+    },
+    {
+     "a": "run",
+     "t": 44.848
+    },
+    {
+     "a": "result",
+     "t": 47.975
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": null,
+   "hud": true
+  }
+ ],
+ "overlays": [
+  {
+   "t": 49.421,
+   "d": 1.8,
+   "emo": "sad",
+   "text": null,
+   "cap": "NO FINAL",
+   "clip": null,
+   "pos": "br"
+  }
+ ],
+ "beats": [
+  {
+   "t": 0.25,
+   "end": 3.979,
+   "say": "There were nineteen other teams in La Liga that season.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/dbea31422299b5c8.wav",
+   "scene": 0
+  },
+  {
+   "t": 4.139,
+   "end": 7.441,
+   "say": "Ronaldo scored against every single one of them.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/1fef88f15b8459e2.wav",
+   "scene": 0
+  },
+  {
+   "t": 8.401,
+   "end": 11.747,
+   "say": "Nobody in the league's history had ever done that.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/d8ec023faf35f2ee.wav",
+   "scene": 0
+  },
+  {
+   "t": 13.107,
+   "end": 17.289,
+   "say": "April twenty-first. The Camp Now, with the title on the line.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/06ce7b78709fb9eb.wav",
+   "scene": 1
+  },
+  {
+   "t": 17.449,
+   "end": 20.04,
+   "say": "Sami Kedeera put Madrid ahead.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/d92ecfde6630d00f.wav",
+   "scene": 1
+  },
+  {
+   "t": 20.2,
+   "end": 23.893,
+   "say": "With twenty minutes left, Alexis Sanchez equalised.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/85053e207aad302a.wav",
+   "scene": 1
+  },
+  {
+   "t": 24.053,
+   "end": 26.843,
+   "say": "Three minutes later, Ronaldo ended it.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/45831ff99ff5f913.wav",
+   "scene": 1
+  },
+  {
+   "t": 28.403,
+   "end": 31.501,
+   "say": "Madrid took the league with a hundred points.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/b4760dbd9b256559.wav",
+   "scene": 2
+  },
+  {
+   "t": 31.661,
+   "end": 34.005,
+   "say": "Nine clear of Barcelona.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/3137eacd525cc0bd.wav",
+   "scene": 2
+  },
+  {
+   "t": 35.365,
+   "end": 39.947,
+   "say": "Four days later, it came down to penalties against Byern Munich.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/b70be1fb19aec969.wav",
+   "scene": 3
+  },
+  {
+   "t": 40.107,
+   "end": 44.062,
+   "say": "Ronaldo went first for Madrid, and Manuel Noyer saved it.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/b9f28f88392c8351.wav",
+   "scene": 3
+  },
+  {
+   "t": 44.222,
+   "end": 46.587,
+   "say": "Madrid missed three of their four.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/be2cf24fdbeab6e5.wav",
+   "scene": 3
+  },
+  {
+   "t": 47.947,
+   "end": 49.071,
+   "say": "No final.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_templates/build/voice_kokoro_bm_george/107a6a66169a78c3.wav",
+   "scene": 3
+  }
+ ],
+ "words": [
+  {
+   "w": "There",
+   "s": 0.25,
+   "e": 0.357,
+   "emph": false
+  },
+  {
+   "w": "were",
+   "s": 0.357,
+   "e": 0.47,
+   "emph": false
+  },
+  {
+   "w": "nineteen",
+   "s": 0.47,
+   "e": 1.12,
+   "emph": true
+  },
+  {
+   "w": "other",
+   "s": 1.12,
+   "e": 1.382,
+   "emph": false
+  },
+  {
+   "w": "teams",
+   "s": 1.382,
+   "e": 1.882,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 1.882,
+   "e": 2.02,
+   "emph": false
+  },
+  {
+   "w": "La",
+   "s": 2.02,
+   "e": 2.22,
+   "emph": false
+  },
+  {
+   "w": "Liga",
+   "s": 2.22,
+   "e": 2.908,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 2.908,
+   "e": 3.245,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 3.245,
+   "e": 4.17,
+   "emph": false
+  },
+  {
+   "w": "Ronaldo",
+   "s": 4.139,
+   "e": 4.776,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 4.776,
+   "e": 5.289,
+   "emph": false
+  },
+  {
+   "w": "against",
+   "s": 5.289,
+   "e": 5.889,
+   "emph": false
+  },
+  {
+   "w": "every",
+   "s": 5.889,
+   "e": 6.264,
+   "emph": true
+  },
+  {
+   "w": "single",
+   "s": 6.264,
+   "e": 6.689,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 6.689,
+   "e": 6.889,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 6.889,
+   "e": 7.039,
+   "emph": false
+  },
+  {
+   "w": "them",
+   "s": 7.039,
+   "e": 7.639,
+   "emph": false
+  },
+  {
+   "w": "Nobody",
+   "s": 8.431,
+   "e": 8.943,
+   "emph": true
+  },
+  {
+   "w": "in",
+   "s": 8.943,
+   "e": 9.068,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 9.068,
+   "e": 9.156,
+   "emph": false
+  },
+  {
+   "w": "league's",
+   "s": 9.156,
+   "e": 9.531,
+   "emph": false
+  },
+  {
+   "w": "history",
+   "s": 9.531,
+   "e": 10.306,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 10.306,
+   "e": 10.581,
+   "emph": false
+  },
+  {
+   "w": "ever",
+   "s": 10.581,
+   "e": 10.868,
+   "emph": false
+  },
+  {
+   "w": "done",
+   "s": 10.868,
+   "e": 11.206,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 11.206,
+   "e": 11.881,
+   "emph": false
+  },
+  {
+   "w": "April",
+   "s": 13.107,
+   "e": 13.517,
+   "emph": false
+  },
+  {
+   "w": "twenty-first",
+   "s": 13.517,
+   "e": 14.605,
+   "emph": false
+  },
+  {
+   "w": "The",
+   "s": 14.73,
+   "e": 14.868,
+   "emph": false
+  },
+  {
+   "w": "Camp",
+   "s": 14.868,
+   "e": 15.205,
+   "emph": false
+  },
+  {
+   "w": "Now",
+   "s": 15.205,
+   "e": 15.63,
+   "emph": false
+  },
+  {
+   "w": "with",
+   "s": 15.73,
+   "e": 15.868,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 15.868,
+   "e": 15.993,
+   "emph": false
+  },
+  {
+   "w": "title",
+   "s": 15.993,
+   "e": 16.405,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 16.405,
+   "e": 16.567,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 16.567,
+   "e": 16.68,
+   "emph": false
+  },
+  {
+   "w": "line",
+   "s": 16.68,
+   "e": 17.455,
+   "emph": false
+  },
+  {
+   "w": "Sami",
+   "s": 17.506,
+   "e": 17.881,
+   "emph": false
+  },
+  {
+   "w": "Kedeera",
+   "s": 17.881,
+   "e": 18.756,
+   "emph": false
+  },
+  {
+   "w": "put",
+   "s": 18.756,
+   "e": 19.031,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 19.031,
+   "e": 19.431,
+   "emph": false
+  },
+  {
+   "w": "ahead",
+   "s": 19.431,
+   "e": 20.181,
+   "emph": false
+  },
+  {
+   "w": "With",
+   "s": 20.2,
+   "e": 20.368,
+   "emph": false
+  },
+  {
+   "w": "twenty",
+   "s": 20.368,
+   "e": 20.781,
+   "emph": false
+  },
+  {
+   "w": "minutes",
+   "s": 20.781,
+   "e": 21.106,
+   "emph": false
+  },
+  {
+   "w": "left",
+   "s": 21.106,
+   "e": 21.656,
+   "emph": false
+  },
+  {
+   "w": "Alexis",
+   "s": 21.768,
+   "e": 22.356,
+   "emph": false
+  },
+  {
+   "w": "Sanchez",
+   "s": 22.356,
+   "e": 23.018,
+   "emph": false
+  },
+  {
+   "w": "equalised",
+   "s": 23.018,
+   "e": 24.056,
+   "emph": false
+  },
+  {
+   "w": "Three",
+   "s": 24.077,
+   "e": 24.327,
+   "emph": false
+  },
+  {
+   "w": "minutes",
+   "s": 24.327,
+   "e": 24.652,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 24.652,
+   "e": 25.252,
+   "emph": false
+  },
+  {
+   "w": "Ronaldo",
+   "s": 25.377,
+   "e": 26.052,
+   "emph": false
+  },
+  {
+   "w": "ended",
+   "s": 26.052,
+   "e": 26.465,
+   "emph": true
+  },
+  {
+   "w": "it",
+   "s": 26.465,
+   "e": 26.977,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 28.415,
+   "e": 28.965,
+   "emph": false
+  },
+  {
+   "w": "took",
+   "s": 28.965,
+   "e": 29.24,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 29.24,
+   "e": 29.365,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 29.365,
+   "e": 29.99,
+   "emph": false
+  },
+  {
+   "w": "with",
+   "s": 29.99,
+   "e": 30.19,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 30.19,
+   "e": 30.303,
+   "emph": false
+  },
+  {
+   "w": "hundred",
+   "s": 30.303,
+   "e": 30.777,
+   "emph": true
+  },
+  {
+   "w": "points",
+   "s": 30.777,
+   "e": 31.64,
+   "emph": false
+  },
+  {
+   "w": "Nine",
+   "s": 31.696,
+   "e": 32.034,
+   "emph": false
+  },
+  {
+   "w": "clear",
+   "s": 32.034,
+   "e": 32.758,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 32.758,
+   "e": 32.959,
+   "emph": false
+  },
+  {
+   "w": "Barcelona",
+   "s": 32.959,
+   "e": 34.171,
+   "emph": false
+  },
+  {
+   "w": "Four",
+   "s": 35.405,
+   "e": 35.655,
+   "emph": false
+  },
+  {
+   "w": "days",
+   "s": 35.655,
+   "e": 35.905,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 35.905,
+   "e": 36.48,
+   "emph": false
+  },
+  {
+   "w": "it",
+   "s": 36.618,
+   "e": 36.755,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 36.755,
+   "e": 37.055,
+   "emph": false
+  },
+  {
+   "w": "down",
+   "s": 37.055,
+   "e": 37.38,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 37.38,
+   "e": 37.518,
+   "emph": false
+  },
+  {
+   "w": "penalties",
+   "s": 37.518,
+   "e": 38.505,
+   "emph": false
+  },
+  {
+   "w": "against",
+   "s": 38.505,
+   "e": 38.942,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 38.942,
+   "e": 39.355,
+   "emph": false
+  },
+  {
+   "w": "Munich",
+   "s": 39.355,
+   "e": 40.105,
+   "emph": false
+  },
+  {
+   "w": "Ronaldo",
+   "s": 40.107,
+   "e": 40.677,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 40.677,
+   "e": 40.891,
+   "emph": false
+  },
+  {
+   "w": "first",
+   "s": 40.891,
+   "e": 41.253,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 41.253,
+   "e": 41.377,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 41.377,
+   "e": 42.177,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 42.277,
+   "e": 42.402,
+   "emph": false
+  },
+  {
+   "w": "Manuel",
+   "s": 42.402,
+   "e": 42.914,
+   "emph": false
+  },
+  {
+   "w": "Noyer",
+   "s": 42.914,
+   "e": 43.277,
+   "emph": false
+  },
+  {
+   "w": "saved",
+   "s": 43.277,
+   "e": 43.715,
+   "emph": true
+  },
+  {
+   "w": "it",
+   "s": 43.715,
+   "e": 44.227,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 44.235,
+   "e": 44.848,
+   "emph": false
+  },
+  {
+   "w": "missed",
+   "s": 44.848,
+   "e": 45.372,
+   "emph": false
+  },
+  {
+   "w": "three",
+   "s": 45.372,
+   "e": 45.673,
+   "emph": true
+  },
+  {
+   "w": "of",
+   "s": 45.673,
+   "e": 45.76,
+   "emph": false
+  },
+  {
+   "w": "their",
+   "s": 45.76,
+   "e": 45.985,
+   "emph": false
+  },
+  {
+   "w": "four",
+   "s": 45.985,
+   "e": 46.735,
+   "emph": false
+  },
+  {
+   "w": "No",
+   "s": 47.975,
+   "e": 48.263,
+   "emph": false
+  },
+  {
+   "w": "final",
+   "s": 48.263,
+   "e": 49.175,
+   "emph": true
+  }
+ ],
+ "micro": [
+  {
+   "t": 2.02,
+   "k": "drift",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 4.139,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 8.431,
+   "k": "glow",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 10.581,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 14.868,
+   "k": "drift",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 17.506,
+   "k": "sweep",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 21.768,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 24.077,
+   "k": "tilt",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 32.959,
+   "k": "glow",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 37.518,
+   "k": "sweep",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 38.942,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 42.402,
+   "k": "drift",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 45.372,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  }
+ ],
+ "sfx": [
+  {
+   "t": 49.421,
+   "k": "react"
+  }
+ ],
+ "report": {
+  "changes": 34,
+  "avg_gap": 1.53,
+  "max_gap": 2.64,
+  "over_limit": [],
+  "robotic_at": [],
+  "ok": true,
+  "warnings": []
+ }
+}
