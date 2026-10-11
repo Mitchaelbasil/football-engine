@@ -49,7 +49,9 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
         start = cur
         cur += sc.get("pre", 0.35 if si else 0.25)
         evs = []
-        for b in sc["beats"]:
+        if not sc.get("beats"):  # silent scene (e.g. Shorts end card)
+            cur += sc.get("dur", 2.5)
+        for b in sc.get("beats", []):
             v = voice[vi]; vi += 1
             bt = cur
             words = [{"w": x["w"], "s": bt + x["s"], "e": bt + x["e"], "emph": False} for x in v["words"]]

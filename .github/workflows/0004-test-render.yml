@@ -40,12 +40,12 @@ jobs:
       - name: Build video
         run: |
           set -o pipefail
-          python 0004/pipeline/build.py "$VID" --voice "${{ inputs.voice }}" --video 2>&1 | tee build.log
-          echo "::notice title=plan::$(grep '^plan:' build.log)"
+          python 0004/pipeline/build.py "$VID" --voice "${{ inputs.voice }}" --video --shorts --thumbs 2>&1 | tee build.log
+          grep '^plan\[' build.log | while read -r l; do echo "::notice title=plan::$l"; done
       - name: Push review assets (contact sheet, waveform, loudness, plan)
         run: |
           R=/tmp/review; mkdir -p $R
-          cp "$VID/out/contact.jpg" "$VID/build/timeline.json" $R/
+          cp "$VID"/out/contact*.jpg "$VID"/out/thumb_*.png "$VID/build/main/timeline.json" $R/ 2>/dev/null || true
           ffmpeg -v error -i "$VID/out/final.mp4" -filter_complex "showwavespic=s=1920x300:split_channels=0" -frames:v 1 $R/wave.png
           ffmpeg -nostats -i "$VID/out/final.mp4" -af ebur128 -f null - 2>&1 | tail -12 > $R/loudness.txt
           for t in 1.5 13.5 30.5 44 60.5; do ffmpeg -v error -ss $t -i "$VID/out/final.mp4" -frames:v 1 -vf scale=960:-1 $R/f_$t.jpg; done
@@ -67,4 +67,4 @@ jobs:
           cp "$VID/build/timeline.json" plan.json 2>/dev/null || true
           if [ -f "$VID/out/final.mp4" ]; then NOTE="🎬 0004 test render ready: ${{ inputs.video }}"; else NOTE="❌ 0004 test render failed: ${{ inputs.video }}"; fi
           python 0004/pipeline/deliver.py --drive-path "football-engine/0004/tests/${{ inputs.video }}" --note "$NOTE" \
-            "$VID/out/final.mp4" "$VID/out/contact.jpg" build.log | tail -1 | sed 's/^/::notice title=drive::/'
+            "$VID"/out/*.mp4 "$VID"/out/thumb_*.png "$VID"/out/thumb_instructions.txt build.log | tail -1 | sed 's/^/::notice title=drive::/'

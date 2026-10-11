@@ -1,6 +1,6 @@
 // 0004 engine v2 — core runtime. Deterministic: renderFrame(T) depends only on T + timeline.
 // timeline.js defines window.TL (written by pipeline/plan.py).
-const W = TL.w || 1920, H = TL.h || 1080, CX = W / 2, CY = H / 2;
+const W = TL.w || 1920, H = TL.h || 1080, CX = W / 2, CY = H / 2, PORT = H > W;
 const TPL = {};
 
 // ---------- math / easing ----------
@@ -21,9 +21,11 @@ function E(par, html, o = {}) {
   if (o.fs) d.style.fontSize = o.fs + 'px'; if (o.col) d.style.color = o.col; if (o.st) Object.assign(d.style, o.st);
   d._x = o.x ?? CX; d._y = o.y ?? CY; d._a = o.a || 'c'; d._r = o.r || 0; par.appendChild(d); S(d, 0); return d;
 }
+// shrink an element (uniformly) so its layout width fits maxW; needs fonts loaded (start() awaits them)
+function fit(d, maxW = W - 160) { const w = d.offsetWidth; if (w > maxW && w > 0) d._k = maxW / w; return d; }
 function S(d, o = 1, dx = 0, dy = 0, s = 1, blur = 0, rot = 0) {
   const ax = d._a === 'l' ? '0%' : d._a === 'r' ? '-100%' : '-50%';
-  d.style.transform = `translate(${d._x + dx}px,${d._y + dy}px) translate(${ax},-50%) rotate(${d._r + rot}deg) scale(${s})`;
+  d.style.transform = `translate(${d._x + dx}px,${d._y + dy}px) translate(${ax},-50%) rotate(${d._r + rot}deg) scale(${s * (d._k || 1)})`;
   d.style.opacity = o; d.style.filter = blur > .3 ? `blur(${blur}px)` : '';
 }
 function R(d, t, a, b = NEVER, amt = 40, dur = .55) { const pi = P(t, a, dur), po = 1 - P(t, b, .35, eio); S(d, pi * po, 0, (1 - pi) * amt - (1 - po) * 20, 1, (1 - pi) * 8); }
@@ -120,7 +122,9 @@ function drawFX(T) {
 
 // ---------- reaction overlays ----------
 const REACT_TEXT = { shock: 'EHHH?!', bored: '...', hype: "LET'S GO!!", sad: 'NOOO...', laugh: 'HAHAHA', aura: 'AURA', what: 'HUH?!' };
-const REACT_POS = { br: [W - 400, H - 290, -4], tr: [W - 400, 340, 3], bl: [400, H - 290, 4], tl: [400, 340, -3] };
+const REACT_POS = PORT
+  ? { br: [CX + 120, H * .66, -4], tr: [CX + 120, H * .3, 3], bl: [CX - 120, H * .66, 4], tl: [CX - 120, H * .3, -3] }
+  : { br: [W - 400, H - 290, -4], tr: [W - 400, 340, 3], bl: [400, H - 290, 4], tl: [400, 340, -3] };
 function initOverlays() {
   const ov = $('over');
   for (const o of TL.overlays) {
@@ -140,6 +144,7 @@ function roomShift(T) {
     const e = P(T, o.t - .05, .35, eio) * (1 - P(T, o.t + o.d - .2, .4, eio));
     if (e > k) { k = e; dx = o.pos[1] === 'r' ? -1 : 1; dy = o.pos[0] === 'b' ? -1 : 1; }
   }
+  if (PORT) return k > 0 ? `translate(0px,${dy * H * .12 * k}px) scale(${1 - .14 * k})` : '';
   return k > 0 ? `translate(${dx * W * .1 * k}px,${dy * H * .035 * k}px) scale(${1 - .16 * k})` : '';
 }
 function drawOverlays(T) {
@@ -158,14 +163,14 @@ function drawOverlays(T) {
 let hudL, hudR, prog;
 function initHUD() {
   const hud = $('hud');
-  hudL = E(hud, 'IF FOOTBALL WAS ANIME', { c: 'L', fs: 20, x: 80, y: 66, a: 'l' });
-  hudR = E(hud, '', { c: 'L', fs: 20, x: W - 80, y: 66, a: 'r', col: 'var(--accent)' });
+  hudL = PORT ? E(hud, 'IF FOOTBALL WAS ANIME', { c: 'L', fs: 24, x: CX, y: 170 }) : E(hud, 'IF FOOTBALL WAS ANIME', { c: 'L', fs: 20, x: 80, y: 66, a: 'l' });
+  hudR = PORT ? E(hud, '', { c: 'L', fs: 22, x: CX, y: 210, col: 'var(--accent)' }) : E(hud, '', { c: 'L', fs: 20, x: W - 80, y: 66, a: 'r', col: 'var(--accent)' });
   prog = E(hud, '', { x: 0, y: H - 4, a: 'l', st: { height: '8px', width: W + 'px', background: 'linear-gradient(90deg,#ffb11f,#e3165b)', transformOrigin: '0 50%' } });
 }
 function drawHUD(T, cur) {
   const on = cur.hud === false ? 0 : 1, hp = P(T, cur.start + .2, .5) * on + (1 - on) * (1 - P(T, cur.start, .3));
   S(hudL, .85 * hp); hudR.innerHTML = cur.arcLabel || ''; S(hudR, hp);
-  S(prog, .9); prog.style.transform += ` scaleX(${T / TL.total})`;
+  S(prog, PORT ? 0 : .9); prog.style.transform += ` scaleX(${T / TL.total})`;
 }
 
 // ---------- scenes ----------
@@ -193,9 +198,11 @@ function transitionIn(s, T) {
   }
 }
 
-function start() {
+async function start() {
   const st = $('stage'); st.style.width = W + 'px'; st.style.height = H + 'px';
   document.body.style.width = W + 'px'; document.body.style.height = H + 'px';
+  await Promise.all(['100px Anton', '800 30px Inter', '900 30px Inter', '600 30px Oswald'].map(f => document.fonts.load(f)));
+  await document.fonts.ready;
   initBG(); initScenes(); initFX(); initOverlays(); initHUD();
   window.READY = true;
 }

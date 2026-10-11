@@ -1,0 +1,367 @@
+{
+ "meta": {
+  "title": "Ronaldo Scored 60 Goals. It Still Wasn't Enough.",
+  "short_title": "RONALDO'S 60-GOAL ARC",
+  "note": "Template test (grid, timeline, table, shootout, Shorts, thumbnails). Facts from the verified pilot.",
+  "thumb": {
+   "big": "2ND",
+   "top": "60 GOALS · 19/19",
+   "kicker": "STILL NOT ENOUGH",
+   "vs": [
+    "60",
+    "73"
+   ],
+   "palette": "gold",
+   "faces": [
+    {
+     "who": "Cristiano Ronaldo",
+     "mood": "frustrated, staring at the number"
+    },
+    {
+     "who": "Lionel Messi",
+     "mood": "calm, slight smile"
+    }
+   ]
+  }
+ },
+ "shorts": [
+  {
+   "name": "nineteen",
+   "scenes": [
+    "grid"
+   ],
+   "title": "19 OUT OF 19"
+  },
+  {
+   "name": "penalties",
+   "scenes": [
+    "shootout"
+   ],
+   "title": "NO FINAL"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "grid",
+   "type": "grid",
+   "palette": "madrid",
+   "data": {
+    "title": "LA LIGA 2011–12 · EVERY OPPONENT",
+    "count": "SCORED AGAINST",
+    "stamp": "FIRST IN LA LIGA HISTORY",
+    "items": [
+     "ATHLETIC CLUB",
+     "ATLÉTICO MADRID",
+     "BARCELONA",
+     "BETIS",
+     "ESPANYOL",
+     "GETAFE",
+     "GRANADA",
+     "LEVANTE",
+     "MÁLAGA",
+     "MALLORCA",
+     "OSASUNA",
+     "RACING",
+     "RAYO VALLECANO",
+     "REAL SOCIEDAD",
+     "SEVILLA",
+     "SPORTING GIJÓN",
+     "VALENCIA",
+     "VILLARREAL",
+     "ZARAGOZA"
+    ]
+   },
+   "beats": [
+    {
+     "say": "There were nineteen other teams in La Liga that season.",
+     "emph": [
+      "nineteen"
+     ],
+     "do": [
+      "show"
+     ]
+    },
+    {
+     "say": "Ronaldo scored against every single one of them.",
+     "emph": [
+      "every"
+     ],
+     "do": [
+      {
+       "a": "light",
+       "at": "every"
+      }
+     ],
+     "hold": 0.8
+    },
+    {
+     "say": "Nobody in the league's history had ever done that.",
+     "emph": [
+      "Nobody"
+     ],
+     "do": [
+      {
+       "a": "stamp",
+       "at": "history"
+      }
+     ],
+     "hold": 0.6
+    }
+   ]
+  },
+  {
+   "id": "clasico",
+   "type": "timeline",
+   "palette": "clasico",
+   "data": {
+    "header": "LA LIGA · CAMP NOU · 21.04.2012",
+    "home": "BARCELONA",
+    "away": "REAL MADRID",
+    "events": [
+     [
+      17,
+      "KHEDIRA",
+      "a"
+     ],
+     [
+      70,
+      "ALEXIS",
+      "h"
+     ],
+     [
+      73,
+      "RONALDO",
+      "a"
+     ]
+    ],
+    "hero": "a"
+   },
+   "beats": [
+    {
+     "say": "April twenty-first. The Camp Now, with the title on the line.",
+     "do": [
+      "open"
+     ]
+    },
+    {
+     "say": "Sami Kedeera put Madrid ahead.",
+     "do": [
+      {
+       "a": "ev0",
+       "at": "ahead"
+      }
+     ]
+    },
+    {
+     "say": "With twenty minutes left, Alexis Sanchez equalised.",
+     "do": [
+      {
+       "a": "ev1",
+       "at": "equalised"
+      }
+     ]
+    },
+    {
+     "say": "Three minutes later, Ronaldo ended it.",
+     "emph": [
+      "ended"
+     ],
+     "do": [
+      {
+       "a": "ev2",
+       "at": "ended"
+      }
+     ],
+     "hold": 0.8
+    }
+   ]
+  },
+  {
+   "id": "table",
+   "type": "table",
+   "palette": "gold",
+   "data": {
+    "title": "LA LIGA 2011–12 · FINAL TABLE",
+    "cols": [
+     "W",
+     "D",
+     "L",
+     "GF",
+     "GA",
+     "PTS"
+    ],
+    "short": [
+     3,
+     5
+    ],
+    "rows": [
+     [
+      1,
+      "REAL MADRID",
+      [
+       32,
+       4,
+       2,
+       121,
+       32,
+       100
+      ],
+      true
+     ],
+     [
+      2,
+      "BARCELONA",
+      [
+       28,
+       7,
+       3,
+       114,
+       29,
+       91
+      ],
+      false
+     ]
+    ],
+    "badge": "+9 POINTS"
+   },
+   "beats": [
+    {
+     "say": "Madrid took the league with a hundred points.",
+     "emph": [
+      "hundred"
+     ],
+     "do": [
+      "rows",
+      {
+       "a": "hl",
+       "at": "hundred"
+      }
+     ]
+    },
+    {
+     "say": "Nine clear of Barcelona.",
+     "do": [
+      {
+       "a": "badge",
+       "at": "Nine"
+      }
+     ],
+     "hold": 0.6
+    }
+   ]
+  },
+  {
+   "id": "shootout",
+   "type": "shootout",
+   "palette": "bayern",
+   "data": {
+    "teams": [
+     "BAYERN",
+     "REAL MADRID"
+    ],
+    "result": "BAYERN WIN 3–1 ON PENALTIES",
+    "kicks": [
+     [
+      0,
+      true,
+      "ALABA"
+     ],
+     [
+      1,
+      false,
+      "RONALDO"
+     ],
+     [
+      0,
+      true,
+      "GÓMEZ"
+     ],
+     [
+      1,
+      false,
+      "KAKÁ"
+     ],
+     [
+      0,
+      false,
+      "KROOS"
+     ],
+     [
+      1,
+      true,
+      "ALONSO"
+     ],
+     [
+      0,
+      false,
+      "LAHM"
+     ],
+     [
+      1,
+      false,
+      "RAMOS"
+     ],
+     [
+      0,
+      true,
+      "SCHWEINSTEIGER"
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "say": "Four days later, it came down to penalties against Byern Munich.",
+     "do": [
+      "show"
+     ]
+    },
+    {
+     "say": "Ronaldo went first for Madrid, and Manuel Noyer saved it.",
+     "emph": [
+      "saved"
+     ],
+     "do": [
+      {
+       "a": "k0",
+       "at": "Ronaldo"
+      },
+      {
+       "a": "k1",
+       "at": "saved"
+      }
+     ]
+    },
+    {
+     "say": "Madrid missed three of their four.",
+     "emph": [
+      "three"
+     ],
+     "do": [
+      {
+       "a": "run",
+       "at": "missed"
+      }
+     ],
+     "hold": 1.2
+    },
+    {
+     "say": "No final.",
+     "emph": [
+      "final"
+     ],
+     "do": [
+      {
+       "a": "result",
+       "at": "No"
+      }
+     ],
+     "react": {
+      "emo": "sad",
+      "cap": "NO FINAL"
+     },
+     "hold": 0.4
+    }
+   ]
+  }
+ ]
+}

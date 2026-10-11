@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/Anton.ttf)}
+@font-face{font-family:Inter;src:url(fonts/Inter.ttf);font-weight:100 900}
+html,body{margin:0;width:1280px;height:720px;overflow:hidden}
+#c{position:relative;width:1280px;height:720px;overflow:hidden;font-family:Inter;color:#14215c}
+.abs{position:absolute}
+.big{font-family:Anton;line-height:.9;white-space:nowrap;background:linear-gradient(180deg,#ff9a1f 0%,#ff5a3c 55%,#e3165b 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 16px 24px rgba(20,33,92,.35))}
+.blue{background:linear-gradient(180deg,#2f6bff 0%,#3a2bd9 60%,#8a1fd0 100%);-webkit-background-clip:text;background-clip:text}
+.pill{font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:#14215c;color:#fff;border-radius:14px;padding:10px 22px;white-space:nowrap}
+.slot{border-radius:30px;box-sizing:border-box}
+.guide{border:6px dashed #14215c;background:rgba(255,255,255,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px}
+.guide b{font-family:Anton;font-size:64px;font-weight:400}
+.guide span{font-weight:800;font-size:22px;letter-spacing:.05em;text-transform:uppercase;line-height:1.35}
+.glow{background:radial-gradient(ellipse at 50% 45%,rgba(255,255,255,.85) 0%,rgba(255,255,255,.35) 45%,rgba(255,255,255,0) 72%)}
+</style></head>
+<body><div id="c"></div>
+<script>
+const PAL = {
+  madrid: ['#7fd4ff', '#b8f5d8', '#ffe066', '#ff9fb2'], violet: ['#9fc4ff', '#ffc6e0', '#c9a6ff', '#ffe066'],
+  gold: ['#ffe39a', '#ffc2d4', '#ffd23f', '#8fd8ff'], barca: ['#8ec0ff', '#ffbdd0', '#5aa0ff', '#ffe066'],
+  mint: ['#b8f5d8', '#9fdcff', '#7fe3c4', '#ffb3c7'], sunset: ['#ffd0a8', '#ffb3d1', '#ffb84d', '#c9a6ff']
+};
+const c = document.getElementById('c');
+function el(html, css, cls = '') { const d = document.createElement('div'); d.className = 'abs ' + cls; d.innerHTML = html; Object.assign(d.style, css); c.appendChild(d); return d; }
+function fitW(d, maxW) { const w = d.offsetWidth; if (w > maxW) d.style.fontSize = parseFloat(getComputedStyle(d).fontSize) * maxW / w + 'px'; return d; }
+function lines() {
+  let s = '<svg width="1280" height="720" viewBox="-640 -360 1280 720">';
+  for (let i = 0; i < 70; i++) { const a = i / 70 * 6.283, w = .012 + (i % 5) * .004, r0 = 200 + (i * 37 % 120);
+    s += `<polygon points="${Math.cos(a - w) * 1100},${Math.sin(a - w) * 1100} ${Math.cos(a) * r0},${Math.sin(a) * r0} ${Math.cos(a + w) * 1100},${Math.sin(a + w) * 1100}" fill="${['rgba(20,33,92,.07)', 'rgba(227,22,91,.10)', 'rgba(255,255,255,.5)'][i % 3]}"/>`; }
+  return s + '</svg>';
+}
+function slot(x, y, w, h, face, n, guide) {
+  if (guide) return el(`<b>FACE ${n}</b><span>${face.who || ''}</span><span style="opacity:.75">${face.mood || ''}</span><span style="font-size:16px;opacity:.6">cut-out · head fills the box · eyes on the top third</span>`, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' }, 'slot guide');
+  return el('', { left: x - 40 + 'px', top: y - 20 + 'px', width: w + 80 + 'px', height: h + 40 + 'px' }, 'glow');
+}
+window.draw = function (T) {
+  c.innerHTML = '';
+  const p = PAL[T.palette] || PAL.gold;
+  c.style.background = `linear-gradient(135deg,${p[0]},${p[1]})`;
+  [[.2, .25, p[2]], [.85, .8, p[3]], [.75, .1, '#ffffff']].forEach(([x, y, col]) => el('', { left: x * 1280 - 450 + 'px', top: y * 720 - 450 + 'px', width: '900px', height: '900px', borderRadius: '50%', background: `radial-gradient(circle,${col} 0%,${col}88 25%,${col}00 65%)` }));
+  el(lines(), { left: 0, top: 0 });
+  const f = T.faces || [{}], g = T.guide;
+  if (T.variant === 'A') {
+    slot(770, 30, 480, 660, f[0], 1, g);
+    if (T.top) fitW(el(T.top, { left: '50px', top: '70px', fontSize: '40px' }, 'pill'), 680);
+    fitW(el(T.big, { left: '40px', top: '160px', fontSize: '360px' }, 'big'), 720);
+    if (T.kicker) fitW(el(T.kicker, { left: '50px', top: '600px', fontSize: '34px', background: '#e3165b' }, 'pill'), 680);
+  } else if (T.variant === 'B') {
+    slot(30, 30, 520, 660, f[0], 1, g);
+    if (T.top) fitW(el(T.top, { left: '600px', top: '80px', fontSize: '40px' }, 'pill'), 640);
+    fitW(el(T.big, { left: '590px', top: '170px', fontSize: '330px' }, 'big'), 660);
+    el(`<svg width="220" height="140" viewBox="0 0 220 140"><path d="M200 20 C 140 30, 80 60, 40 110" stroke="#e3165b" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M15 120 L 70 125 L 40 75 Z" fill="#e3165b"/></svg>`, { left: '520px', top: '520px' });
+    el(`<div style="font-family:Anton;font-size:58px;color:#ffd23f;-webkit-text-stroke:8px #14215c;paint-order:stroke fill;transform:rotate(-8deg)">EHHH?!</div>`, { left: '1040px', top: '590px' });
+  } else {
+    slot(20, 40, 440, 640, f[0], 1, g); slot(820, 40, 440, 640, f[1] || {}, 2, g);
+    const [a, b] = T.vs || ['', ''];
+    fitW(el(a, { left: '470px', top: '70px', width: '340px', textAlign: 'center', fontSize: '230px' }, 'big'), 340);
+    el('VS', { left: '585px', top: '335px', fontSize: '44px', background: '#e3165b' }, 'pill');
+    fitW(el(b, { left: '470px', top: '420px', width: '340px', textAlign: 'center', fontSize: '230px' }, 'big blue'), 340);
+  }
+  window.DRAWN = true;
+};
+window.READY = true;
+</script></body></html>
