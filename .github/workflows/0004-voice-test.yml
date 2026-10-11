@@ -1,0 +1,51 @@
+name: 0004 voice test
+
+# Quick check of the Chatterbox voice job on Kaggle without rendering video.
+# Sends the clips to Drive football-engine/0004/voice/tests and reports WER/retakes or the failure log as annotations.
+
+on:
+  workflow_dispatch:
+    inputs:
+      lines:
+        description: "Sentences separated by |"
+        default: "Sixty goals in a single season.|But five hundred kilometres away, someone was playing a different game."
+
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q kaggle numpy soundfile google-api-python-client==2.151.0 google-auth==2.36.0
+      - name: Run voice job
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+          LINES: ${{ inputs.lines }}
+        run: |
+          source 0004/pipeline/kaggle_auth.sh
+          python - <<'EOF'
+          import json, os, sys
+          from pathlib import Path
+          sys.path.insert(0, "0004/pipeline")
+          from voice import _key
+          from kaggle_voice import run
+          lines = [l.strip() for l in os.environ["LINES"].split("|") if l.strip()]
+          jobs = [{"key": _key("chatterbox", l), "text": l} for l in lines]
+          def note(t, m): print(f"::notice title={t}::" + m.replace("%", "%25").replace("\n", "%0A")[-3500:])
+          try:
+              s = run(jobs, Path("/tmp/vt"))
+              note("voice ok", json.dumps(s)[:3000])
+          except Exception as e:
+              note("voice failed", str(e))
+              sys.exit(1)
+          EOF
+      - name: Clips to Drive
+        if: success()
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python 0004/pipeline/deliver.py --no-telegram --drive-path football-engine/0004/voice/tests /tmp/vt/*.wav | tail -1 | sed 's/^/::notice title=drive::/'

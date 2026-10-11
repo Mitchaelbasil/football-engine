@@ -48,11 +48,19 @@ def run(jobs: list, cache_dir: Path, timeout_min: int = 80) -> dict:
     print(f"kaggle: {status.strip()[-120:]} after {time.time() - t0:.0f}s", flush=True)
     out = work / "output"
     out.mkdir()
-    _k("kernels", "output", kid, "-p", str(out), check=False)
-    logs = list(out.glob("*.log"))
+    dl = _k("kernels", "output", kid, "-p", str(out), check=False)
     if "complete" not in status:
-        tail = logs[0].read_text()[-2500:] if logs else "(no log)"
-        raise RuntimeError(f"Kaggle voice job did not complete ({status.strip()[-80:]}). Log tail:\n{tail}")
+        err = next(out.rglob("error.txt"), None)
+        detail = err.read_text()[-3000:] if err else ""
+        for lg in out.rglob("*.log"):
+            try:
+                lines = [x.get("data", "") for x in json.loads(lg.read_text())]
+                detail += "\n--- log ---\n" + "".join(lines)[-3000:]
+            except Exception:
+                detail += "\n--- log ---\n" + lg.read_text()[-3000:]
+        if not detail.strip():
+            detail = f"(no log; files: {[p.name for p in out.rglob('*')]}; output cmd: {dl.strip()[-400:]})"
+        raise RuntimeError(f"Kaggle voice job did not complete ({status.strip()[-80:]}). Detail:\n{detail}")
     cache_dir.mkdir(parents=True, exist_ok=True)
     got = 0
     for j in jobs:
