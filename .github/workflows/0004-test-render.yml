@@ -7,8 +7,8 @@ on:
         description: "Folder under 0004/videos"
         default: "_checkpoint"
       voice:
-        description: "Voice backend (chatterbox | kokoro:bm_george | fake)"
-        default: "chatterbox"
+        description: "Voice backend (kokoro:af_bella | chatterbox | fake)"
+        default: "kokoro:af_bella"
 
 concurrency:
   group: 0004-render-${{ inputs.video }}
