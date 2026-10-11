@@ -50,8 +50,8 @@ jobs:
           set -o pipefail
           source 0004/pipeline/kaggle_auth.sh
           python 0004/pipeline/build.py "$VID" --voice "${{ inputs.voice }}" --video --shorts --thumbs 2>&1 | tee build.log
-          grep '^plan\[' build.log | while read -r l; do echo "::notice title=plan::$l"; done
-          grep '^kaggle:' build.log | tail -3 | while read -r l; do echo "::notice title=voice::$l"; done
+          grep '^plan\[' build.log | while read -r l; do echo "::notice title=plan::$l"; done || true
+          grep '^kaggle:' build.log | tail -3 | while read -r l; do echo "::notice title=voice::$l"; done || true
           if grep -q 'VOICE FALLBACK' build.log; then echo "::warning title=voice::$(grep 'VOICE FALLBACK' build.log | head -c 1500 | tr '\n' ' ')"; fi
       - name: Push review assets (contact sheet, waveform, loudness, plan)
         run: |
