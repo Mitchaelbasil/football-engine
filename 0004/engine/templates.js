@@ -190,8 +190,15 @@ TPL.h2h = {
 // Photo slot with multi-crop pans. data: slot, desc, src, cap, crops:[[cx,cy,zoom],...]. actions: crop1, crop2..., cap
 function photoInner(d, w, h) {
   if (d.src) return `<img src="${d.src}" style="width:${w}px;height:${h}px;object-fit:cover;display:block">`;
-  return `<div style="width:${w}px;height:${h}px;background:repeating-linear-gradient(135deg,rgba(255,255,255,.75) 0 40px,rgba(214,236,255,.75) 40px 80px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px">
+  if (d.preview) return `<div style="width:${w}px;height:${h}px;background:repeating-linear-gradient(135deg,rgba(255,255,255,.75) 0 40px,rgba(214,236,255,.75) 40px 80px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px">
     <div class="A" style="font-size:${Math.min(120, w / 8)}px">PHOTO SLOT ${d.slot || ''}</div><div class="L" style="font-size:28px;max-width:${w - 120}px;white-space:normal;text-align:center;line-height:1.5">${d.desc || ''}</div></div>`;
+  // skipped slot: a clean location/date card instead of a photo
+  const [a, b] = (d.cap || '').split('·').map(x => x.trim());
+  return `<div style="position:relative;width:${w}px;height:${h}px;overflow:hidden;background:linear-gradient(135deg,#ffe9a8,#ffc2d4 55%,#b9dcff)">
+    <div style="position:absolute;left:${w / 2 - CX}px;top:${h / 2 - CY}px">${speedLines(70, 120, 1400, ['rgba(20,33,92,.07)', 'rgba(227,22,91,.10)', 'rgba(255,255,255,.55)'], 5)}</div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:0 60px">
+      <div class="A" style="font-size:${Math.min(150, w / 7)}px;color:#14215c;white-space:normal;line-height:.95">${a || ''}</div>
+      ${b ? `<div class="L" style="font-size:34px;color:#e3165b">${b}</div>` : ''}</div></div>`;
 }
 TPL.photo = {
   build(L, d) {
@@ -222,9 +229,9 @@ TPL.aura = {
     const r = { d }, w = PORT ? W - 140 : 1080, h = PORT ? 1100 : 680;
     r.rays = E(L, '', { st: { width: '2600px', height: '2600px', borderRadius: '50%', background: 'repeating-conic-gradient(from 0deg,rgba(255,214,90,.55) 0deg 6deg,rgba(255,255,255,0) 6deg 15deg)', maskImage: 'radial-gradient(circle,#000 20%,transparent 62%)', WebkitMaskImage: 'radial-gradient(circle,#000 20%,transparent 62%)' } });
     r.glow = E(L, '', { st: { width: '1500px', height: '1100px', borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(255,200,60,.9) 0%,rgba(255,120,150,.45) 40%,rgba(255,255,255,0) 70%)' } });
-    r.card = E(L, `<div style="width:${w}px;height:${h}px;overflow:hidden;border-radius:26px;border:10px solid #fff;box-shadow:0 0 90px rgba(255,170,40,.65)">${photoInner(d, w, h)}</div>`, { y: CY });
+    r.card = (d.src || d.preview) ? E(L, `<div style="width:${w}px;height:${h}px;overflow:hidden;border-radius:26px;border:10px solid #fff;box-shadow:0 0 90px rgba(255,170,40,.65)">${photoInner(d, w, h)}</div>`, { y: CY }) : null;
     r.parts = [...Array(46)].map((_, i) => E(L, '', { st: { width: (6 + rnd(i * 9) * 12) + 'px', height: (6 + rnd(i * 9) * 12) + 'px', borderRadius: '50%', background: i % 3 ? '#ffd23f' : '#ff7aa8', boxShadow: '0 0 16px #ffd23f' } }));
-    r.word = fit(E(L, d.word || 'AURA', { c: 'A gold stroke', fs: d.fs || 330, y: CY + 20, st: { WebkitTextStroke: '0px', filter: 'drop-shadow(0 0 30px rgba(255,255,255,.9)) drop-shadow(0 10px 40px rgba(227,22,91,.5))' } }), W - 80);
+    r.word = fit(E(L, d.word || 'AURA', { c: 'A gold', fs: d.fs || 330, y: CY + 20 }), W - 80);  // layered after the photo card = always on top
     r.sub = fit(E(L, d.sub || '', { c: 'L', fs: 34, y: CY + (PORT ? 620 : 300) }), FW);
     return r;
   },
@@ -233,8 +240,10 @@ TPL.aura = {
     const pc = P(t, c, 1.2), pb = P(t, b, .35);
     S(r.rays, pc * .9, 0, 0, lerp(.7, 1.05, pc) + pb * .15, 0, t * (12 + 40 * pb));
     S(r.glow, pc * (.55 + .35 * Math.sin(t * 7) * .5 + .4 * pb), 0, 0, 1 + .06 * Math.sin(t * 5));
-    S(r.card, P(t, 0, .35), 0, 0, lerp(.96, 1.07, P(t, c, 2.4, eio)) - .05 * pb * (1 - P(t, b + .2, .4)));
-    r.card.style.filter = pb > 0 ? `brightness(${1 - .25 * pb}) saturate(${1 + .3 * pb})` : '';
+    if (r.card) {
+      S(r.card, P(t, 0, .35), 0, 0, lerp(.96, 1.07, P(t, c, 2.4, eio)) - .05 * pb * (1 - P(t, b + .2, .4)));
+      r.card.style.filter = pb > 0 ? `brightness(${1 - .25 * pb}) saturate(${1 + .3 * pb})` : '';
+    }
     r.parts.forEach((p, i) => {
       const sp = 70 + rnd(i * 3) * 160, ph = rnd(i * 5) * 900, span = PORT ? 1700 : 960;
       const yy = CY + span / 2 - ((Math.max(0, t - c) * sp * (1 + 1.8 * pb) + ph) % span), xx = CX + (rnd(i) - .5) * (PORT ? 950 : 1500) + Math.sin(t * 1.5 + i) * 30;

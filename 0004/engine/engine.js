@@ -19,6 +19,7 @@ const NEVER = 1e9;
 function E(par, html, o = {}) {
   const d = document.createElement('div'); d.className = 'el ' + (o.c || ''); d.innerHTML = html;
   if (o.fs) d.style.fontSize = o.fs + 'px'; if (o.col) d.style.color = o.col; if (o.st) Object.assign(d.style, o.st);
+  d._f = d.style.filter || '';  // keep custom filters (outlines/glows) when S() animates blur
   d._x = o.x ?? CX; d._y = o.y ?? CY; d._a = o.a || 'c'; d._r = o.r || 0; par.appendChild(d); S(d, 0); return d;
 }
 // shrink an element (uniformly) so its layout width fits maxW; needs fonts loaded (start() awaits them)
@@ -26,7 +27,7 @@ function fit(d, maxW = W - 160) { const w = d.offsetWidth; if (w > maxW && w > 0
 function S(d, o = 1, dx = 0, dy = 0, s = 1, blur = 0, rot = 0) {
   const ax = d._a === 'l' ? '0%' : d._a === 'r' ? '-100%' : '-50%';
   d.style.transform = `translate(${d._x + dx}px,${d._y + dy}px) translate(${ax},-50%) rotate(${d._r + rot}deg) scale(${s * (d._k || 1)})`;
-  d.style.opacity = o; d.style.filter = blur > .3 ? `blur(${blur}px)` : '';
+  d.style.opacity = o; d.style.filter = ((d._f || '') + (blur > .3 ? ` blur(${blur}px)` : '')).trim();
 }
 function R(d, t, a, b = NEVER, amt = 40, dur = .55) { const pi = P(t, a, dur), po = 1 - P(t, b, .35, eio); S(d, pi * po, 0, (1 - pi) * amt - (1 - po) * 20, 1, (1 - pi) * 8); }
 function RX(d, t, a, b = NEVER, amt = -80, dur = .5) { const pi = P(t, a, dur), po = 1 - P(t, b, .35, eio); S(d, pi * po, (1 - pi) * amt, 0, 1, (1 - pi) * 6); }
