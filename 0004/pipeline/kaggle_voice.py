@@ -24,7 +24,7 @@ def _k(*args, check=True) -> str:
     return (r.stdout or "") + (r.stderr or "")
 
 
-def run(jobs: list, cache_dir: Path, timeout_min: int = 80) -> dict:
+def run(jobs: list, cache_dir: Path, timeout_min: int = 170) -> dict:
     """jobs: [{'key': cache key, 'text': sentence}] -> writes <key>.wav/<key>.json into cache_dir."""
     user = os.environ.get("KAGGLE_USER", "mitchaelbasil")
     kid = f"{user}/{SLUG}"
