@@ -255,7 +255,10 @@ def _plan_sfx(tl):
     """Built-in SFX ONLY on mundane moments (number ticks, list-item hits). Anime-worthy moments get NO built-in
     sound: they are listed as cues (tl['cues']) for Mitchael's anime SFX / reaction clips, tested by hand first."""
     s, cues = tl["sfx"], tl.setdefault("cues", [])
-    for sc in tl["scenes"]:
+    last_whoosh = -1e9  # whoosh only on BIG transitions (into an arc card / end card), at most ~1 per 40 s
+    for i, sc in enumerate(tl["scenes"]):
+        if i and sc["type"] in ("arc", "endcard") and sc["start"] - last_whoosh >= 40:
+            s.append({"t": sc["start"], "k": "whoosh"}); last_whoosh = sc["start"]
         for e in sc["ev"]:
             a = e["a"]
             if a in ("count", "read", "rread"):
