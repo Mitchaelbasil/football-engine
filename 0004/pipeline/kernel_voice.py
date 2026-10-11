@@ -31,6 +31,7 @@ try:
     import numpy as np  # noqa: E402
     import soundfile as sf  # noqa: E402
     import torch  # noqa: E402
+    import torchaudio  # noqa: E402
     from chatterbox.tts import ChatterboxTTS  # noqa: E402
     from faster_whisper import WhisperModel  # noqa: E402
     from num2words import num2words  # noqa: E402
@@ -114,7 +115,8 @@ try:
             a = tts.generate(j["text"], **kw).squeeze().cpu().numpy().astype(np.float32)
             tmp = f"/tmp/{j['key']}_{k}.wav"
             sf.write(tmp, a, SR)
-            segs, _ = asr.transcribe(tmp, language="en", word_timestamps=True, beam_size=5)
+            a16 = torchaudio.functional.resample(torch.from_numpy(a), SR, 16000).numpy()  # array in: avoids PyAV file decoding
+            segs, _ = asr.transcribe(a16, language="en", word_timestamps=True, beam_size=5)
             ws = [(w.word.strip(), w.start, w.end) for s in segs for w in (s.words or [])]
             e = wer(target, toks(" ".join(w[0] for w in ws)))
             dur = len(a) / SR
