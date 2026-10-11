@@ -268,12 +268,18 @@ def write_sheet(sheets, sid: str, rows: list, pipes: list, today: dt.date) -> No
         vals.update(spreadsheetId=sid, range=f"{tab}!A1", valueInputOption="USER_ENTERED",
                     body={"values": data}).execute()
 
-    head = vals.get(spreadsheetId=sid, range="History!A1:A1").execute().get("values")
-    hist = [] if head else [HISTORY_HEADERS]
-    hist += [[today.isoformat(), "'" + r["id"], "'" + r["pipeline"], r["format"], r["views"],
-              r["watch_min"], r["net_subs"]] for r in rows]
-    vals.append(spreadsheetId=sid, range="History!A1", valueInputOption="USER_ENTERED",
-                insertDataOption="INSERT_ROWS", body={"values": hist}).execute()
+    # History: one snapshot per day; a same-day re-run replaces that day's rows.
+    stamp = today.isoformat()
+    prev = vals.get(spreadsheetId=sid, range="History", valueRenderOption="UNFORMATTED_VALUE",
+                    dateTimeRenderOption="FORMATTED_STRING").execute().get("values", [])[1:]
+    kept = [["'" + str(c) if i in (0, 1, 2) else c for i, c in enumerate(row)]
+            for row in prev if row and str(row[0]) != stamp]
+    hist = [HISTORY_HEADERS] + kept + [[
+        "'" + stamp, "'" + r["id"], "'" + r["pipeline"], r["format"], r["views"],
+        r["watch_min"], r["net_subs"]] for r in rows]
+    vals.clear(spreadsheetId=sid, range="History").execute()
+    vals.update(spreadsheetId=sid, range="History!A1", valueInputOption="USER_ENTERED",
+                body={"values": hist}).execute()
 
     fmt = []
     for t in ("Videos", "Pipelines", "History"):
@@ -322,7 +328,7 @@ def render_summary(channel: dict, rows: list, pipes: list, today: dt.date) -> st
         f"Lifetime views: {sum(r['views'] for r in pub):,} | Views last 7d: {views_7d:,} | "
         f"Net subs last 7d: {subs_7d:+,}</p>",
         "<p><i>Analytics lag ~2 days, so the newest uploads look small. "
-        "Shorts = duration up to 3 min.</i></p>",
+        "Shorts = duration up to 3 min. Avg view % above 100 on Shorts = loops.</i></p>",
         "<h2>By pipeline</h2>",
         _table(["Pipeline", "Format", "Videos", "Total views", "Median views", "Median views/day",
                 "Avg view %", "Net subs", "Subs/1k", "Best video"],
@@ -339,15 +345,22 @@ def render_summary(channel: dict, rows: list, pipes: list, today: dt.date) -> st
         "<h2>Last 30 days: worst 5 by views/day</h2>",
         _table(vhead, [vrow(r) for r in recent_bottom]) if recent else "<p>No uploads.</p>",
     ]
-    return "<html><body>" + "".join(parts) + "</body></html>"
+    return '<html><head><meta charset="utf-8"></head><body>' + "".join(parts) + "</body></html>"
 
 
 def write_doc(drive, folder: str, title: str, body_html: str) -> str:
+    """Create the weekly doc, or overwrite it if this week's already exists (re-runs)."""
     media = MediaInMemoryUpload(body_html.encode("utf-8"), mimetype="text/html", resumable=False)
-    f = drive.files().create(
-        body={"name": title, "mimeType": DOC_MIME, "parents": [folder]},
-        media_body=media, fields="id,webViewLink",
-    ).execute()
+    q = f"name = '{_q(title)}' and '{folder}' in parents and trashed = false"
+    found = drive.files().list(q=q, fields="files(id)", pageSize=1).execute().get("files", [])
+    if found:
+        f = drive.files().update(fileId=found[0]["id"], media_body=media,
+                                 fields="id,webViewLink").execute()
+    else:
+        f = drive.files().create(
+            body={"name": title, "mimeType": DOC_MIME, "parents": [folder]},
+            media_body=media, fields="id,webViewLink",
+        ).execute()
     return f["webViewLink"]
 
 
