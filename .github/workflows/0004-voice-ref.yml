@@ -1,0 +1,45 @@
+name: 0004 voice reference
+
+# Mitchael drops his voice recording (any audio format) into the private Drive folder football-engine/0004/voice/.
+# This workflow takes the newest audio file there, cleans it (trim silence, mono, high-pass, loudness), saves
+# voice_ref.wav back to that Drive folder and publishes it to a PRIVATE Kaggle dataset for the Chatterbox voice job.
+# The recording never touches the (public) repo.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ref:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client==2.151.0 google-auth==2.36.0 kaggle && sudo apt-get install -y -qq ffmpeg > /dev/null
+      - name: Fetch newest recording from Drive
+        run: python 0004/pipeline/voice_ref.py fetch /tmp/raw
+      - name: Clean
+        run: |
+          mkdir -p /tmp/ds
+          ffmpeg -v error -y -i /tmp/raw -af "aformat=channel_layouts=mono,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1,areverse,highpass=f=70,loudnorm=I=-20:TP=-2:LRA=11" -ar 24000 -c:a pcm_s16le /tmp/ds/voice_ref.wav
+          echo "::notice title=voice ref::$(ffprobe -v error -show_entries format=duration -of csv=p=0 /tmp/ds/voice_ref.wav)s after cleaning"
+      - name: Save cleaned clip to Drive
+        run: python 0004/pipeline/deliver.py --no-telegram --drive-path football-engine/0004/voice /tmp/ds/voice_ref.wav | tail -1 | sed 's/^/::notice title=drive::/'
+      - name: Publish to private Kaggle dataset
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        run: |
+          source 0004/pipeline/kaggle_auth.sh
+          printf '{"title":"football-engine-voice-ref","id":"%s/football-engine-voice-ref","licenses":[{"name":"CC0-1.0"}]}' "$KAGGLE_USER" > /tmp/ds/dataset-metadata.json
+          if kaggle datasets status "$KAGGLE_USER/football-engine-voice-ref" >/dev/null 2>&1; then
+            kaggle datasets version -p /tmp/ds -m "update reference clip" 2>&1 | tail -2
+          else
+            kaggle datasets create -p /tmp/ds 2>&1 | tail -2
+          fi
+          echo "::notice title=kaggle::$(kaggle datasets status $KAGGLE_USER/football-engine-voice-ref 2>&1 | tail -1)"
