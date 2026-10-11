@@ -81,7 +81,7 @@ def _music(T):
     return sosfilt(butter(2, 3200, "low", fs=SR, output="sos"), music)
 
 
-def mix(tl: dict, voice_wav: Path, out: Path, music_gain=1.0):
+def mix(tl: dict, voice_wav: Path, out: Path, music_gain=0.75):
     T = tl["total"]; N = int((T + 1) * SR)
     v, vsr = sf.read(voice_wav, dtype="float32")
     if vsr != SR:

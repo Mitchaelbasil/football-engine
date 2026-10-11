@@ -72,6 +72,9 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
             beats_out.append({"t": round(bt, 3), "end": round(end, 3), "say": b["say"], "wav": v["wav"], "scene": si})
             words_all += [{**x, "s": round(x["s"], 3), "e": round(x["e"], 3)} for x in words]
             cur = end + b.get("hold", 0.0) + BEAT_GAP
+            if b.get("react"):  # narration pauses for the reaction; it never spills into the next scene
+                o = overlays[-1]
+                cur = max(cur, o["t"] + o["d"] + 0.2)
         end = cur + sc.get("post", 0.25)
         if sc["type"] == "arc":
             d = sc.get("data", {})
