@@ -14,6 +14,9 @@ concurrency:
   group: 0004-render-${{ inputs.video }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -39,6 +42,15 @@ jobs:
           set -o pipefail
           python 0004/pipeline/build.py "$VID" --voice "${{ inputs.voice }}" --video 2>&1 | tee build.log
           echo "::notice title=plan::$(grep '^plan:' build.log)"
+      - name: Push review assets (contact sheet, waveform, loudness, plan)
+        run: |
+          R=/tmp/review; mkdir -p $R
+          cp "$VID/out/contact.jpg" "$VID/build/timeline.json" $R/
+          ffmpeg -v error -i "$VID/out/final.mp4" -filter_complex "showwavespic=s=1920x300:split_channels=0" -frames:v 1 $R/wave.png
+          ffmpeg -nostats -i "$VID/out/final.mp4" -af ebur128 -f null - 2>&1 | tail -12 > $R/loudness.txt
+          for t in 1.5 13.5 30.5 44 60.5; do ffmpeg -v error -ss $t -i "$VID/out/final.mp4" -frames:v 1 -vf scale=960:-1 $R/f_$t.jpg; done
+          cd $R && git init -q && git checkout -q -b review && git add . && git -c user.name=render-bot -c user.email=bot@users.noreply.github.com commit -qm "review ${{ inputs.video }}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "review:review/${{ inputs.video }}"
       - name: Report failure
         if: failure()
         run: |
