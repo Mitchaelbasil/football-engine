@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/Anton.ttf)}
+@font-face{font-family:Inter;src:url(fonts/Inter.ttf);font-weight:100 900}
+@font-face{font-family:Oswald;src:url(fonts/Oswald.ttf);font-weight:200 700}
+html,body{margin:0;overflow:hidden;background:#bfe6ff}
+#stage{position:relative;overflow:hidden;font-family:Inter;color:var(--text)}
+#bg,#fx,#layers,#over,#hud{position:absolute;inset:0}
+.blob{position:absolute;left:0;top:0;width:1500px;height:1500px;border-radius:50%;mix-blend-mode:screen}
+#vig{position:absolute;inset:0;background:var(--vig)}
+.layer{position:absolute;inset:0;opacity:0;transform-origin:50% 50%}
+.el{position:absolute;left:0;top:0;white-space:nowrap}
+.A{font-family:Anton;line-height:.92;letter-spacing:.005em;text-shadow:var(--tshadow)}
+.L{font-family:Inter;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.O{font-family:Oswald;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.gold{background:var(--hero);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:var(--heroglow)}
+.blue{background:var(--rival);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:var(--rivalglow)}
+.card{background:var(--card);border:1.5px solid var(--cardb);border-radius:28px;box-shadow:var(--cards)}
+.pill{padding:14px 30px;border-radius:999px;font-family:Inter;font-weight:900;letter-spacing:.16em;font-size:28px;text-transform:uppercase}
+.pg{background:var(--herobar);color:var(--pilltext)}
+.pb{background:var(--rivalbar);color:#fff}
+.bar{position:absolute;height:84px;border-radius:14px;transform-origin:0 50%}
+.track{position:absolute;height:84px;border-radius:14px;background:var(--track)}
+.ck{display:inline-block;width:86px;height:86px;border-radius:50%;background:var(--herobar);color:#fff;text-align:center;line-height:86px;font-family:Inter;font-weight:900;font-size:50px;margin-right:36px;vertical-align:middle}
+.stroke{-webkit-text-stroke:10px var(--text);paint-order:stroke fill}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div><div id="vig"></div>
+<div id="layers"></div>
+<div id="fx"></div>
+<div id="over"></div>
+<div id="hud"></div>
+</div>
+<script src="timeline.js"></script>
+<script src="engine.js"></script>
+<script src="templates.js"></script>
+<script>start();</script>
+</body></html>

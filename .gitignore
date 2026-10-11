@@ -41,3 +41,8 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+.tmp/
+
+# 0004 build outputs
+0004/videos/*/build/
+0004/videos/*/out/
