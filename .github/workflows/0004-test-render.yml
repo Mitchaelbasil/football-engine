@@ -7,8 +7,8 @@ on:
         description: "Folder under 0004/videos"
         default: "_checkpoint"
       voice:
-        description: "Voice backend (fake | kokoro:bm_george)"
-        default: "kokoro:bm_george"
+        description: "Voice backend (chatterbox | kokoro:bm_george | fake)"
+        default: "chatterbox"
 
 concurrency:
   group: 0004-render-${{ inputs.video }}
@@ -38,10 +38,15 @@ jobs:
           pip install -q -r 0004/requirements.txt
           python -m playwright install --with-deps chromium > /dev/null
       - name: Build video
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
         run: |
           set -o pipefail
+          source 0004/pipeline/kaggle_auth.sh
           python 0004/pipeline/build.py "$VID" --voice "${{ inputs.voice }}" --video --shorts --thumbs 2>&1 | tee build.log
           grep '^plan\[' build.log | while read -r l; do echo "::notice title=plan::$l"; done
+          grep '^kaggle:' build.log | tail -3 | while read -r l; do echo "::notice title=voice::$l"; done
+          if grep -q 'VOICE FALLBACK' build.log; then echo "::warning title=voice::$(grep 'VOICE FALLBACK' build.log | head -c 1500 | tr '\n' ' ')"; fi
       - name: Push review assets (contact sheet, waveform, loudness, plan)
         run: |
           R=/tmp/review; mkdir -p $R
@@ -65,6 +70,6 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           cp "$VID/build/timeline.json" plan.json 2>/dev/null || true
-          if [ -f "$VID/out/final.mp4" ]; then NOTE="🎬 0004 test render ready: ${{ inputs.video }}"; else NOTE="❌ 0004 test render failed: ${{ inputs.video }}"; fi
+          if [ -f "$VID/out/final.mp4" ]; then NOTE="🎬 0004 test render ready: ${{ inputs.video }}"; grep -q 'VOICE FALLBACK' build.log && NOTE="$NOTE (⚠️ Kokoro fallback voice)"; else NOTE="❌ 0004 test render failed: ${{ inputs.video }}"; fi
           python 0004/pipeline/deliver.py --drive-path "football-engine/0004/tests/${{ inputs.video }}" --note "$NOTE" \
             "$VID"/out/*.mp4 "$VID"/out/thumb_*.png "$VID"/out/thumb_instructions.txt build.log | tail -1 | sed 's/^/::notice title=drive::/'

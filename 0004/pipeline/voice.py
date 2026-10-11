@@ -2,8 +2,8 @@
 
 Backends:
   fake    - silent audio with estimated timings (local dev, no models)
-  kokoro  - Kokoro-82M bm_george (fallback voice); word timings from the model
-  (chatterbox + Whisper auto-retake arrives in build step 2)
+  kokoro      - Kokoro-82M bm_george (fallback voice); word timings from the model
+  chatterbox  - Mitchael's cloned voice on Kaggle GPU, Whisper-checked auto-retakes (kaggle_voice.py)
 """
 
 import hashlib
@@ -74,13 +74,30 @@ def _kokoro_synth(text: str, voice: str = "bm_george", speed: float = 0.95):
     return audio, words
 
 
+def _key(backend: str, text: str) -> str:
+    tag = backend
+    if backend == "chatterbox":
+        from kaggle_voice import CFG
+        tag += json.dumps(CFG, sort_keys=True)
+    return hashlib.sha1(f"{tag}|{text}".encode()).hexdigest()[:16]
+
+
 def synth_beats(beats: list, backend: str, cache_dir: Path) -> list:
     """beats: [{'say': str}] -> [{'wav': path, 'dur': float, 'words': [...]}] (cached by text+backend)."""
     cache_dir.mkdir(parents=True, exist_ok=True)
+    if backend == "chatterbox":  # one Kaggle GPU batch for every sentence not cached yet
+        todo, seen = [], set()
+        for b in beats:
+            k = _key(backend, b["say"])
+            if k not in seen and not ((cache_dir / f"{k}.wav").exists() and (cache_dir / f"{k}.json").exists()):
+                todo.append({"key": k, "text": b["say"]}); seen.add(k)
+        if todo:
+            from kaggle_voice import run
+            run(todo, cache_dir)
     out = []
     for b in beats:
         text = b["say"]
-        key = hashlib.sha1(f"{backend}|{text}".encode()).hexdigest()[:16]
+        key = _key(backend, text)
         wav, meta = cache_dir / f"{key}.wav", cache_dir / f"{key}.json"
         if not (wav.exists() and meta.exists()):
             if backend == "fake":

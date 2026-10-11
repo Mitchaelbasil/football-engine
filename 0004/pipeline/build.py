@@ -107,6 +107,15 @@ def main():
 
     vd = a.video_dir.resolve()
     doc = json.loads((vd / "scenes.json").read_text())
+    if a.voice == "chatterbox":  # voice every sentence (main + Shorts hooks) in ONE Kaggle job; fall back to Kokoro if it fails
+        allb = [b for s in doc["scenes"] for b in s.get("beats", [])]
+        if a.shorts:
+            allb += [b for _, d in short_docs(doc) for s in d["scenes"] for b in s.get("beats", [])]
+        try:
+            synth_beats(allb, "chatterbox", vd / "build" / "voice_chatterbox")
+        except Exception as e:
+            print(f"VOICE FALLBACK: chatterbox failed ({str(e)[:1500]}) -> using kokoro:bm_george", flush=True)
+            a.voice = "kokoro:bm_george"
     out = vd / "out"; out.mkdir(parents=True, exist_ok=True)
     size = PORT if a.portrait else LAND
     main_build = vd / "build" / ("main_9x16" if a.portrait else "main")
