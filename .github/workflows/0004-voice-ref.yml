@@ -35,11 +35,17 @@ jobs:
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
         run: |
+          note() { echo "::notice title=$1::$(printf '%s' "$2" | tail -c 900 | tr '\n' ' ')"; }
+          note "kaggle cli" "$(kaggle --version 2>&1)"
+          note "token shape" "$(printf '%s' "$KAGGLE_API_TOKEN" | tr -d '\r\n ' | sed -E 's/[A-Za-z0-9]/x/g' | cut -c1-12) len=$(printf '%s' "$KAGGLE_API_TOKEN" | tr -d '\r\n ' | wc -c)"
           source 0004/pipeline/kaggle_auth.sh
+          note "auth mode" "user=$KAGGLE_USER json=$([ -f ~/.kaggle/kaggle.json ] && echo y || echo n) key=$([ -n "$KAGGLE_KEY" ] && echo y || echo n) token=$([ -n "$KAGGLE_API_TOKEN" ] && echo y || echo n)"
+          note "list mine" "$(kaggle datasets list --mine 2>&1 | head -5)"
           printf '{"title":"football-engine-voice-ref","id":"%s/football-engine-voice-ref","licenses":[{"name":"CC0-1.0"}]}' "$KAGGLE_USER" > /tmp/ds/dataset-metadata.json
           if kaggle datasets status "$KAGGLE_USER/football-engine-voice-ref" >/dev/null 2>&1; then
-            kaggle datasets version -p /tmp/ds -m "update reference clip" 2>&1 | tail -2
+            note "version" "$(kaggle datasets version -p /tmp/ds -m 'update reference clip' 2>&1)"
           else
-            kaggle datasets create -p /tmp/ds 2>&1 | tail -2
+            note "create" "$(kaggle datasets create -p /tmp/ds 2>&1)"
           fi
-          echo "::notice title=kaggle::$(kaggle datasets status $KAGGLE_USER/football-engine-voice-ref 2>&1 | tail -1)"
+          sleep 20
+          note "status" "$(kaggle datasets status $KAGGLE_USER/football-engine-voice-ref 2>&1)"
