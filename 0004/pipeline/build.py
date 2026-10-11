@@ -81,6 +81,12 @@ def short_docs(doc: dict) -> list:
     out = []
     for sp in specs:
         scenes = [copy.deepcopy(by_id[i]) for i in sp["scenes"]]
+        if sp.get("hook"):  # Shorts must open on a hook: one spoken line over a word slam
+            h = sp["hook"]
+            scenes.insert(0, {"id": "hook", "type": "slam", "palette": h.get("palette", scenes[0].get("palette", "gold")), "hud": False,
+                              "data": {"word": h["word"], "pre": h.get("pre", "")},
+                              "beats": [{"say": h["say"], "emph": [h["at"]] if h.get("at") else [],
+                                         "do": ["pre", {"a": "slam", "at": h["at"]} if h.get("at") else "slam"]}]})
         scenes.append({"id": "end", "type": "endcard", "palette": "violet", "hud": False, "dur": 2.6,
                        "data": {"line": "FULL STORY ON THE CHANNEL", "title": sp.get("title", title)}})
         out.append((sp["name"], {"meta": doc.get("meta", {}), "scenes": scenes}))

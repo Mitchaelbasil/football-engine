@@ -37,7 +37,13 @@
    "scenes": [
     "shootout"
    ],
-   "title": "NO FINAL"
+   "title": "NO FINAL",
+   "hook": {
+    "say": "Ronaldo missed. Kaká missed. Ramos missed.",
+    "word": "NO FINAL",
+    "pre": "REAL MADRID · 2012",
+    "at": "Ramos"
+   }
   }
  ],
  "scenes": [
