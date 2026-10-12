@@ -35,7 +35,7 @@ def can_import():
 # ACE-Step's requirements.txt pins old wheels (e.g. spacy==3.8.4) that don't exist for Kaggle's Python 3.13,
 # so install the package without deps and add what it imports, unpinned; fall back to its pinned diffusers/transformers.
 pip("--no-deps git+https://github.com/ace-step/ACE-Step.git")
-pip("loguru pypinyin hangul-romanize py3langid num2words spacy opencc cutlet diffusers accelerate peft librosa soundfile")
+pip("loguru==0.7.3 pypinyin==0.53.0 hangul-romanize==0.1.0 py3langid==0.3.0 num2words==0.5.14 spacy opencc cutlet diffusers accelerate peft librosa soundfile")
 if not can_import():
     pip('"diffusers==0.33.1" "transformers==4.50.0"')
     if not can_import():
