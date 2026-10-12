@@ -1,0 +1,97 @@
+name: 0004 music gen
+
+# Generates instrumental mood tracks with ACE-Step (Apache-2.0, free to use commercially) on Kaggle's free GPU.
+# Tracks are faded, levelled to -20 LUFS and uploaded to Drive football-engine/0004/music/ as music_<mood>_ace_NN.wav
+# (+ Telegram ping). MP3 previews go to branch review/music for a quick listen.
+# Trigger: Actions tab -> Run workflow, or commit 0004/music/request.json ({"moods": "tension,sad", "takes": 2, ...}).
+
+on:
+  workflow_dispatch:
+    inputs:
+      moods:
+        description: "Comma separated: tension, sad, triumph, hype, mystery, epic, chill"
+        default: "tension"
+      takes:
+        description: "Tracks per mood"
+        default: "2"
+      seconds:
+        description: "Length of each track (10-240)"
+        default: "120"
+      start:
+        description: "First take number (raise it to add to an existing set)"
+        default: "1"
+  push:
+    paths:
+      - 0004/music/request.json
+
+concurrency:
+  group: 0004-music
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  music:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q kaggle google-api-python-client==2.151.0 google-auth==2.36.0
+      - name: Read request
+        env:
+          IN_MOODS: ${{ inputs.moods }}
+          IN_TAKES: ${{ inputs.takes }}
+          IN_SECONDS: ${{ inputs.seconds }}
+          IN_START: ${{ inputs.start }}
+        run: |
+          python - <<'EOF' >> "$GITHUB_ENV"
+          import json, os
+          r = {}
+          if os.environ.get("GITHUB_EVENT_NAME") == "push" and os.path.exists("0004/music/request.json"):
+              r = json.load(open("0004/music/request.json"))
+          g = lambda k, d: str(r.get(k) or os.environ.get("IN_" + k.upper()) or d)
+          print(f"MOODS={g('moods', 'tension')}\nTAKES={g('takes', 2)}\nSECONDS={g('seconds', 120)}\nSTART={g('start', 1)}")
+          EOF
+      - name: Generate on Kaggle GPU
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        run: |
+          set -o pipefail
+          source 0004/pipeline/kaggle_auth.sh
+          python 0004/pipeline/kaggle_music.py --moods "$MOODS" --takes "$TAKES" --seconds "$SECONDS" --start "$START" --out /tmp/raw 2>&1 | tee gen.log
+          grep -E '^kaggle' gen.log | tail -25 | while read -r l; do echo "::notice title=kaggle::$l"; done || true
+      - name: Fade, level, previews
+        run: |
+          mkdir -p /tmp/music /tmp/prev
+          for f in /tmp/raw/*.wav; do
+            n=$(basename "$f" .wav)
+            ffmpeg -v error -y -i "$f" -af "afade=t=in:d=1.5,areverse,afade=t=in:d=4,areverse,loudnorm=I=-20:TP=-2:LRA=11" -ar 44100 -ac 2 -c:a pcm_s16le "/tmp/music/$n.wav"
+            ffmpeg -v error -y -i "/tmp/music/$n.wav" -b:a 128k "/tmp/prev/$n.mp3"
+            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "/tmp/music/$n.wav")
+            l=$(ffmpeg -nostats -i "/tmp/music/$n.wav" -af ebur128 -f null - 2>&1 | grep -E '^ +I:' | tail -1 | tr -s ' ')
+            echo "::notice title=$n::${d}s,${l}"
+          done
+      - name: Push previews (review/music)
+        run: |
+          ffmpeg -v error -i "$(ls /tmp/music/*.wav | head -1)" -filter_complex "showwavespic=s=1600x240" -frames:v 1 /tmp/prev/wave_first.png || true
+          cd /tmp/prev && git init -q && git checkout -q -b review && git add . && git -c user.name=music-bot -c user.email=bot@users.noreply.github.com commit -qm "music previews $MOODS"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "review:review/music"
+      - name: Report failure
+        if: failure()
+        run: |
+          tail -c 3500 gen.log 2>/dev/null | sed ':a;N;$!ba;s/%/%25/g;s/\r/%0D/g;s/\n/%0A/g' | sed 's/^/::error title=music log tail::/'
+      - name: Deliver to Drive + Telegram
+        if: success()
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python 0004/pipeline/deliver.py --drive-path football-engine/0004/music --note "🎵 0004 music ready ($MOODS) - have a listen" /tmp/music/*.wav | tail -1 | sed 's/^/::notice title=drive::/'
