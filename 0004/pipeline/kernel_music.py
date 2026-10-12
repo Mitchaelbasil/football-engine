@@ -20,9 +20,26 @@ def _fail(msg):
     sys.exit(1)
 
 
-r = subprocess.run(f"{sys.executable} -m pip install -q git+https://github.com/ace-step/ACE-Step.git 2>&1 | tail -15",
-                   shell=True, capture_output=True, text=True)
-print("pip:", r.stdout[-1500:], flush=True)
+def pip(args):
+    r = subprocess.run(f"{sys.executable} -m pip install -q {args} 2>&1 | tail -8", shell=True, capture_output=True, text=True)
+    print("pip", args[:80], "->", r.stdout[-800:], flush=True)
+
+
+def can_import():
+    r = subprocess.run([sys.executable, "-c", "from acestep.pipeline_ace_step import ACEStepPipeline"],
+                       capture_output=True, text=True)
+    print("import check:", "ok" if r.returncode == 0 else r.stderr[-1200:], flush=True)
+    return r.returncode == 0
+
+
+# ACE-Step's requirements.txt pins old wheels (e.g. spacy==3.8.4) that don't exist for Kaggle's Python 3.13,
+# so install the package without deps and add what it imports, unpinned; fall back to its pinned diffusers/transformers.
+pip("--no-deps git+https://github.com/ace-step/ACE-Step.git")
+pip("loguru pypinyin hangul-romanize py3langid num2words spacy opencc cutlet diffusers accelerate peft librosa soundfile")
+if not can_import():
+    pip('"diffusers==0.33.1" "transformers==4.50.0"')
+    if not can_import():
+        _fail("ACE-Step import failed after dependency fallback (see log)")
 
 try:
     import numpy as np
