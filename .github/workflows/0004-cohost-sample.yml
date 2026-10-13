@@ -28,7 +28,7 @@ jobs:
           pip install -q kokoro==0.9.4 soundfile numpy google-api-python-client==2.151.0 google-auth==2.36.0
       - name: Render dialogues
         run: |
-          mkdir -p /tmp/s && python - <<'EOF'
+          mkdir -p /tmp/s && python - <<'EOF' 2>&1 | tee -a run.log
           import json, subprocess, sys
           import numpy as np, soundfile as sf
           sys.path.insert(0, "0004/pipeline")
@@ -57,6 +57,7 @@ jobs:
           EOF
       - name: Version with music bed
         run: |
+          exec > >(tee -a run.log) 2>&1
           M=$(python -c "import json;print(json.load(open('0004/samples/cohost.json'))['music'])")
           W=$(python -c "import json;print(json.load(open('0004/samples/cohost.json'))['music_with'])")
           git fetch -q origin review/music && git show "FETCH_HEAD:$M.mp3" > /tmp/bed.mp3
@@ -65,6 +66,9 @@ jobs:
             "[0:a]aresample=44100,loudnorm=I=-16:TP=-1.5,asplit=2[v][sc];[1:a]aresample=44100,volume=-14dB[m];[m][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=350[md];[v][md]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95" \
             -b:a 160k "/tmp/s/4_bella_plus_${W}_with_music.mp3"
           echo "::notice title=music::$M under $W"
+      - name: Report failure
+        if: failure()
+        run: tail -c 3000 run.log 2>/dev/null | sed ':a;N;$!ba;s/%/%25/g;s/\r/%0D/g;s/\n/%0A/g' | sed 's/^/::error title=log tail::/'
       - name: Push previews (review/cohost)
         run: |
           mkdir -p /tmp/p && cp /tmp/s/*.mp3 /tmp/p/ && cd /tmp/p && git init -q && git checkout -q -b review && git add . && git -c user.name=voice-bot -c user.email=bot@users.noreply.github.com commit -qm "co-host samples"

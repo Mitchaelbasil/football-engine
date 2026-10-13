@@ -80,8 +80,11 @@ jobs:
       - name: Push previews (review/music)
         run: |
           ffmpeg -v error -i "$(ls /tmp/music/*.wav | head -1)" -filter_complex "showwavespic=s=1600x240" -frames:v 1 /tmp/prev/wave_first.png || true
-          cd /tmp/prev && git init -q && git checkout -q -b review && git add . && git -c user.name=music-bot -c user.email=bot@users.noreply.github.com commit -qm "music previews $MOODS"
-          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "review:review/music"
+          # add to the existing previews instead of replacing them
+          U="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}"
+          if git clone -q --depth 1 -b review/music "$U" /tmp/rv 2>/dev/null; then :; else mkdir -p /tmp/rv && git -C /tmp/rv init -q && git -C /tmp/rv checkout -q -b review/music; fi
+          cp /tmp/prev/* /tmp/rv/ && cd /tmp/rv && git add . && git -c user.name=music-bot -c user.email=bot@users.noreply.github.com commit -qm "music previews $MOODS"
+          git push -q "$U" HEAD:review/music
       - name: Report failure
         if: failure()
         run: |
