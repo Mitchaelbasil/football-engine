@@ -58,7 +58,7 @@ def _resolve(beat: dict, bt: float, words: list, spec, warn: list) -> tuple:
 
 
 def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: int = 30):
-    warn, scenes, beats_out, words_all, overlays, sfx = [], [], [], [], [], []
+    warn, scenes, beats_out, words_all, overlays, sfx, manual = [], [], [], [], [], [], []
     cur, vi, arc_label, react_i = 0.0, 0, None, 0
     last_spk, last_end = None, -1e9
     for si, sc in enumerate(doc["scenes"]):
@@ -81,6 +81,9 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
             for spec in b.get("do", []):
                 a, t = _resolve(b, bt, words, spec, warn)
                 evs.append({"a": a, "t": round(t, 3)})
+            for spec in b.get("sfx", []):
+                _, t = _resolve(b, bt, words, {"a": spec["g"], "at": spec.get("at"), "dt": spec.get("dt", 0.0)}, warn)
+                manual.append({"t": round(t, 3), "g": spec["g"], "align": spec.get("align", "attack")})
             end = bt + v["dur"]
             if b.get("react"):
                 r = b["react"] if isinstance(b["react"], dict) else {"emo": b["react"]}
@@ -109,9 +112,11 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
     total = round(cur + 0.4, 3)
     tl = {"w": w, "h": h, "fps": fps, "total": total, "scenes": scenes, "overlays": overlays,
           "beats": beats_out, "words": words_all, "micro": [], "sfx": sfx,
-          "speakers": speaker_runs(beats_out), "hosts": hosts_meta(doc)}
+          "speakers": speaker_runs(beats_out), "hosts": hosts_meta(doc), "manual_sfx": manual,
+          "seed": doc.get("meta", {}).get("title", "")}
     _plan_motion(tl)
-    _plan_sfx(tl)
+    _plan_sfx(tl, doc)
+    _plan_beds(tl, doc)
     tl["report"] = validate(tl)
     tl["report"]["warnings"] = warn
     return tl
@@ -292,33 +297,68 @@ def _plan_motion(tl):
     tl["micro"].sort(key=lambda m: m["t"])
 
 
-def _plan_sfx(tl):
-    """Built-in SFX ONLY on mundane moments (number ticks, list-item hits). Anime-worthy moments get NO built-in
-    sound: they are listed as cues (tl['cues']) for Mitchael's anime SFX / reaction clips, tested by hand first."""
+# Library SFX (Drive 0004/sfx, matched by filename prefix): which group plays on which engine event, and how the
+# clip is lined up: "attack" = its first strong transient lands on the cue, "peak" = its loudest moment lands on
+# the cue (whooshes, risers), "onset" = it simply starts there. Ordinary moments keep the built-in ticks.
+SFX_ON = {"slam": "impact", "stamp": "impact", "burst": "aura", "lock": "scouter", "rival": "scouter", "title": "title"}
+REACT_SFX = {"shock": "reaction_shock", "sad": "reaction_sad", "laugh": "reaction_laugh", "what": "reaction_what",
+             "hype": "reaction_hype", "bored": "reaction_what", "aura": "reaction_hype"}
+MONEY = ("€", "$", "£")
+
+
+def _plan_sfx(tl, doc=None):
+    """SFX timeline: library sounds on payoffs (slams, scanner, aura, arc titles, reactions, list items, photos, money),
+    built-in ticks on counters. Whooshes only into arc/end cards, at most ~1 per 40 s. Beats can add their own
+    cues: "sfx": [{"g": "shatter", "at": "record"}] (groups: countdown, shatter, notify, typing, censor, money...)."""
     s, cues = tl["sfx"], tl.setdefault("cues", [])
-    last_whoosh = -1e9  # whoosh only on BIG transitions (into an arc card / end card), at most ~1 per 40 s
+    last_whoosh = -1e9
+
+    def add(t, g, align="attack", what="", **kw):
+        s.append({"t": round(t, 3), "g": g, "align": align, **kw})
+        cues.append({"t": round(t, 3), "what": what or g.upper(), "idea": g})
+
     for i, sc in enumerate(tl["scenes"]):
         if i and sc["type"] in ("arc", "endcard") and sc["start"] - last_whoosh >= 40:
-            s.append({"t": sc["start"], "k": "whoosh"}); last_whoosh = sc["start"]
+            add(sc["start"] + 0.12, "whoosh", "peak", "TRANSITION"); last_whoosh = sc["start"]
+        if sc["type"] == "photo":
+            add(sc["start"] + 0.08, "photo", what="PHOTO")
+        ev = {}
         for e in sc["ev"]:
-            a = e["a"]
+            ev.setdefault(e["a"], []).append(e["t"])
+        d = sc.get("data", {})
+        for e in sc["ev"]:
+            a, t = e["a"], e["t"]
             if a in ("count", "read", "rread"):
-                s.append({"t": e["t"], "k": "ticks"})
+                s.append({"t": t, "k": "ticks"})
             elif a.startswith("item"):
-                s.append({"t": e["t"], "k": "hit"})
-            if a in ("slam", "stamp"):
-                cues.append({"t": e["t"], "what": "SLAM", "idea": "impact hit / dramatic sting"})
-            elif a == "burst":
-                cues.append({"t": e["t"], "what": "AURA", "idea": "aura / power-up sound"})
-            elif a == "charge":
-                cues.append({"t": e["t"], "what": "AURA CHARGE", "idea": "charging / energy build"})
-            elif a in ("lock", "rival"):
-                cues.append({"t": e["t"], "what": "SCANNER", "idea": "scouter beep"})
-            elif a == "title":
-                cues.append({"t": e["t"], "what": "ARC TITLE", "idea": "anime title-card sting"})
+                add(t, "list", what="LIST ITEM")
+            if a in SFX_ON:
+                add(t, SFX_ON[a], "onset" if SFX_ON[a] in ("scouter", "aura") else "attack", a.upper())
+            elif a == "charge":  # riser: its peak lands on the burst that follows
+                nxt = [x for x in ev.get("burst", []) if x > t]
+                add(t, "charge", "peak" if nxt else "onset", "AURA CHARGE", until=round(nxt[0], 3) if nxt else None)
+            if a == "rread" and d.get("rival", {}).get("value", 0) > d.get("max", 100):
+                add(t + 0.9, "overload", "onset", "SCANNER BROKE")
+            if a == "count" and any(c in f"{d.get('prefix', '')}{d.get('suffix', '')}" for c in MONEY):
+                add(t + 1.1, "money", what="MONEY")
     for o in tl["overlays"]:
-        cues.append({"t": o["t"], "what": f"REACTION ({o['emo']})", "idea": "anime reaction clip / sound"})
+        add(o["t"], REACT_SFX.get(o["emo"], "reaction_shock"), what=f"REACTION ({o['emo']})")
+    for c in tl.get("manual_sfx", []):
+        add(c["t"], c["g"], c.get("align", "attack"), "MANUAL")
     s.sort(key=lambda x: x["t"]); cues.sort(key=lambda x: x["t"])
+
+
+def _plan_beds(tl, doc):
+    """Music / ambience beds from scene-level "bed": "<mood>" | "ambience" | "none" (carries forward)."""
+    beds, cur = [], None
+    for sc, ps in zip(doc["scenes"], tl["scenes"]):
+        if "bed" in sc:
+            cur = None if sc["bed"] in (None, "none") else sc["bed"]
+        if cur and beds and beds[-1]["mood"] == cur and abs(beds[-1]["t1"] - ps["start"]) < 0.01:
+            beds[-1]["t1"] = ps["end"]
+        elif cur:
+            beds.append({"t0": ps["start"], "t1": ps["end"], "mood": cur})
+    tl["beds"] = beds
 
 
 def _speech_rms(a: np.ndarray) -> float:

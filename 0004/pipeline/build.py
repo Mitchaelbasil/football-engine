@@ -72,12 +72,18 @@ def make(doc: dict, voice_backend: str, build: Path, size, allow_invalid=False):
     return tl
 
 
+ASSETS, SFX_OFF = None, ()
+
+
 def render_full(tl, build: Path, out_mp4: Path):
     plan.assemble_voice(tl, build / "voice.wav")
     if len(tl.get("voice_gains", {})) > 1:
         print(f"voice levels[{build.name}]: " + ", ".join(f"{k} x{g:.2f}" for k, g in tl["voice_gains"].items()))
     silent = render.video(build, tl["total"], tl["fps"], tl["w"], tl["h"], build / "video.mp4")
-    mixer.mix(tl, build / "voice.wav", build / "mix.wav")
+    mixer.mix(tl, build / "voice.wav", build / "mix.wav", ASSETS, SFX_OFF)
+    if tl.get("sfx_used"):
+        (build / "sfx_used.txt").write_text("\n".join(tl["sfx_used"]))
+        print(f"sfx[{build.name}]: {len(tl['sfx_used'])} library sounds, beds {[b['mood'] for b in tl.get('beds', [])]}")
     return mixer.mux(silent, build / "mix.wav", out_mp4)
 
 
@@ -111,10 +117,15 @@ def main():
     ap.add_argument("--shorts", action="store_true")
     ap.add_argument("--thumbs", action="store_true")
     ap.add_argument("--allow-invalid", action="store_true")
+    ap.add_argument("--assets", type=Path, help="synced Drive assets (sfx/, music/) - see assets.py")
+    ap.add_argument("--sfx-off", default="", help="drop library files by source tag, e.g. op,dbz (if claims land)")
     a = ap.parse_args()
+    global ASSETS, SFX_OFF
+    ASSETS = a.assets
 
     vd = a.video_dir.resolve()
     doc = json.loads((vd / "scenes.json").read_text())
+    SFX_OFF = tuple(x for x in (a.sfx_off.split(",") + doc.get("meta", {}).get("sfx_off", [])) if x)
     if a.voice == "chatterbox":  # voice every sentence (main + Shorts hooks) in ONE Kaggle job; fall back to Kokoro if it fails
         allb = plan.doc_beats(doc)
         if a.shorts:
@@ -136,8 +147,8 @@ def main():
 
     if a.video:
         final = render_full(tl, main_build, out / "final.mp4")
-        cues = ["ANIME SFX CUES - built-in sound is OFF at these moments; test your anime sounds/clips here", ""]
-        cues += [f"{int(c['t'] // 60)}:{c['t'] % 60:05.2f}  {c['what']:<20} {c['idea']}" for c in tl.get("cues", [])]
+        cues = ["SFX PLAYED (time, group, file from Drive 0004/sfx)", ""] + [
+            f"{int(float(u.split()[0]) // 60)}:{float(u.split()[0]) % 60:05.2f}  " + " ".join(u.split()[1:]) for u in tl.get("sfx_used", [])]
         (out / "sfx_cues.txt").write_text("\n".join(cues))
         contact_sheet(final, out / "contact.jpg")
         print(f"done: {final}")

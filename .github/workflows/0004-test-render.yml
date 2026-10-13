@@ -51,20 +51,33 @@ jobs:
           path: ${{ env.VID }}/build/voice_chatterbox
           key: voice-${{ env.VIDEO }}-${{ github.run_id }}
           restore-keys: voice-${{ env.VIDEO }}-
+      - name: Restore Drive assets (SFX library, music, arc intro, reaction clips)
+        uses: actions/cache@v4
+        with:
+          path: assets
+          key: assets-${{ github.run_id }}
+          restore-keys: assets-
+      - name: Sync Drive assets
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python 0004/pipeline/assets.py --doc "$VID/scenes.json" --out assets | tee -a assets.log | sed 's/^/::notice title=assets::/'
       - name: Build video
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
         run: |
           set -o pipefail
           source 0004/pipeline/kaggle_auth.sh
-          python 0004/pipeline/build.py "$VID" --voice "$VOICE" --video --shorts --thumbs 2>&1 | tee build.log
-          grep -E '^(plan\[|voice levels)' build.log | while read -r l; do echo "::notice title=plan::$l"; done || true
+          python 0004/pipeline/build.py "$VID" --voice "$VOICE" --assets assets --video --shorts --thumbs 2>&1 | tee build.log
+          grep -E '^(plan\[|voice levels|sfx\[)' build.log | while read -r l; do echo "::notice title=plan::$l"; done || true
           grep '^kaggle:' build.log | tail -3 | while read -r l; do echo "::notice title=voice::$l"; done || true
           if grep -q 'VOICE FALLBACK' build.log; then echo "::warning title=voice::$(grep 'VOICE FALLBACK' build.log | head -c 1500 | tr '\n' ' ')"; fi
       - name: Push review assets (contact sheet, waveform, loudness, plan)
         run: |
           R=/tmp/review; mkdir -p $R
-          cp "$VID"/out/contact*.jpg "$VID"/out/thumb_*.png "$VID/build/main/timeline.json" $R/ 2>/dev/null || true
+          cp "$VID"/out/contact*.jpg "$VID"/out/thumb_*.png "$VID/build/main/timeline.json" "$VID"/out/sfx_cues.txt $R/ 2>/dev/null || true
+          grep -h "bed " build.log > $R/beds.txt || true
           ffmpeg -v error -i "$VID/out/final.mp4" -filter_complex "showwavespic=s=1920x300:split_channels=0" -frames:v 1 $R/wave.png
           ffmpeg -nostats -i "$VID/out/final.mp4" -af ebur128 -f null - 2>&1 | tail -12 > $R/loudness.txt
           for t in 1.5 13.5 30.5 44 60.5; do ffmpeg -v error -ss $t -i "$VID/out/final.mp4" -frames:v 1 -vf scale=960:-1 $R/f_$t.jpg; done
