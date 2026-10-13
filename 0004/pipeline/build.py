@@ -90,18 +90,24 @@ def render_full(tl, build: Path, out_mp4: Path):
 def short_docs(doc: dict) -> list:
     """Each Short = a run of scenes from the long video + an end card pointing to the full story."""
     by_id = {s.get("id"): s for s in doc["scenes"]}
+    bed_at, cur = {}, None  # music mood active at each scene in the long video, so a Short cut keeps its bed
+    for s in doc["scenes"]:
+        cur = s.get("bed", cur); bed_at[s.get("id")] = cur
     specs = doc.get("shorts") or [{"name": "hook", "scenes": [s["id"] for s in doc["scenes"][:3]]}]
     title = doc.get("meta", {}).get("short_title") or doc.get("meta", {}).get("title", "")
     out = []
     for sp in specs:
         scenes = [copy.deepcopy(by_id[i]) for i in sp["scenes"]]
+        if bed_at.get(sp["scenes"][0]) and "bed" not in scenes[0]:
+            scenes[0]["bed"] = bed_at[sp["scenes"][0]]
         if sp.get("hook"):  # Shorts must open on a hook: one spoken line over a word slam
             h = sp["hook"]
             scenes.insert(0, {"id": "hook", "type": "slam", "palette": h.get("palette", scenes[0].get("palette", "gold")), "hud": False,
+                              **({"bed": scenes[0]["bed"]} if scenes[0].get("bed") else {}),
                               "data": {"word": h["word"], "pre": h.get("pre", "")},
                               "beats": [{"say": h["say"], "speaker": h.get("speaker", "H"), "emph": [h["at"]] if h.get("at") else [],
                                          "do": ["pre", {"a": "slam", "at": h["at"]} if h.get("at") else "slam"]}]})
-        scenes.append({"id": "end", "type": "endcard", "palette": "violet", "hud": False, "dur": 2.6,
+        scenes.append({"id": "end", "type": "endcard", "palette": "violet", "hud": False, "dur": 2.6, "bed": "none",
                        "data": {"line": "FULL STORY ON THE CHANNEL", "title": sp.get("title", title)}})
         out.append((sp["name"], {"meta": doc.get("meta", {}), "scenes": scenes}))
     return out

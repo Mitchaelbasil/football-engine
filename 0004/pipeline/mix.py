@@ -257,16 +257,22 @@ def mix(tl: dict, voice_wav: Path, out: Path, assets=None, off=()):
     return out
 
 
-def master(audio: Path, out: Path, I=-14.0, TP=-1.5, LRA=11.0) -> Path:
-    """Peak-limit, then two-pass loudnorm (single-pass undershot to about -15.6 LUFS)."""
+def _loudnorm_stats(audio: Path, chain: str, I, TP, LRA) -> dict:
     import json, re
-    pre = "alimiter=limit=0.9:attack=3:release=80:level=false"
     r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(audio), "-af",
-                        f"{pre},loudnorm=I={I}:TP={TP}:LRA={LRA}:print_format=json", "-f", "null", "-"], capture_output=True, text=True)
-    m = json.loads(re.findall(r"\{[^{}]*\}", r.stderr)[-1])
+                        f"{chain}loudnorm=I={I}:TP={TP}:LRA={LRA}:print_format=json", "-f", "null", "-"], capture_output=True, text=True)
+    return json.loads(re.findall(r"\{[^{}]*\}", r.stderr)[-1])
+
+
+def master(audio: Path, out: Path, I=-14.0, TP=-1.5, LRA=11.0) -> Path:
+    """Gain to target, peak-limit, then a linear two-pass loudnorm. (Plain loudnorm undershot to about -15.3 LUFS:
+    speech + SFX peaks hit the true-peak ceiling before the gain it needed, so the limiter has to run first.)"""
+    raw = _loudnorm_stats(audio, "", I, TP, LRA)
+    pre = f"volume={I - float(raw['input_i']):.2f}dB,alimiter=limit=0.75:attack=2:release=60:level=false,"
+    m = _loudnorm_stats(audio, pre, I, TP, LRA)
     ln = (f"loudnorm=I={I}:TP={TP}:LRA={LRA}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
           f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(audio), "-af", f"{pre},{ln}", "-ar", "48000", str(out)], check=True)
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(audio), "-af", pre + ln, "-ar", "48000", str(out)], check=True)
     return out
 
 
