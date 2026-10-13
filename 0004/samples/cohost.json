@@ -1,0 +1,20 @@
+{
+  "note": "Two-host test: Bella tells the story, the pundit interjects. Facts from the pilot (Ronaldo 2011-12).",
+  "host": "af_bella",
+  "pundits": ["bm_george", "am_michael", "am_fenrir"],
+  "music": "music_tension_ace_02",
+  "music_with": "bm_george",
+  "lines": [
+    ["H", "In the twenty eleven, twelve season, Cristiano Ronaldo scored sixty goals.", 0.3],
+    ["P", "Sixty. In one season.", 0.35],
+    ["H", "He scored against every single team in La Liga. All nineteen of them.", 0.3],
+    ["P", "Every opponent. Nobody was safe.", 0.4],
+    ["H", "Real Madrid won the league with a hundred points, and Ronaldo scored the winner at the Camp Now.", 0.3],
+    ["P", "That's a Ballon Dor season. Easy.", 0.45],
+    ["H", "Except, five hundred kilometres away, someone was having a very different kind of year.", 0.35],
+    ["P", "Wait. How many did Messi score?", 0.4],
+    ["H", "Seventy-three.", 0.6],
+    ["P", "Seventy-three? That's not a season. That's a video game.", 0.4],
+    ["H", "Sixty goals. And Ronaldo still finished second.", 0.2]
+  ]
+}

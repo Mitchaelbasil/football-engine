@@ -1,0 +1,79 @@
+name: 0004 co-host sample
+
+# Renders a two-voice dialogue (host + pundit) from 0004/samples/cohost.json, once per pundit voice,
+# plus one version with a music bed under the voices. MP3s go to branch review/cohost and to
+# Drive football-engine/0004/voice/samples/cohost (+ Telegram ping).
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 0004/samples/cohost.json
+
+permissions:
+  contents: write
+
+jobs:
+  cohost:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg > /dev/null
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q kokoro==0.9.4 soundfile numpy google-api-python-client==2.151.0 google-auth==2.36.0
+      - name: Render dialogues
+        run: |
+          mkdir -p /tmp/s && python - <<'EOF'
+          import json, subprocess, sys
+          import numpy as np, soundfile as sf
+          sys.path.insert(0, "0004/pipeline")
+          from voice import _kokoro_synth, SR
+          cfg = json.load(open("0004/samples/cohost.json"))
+          def lvl(a, target=0.12):  # match host and pundit loudness
+              r = float(np.sqrt(np.mean(a ** 2)) + 1e-9)
+              return a * (target / r)
+          host_cache = {}
+          for i, p in enumerate(cfg["pundits"], 1):
+              parts = []
+              for who, text, gap in cfg["lines"]:
+                  if who == "H":
+                      if text not in host_cache:
+                          host_cache[text] = lvl(_kokoro_synth(text, cfg["host"])[0])
+                      a = host_cache[text]
+                  else:
+                      a = lvl(_kokoro_synth(text, p, speed=1.0)[0])
+                  parts += [a, np.zeros(int(gap * SR), dtype=np.float32)]
+              y = np.concatenate(parts)
+              y = y / max(1e-6, np.abs(y).max()) * 0.9
+              sf.write(f"/tmp/s/{p}.wav", y, SR)
+              subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"/tmp/s/{p}.wav", "-af", "loudnorm=I=-16:TP=-1.5",
+                              "-ar", "44100", "-b:a", "160k", f"/tmp/s/{i}_bella_plus_{p}.mp3"], check=True)
+              print(f"::notice title=sample::{p} {len(y) / SR:.1f}s")
+          EOF
+      - name: Version with music bed
+        run: |
+          M=$(python -c "import json;print(json.load(open('0004/samples/cohost.json'))['music'])")
+          W=$(python -c "import json;print(json.load(open('0004/samples/cohost.json'))['music_with'])")
+          git fetch -q origin review/music && git show "FETCH_HEAD:$M.mp3" > /tmp/bed.mp3
+          # bed ~18 dB under the voices, ducked a little more while anyone talks
+          ffmpeg -v error -y -i "/tmp/s/$W.wav" -stream_loop -1 -i /tmp/bed.mp3 -filter_complex \
+            "[0:a]aresample=44100,loudnorm=I=-16:TP=-1.5,asplit=2[v][sc];[1:a]aresample=44100,volume=-14dB[m];[m][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=350[md];[v][md]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95" \
+            -b:a 160k "/tmp/s/4_bella_plus_${W}_with_music.mp3"
+          echo "::notice title=music::$M under $W"
+      - name: Push previews (review/cohost)
+        run: |
+          mkdir -p /tmp/p && cp /tmp/s/*.mp3 /tmp/p/ && cd /tmp/p && git init -q && git checkout -q -b review && git add . && git -c user.name=voice-bot -c user.email=bot@users.noreply.github.com commit -qm "co-host samples"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "review:review/cohost"
+      - name: Upload to Drive + Telegram
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python 0004/pipeline/deliver.py --drive-path football-engine/0004/voice/samples/cohost --note "🎙️ 0004 co-host samples ready - pick the pundit voice" /tmp/s/*.mp3 | tail -1 | sed 's/^/::notice title=drive::/'
