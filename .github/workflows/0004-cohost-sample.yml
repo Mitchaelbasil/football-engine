@@ -61,9 +61,11 @@ jobs:
           M=$(python -c "import json;print(json.load(open('0004/samples/cohost.json'))['music'])")
           W=$(python -c "import json;print(json.load(open('0004/samples/cohost.json'))['music_with'])")
           git fetch -q origin review/music && git show "FETCH_HEAD:$M.mp3" > /tmp/bed.mp3
-          # bed ~18 dB under the voices, ducked a little more while anyone talks
-          ffmpeg -v error -y -i "/tmp/s/$W.wav" -stream_loop -1 -i /tmp/bed.mp3 -filter_complex \
-            "[0:a]aresample=44100,loudnorm=I=-16:TP=-1.5,asplit=2[v][sc];[1:a]aresample=44100,volume=-14dB[m];[m][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=350[md];[v][md]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95" \
+          # bed ~18 dB under the voices (-20 LUFS preview -10 dB vs -16 LUFS voice), ducked a little more while anyone talks
+          # loudnorm in its own pass: inside the graph its look-ahead cut the last ~3 s
+          ffmpeg -v error -y -i "/tmp/s/$W.wav" -af "aresample=44100,loudnorm=I=-16:TP=-1.5" /tmp/voice_n.wav
+          ffmpeg -v error -y -i /tmp/voice_n.wav -stream_loop -1 -i /tmp/bed.mp3 -filter_complex \
+            "[0:a]asplit=2[v][sc];[1:a]aresample=44100,volume=-10dB[m];[m][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=350[md];[v][md]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95" \
             -b:a 160k "/tmp/s/4_bella_plus_${W}_with_music.mp3"
           echo "::notice title=music::$M under $W"
       - name: Report failure
