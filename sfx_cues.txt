@@ -1,0 +1,22 @@
+SFX PLAYED (time, group, file from Drive 0004/sfx)
+
+0:03.74  list list_doc_paper.wav
+0:06.70  list list_doc_paper.wav
+0:09.58  impact impact_op_bone_creak_crack.wav
+0:10.51  reaction_shock reaction_shock_op_sudden_alert.wav
+0:12.88  whoosh whoosh_sk_fast_swoosh.wav
+0:14.34  title title_op_enemy_intro_3.wav
+0:16.78  scouter scouter_op_sword_spin.wav
+0:24.08  scouter scouter_dbz_scan_long.wav
+0:28.06  overload overload_fx_beep_static.wav
+0:28.66  reaction_shock reaction_shock_op_terrifying_moment.wav
+0:30.99  photo photo_fx_camera_shot.wav
+0:40.23  charge charge_doc_riser.wav
+0:43.73  aura aura_fx_sword_thunder.wav
+0:44.84  reaction_hype reaction_hype_crowd_celebration.wav
+0:47.73  list list_doc_paper.wav
+0:51.87  list list_doc_paper.wav
+0:53.23  impact impact_op_breaking_through_floor_wall.wav
+1:08.20  impact impact_op_explosion.wav
+1:16.02  reaction_shock reaction_shock_op_terror.wav
+1:34.40  impact impact_fx_fast_impact.wav

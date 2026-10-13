@@ -1,0 +1,7 @@
+  bed 0.0-12.8s: music_epic_ace_01.wav
+  bed 12.8-30.9s: music_tension_ace_02.wav
+  bed 30.9-38.3s: music_epic_ace_02.wav
+  bed 38.3-47.1s: music_triumph_ace_02.wav
+  bed 47.1-89.7s: music_mystery_ace_01.wav
+  bed 89.7-97.4s: music_sad_ace_02.wav
+  bed 0.0-40.0s: music_mystery_ace_01.wav

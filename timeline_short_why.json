@@ -1,0 +1,1085 @@
+{
+ "w": 1080,
+ "h": 1920,
+ "fps": 30,
+ "total": 43.57,
+ "scenes": [
+  {
+   "id": "hook",
+   "type": "slam",
+   "palette": "barca",
+   "start": 0.0,
+   "end": 4.422,
+   "data": {
+    "word": "2ND",
+    "pre": "60 GOALS \u00b7 LA LIGA CHAMPION"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 0.25
+    },
+    {
+     "a": "slam",
+     "t": 0.25
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "why",
+   "type": "h2h",
+   "palette": "barca",
+   "start": 4.422,
+   "end": 17.879,
+   "data": {
+    "left": {
+     "name": "RONALDO"
+    },
+    "right": {
+     "name": "MESSI"
+    },
+    "rows": [
+     [
+      "ALL COMPETITIONS",
+      60,
+      73,
+      0
+     ],
+     [
+      "LA LIGA GOALS",
+      46,
+      50,
+      0
+     ],
+     [
+      "LA LIGA TITLES",
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   "ev": [
+    {
+     "a": "left",
+     "t": 4.772
+    },
+    {
+     "a": "right",
+     "t": 12.34
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "calendar",
+   "type": "slam",
+   "palette": "mint",
+   "start": 17.879,
+   "end": 22.488,
+   "data": {
+    "pre": "THE BALLON D'OR VOTE",
+    "word": "2012",
+    "sub": "THE CALENDAR YEAR \u00b7 NOT THE SEASON",
+    "fs": 420
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 18.229
+    },
+    {
+     "a": "slam",
+     "t": 18.442
+    },
+    {
+     "a": "sub",
+     "t": 21.017
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "n91",
+   "type": "counter",
+   "palette": "violet",
+   "start": 22.488,
+   "end": 31.607,
+   "data": {
+    "value": 91,
+    "label": "GOALS IN 2012",
+    "sub": "GERD M\u00dcLLER'S RECORD: 85 \u00b7 1972"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 22.968
+    },
+    {
+     "a": "sub",
+     "t": 30.234
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "vote",
+   "type": "h2h",
+   "palette": "gold",
+   "start": 31.607,
+   "end": 39.97,
+   "data": {
+    "left": {
+     "name": "RONALDO"
+    },
+    "right": {
+     "name": "MESSI"
+    },
+    "rows": [
+     [
+      "BALLON D'OR 2012 \u00b7 VOTE %",
+      23.68,
+      41.6,
+      1
+     ]
+    ]
+   },
+   "ev": [
+    {
+     "a": "left",
+     "t": 31.971
+    },
+    {
+     "a": "right",
+     "t": 34.781
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "palette": "violet",
+   "start": 39.97,
+   "end": 43.17,
+   "data": {
+    "line": "FULL STORY ON THE CHANNEL",
+    "title": "WHY 60 WASN'T ENOUGH"
+   },
+   "ev": [],
+   "tr": "slide",
+   "arcLabel": null,
+   "hud": false
+  }
+ ],
+ "overlays": [
+  {
+   "t": 26.26,
+   "d": 1.8,
+   "emo": "shock",
+   "text": "91?!",
+   "cap": "THAT'S A VIDEO GAME",
+   "clip": null,
+   "pos": "br"
+  }
+ ],
+ "beats": [
+  {
+   "t": 0.25,
+   "end": 4.012,
+   "say": "How do you score sixty goals, win the league, and still finish second?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/1cbe128f1393e0a5.wav",
+   "scene": 0,
+   "speaker": "H"
+  },
+  {
+   "t": 4.772,
+   "end": 7.635,
+   "say": "Because the Ballon Dor doesn't care who won the league.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/5fa2d2d3bd846e42.wav",
+   "scene": 1,
+   "speaker": "P"
+  },
+  {
+   "t": 7.795,
+   "end": 13.64,
+   "say": "Messi didn't win La Liga. He didn't win the Champions League either. He just outscored everybody.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/6e9d66ed62c3fdaa.wav",
+   "scene": 1,
+   "speaker": "P"
+  },
+  {
+   "t": 13.8,
+   "end": 17.469,
+   "say": "Fifty league goals. Nobody in Spain had ever done that.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/3dc204bf1218f5a7.wav",
+   "scene": 1,
+   "speaker": "P"
+  },
+  {
+   "t": 18.229,
+   "end": 22.078,
+   "say": "And the vote isn't about the season. It's about the calendar year.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/29190ebc95dbdc9e.wav",
+   "scene": 2,
+   "speaker": "P"
+  },
+  {
+   "t": 22.838,
+   "end": 25.91,
+   "say": "In twenty twelve, Messi scored ninety-one goals.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/f8957bf9301118fb.wav",
+   "scene": 3,
+   "speaker": "P"
+  },
+  {
+   "t": 28.26,
+   "end": 31.197,
+   "say": "Gerd Mueller's record had stood for forty years.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/0b9542f0edd806f7.wav",
+   "scene": 3,
+   "speaker": "P"
+  },
+  {
+   "t": 31.957,
+   "end": 33.835,
+   "say": "Ronaldo had the better story.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/64c181054a0ffdad.wav",
+   "scene": 4,
+   "speaker": "P"
+  },
+  {
+   "t": 33.995,
+   "end": 37.76,
+   "say": "Messi had the bigger numbers. And the voters went with the numbers.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/003490404e98d730.wav",
+   "scene": 4,
+   "speaker": "P"
+  },
+  {
+   "t": 37.92,
+   "end": 39.36,
+   "say": "It wasn't even close.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_checkpoint/build/voice_kokoro_af_bella/1789e85ce314358b.wav",
+   "scene": 4,
+   "speaker": "P"
+  }
+ ],
+ "words": [
+  {
+   "w": "How",
+   "s": 0.25,
+   "e": 0.337,
+   "emph": true
+  },
+  {
+   "w": "do",
+   "s": 0.337,
+   "e": 0.438,
+   "emph": false
+  },
+  {
+   "w": "you",
+   "s": 0.438,
+   "e": 0.525,
+   "emph": false
+  },
+  {
+   "w": "score",
+   "s": 0.525,
+   "e": 0.838,
+   "emph": false
+  },
+  {
+   "w": "sixty",
+   "s": 0.838,
+   "e": 1.2,
+   "emph": false
+  },
+  {
+   "w": "goals",
+   "s": 1.2,
+   "e": 1.875,
+   "emph": false
+  },
+  {
+   "w": "win",
+   "s": 2.013,
+   "e": 2.212,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 2.212,
+   "e": 2.3,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 2.3,
+   "e": 2.7,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 2.738,
+   "e": 2.85,
+   "emph": false
+  },
+  {
+   "w": "still",
+   "s": 2.85,
+   "e": 3.138,
+   "emph": false
+  },
+  {
+   "w": "finish",
+   "s": 3.138,
+   "e": 3.437,
+   "emph": false
+  },
+  {
+   "w": "second",
+   "s": 3.437,
+   "e": 4.25,
+   "emph": false
+  },
+  {
+   "w": "Because",
+   "s": 4.772,
+   "e": 5.068,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 5.068,
+   "e": 5.205,
+   "emph": false
+  },
+  {
+   "w": "Ballon",
+   "s": 5.205,
+   "e": 5.78,
+   "emph": false
+  },
+  {
+   "w": "Dor",
+   "s": 5.78,
+   "e": 6.068,
+   "emph": false
+  },
+  {
+   "w": "doesn't",
+   "s": 6.068,
+   "e": 6.355,
+   "emph": true
+  },
+  {
+   "w": "care",
+   "s": 6.355,
+   "e": 6.668,
+   "emph": false
+  },
+  {
+   "w": "who",
+   "s": 6.668,
+   "e": 6.843,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 6.843,
+   "e": 7.056,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 7.056,
+   "e": 7.143,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 7.143,
+   "e": 7.868,
+   "emph": false
+  },
+  {
+   "w": "Messi",
+   "s": 7.815,
+   "e": 8.19,
+   "emph": false
+  },
+  {
+   "w": "didn't",
+   "s": 8.19,
+   "e": 8.44,
+   "emph": false
+  },
+  {
+   "w": "win",
+   "s": 8.44,
+   "e": 8.665,
+   "emph": false
+  },
+  {
+   "w": "La",
+   "s": 8.665,
+   "e": 8.903,
+   "emph": false
+  },
+  {
+   "w": "Liga",
+   "s": 8.903,
+   "e": 9.565,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 9.69,
+   "e": 9.803,
+   "emph": false
+  },
+  {
+   "w": "didn't",
+   "s": 9.803,
+   "e": 10.015,
+   "emph": false
+  },
+  {
+   "w": "win",
+   "s": 10.015,
+   "e": 10.227,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 10.227,
+   "e": 10.328,
+   "emph": false
+  },
+  {
+   "w": "Champions",
+   "s": 10.328,
+   "e": 10.94,
+   "emph": false
+  },
+  {
+   "w": "League",
+   "s": 10.94,
+   "e": 11.265,
+   "emph": false
+  },
+  {
+   "w": "either",
+   "s": 11.265,
+   "e": 11.865,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 11.965,
+   "e": 12.09,
+   "emph": false
+  },
+  {
+   "w": "just",
+   "s": 12.09,
+   "e": 12.34,
+   "emph": false
+  },
+  {
+   "w": "outscored",
+   "s": 12.34,
+   "e": 12.952,
+   "emph": true
+  },
+  {
+   "w": "everybody",
+   "s": 12.952,
+   "e": 13.89,
+   "emph": false
+  },
+  {
+   "w": "Fifty",
+   "s": 13.832,
+   "e": 14.182,
+   "emph": true
+  },
+  {
+   "w": "league",
+   "s": 14.182,
+   "e": 14.432,
+   "emph": false
+  },
+  {
+   "w": "goals",
+   "s": 14.432,
+   "e": 15.107,
+   "emph": false
+  },
+  {
+   "w": "Nobody",
+   "s": 15.245,
+   "e": 15.732,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 15.732,
+   "e": 15.895,
+   "emph": false
+  },
+  {
+   "w": "Spain",
+   "s": 15.895,
+   "e": 16.332,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 16.332,
+   "e": 16.544,
+   "emph": false
+  },
+  {
+   "w": "ever",
+   "s": 16.544,
+   "e": 16.832,
+   "emph": true
+  },
+  {
+   "w": "done",
+   "s": 16.832,
+   "e": 17.107,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 17.107,
+   "e": 17.732,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 18.229,
+   "e": 18.341,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 18.341,
+   "e": 18.442,
+   "emph": false
+  },
+  {
+   "w": "vote",
+   "s": 18.442,
+   "e": 18.817,
+   "emph": false
+  },
+  {
+   "w": "isn't",
+   "s": 18.817,
+   "e": 19.092,
+   "emph": false
+  },
+  {
+   "w": "about",
+   "s": 19.092,
+   "e": 19.354,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 19.354,
+   "e": 19.504,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 19.504,
+   "e": 20.279,
+   "emph": false
+  },
+  {
+   "w": "It's",
+   "s": 20.404,
+   "e": 20.617,
+   "emph": false
+  },
+  {
+   "w": "about",
+   "s": 20.617,
+   "e": 20.879,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 20.879,
+   "e": 21.017,
+   "emph": false
+  },
+  {
+   "w": "calendar",
+   "s": 21.017,
+   "e": 21.591,
+   "emph": true
+  },
+  {
+   "w": "year",
+   "s": 21.591,
+   "e": 22.304,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 22.843,
+   "e": 22.968,
+   "emph": false
+  },
+  {
+   "w": "twenty",
+   "s": 22.968,
+   "e": 23.268,
+   "emph": false
+  },
+  {
+   "w": "twelve",
+   "s": 23.268,
+   "e": 23.893,
+   "emph": false
+  },
+  {
+   "w": "Messi",
+   "s": 24.005,
+   "e": 24.318,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 24.318,
+   "e": 24.68,
+   "emph": false
+  },
+  {
+   "w": "ninety-one",
+   "s": 24.68,
+   "e": 25.293,
+   "emph": true
+  },
+  {
+   "w": "goals",
+   "s": 25.293,
+   "e": 26.093,
+   "emph": false
+  },
+  {
+   "w": "Gerd",
+   "s": 28.284,
+   "e": 28.559,
+   "emph": false
+  },
+  {
+   "w": "Mueller's",
+   "s": 28.559,
+   "e": 29.047,
+   "emph": false
+  },
+  {
+   "w": "record",
+   "s": 29.047,
+   "e": 29.584,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 29.584,
+   "e": 29.759,
+   "emph": false
+  },
+  {
+   "w": "stood",
+   "s": 29.759,
+   "e": 30.059,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 30.059,
+   "e": 30.234,
+   "emph": false
+  },
+  {
+   "w": "forty",
+   "s": 30.234,
+   "e": 30.609,
+   "emph": true
+  },
+  {
+   "w": "years",
+   "s": 30.609,
+   "e": 31.384,
+   "emph": false
+  },
+  {
+   "w": "Ronaldo",
+   "s": 31.971,
+   "e": 32.646,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 32.646,
+   "e": 32.809,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 32.809,
+   "e": 32.896,
+   "emph": false
+  },
+  {
+   "w": "better",
+   "s": 32.896,
+   "e": 33.246,
+   "emph": false
+  },
+  {
+   "w": "story",
+   "s": 33.246,
+   "e": 34.071,
+   "emph": false
+  },
+  {
+   "w": "Messi",
+   "s": 34.018,
+   "e": 34.456,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 34.456,
+   "e": 34.656,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 34.656,
+   "e": 34.781,
+   "emph": false
+  },
+  {
+   "w": "bigger",
+   "s": 34.781,
+   "e": 35.143,
+   "emph": false
+  },
+  {
+   "w": "numbers",
+   "s": 35.143,
+   "e": 35.893,
+   "emph": true
+  },
+  {
+   "w": "And",
+   "s": 35.993,
+   "e": 36.131,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 36.131,
+   "e": 36.23,
+   "emph": false
+  },
+  {
+   "w": "voters",
+   "s": 36.23,
+   "e": 36.718,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 36.718,
+   "e": 36.906,
+   "emph": false
+  },
+  {
+   "w": "with",
+   "s": 36.906,
+   "e": 37.031,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 37.031,
+   "e": 37.118,
+   "emph": false
+  },
+  {
+   "w": "numbers",
+   "s": 37.118,
+   "e": 37.943,
+   "emph": true
+  },
+  {
+   "w": "It",
+   "s": 37.92,
+   "e": 38.066,
+   "emph": false
+  },
+  {
+   "w": "wasn't",
+   "s": 38.066,
+   "e": 38.391,
+   "emph": false
+  },
+  {
+   "w": "even",
+   "s": 38.391,
+   "e": 38.704,
+   "emph": false
+  },
+  {
+   "w": "close",
+   "s": 38.704,
+   "e": 39.516,
+   "emph": true
+  }
+ ],
+ "micro": [
+  {
+   "t": 2.3,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 6.068,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 7.815,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 8.903,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 10.94,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 12.952,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 15.245,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 16.544,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 20.404,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 24.005,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 34.018,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 37.118,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 38.704,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 41.266,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.25,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 18.442,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 22.968,
+   "k": "ticks"
+  },
+  {
+   "t": 26.26,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 40.09,
+   "g": "whoosh",
+   "align": "peak"
+  }
+ ],
+ "speakers": [
+  {
+   "who": "H",
+   "t": 0.25,
+   "end": 4.012,
+   "talk": [
+    [
+     0.25,
+     4.012
+    ]
+   ]
+  },
+  {
+   "who": "P",
+   "t": 4.772,
+   "end": 39.36,
+   "talk": [
+    [
+     4.772,
+     7.635
+    ],
+    [
+     7.795,
+     13.64
+    ],
+    [
+     13.8,
+     17.469
+    ],
+    [
+     18.229,
+     22.078
+    ],
+    [
+     22.838,
+     25.91
+    ],
+    [
+     28.26,
+     31.197
+    ],
+    [
+     31.957,
+     33.835
+    ],
+    [
+     33.995,
+     37.76
+    ],
+    [
+     37.92,
+     39.36
+    ]
+   ]
+  }
+ ],
+ "hosts": {
+  "H": {
+   "name": "BELLA",
+   "role": "THE STORY"
+  },
+  "P": {
+   "name": "MICHAEL",
+   "role": "THE BREAKDOWN"
+  }
+ },
+ "manual_sfx": [],
+ "seed": "Engine v2 checkpoint \u2014 two hosts (Bella: story, Michael: the breakdown)",
+ "cues": [
+  {
+   "t": 0.25,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 18.442,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 26.26,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 40.09,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  }
+ ],
+ "beds": [
+  {
+   "t0": 0.0,
+   "t1": 39.97,
+   "mood": "mystery"
+  }
+ ],
+ "report": {
+  "changes": 31,
+  "avg_gap": 1.41,
+  "max_gap": 2.34,
+  "over_limit": [],
+  "robotic_at": [],
+  "ok": true,
+  "warnings": []
+ },
+ "voice_gains": {
+  "H": 1.0,
+  "P": 1.3165499125333155
+ }
+}
