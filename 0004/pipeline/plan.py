@@ -340,20 +340,55 @@ def speaker_gains(tl) -> dict:
     return {k: float(np.clip(ref / r, 0.5, 2.5)) if r and ref else 1.0 for k, r in rms.items()}
 
 
-def assemble_voice(tl, out: Path):
+def voice_track(tl) -> np.ndarray:
     track = np.zeros(int((tl["total"] + 1) * SR), dtype=np.float32)
-    gains = speaker_gains(tl)
+    gains = tl.get("voice_gains") or speaker_gains(tl)
     tl["voice_gains"] = gains
     for b in tl["beats"]:
         a, _ = sf.read(b["wav"], dtype="float32")
         a = a * gains.get(b.get("speaker", "H"), 1.0)
         i = int(b["t"] * SR)
         track[i:i + len(a)] += a[: max(0, len(track) - i)]
-    sf.write(out, track, SR)
+    return track
+
+
+ENV_RANGE_DB = 26.0   # meter span below the loud end of the speech
+ENV_RELEASE = 0.16    # seconds for the glow to fall back (fast attack, slow release, like a VU meter)
+
+
+def voice_envelope(tl, track: np.ndarray) -> list:
+    """Per-frame voice loudness 0-99 for the host mic glow. Fake (silent) voice -> driven by word timings."""
+    fps = tl["fps"]; n = int(tl["total"] * fps) + 2
+    if float(np.max(np.abs(track))) < 1e-4:
+        v = np.zeros(n)
+        for w in tl["words"]:
+            i0, i1 = int(w["s"] * fps), min(n, int(w["e"] * fps) + 1)
+            v[i0:i1] = np.maximum(v[i0:i1], .55 + .45 * np.abs(np.sin(np.arange(i0, i1) * 1.7)))
+    else:
+        hop, L = SR / fps, int(SR / fps)
+        cs = np.concatenate([[0.0], np.cumsum(track.astype(np.float64) ** 2)])
+        mid = (np.arange(n) * hop).astype(int)
+        lo, hi = np.clip(mid - L // 2, 0, len(track)), np.clip(mid + L // 2, 0, len(track))
+        rms = np.sqrt((cs[hi] - cs[lo]) / np.maximum(hi - lo, 1))
+        db = 20 * np.log10(rms + 1e-9)
+        act = db[db > -60]
+        top = float(np.percentile(act, 95)) if len(act) else -14.0
+        v = np.clip((db - (top - ENV_RANGE_DB)) / ENV_RANGE_DB, 0, 1)
+    rel = float(np.exp(-1 / (fps * ENV_RELEASE)))
+    env = np.zeros(n)
+    for i in range(n):
+        env[i] = max(v[i], env[i - 1] * rel if i else 0)
+    return [int(x) for x in np.round(env * 99)]
+
+
+def assemble_voice(tl, out: Path):
+    sf.write(out, voice_track(tl), SR)
 
 
 def write(tl, build: Path):
     build.mkdir(parents=True, exist_ok=True)
-    (build / "timeline.json").write_text(json.dumps(tl, indent=1))
-    eng = {k: tl[k] for k in ("w", "h", "fps", "total", "scenes", "overlays", "micro", "speakers", "hosts")}
+    if len({r["who"] for r in tl.get("speakers", [])}) > 1 and "env" not in tl:
+        tl["env"] = voice_envelope(tl, voice_track(tl))
+    (build / "timeline.json").write_text(json.dumps({k: v for k, v in tl.items() if k != "env"}, indent=1))
+    eng = {k: tl[k] for k in ("w", "h", "fps", "total", "scenes", "overlays", "micro", "speakers", "hosts", "env") if k in tl}
     (build / "timeline.js").write_text("window.TL=" + json.dumps(eng) + ";")

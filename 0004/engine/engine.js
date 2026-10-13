@@ -169,59 +169,82 @@ function initHUD() {
 }
 function drawHUD(T, cur) {
   const on = cur.hud === false ? 0 : 1, hp = P(T, cur.start + .2, .5) * on + (1 - on) * (1 - P(T, cur.start, .3));
-  S(hudL, .85 * hp); hudR.innerHTML = cur.arcLabel || ''; S(hudR, PORT && TWO ? 0 : hp);  // 9:16 two-host: the tag takes the arc label's slot
+  S(hudL, .85 * hp); hudR.innerHTML = cur.arcLabel || ''; S(hudR, PORT && TWO ? 0 : hp);  // 9:16 two-host: the mic takes the arc label's slot
   S(prog, PORT ? 0 : .9); prog.style.transform += ` scaleX(${T / TL.total})`;
 }
 
-// ---------- host name tag (two-host videos only) ----------
-// H = Bella (the story), P = Michael (the breakdown). The tag swaps on every handoff (a visible change the
-// planner counts). Placeholder avatar = initial on a gradient disc until the original avatars are designed;
-// meta.hosts.<X>.avatar (image path) replaces it.
-const TAG_STYLE = { H: { disc: 'var(--herobar)', role: 'var(--accent)' }, P: { disc: 'var(--rivalbar)', role: 'var(--rivaltext)' } };
-const TAG_IN = .25, TAG_FORCE = 3.5;
-let tags = {}, TWO = false;
+// ---------- host mic (two-host videos only) ----------
+// One mic per host in the same spot: pink = Bella (H, the story), blue = Michael (P, the breakdown).
+// The glow follows the REAL voice loudness (TL.env, 0-99 per frame, VU-style fast attack / slow release),
+// so it breathes with every word. On each handoff the mics crossfade and the host's name flashes beside it.
+const MIC_COL = { H: { a: '#ff9bd0', b: '#e3165b', g: '255,70,150' }, P: { a: '#8fbcff', b: '#2f4bff', g: '60,120,255' } };
+const TAG_IN = .25, TAG_FORCE = 3.5, NAME_FOR = 2.6;
+const MIC_POS = PORT ? { x: 64, y: 262, k: .7 } : { x: 118, y: H - 128, k: 1.2 };
+let mics = {}, TWO = false;
+const envAt = T => { const e = TL.env; if (!e || !e.length) return 0; return e[Math.max(0, Math.min(e.length - 1, Math.round(T * TL.fps)))] / 99; };
+function micSVG(c, id) {
+  const w = (d, cls) => `<path class="${cls}" d="${d}" fill="none" stroke="${c.b}" stroke-width="6" stroke-linecap="round"/>`;
+  return `<svg width="100" height="150" viewBox="0 0 100 150" style="display:block;overflow:visible">
+    <defs><linearGradient id="mg${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c.a}"/><stop offset="1" stop-color="${c.b}"/></linearGradient></defs>
+    ${w('M90 20 a34 34 0 0 1 0 46', 'w1')}${w('M104 8 a52 52 0 0 1 0 70', 'w2')}${w('M10 20 a34 34 0 0 0 0 46', 'w1')}${w('M-4 8 a52 52 0 0 0 0 70', 'w2')}
+    <g class="cap" style="transform-origin:50px 42px">
+      <rect x="28" y="4" width="44" height="76" rx="22" fill="url(#mg${id})" stroke="#14215c" stroke-width="5"/>
+      <path d="M37 26 h26 M37 38 h26 M37 50 h26" stroke="#fff" stroke-opacity=".8" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <path d="M17 50 v7 a33 33 0 0 0 66 0 v-7" fill="none" stroke="#14215c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M50 91 v26 M30 120 h40" stroke="#14215c" stroke-width="7" stroke-linecap="round"/>
+  </svg>`;
+}
 function initTags() {
   const runs = TL.speakers || [];
   TWO = new Set(runs.map(r => r.who)).size > 1;
   if (!TWO) return;
-  const hud = $('hud');
+  const hud = $('hud'), k = MIC_POS.k;
   for (const who of new Set(runs.map(r => r.who))) {
-    const h = (TL.hosts || {})[who] || { name: who }, st = TAG_STYLE[who] || TAG_STYLE.H;
-    const av = h.avatar ? `<img src="${h.avatar}" style="width:100%;height:100%;object-fit:cover">` : (h.name || who)[0];
-    const bars = [0, 1, 2, 3].map(() => `<i style="display:block;width:9px;height:36px;margin:0 3px;border-radius:5px;background:${st.disc};transform-origin:50% 100%"></i>`).join('');
-    const el = E(hud, `<div style="display:flex;align-items:center;gap:22px;padding:12px 36px 12px 12px;border-radius:999px;background:rgba(255,255,255,.82);border:2px solid #fff;box-shadow:0 18px 44px rgba(30,70,160,.2)">
-        <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;background:${st.disc};color:#fff;font-family:Anton;font-size:52px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-sizing:border-box">${av}</div>
-        <div><div class="A" style="font-size:48px;line-height:1;text-shadow:none">${h.name || who}</div><div class="L" style="font-size:17px;margin-top:8px;color:${st.role}">${h.role || ''}</div></div>
-        <div style="display:flex;align-items:flex-end;height:36px;margin-left:4px">${bars}</div></div>`,
-      PORT ? { x: 0, y: 226, a: 'l' } : { x: 64, y: H - 118, a: 'l' });  // 9:16: top-left under the channel name, clear of h2h names
-    if (PORT) el._k = .66;
-    el._bars = [...el.querySelectorAll('i')];
-    tags[who] = el;
+    const h = (TL.hosts || {})[who] || { name: who }, c = MIC_COL[who] || MIC_COL.H;
+    const el = E(hud, `<div style="position:relative;width:100px;height:150px">
+        <div class="glow" style="position:absolute;left:-95px;top:-103px;width:290px;height:290px;border-radius:50%;background:radial-gradient(circle,rgba(${c.g},.8) 0%,rgba(${c.g},.3) 36%,rgba(${c.g},0) 68%)"></div>
+        <div class="mic" style="position:absolute;left:0;top:0">${micSVG(c, who)}</div></div>`, { x: MIC_POS.x, y: MIC_POS.y });
+    el._k = k;
+    el._glow = el.querySelector('.glow'); el._mic = el.querySelector('.mic'); el._cap = el.querySelector('.cap');
+    el._w1 = [...el.querySelectorAll('.w1')]; el._w2 = [...el.querySelectorAll('.w2')]; el._c = c;
+    el._name = E(hud, `<div style="padding:10px 28px;border-radius:999px;background:linear-gradient(90deg,${c.a},${c.b});color:#fff;font-family:Anton;font-size:42px;letter-spacing:.04em;box-shadow:0 12px 30px rgba(${c.g},.35)">${h.name || who}</div>`,
+      { x: MIC_POS.x + 78 * k, y: MIC_POS.y - 34 * k, a: 'l' });
+    el._name._k = k;
+    mics[who] = el;
   }
 }
 function drawTags(T, cur) {
   if (!TWO) return;
-  const runs = TL.speakers;
+  const runs = TL.speakers, e = envAt(T);
   let ri = -1; for (let i = 0; i < runs.length; i++) if (T >= runs[i].t - TAG_IN) ri = i;
   const ci = TL.scenes.indexOf(cur), prev = TL.scenes[ci - 1];
   const hudV = lerp(prev && prev.hud === false ? 0 : 1, cur.hud === false ? 0 : 1, prev ? P(T, cur.start, .3) : 1);
-  let corner = 0;  // a reaction panel in the tag's corner pushes the tag out
+  let corner = 0;  // a reaction panel in the mic's corner pushes it out
   if (!PORT) for (const o of TL.overlays) if (o.pos === 'bl') corner = Math.max(corner, P(T, o.t - .2, .2) * (1 - P(T, o.t + o.d, .3)));
-  for (const who in tags) {
-    const el = tags[who];
-    let o = 0, dx = 0, sc = 1;
+  for (const who in mics) {
+    const el = mics[who];
+    let o = 0, sc = 1, nm = 0, ndx = 0, live = 0;
     if (ri >= 0 && runs[ri].who === who) {
-      const r = runs[ri], a = r.t - TAG_IN, pin = clamp((T - a) / .45);
+      const a = runs[ri].t - TAG_IN, pin = clamp((T - a) / .45);
       const forced = ri > 0 ? clamp((T - a) * 50) * (1 - P(T, a + TAG_FORCE, .3)) : 0;  // handoffs always show
-      o = clamp(pin * 2.5) * Math.max(hudV, forced) * (1 - corner);
-      dx = (1 - eo(pin)) * -160; sc = lerp(.7, 1, eb(pin));
-      const talk = r.talk.some(([s, e]) => T >= s && T <= e);
-      el._bars.forEach((b, i) => { const k = talk ? .25 + .75 * Math.abs(Math.sin(T * (9 + i * 2.3) + i * 1.9) * Math.sin(T * 5.1 + i)) : .2; b.style.transform = `scaleY(${k})`; });
-    } else if (ri > 0 && runs[ri - 1].who === who) {  // the other host just took over: slide out
+      const vis = Math.max(hudV, forced) * (1 - corner);
+      o = clamp(pin * 2.5) * vis; sc = lerp(.6, 1, eb(pin)); live = 1;
+      const pn = P(T, a + .15, .35) * (1 - P(T, a + NAME_FOR, .4, eio));
+      nm = pn * vis; ndx = (1 - eo(P(T, a + .15, .35))) * -40;
+    } else if (ri > 0 && runs[ri - 1].who === who) {  // the other host just took over: crossfade out
       const po = P(T, runs[ri].t - TAG_IN, .3, eio);
-      o = (1 - po) * hudV * (1 - corner); dx = po * -120; sc = lerp(1, .9, po);
+      o = (1 - po) * hudV * (1 - corner); sc = lerp(1, .85, po);
     }
-    S(el, o, dx, 0, sc);
+    S(el, o, 0, 0, sc);
+    S(el._name, nm, ndx, 0, 1);
+    const g = live ? e : 0;
+    el._glow.style.opacity = .16 + .84 * g;
+    el._glow.style.transform = `scale(${.7 + .6 * g})`;
+    el._mic.style.filter = `drop-shadow(0 0 ${3 + 26 * g}px rgba(${el._c.g},${.45 + .55 * g})) drop-shadow(0 0 ${2 + 8 * g}px rgba(${el._c.g},${.5 + .5 * g}))`;
+    el._cap.style.transform = `scale(${1 + .08 * g})`;
+    el._w1.forEach(p => p.style.opacity = clamp(g * 1.7 - .2));
+    el._w2.forEach(p => p.style.opacity = clamp(g * 1.7 - .75));
   }
 }
 

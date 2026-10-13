@@ -31,7 +31,8 @@ jobs:
           V="${{ inputs.video }}"; VO="${{ inputs.voice }}"; N=""
           if [ -z "$V" ]; then R=0004/requests/test-render.json
             V=$(jq -r '.video // "_checkpoint"' $R); VO=$(jq -r '.voice // "kokoro:af_bella"' $R); N=$(jq -r '.note // ""' $R); fi
-          { echo "VIDEO=$V"; echo "VOICE=$VO"; echo "VID=0004/videos/$V"; echo "NOTE_EXTRA=$N"; } >> $GITHUB_ENV
+          TG=true; [ -z "${{ inputs.video }}" ] && TG=$(jq -r 'if .telegram == false then "false" else "true" end' 0004/requests/test-render.json)
+          { echo "VIDEO=$V"; echo "VOICE=$VO"; echo "VID=0004/videos/$V"; echo "NOTE_EXTRA=$N"; echo "TELEGRAM=$TG"; } >> $GITHUB_ENV
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -70,6 +71,12 @@ jobs:
           ffmpeg -v error -i "$VID/out/final.mp4" -vn -ac 1 -b:a 64k $R/final_audio.mp3  # for level checks per speaker
           for f in "$VID"/out/short_*.mp4; do ffmpeg -v error -i "$f" -vn -ac 1 -b:a 64k "$R/$(basename "$f" .mp4)_audio.mp3"; done
           for d in "$VID"/build/short_*/; do cp "$d/timeline.json" "$R/timeline_$(basename "$d").json" 2>/dev/null || true; done
+          # the videos themselves, so a Claude chat can post them (GitHub caps files at 100 MB: bigger ones get a 720p preview)
+          for f in "$VID"/out/*.mp4; do
+            if [ $(stat -c%s "$f") -lt 90000000 ]; then cp "$f" $R/; else
+              D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f"); BR=$(python3 -c "print(int(85e6*8/$D/1000)-128)")
+              ffmpeg -v error -i "$f" -vf scale=-2:720 -c:v libx264 -b:v ${BR}k -maxrate ${BR}k -bufsize $((BR*2))k -c:a aac -b:a 128k "$R/$(basename "$f" .mp4)_720p.mp4"; fi
+          done
           cd $R && git init -q && git checkout -q -b review && git add . && git -c user.name=render-bot -c user.email=bot@users.noreply.github.com commit -qm "review $VIDEO"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "review:review/$VIDEO"
       - name: Report failure
@@ -88,5 +95,6 @@ jobs:
           cp "$VID/build/timeline.json" plan.json 2>/dev/null || true
           if [ -f "$VID/out/final.mp4" ]; then NOTE="🎬 0004 test render ready: $VIDEO"; grep -q 'VOICE FALLBACK' build.log && NOTE="$NOTE (⚠️ Kokoro fallback voice)"; else NOTE="❌ 0004 test render failed: $VIDEO"; fi
           [ -n "$NOTE_EXTRA" ] && NOTE="$NOTE - $NOTE_EXTRA"
-          python 0004/pipeline/deliver.py --drive-path "football-engine/0004/tests/$VIDEO" --note "$NOTE" \
+          TG=""; [ "$TELEGRAM" = "false" ] && TG="--no-telegram"
+          python 0004/pipeline/deliver.py $TG --drive-path "football-engine/0004/tests/$VIDEO" --note "$NOTE" \
             "$VID"/out/*.mp4 "$VID"/out/thumb_*.png "$VID"/out/*.txt build.log | tail -1 | sed 's/^/::notice title=drive::/'
