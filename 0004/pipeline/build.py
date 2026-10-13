@@ -51,14 +51,20 @@ def contact_sheet(video: Path, out: Path, every: float = 2.0, cols: int = 6):
 
 
 def make(doc: dict, voice_backend: str, build: Path, size, allow_invalid=False):
-    beats = [b for s in doc["scenes"] for b in s.get("beats", [])]
-    voice = synth_beats(beats, voice_backend, build.parent / f"voice_{voice_backend.replace(':', '_')}")
+    beats = plan.doc_beats(doc)
+    pundit = (doc.get("meta", {}).get("hosts") or {}).get("P", {}).get("voice")
+    voice = synth_beats(beats, voice_backend, build.parent / f"voice_{voice_backend.replace(':', '_')}", pundit)
     tl = plan.build_timeline(doc, voice, w=size[0], h=size[1])
     stage_engine(build)
     plan.write(tl, build)
     rep = tl["report"]
+    air = {}
+    for bt in tl["beats"]:
+        air[bt["speaker"]] = air.get(bt["speaker"], 0) + bt["end"] - bt["t"]
+    talk = sum(air.values()) or 1
+    hosts = " ".join(f"{k}={v / talk:.0%}" for k, v in sorted(air.items()))
     print(f"plan[{build.name}]: {tl['total']:.1f}s, {rep['changes']} visual changes, avg gap {rep['avg_gap']}s, max gap {rep['max_gap']}s, "
-          f"robotic runs {len(rep['robotic_at'])}, micro {len(tl['micro'])}, ok={rep['ok']}")
+          f"robotic runs {len(rep['robotic_at'])}, micro {len(tl['micro'])}, airtime {hosts}, ok={rep['ok']}")
     for w in rep["warnings"]:
         print("  warn:", w)
     if not rep["ok"] and not allow_invalid:
@@ -68,6 +74,8 @@ def make(doc: dict, voice_backend: str, build: Path, size, allow_invalid=False):
 
 def render_full(tl, build: Path, out_mp4: Path):
     plan.assemble_voice(tl, build / "voice.wav")
+    if len(tl.get("voice_gains", {})) > 1:
+        print(f"voice levels[{build.name}]: " + ", ".join(f"{k} x{g:.2f}" for k, g in tl["voice_gains"].items()))
     silent = render.video(build, tl["total"], tl["fps"], tl["w"], tl["h"], build / "video.mp4")
     mixer.mix(tl, build / "voice.wav", build / "mix.wav")
     return mixer.mux(silent, build / "mix.wav", out_mp4)
@@ -85,7 +93,7 @@ def short_docs(doc: dict) -> list:
             h = sp["hook"]
             scenes.insert(0, {"id": "hook", "type": "slam", "palette": h.get("palette", scenes[0].get("palette", "gold")), "hud": False,
                               "data": {"word": h["word"], "pre": h.get("pre", "")},
-                              "beats": [{"say": h["say"], "emph": [h["at"]] if h.get("at") else [],
+                              "beats": [{"say": h["say"], "speaker": h.get("speaker", "H"), "emph": [h["at"]] if h.get("at") else [],
                                          "do": ["pre", {"a": "slam", "at": h["at"]} if h.get("at") else "slam"]}]})
         scenes.append({"id": "end", "type": "endcard", "palette": "violet", "hud": False, "dur": 2.6,
                        "data": {"line": "FULL STORY ON THE CHANNEL", "title": sp.get("title", title)}})
@@ -108,9 +116,9 @@ def main():
     vd = a.video_dir.resolve()
     doc = json.loads((vd / "scenes.json").read_text())
     if a.voice == "chatterbox":  # voice every sentence (main + Shorts hooks) in ONE Kaggle job; fall back to Kokoro if it fails
-        allb = [b for s in doc["scenes"] for b in s.get("beats", [])]
+        allb = plan.doc_beats(doc)
         if a.shorts:
-            allb += [b for _, d in short_docs(doc) for s in d["scenes"] for b in s.get("beats", [])]
+            allb += [b for _, d in short_docs(doc) for b in plan.doc_beats(d)]
         try:
             synth_beats(allb, "chatterbox", vd / "build" / "voice_chatterbox")
         except Exception as e:

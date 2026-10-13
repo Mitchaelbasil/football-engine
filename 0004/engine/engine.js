@@ -169,8 +169,60 @@ function initHUD() {
 }
 function drawHUD(T, cur) {
   const on = cur.hud === false ? 0 : 1, hp = P(T, cur.start + .2, .5) * on + (1 - on) * (1 - P(T, cur.start, .3));
-  S(hudL, .85 * hp); hudR.innerHTML = cur.arcLabel || ''; S(hudR, hp);
+  S(hudL, .85 * hp); hudR.innerHTML = cur.arcLabel || ''; S(hudR, PORT && TWO ? 0 : hp);  // 9:16 two-host: the tag takes the arc label's slot
   S(prog, PORT ? 0 : .9); prog.style.transform += ` scaleX(${T / TL.total})`;
+}
+
+// ---------- host name tag (two-host videos only) ----------
+// H = Bella (the story), P = Michael (the breakdown). The tag swaps on every handoff (a visible change the
+// planner counts). Placeholder avatar = initial on a gradient disc until the original avatars are designed;
+// meta.hosts.<X>.avatar (image path) replaces it.
+const TAG_STYLE = { H: { disc: 'var(--herobar)', role: 'var(--accent)' }, P: { disc: 'var(--rivalbar)', role: 'var(--rivaltext)' } };
+const TAG_IN = .25, TAG_FORCE = 3.5;
+let tags = {}, TWO = false;
+function initTags() {
+  const runs = TL.speakers || [];
+  TWO = new Set(runs.map(r => r.who)).size > 1;
+  if (!TWO) return;
+  const hud = $('hud');
+  for (const who of new Set(runs.map(r => r.who))) {
+    const h = (TL.hosts || {})[who] || { name: who }, st = TAG_STYLE[who] || TAG_STYLE.H;
+    const av = h.avatar ? `<img src="${h.avatar}" style="width:100%;height:100%;object-fit:cover">` : (h.name || who)[0];
+    const bars = [0, 1, 2, 3].map(() => `<i style="display:block;width:9px;height:36px;margin:0 3px;border-radius:5px;background:${st.disc};transform-origin:50% 100%"></i>`).join('');
+    const el = E(hud, `<div style="display:flex;align-items:center;gap:22px;padding:12px 36px 12px 12px;border-radius:999px;background:rgba(255,255,255,.82);border:2px solid #fff;box-shadow:0 18px 44px rgba(30,70,160,.2)">
+        <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;background:${st.disc};color:#fff;font-family:Anton;font-size:52px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-sizing:border-box">${av}</div>
+        <div><div class="A" style="font-size:48px;line-height:1;text-shadow:none">${h.name || who}</div><div class="L" style="font-size:17px;margin-top:8px;color:${st.role}">${h.role || ''}</div></div>
+        <div style="display:flex;align-items:flex-end;height:36px;margin-left:4px">${bars}</div></div>`,
+      PORT ? { x: 0, y: 226, a: 'l' } : { x: 64, y: H - 118, a: 'l' });  // 9:16: top-left under the channel name, clear of h2h names
+    if (PORT) el._k = .66;
+    el._bars = [...el.querySelectorAll('i')];
+    tags[who] = el;
+  }
+}
+function drawTags(T, cur) {
+  if (!TWO) return;
+  const runs = TL.speakers;
+  let ri = -1; for (let i = 0; i < runs.length; i++) if (T >= runs[i].t - TAG_IN) ri = i;
+  const ci = TL.scenes.indexOf(cur), prev = TL.scenes[ci - 1];
+  const hudV = lerp(prev && prev.hud === false ? 0 : 1, cur.hud === false ? 0 : 1, prev ? P(T, cur.start, .3) : 1);
+  let corner = 0;  // a reaction panel in the tag's corner pushes the tag out
+  if (!PORT) for (const o of TL.overlays) if (o.pos === 'bl') corner = Math.max(corner, P(T, o.t - .2, .2) * (1 - P(T, o.t + o.d, .3)));
+  for (const who in tags) {
+    const el = tags[who];
+    let o = 0, dx = 0, sc = 1;
+    if (ri >= 0 && runs[ri].who === who) {
+      const r = runs[ri], a = r.t - TAG_IN, pin = clamp((T - a) / .45);
+      const forced = ri > 0 ? clamp((T - a) * 50) * (1 - P(T, a + TAG_FORCE, .3)) : 0;  // handoffs always show
+      o = clamp(pin * 2.5) * Math.max(hudV, forced) * (1 - corner);
+      dx = (1 - eo(pin)) * -160; sc = lerp(.7, 1, eb(pin));
+      const talk = r.talk.some(([s, e]) => T >= s && T <= e);
+      el._bars.forEach((b, i) => { const k = talk ? .25 + .75 * Math.abs(Math.sin(T * (9 + i * 2.3) + i * 1.9) * Math.sin(T * 5.1 + i)) : .2; b.style.transform = `scaleY(${k})`; });
+    } else if (ri > 0 && runs[ri - 1].who === who) {  // the other host just took over: slide out
+      const po = P(T, runs[ri].t - TAG_IN, .3, eio);
+      o = (1 - po) * hudV * (1 - corner); dx = po * -120; sc = lerp(1, .9, po);
+    }
+    S(el, o, dx, 0, sc);
+  }
 }
 
 // ---------- scenes ----------
@@ -205,7 +257,7 @@ async function start() {
   document.body.style.width = W + 'px'; document.body.style.height = H + 'px';
   await Promise.all(['100px Anton', '800 30px Inter', '900 30px Inter', '600 30px Oswald'].map(f => document.fonts.load(f)));
   await document.fonts.ready;
-  initBG(); initScenes(); initFX(); initOverlays(); initHUD();
+  initBG(); initScenes(); initFX(); initOverlays(); initHUD(); initTags();
   window.READY = true;
 }
 
@@ -225,5 +277,5 @@ window.renderFrame = function (T) {
     s.L.style.transform = `${tin.tf} scale(${lerp(1, .94, po)}) ${camera(s, t)}${extra}`;
   }
   $('layers').style.transform = roomShift(T);
-  drawFX(T); drawOverlays(T); drawHUD(T, cur);
+  drawFX(T); drawOverlays(T); drawHUD(T, cur); drawTags(T, cur);
 };

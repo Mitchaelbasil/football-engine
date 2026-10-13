@@ -2,8 +2,11 @@
 
 Backends:
   fake    - silent audio with estimated timings (local dev, no models)
-  kokoro      - Kokoro-82M bm_george (fallback voice); word timings from the model
+  kokoro      - Kokoro-82M (kokoro:<voice>, e.g. kokoro:af_bella); word timings from the model
   chatterbox  - Mitchael's cloned voice on Kaggle GPU, Whisper-checked auto-retakes (kaggle_voice.py)
+
+Two hosts: every beat has a speaker. "H" = host/storyteller (the backend above, af_bella),
+"P" = pundit who takes over the "why" sections (always Kokoro, am_michael at speed 1.0).
 """
 
 import hashlib
@@ -43,6 +46,15 @@ def _fake(text: str):
 
 
 _kokoro = {}
+HOST_SPEED = 0.95
+PUNDIT = ("am_michael", 1.0)   # locked 13 Oct (Mitchael picked Michael over George / Fenrir)
+
+
+def beat_backend(backend: str, speaker: str, pundit: str = None) -> str:
+    """Backend string for one beat. Host beats use the main backend; pundit beats use Kokoro (fake stays fake)."""
+    if speaker != "P" or backend == "fake":
+        return backend
+    return f"kokoro:{pundit or PUNDIT[0]}@{PUNDIT[1]}"
 
 
 def _kokoro_synth(text: str, voice: str = "bm_george", speed: float = 0.95):
@@ -74,6 +86,15 @@ def _kokoro_synth(text: str, voice: str = "bm_george", speed: float = 0.95):
     return audio, words
 
 
+def _parse_kokoro(backend: str):
+    """'kokoro' | 'kokoro:af_bella' | 'kokoro:am_michael@1.0' -> (voice, speed)"""
+    v = backend.split(":", 1)[1] if ":" in backend else "bm_george"
+    if "@" in v:
+        v, sp = v.split("@", 1)
+        return v, float(sp)
+    return v, HOST_SPEED
+
+
 def _key(backend: str, text: str) -> str:
     tag = backend
     if backend == "chatterbox":
@@ -82,12 +103,14 @@ def _key(backend: str, text: str) -> str:
     return hashlib.sha1(f"{tag}|{text}".encode()).hexdigest()[:16]
 
 
-def synth_beats(beats: list, backend: str, cache_dir: Path) -> list:
-    """beats: [{'say': str}] -> [{'wav': path, 'dur': float, 'words': [...]}] (cached by text+backend)."""
+def synth_beats(beats: list, backend: str, cache_dir: Path, pundit: str = None) -> list:
+    """beats: [{'say': str, 'speaker': 'H'|'P'}] -> [{'wav', 'dur', 'words', 'speaker'}] (cached by text+voice)."""
     cache_dir.mkdir(parents=True, exist_ok=True)
-    if backend == "chatterbox":  # one Kaggle GPU batch for every sentence not cached yet
+    if backend == "chatterbox":  # one Kaggle GPU batch for every host sentence not cached yet
         todo, seen = [], set()
         for b in beats:
+            if b.get("speaker", "H") == "P":
+                continue
             k = _key(backend, b["say"])
             if k not in seen and not ((cache_dir / f"{k}.wav").exists() and (cache_dir / f"{k}.json").exists()):
                 todo.append({"key": k, "text": b["say"]}); seen.add(k)
@@ -96,19 +119,20 @@ def synth_beats(beats: list, backend: str, cache_dir: Path) -> list:
             run(todo, cache_dir)
     out = []
     for b in beats:
-        text = b["say"]
-        key = _key(backend, text)
+        text, spk = b["say"], b.get("speaker", "H")
+        bk = beat_backend(backend, spk, pundit)
+        key = _key(bk, text)
         wav, meta = cache_dir / f"{key}.wav", cache_dir / f"{key}.json"
         if not (wav.exists() and meta.exists()):
-            if backend == "fake":
+            if bk == "fake":
                 audio, words = _fake(text)
-            elif backend.startswith("kokoro"):
-                v = backend.split(":", 1)[1] if ":" in backend else "bm_george"
-                audio, words = _kokoro_synth(text, v)
+            elif bk.startswith("kokoro"):
+                v, sp = _parse_kokoro(bk)
+                audio, words = _kokoro_synth(text, v, sp)
             else:
-                raise ValueError(f"unknown voice backend {backend}")
+                raise ValueError(f"unknown voice backend {bk}")
             sf.write(wav, audio, SR)
             meta.write_text(json.dumps({"dur": len(audio) / SR, "words": words}))
         m = json.loads(meta.read_text())
-        out.append({"wav": str(wav), "dur": m["dur"], "words": m["words"]})
+        out.append({"wav": str(wav), "dur": m["dur"], "words": m["words"], "speaker": spk})
     return out

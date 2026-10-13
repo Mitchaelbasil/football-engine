@@ -1,7 +1,17 @@
 {
  "meta": {
-  "title": "Engine v2 checkpoint — Ronaldo's 60-goal arc",
-  "note": "Test render for review. Facts from the verified pilot (Ronaldo 2011-12)."
+  "title": "Engine v2 checkpoint — two hosts (Bella: story, Michael: the breakdown)",
+  "note": "Two-host test. Bella tells the story, hands off with a question, Michael explains why. Facts from the verified pilot + Messi 91 in 2012 (Müller 85, 1972).",
+  "hosts": {
+   "H": {
+    "name": "BELLA",
+    "role": "THE STORY"
+   },
+   "P": {
+    "name": "MICHAEL",
+    "role": "THE BREAKDOWN"
+   }
+  }
  },
  "scenes": [
   {
@@ -206,62 +216,6 @@
    ]
   },
   {
-   "id": "h2h",
-   "type": "h2h",
-   "palette": "barca",
-   "data": {
-    "left": {
-     "name": "RONALDO"
-    },
-    "right": {
-     "name": "MESSI"
-    },
-    "rows": [
-     [
-      "ALL COMPETITIONS",
-      60,
-      73,
-      0
-     ],
-     [
-      "LA LIGA GOALS",
-      46,
-      50,
-      0
-     ],
-     [
-      "GAMES",
-      55,
-      60,
-      0
-     ]
-    ]
-   },
-   "beats": [
-    {
-     "say": "On paper, Ronaldo's season was historic.",
-     "do": [
-      {
-       "a": "left",
-       "at": "Ronaldo"
-      }
-     ]
-    },
-    {
-     "say": "Messi's was absurd. More goals in the league, more goals overall, and the first man ever to score fifty in a La Liga season.",
-     "emph": [
-      "fifty"
-     ],
-     "do": [
-      {
-       "a": "right",
-       "at": "absurd"
-      }
-     ]
-    }
-   ]
-  },
-  {
    "id": "night",
    "type": "photo",
    "palette": "clasico",
@@ -336,6 +290,258 @@
    ]
   },
   {
+   "id": "question",
+   "type": "checklist",
+   "palette": "violet",
+   "data": {
+    "items": [
+     "LA LIGA CHAMPION",
+     "BEAT BARÇA AT THE CAMP NOU",
+     "BALLON D'OR: 2ND"
+    ]
+   },
+   "beats": [
+    {
+     "say": "So he won the league, beat Barcelona in their own stadium, and still finished second.",
+     "emph": [
+      "second"
+     ],
+     "do": [
+      {
+       "a": "item0",
+       "at": "won"
+      },
+      {
+       "a": "item1",
+       "at": "beat"
+      },
+      {
+       "a": "item2",
+       "at": "second"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "whyq",
+   "type": "slam",
+   "palette": "gold",
+   "hud": false,
+   "data": {
+    "word": "WHY?",
+    "fs": 520
+   },
+   "beats": [
+    {
+     "say": "Why?",
+     "emph": [
+      "Why"
+     ],
+     "do": [
+      {
+       "a": "slam",
+       "at": "Why"
+      }
+     ],
+     "hold": 0.1
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "type": "h2h",
+   "palette": "barca",
+   "speaker": "P",
+   "data": {
+    "left": {
+     "name": "RONALDO"
+    },
+    "right": {
+     "name": "MESSI"
+    },
+    "rows": [
+     [
+      "ALL COMPETITIONS",
+      60,
+      73,
+      0
+     ],
+     [
+      "LA LIGA GOALS",
+      46,
+      50,
+      0
+     ],
+     [
+      "LA LIGA TITLES",
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "say": "Because the Ballon Dor doesn't care who won the league.",
+     "emph": [
+      "doesn't"
+     ],
+     "do": [
+      {
+       "a": "left",
+       "at": "Because"
+      }
+     ]
+    },
+    {
+     "say": "Messi didn't win La Liga. He didn't win the Champions League either. He just outscored everybody.",
+     "emph": [
+      "outscored"
+     ],
+     "do": [
+      {
+       "a": "right",
+       "at": "outscored"
+      }
+     ]
+    },
+    {
+     "say": "Fifty league goals. Nobody in Spain had ever done that.",
+     "emph": [
+      "Fifty",
+      "ever"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "calendar",
+   "type": "slam",
+   "palette": "mint",
+   "speaker": "P",
+   "data": {
+    "pre": "THE BALLON D'OR VOTE",
+    "word": "2012",
+    "sub": "THE CALENDAR YEAR · NOT THE SEASON",
+    "fs": 420
+   },
+   "beats": [
+    {
+     "say": "And the vote isn't about the season. It's about the calendar year.",
+     "emph": [
+      "calendar"
+     ],
+     "do": [
+      "pre",
+      {
+       "a": "slam",
+       "at": "vote"
+      },
+      {
+       "a": "sub",
+       "at": "calendar"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "n91",
+   "type": "counter",
+   "palette": "violet",
+   "speaker": "P",
+   "data": {
+    "value": 91,
+    "label": "GOALS IN 2012",
+    "sub": "GERD MÜLLER'S RECORD: 85 · 1972"
+   },
+   "beats": [
+    {
+     "say": "In twenty twelve, Messi scored ninety-one goals.",
+     "emph": [
+      "ninety-one",
+      "ninety"
+     ],
+     "do": [
+      {
+       "a": "count",
+       "at": "twenty"
+      }
+     ],
+     "react": {
+      "emo": "shock",
+      "text": "91?!",
+      "cap": "THAT'S A VIDEO GAME"
+     }
+    },
+    {
+     "say": "Gerd Mueller's record had stood for forty years.",
+     "emph": [
+      "forty"
+     ],
+     "do": [
+      {
+       "a": "sub",
+       "at": "forty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vote",
+   "type": "h2h",
+   "palette": "gold",
+   "speaker": "P",
+   "data": {
+    "left": {
+     "name": "RONALDO"
+    },
+    "right": {
+     "name": "MESSI"
+    },
+    "rows": [
+     [
+      "BALLON D'OR 2012 · VOTE %",
+      23.68,
+      41.6,
+      1
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "say": "Ronaldo had the better story.",
+     "do": [
+      {
+       "a": "left",
+       "at": "Ronaldo"
+      }
+     ]
+    },
+    {
+     "say": "Messi had the bigger numbers. And the voters went with the numbers.",
+     "emph": [
+      "numbers"
+     ],
+     "do": [
+      {
+       "a": "right",
+       "at": "bigger"
+      }
+     ]
+    },
+    {
+     "say": "It wasn't even close.",
+     "emph": [
+      "close"
+     ],
+     "hold": 0.2
+    }
+   ]
+  },
+  {
    "id": "verdict",
    "type": "slam",
    "palette": "sunset",
@@ -371,6 +577,24 @@
      "hold": 2.0
     }
    ]
+  }
+ ],
+ "shorts": [
+  {
+   "name": "why",
+   "scenes": [
+    "why",
+    "calendar",
+    "n91",
+    "vote"
+   ],
+   "title": "WHY 60 WASN'T ENOUGH",
+   "hook": {
+    "say": "How do you score sixty goals, win the league, and still finish second?",
+    "word": "2ND",
+    "pre": "60 GOALS · LA LIGA CHAMPION",
+    "at": "second"
+   }
   }
  ]
 }

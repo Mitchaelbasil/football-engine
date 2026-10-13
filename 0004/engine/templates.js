@@ -206,7 +206,7 @@ TPL.photo = {
     r.crops = d.crops || [[.5, .5, 1.08], [.36, .42, 1.38], [.64, .56, 1.26]];
     r.card = E(L, `<div style="width:${w}px;height:${h}px;overflow:hidden;border-radius:26px;border:10px solid #fff;box-shadow:0 30px 80px rgba(20,33,92,.28);background:#fff"><div class="pin" style="transform-origin:50% 50%">${photoInner(d, w, h)}</div></div>`, { y: CY + 15 });
     r.pin = r.card.querySelector('.pin');
-    r.cap = fit(E(L, d.cap || '', { c: 'pill pg', x: CX - w / 2 + 40, y: CY + 15 + h / 2 - 10, a: 'l', st: { fontSize: '26px' } }), w - 80);
+    r.cap = fit(E(L, d.cap || '', { c: 'pill pg', x: CX + w / 2 - 40, y: CY + 15 + h / 2 - 10, a: 'r',  /* right side: the host tag owns bottom-left */ st: { fontSize: '26px' } }), w - 80);
     return r;
   },
   update(t, A, r) {

@@ -5,6 +5,10 @@ Enforces the Beastify rules:
   * no robotic rhythm: 3+ consecutive gaps within +-ROBOT_TOL of each other
 Visual changes are anchored to narration: emphasised words first, then content words, then beat starts.
 Only planner-inserted micro-motions are ever moved, so scripted beats stay exactly where Claude put them.
+
+Two hosts: beats carry speaker "H" (Bella, story) or "P" (Michael, the breakdown); a scene-level "speaker"
+sets the default for its beats. A speaker switch gets a natural pause (HANDOFF) and counts as a visible
+change (the name tag swaps). tl["speakers"] lists the contiguous runs for the engine's name tag.
 """
 
 import json
@@ -25,6 +29,17 @@ BEAT_GAP = 0.16
 REACT_DUR = 1.8
 TRANSITIONS = ["zoom", "slide", "rise", "flash"]
 REACT_POS = ["br", "tl", "tr", "bl"]
+HANDOFF = 0.55         # min silence between the last word of one host and the first of the other
+TAG_IN = 0.25          # name tag starts entering this long before the new speaker's first word
+
+
+def speaker_of(scene: dict, beat: dict) -> str:
+    return beat.get("speaker") or scene.get("speaker") or "H"
+
+
+def doc_beats(doc: dict) -> list:
+    """Every spoken beat in order, with its speaker resolved (input for voice.synth_beats)."""
+    return [{**b, "speaker": speaker_of(s, b)} for s in doc["scenes"] for b in s.get("beats", [])]
 
 
 def _resolve(beat: dict, bt: float, words: list, spec, warn: list) -> tuple:
@@ -45,6 +60,7 @@ def _resolve(beat: dict, bt: float, words: list, spec, warn: list) -> tuple:
 def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: int = 30):
     warn, scenes, beats_out, words_all, overlays, sfx = [], [], [], [], [], []
     cur, vi, arc_label, react_i = 0.0, 0, None, 0
+    last_spk, last_end = None, -1e9
     for si, sc in enumerate(doc["scenes"]):
         start = cur
         cur += sc.get("pre", 0.35 if si else 0.25)
@@ -53,6 +69,9 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
             cur += sc.get("dur", 2.5)
         for b in sc.get("beats", []):
             v = voice[vi]; vi += 1
+            spk = speaker_of(sc, b)
+            if last_spk and spk != last_spk:
+                cur = max(cur, last_end + HANDOFF)
             bt = cur
             words = [{"w": x["w"], "s": bt + x["s"], "e": bt + x["e"], "emph": False} for x in v["words"]]
             emph = {norm(e) for e in b.get("emph", [])}
@@ -71,7 +90,8 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
                 overlays.append({"t": round(rt, 3), "d": r.get("d", REACT_DUR), "emo": r["emo"], "text": r.get("text"),
                                  "cap": r.get("cap"), "clip": r.get("clip"), "pos": r.get("pos", REACT_POS[react_i % 4])})
                 react_i += 1
-            beats_out.append({"t": round(bt, 3), "end": round(end, 3), "say": b["say"], "wav": v["wav"], "scene": si})
+            beats_out.append({"t": round(bt, 3), "end": round(end, 3), "say": b["say"], "wav": v["wav"], "scene": si, "speaker": spk})
+            last_spk, last_end = spk, end
             words_all += [{**x, "s": round(x["s"], 3), "e": round(x["e"], 3)} for x in words]
             cur = end + b.get("hold", 0.0) + BEAT_GAP
             if b.get("react"):  # narration pauses for the reaction; it never spills into the next scene
@@ -88,7 +108,8 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
         cur = end
     total = round(cur + 0.4, 3)
     tl = {"w": w, "h": h, "fps": fps, "total": total, "scenes": scenes, "overlays": overlays,
-          "beats": beats_out, "words": words_all, "micro": [], "sfx": sfx}
+          "beats": beats_out, "words": words_all, "micro": [], "sfx": sfx,
+          "speakers": speaker_runs(beats_out), "hosts": hosts_meta(doc)}
     _plan_motion(tl)
     _plan_sfx(tl)
     tl["report"] = validate(tl)
@@ -96,10 +117,30 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
     return tl
 
 
+def speaker_runs(beats: list) -> list:
+    """Contiguous runs of one speaker: [{'who', 't', 'end', 'talk': [[t, end], ...]}]."""
+    runs = []
+    for b in beats:
+        if runs and runs[-1]["who"] == b["speaker"]:
+            runs[-1]["end"] = b["end"]; runs[-1]["talk"].append([b["t"], b["end"]])
+        else:
+            runs.append({"who": b["speaker"], "t": b["t"], "end": b["end"], "talk": [[b["t"], b["end"]]]})
+    return runs
+
+
+def hosts_meta(doc: dict) -> dict:
+    h = {"H": {"name": "BELLA", "role": "THE STORY"}, "P": {"name": "MICHAEL", "role": "THE BREAKDOWN"}}
+    for k, v in (doc.get("meta", {}).get("hosts") or {}).items():
+        h[k] = {**h.get(k, {}), **v}
+    return h
+
+
 # ---------- change bookkeeping ----------
 
 def fixed_changes(tl) -> list:
     ch = [s["start"] for s in tl["scenes"]] + [e["t"] for s in tl["scenes"] for e in s["ev"]]
+    if len({r["who"] for r in tl.get("speakers", [])}) > 1:  # name tag swap on every handoff
+        ch += [r["t"] - TAG_IN for r in tl["speakers"][1:]]
     for o in tl["overlays"]:
         ch += [o["t"], o["t"] + o["d"]]
     return ch
@@ -280,10 +321,32 @@ def _plan_sfx(tl):
     s.sort(key=lambda x: x["t"]); cues.sort(key=lambda x: x["t"])
 
 
-def assemble_voice(tl, out: Path):
-    track = np.zeros(int((tl["total"] + 1) * SR), dtype=np.float32)
+def _speech_rms(a: np.ndarray) -> float:
+    """Rough perceived level: high-passed (drops the male voice's extra low end), speech samples only."""
+    from scipy.signal import butter, sosfilt
+    y = sosfilt(butter(2, 150, "high", fs=SR, output="sos"), a)
+    act = y[np.abs(y) > 0.01]
+    return float(np.sqrt(np.mean(act ** 2))) if len(act) else 0.0
+
+
+def speaker_gains(tl) -> dict:
+    """Level every speaker to the host's level with one gain per speaker (keeps each voice's own dynamics)."""
+    by = {}
     for b in tl["beats"]:
         a, _ = sf.read(b["wav"], dtype="float32")
+        by.setdefault(b.get("speaker", "H"), []).append(a)
+    rms = {k: _speech_rms(np.concatenate(v)) for k, v in by.items()}
+    ref = rms.get("H") or next(iter(rms.values()), 0)
+    return {k: float(np.clip(ref / r, 0.5, 2.5)) if r and ref else 1.0 for k, r in rms.items()}
+
+
+def assemble_voice(tl, out: Path):
+    track = np.zeros(int((tl["total"] + 1) * SR), dtype=np.float32)
+    gains = speaker_gains(tl)
+    tl["voice_gains"] = gains
+    for b in tl["beats"]:
+        a, _ = sf.read(b["wav"], dtype="float32")
+        a = a * gains.get(b.get("speaker", "H"), 1.0)
         i = int(b["t"] * SR)
         track[i:i + len(a)] += a[: max(0, len(track) - i)]
     sf.write(out, track, SR)
@@ -292,5 +355,5 @@ def assemble_voice(tl, out: Path):
 def write(tl, build: Path):
     build.mkdir(parents=True, exist_ok=True)
     (build / "timeline.json").write_text(json.dumps(tl, indent=1))
-    eng = {k: tl[k] for k in ("w", "h", "fps", "total", "scenes", "overlays", "micro")}
+    eng = {k: tl[k] for k in ("w", "h", "fps", "total", "scenes", "overlays", "micro", "speakers", "hosts")}
     (build / "timeline.js").write_text("window.TL=" + json.dumps(eng) + ";")
