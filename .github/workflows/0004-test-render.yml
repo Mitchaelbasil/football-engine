@@ -69,7 +69,7 @@ jobs:
           for t in 1.5 13.5 30.5 44 60.5; do ffmpeg -v error -ss $t -i "$VID/out/final.mp4" -frames:v 1 -vf scale=960:-1 $R/f_$t.jpg; done
           ffmpeg -v error -i "$VID/out/final.mp4" -vn -ac 1 -b:a 64k $R/final_audio.mp3  # for level checks per speaker
           for f in "$VID"/out/short_*.mp4; do ffmpeg -v error -i "$f" -vn -ac 1 -b:a 64k "$R/$(basename "$f" .mp4)_audio.mp3"; done
-          cp "$VID"/build/short_*/timeline.json $R/ 2>/dev/null || true
+          for d in "$VID"/build/short_*/; do cp "$d/timeline.json" "$R/timeline_$(basename "$d").json" 2>/dev/null || true; done
           cd $R && git init -q && git checkout -q -b review && git add . && git -c user.name=render-bot -c user.email=bot@users.noreply.github.com commit -qm "review $VIDEO"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "review:review/$VIDEO"
       - name: Report failure
