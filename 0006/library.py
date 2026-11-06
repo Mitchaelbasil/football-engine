@@ -34,8 +34,12 @@ def load_formats() -> list:
     return data["formats"]
 
 
+LEAD_RE = re.compile(r"^[^\w]+")
+
+
 def classify(title: str, formats: list) -> list:
-    return [f["id"] for f in formats if f["rx"].search(title or "")]
+    t = LEAD_RE.sub("", title or "")  # leading emoji, flags, zero-width spaces, quotes
+    return [f["id"] for f in formats if f["rx"].search(t)]
 
 
 def creator_pool(db, outlier, min_views, high_volume, replicable) -> list:

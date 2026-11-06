@@ -1,80 +1,243 @@
 {
-  "_note": "Title formats for the 0006 Format Library. A title can match several formats. 'fits_us' = a faceless data/anime channel can make it without match footage or a presenter. Regexes are Python, case-insensitive. Edit freely; hit rates are recomputed every run.",
-  "formats": [
-    {"id": "rise_fall", "name": "The Rise and Fall of X", "fits_us": true,
-     "re": "\\brise (and|&) fall\\b|\\brise,? fall\\b",
-     "why": "A full arc in four words: success the viewer knows, plus a collapse they want explained."},
-    {"id": "what_happened", "name": "What Happened to X", "fits_us": true,
-     "re": "\\bwhat (ever )?happened to\\b|\\bwhatever happened to\\b",
-     "why": "Curiosity gap about a name the viewer remembers; the answer feels owed."},
-    {"id": "how_good_was", "name": "How Good Was X (Actually/Really)", "fits_us": true,
-     "re": "\\bhow (good|great|bad|fast|strong) (was|were|is) \\b",
-     "why": "Settles a debate with evidence; 'actually' promises a verdict against the hype."},
-    {"id": "why", "name": "Why X ...", "fits_us": true,
-     "re": "^why\\b|\\bthe (real )?reason (why )?\\b",
-     "why": "Explains a known outcome; the viewer already has the question."},
-    {"id": "how_x_became", "name": "How X Became/Destroyed/Changed Y", "fits_us": true,
-     "re": "^how\\b(?! (good|great|bad|fast|strong|many|much|old|to)\\b)",
-     "why": "Mechanism story: a known result plus the hidden path to it."},
-    {"id": "the_day", "name": "The Day/Night/Match X ...", "fits_us": true,
-     "re": "^the (day|night|match|game|moment|season|year|time)\\b",
-     "why": "One vivid event as a story; specific and cinematic."},
-    {"id": "the_one_who", "name": "The Player/Club/Team Who/That ...", "fits_us": true,
-     "re": "^the (only |first |last )?(player|footballer|club|team|man|manager|goalkeeper|striker|kid|boy|game|transfer|league|referee|coach)s? (who|that)\\b",
-     "why": "A single protagonist defined by one extraordinary fact."},
-    {"id": "footballers_who", "name": "(Famous) Footballers/Players Who ...", "fits_us": true,
-     "re": "\\b(footballers|players|clubs|teams|managers|legends|goalkeepers|strikers|stars|wonderkids) (who|that|with)\\b",
-     "why": "A collection defined by a surprising shared trait; many faces, one hook."},
-    {"id": "data_superlative", "name": "Most / Highest / Oldest X (data list)", "fits_us": true,
-     "re": "^(most|highest|lowest|oldest|youngest|fastest|richest|tallest|shortest|longest|biggest|greatest|best|worst|every|all|number of|top)\\b|\\b(ranked|ranking|comparison|timeline|by the numbers)\\b",
-     "why": "Pure data payoff: a ranked answer to a 'who is the most...' question."},
-    {"id": "numbered_list", "name": "N Players/Moments That ...", "fits_us": true,
-     "re": "^(top )?\\d{1,3} (?!-)\\w",
-     "why": "Countable promise; viewers know the length and stay for #1."},
-    {"id": "tier_list", "name": "Tier List / Ranking Every X", "fits_us": true,
-     "re": "\\btier list\\b|\\branking (every|all|the)\\b|\\bi ranked\\b",
-     "why": "Opinion with structure; invites argument in comments."},
-    {"id": "vs", "name": "X vs Y (comparison)", "fits_us": true,
-     "re": "\\b\\w+ (vs\\.?|v|versus) \\w+(?!.*\\d+\\s*-\\s*\\d+)",
-     "why": "Head-to-head debate; the viewer picks a side before clicking."},
-    {"id": "what_if", "name": "What If X ...", "fits_us": true,
-     "re": "^what if\\b|\\bwhat would happen if\\b",
-     "why": "Hypothetical the viewer can't resolve alone; data simulation fits."},
-    {"id": "debate_question", "name": "Is X Better/the GOAT? (question)", "fits_us": true,
-     "re": "^(is|was|are|were|who|which|did|does|can|could|should) \\b.*\\?|\\bgoat\\b",
-     "why": "An open debate framed as a question the video answers."},
-    {"id": "explained", "name": "X Explained", "fits_us": true,
-     "re": "\\bexplained\\b|\\bexplaining\\b|\\bbreakdown\\b",
-     "why": "Promises clarity on something confusing; search-friendly."},
-    {"id": "story_truth", "name": "The (Untold) Story / Truth About X", "fits_us": true,
-     "re": "\\b(untold|true|real|full|crazy|insane|tragic|sad|incredible) story\\b|\\bstory of\\b|\\btruth (about|behind)\\b",
-     "why": "Promises the full narrative or a hidden side of a known name."},
-    {"id": "hidden_secret", "name": "Hidden / Secret / Nobody Talks About", "fits_us": true,
-     "re": "\\b(hidden|secret|nobody talks about|no one talks about|nobody noticed|forgotten|you never knew|didn't know)\\b",
-     "why": "Insider knowledge; the viewer fears missing what others know."},
-    {"id": "shock_change", "name": "Shocked the World / Changed Football Forever", "fits_us": true,
-     "re": "\\b(shocked the world|changed (football|the game|everything)|forever|destroyed|humiliated|broke the internet|nobody saw coming|unstoppable)\\b",
-     "why": "Stakes and scale in one phrase."},
-    {"id": "first_person_test", "name": "I Scouted / I Tried / I Watched Every ...", "fits_us": false,
-     "re": "^i ('?ve )?(scouted|tried|watched|ranked|analysed|analyzed|tested|played|spent|became|made|simulated|asked)\\b|^we (simulated|ranked|tried|watched)\\b",
-     "why": "Personal effort as proof; needs a creator identity (a voice persona could carry it)."},
-    {"id": "if_you_dont_understand", "name": "If You Don't Understand X, You Don't Understand Y", "fits_us": true,
-     "re": "\\bif you don'?t understand\\b",
-     "why": "Trinder's format: an unfamiliar mechanism tied to an outcome viewers want."},
-    {"id": "new_era", "name": "The New Era of X / About to Change Forever", "fits_us": true,
-     "re": "\\bnew era\\b|\\babout to change\\b|\\bnobody (even )?realizes\\b|\\bis over\\b|\\bthe end of\\b",
-     "why": "Shift narrative; urgency that the world is changing now."},
-    {"id": "over_under", "name": "Overrated / Underrated", "fits_us": true,
-     "re": "\\b(overrated|underrated|most overrated|most underrated)\\b",
-     "why": "Contrarian verdict; invites disagreement."},
-    {"id": "compilation", "name": "Goals / Skills / Highlights compilation", "fits_us": false,
-     "re": "\\b(all goals|top 10 goals|skills (&|and) goals|best goals|best skills|goals (&|and) assists|every goal)\\b",
-     "why": "Footage compilations; not replicable without match footage."},
-    {"id": "reacts", "name": "X Reacts to Y", "fits_us": false,
-     "re": "\\breacts? to\\b|\\breaction to\\b|\\breacting to\\b",
-     "why": "Reaction content; needs a presenter and footage."},
-    {"id": "quiz", "name": "Guess the Player / Quiz", "fits_us": true,
-     "re": "\\bguess\\b|\\bquiz\\b|\\bcan you name\\b",
-     "why": "Interactive; viewers play along, high retention."}
-  ]
+ "_note": "Title formats for the 0006 Format Library. A title can match several formats. 'fits_us' = a faceless data/anime channel can make it without match footage or a presenter. Regexes are Python, case-insensitive. Edit freely; hit rates are recomputed every run.",
+ "formats": [
+  {
+   "id": "rise_fall",
+   "name": "Rise and Fall / Fell Off / Collapse",
+   "fits_us": true,
+   "re": "\\brise (and|&) fall\\b|\\brise,? fall\\b|\\bfell off\\b|\\bdownfall\\b|\\bfall from grace\\b|\\bcollapsed?\\b",
+   "why": "A full arc in four words: success the viewer knows, plus a collapse they want explained."
+  },
+  {
+   "id": "what_happened",
+   "name": "What Happened to X",
+   "fits_us": true,
+   "re": "\\bwhat (ever )?happened to\\b|\\bwhatever happened to\\b",
+   "why": "Curiosity gap about a name the viewer remembers; the answer feels owed."
+  },
+  {
+   "id": "how_good_was",
+   "name": "How Good Was X (Actually/Really)",
+   "fits_us": true,
+   "re": "\\bhow (good|great|bad|fast|strong) (was|were|is) \\b",
+   "why": "Settles a debate with evidence; 'actually' promises a verdict against the hype."
+  },
+  {
+   "id": "why",
+   "name": "Why X / This Is Why X",
+   "fits_us": true,
+   "re": "^why\\b|\\bthe (real )?reason (why )?\\b|^(this is|here'?s|here is) why\\b",
+   "why": "Explains a known outcome; the viewer already has the question."
+  },
+  {
+   "id": "how_x_became",
+   "name": "How X Became/Destroyed/Changed Y",
+   "fits_us": true,
+   "re": "^how\\b(?! (good|great|bad|fast|strong|many|much|old|to)\\b)",
+   "why": "Mechanism story: a known result plus the hidden path to it."
+  },
+  {
+   "id": "the_day",
+   "name": "The Day/Night/Match X ...",
+   "fits_us": true,
+   "re": "^the (day|night|match|game|moment|season|year|time)\\b",
+   "why": "One vivid event as a story; specific and cinematic."
+  },
+  {
+   "id": "the_one_who",
+   "name": "The Player/Club/Team Who/That ...",
+   "fits_us": true,
+   "re": "^the (only |first |last )?(player|footballer|club|team|man|manager|goalkeeper|striker|kid|boy|game|transfer|league|referee|coach)s? (who|that)\\b",
+   "why": "A single protagonist defined by one extraordinary fact."
+  },
+  {
+   "id": "footballers_who",
+   "name": "(Famous) Footballers/Players Who ...",
+   "fits_us": true,
+   "re": "\\b(footballers|players|clubs|teams|managers|legends|goalkeepers|strikers|stars|wonderkids) (who|that|with)\\b|\\bfamous (footballers|players)\\b",
+   "why": "A collection defined by a surprising shared trait; many faces, one hook."
+  },
+  {
+   "id": "data_superlative",
+   "name": "Most / Highest / Oldest X (data list)",
+   "fits_us": true,
+   "re": "^(the )?(most|highest|lowest|oldest|youngest|fastest|richest|tallest|shortest|longest|biggest|greatest|best|worst|every|all|number of|top|current)\\b|\\b(ranked|ranking|comparison|timeline|by the numbers|all-time|all time|leaders|history|of all time)\\b",
+   "why": "Pure data payoff: a ranked answer to a 'who is the most...' question."
+  },
+  {
+   "id": "numbered_list",
+   "name": "N Players/Moments That ...",
+   "fits_us": true,
+   "re": "^(top )?\\d{1,3} (?!-)\\w",
+   "why": "Countable promise; viewers know the length and stay for #1."
+  },
+  {
+   "id": "tier_list",
+   "name": "Tier List / Ranking Every X",
+   "fits_us": true,
+   "re": "\\btier list\\b|\\branking (every|all|the)\\b|\\bi ranked\\b",
+   "why": "Opinion with structure; invites argument in comments."
+  },
+  {
+   "id": "vs",
+   "name": "X vs Y (comparison)",
+   "fits_us": true,
+   "re": "\\b\\w+ (vs\\.?|v|versus) \\w+(?!.*\\d+\\s*-\\s*\\d+)",
+   "why": "Head-to-head debate; the viewer picks a side before clicking."
+  },
+  {
+   "id": "what_if",
+   "name": "What If X ...",
+   "fits_us": true,
+   "re": "^what if\\b|\\bwhat would happen if\\b",
+   "why": "Hypothetical the viewer can't resolve alone; data simulation fits."
+  },
+  {
+   "id": "debate_question",
+   "name": "Is X Better/the GOAT? (question)",
+   "fits_us": true,
+   "re": "^(is|was|are|were|who|which|did|does|can|could|should|when) \\b.*\\?|\\bgoat\\b|\\bactually in his prime\\b",
+   "why": "An open debate framed as a question the video answers."
+  },
+  {
+   "id": "explained",
+   "name": "X Explained",
+   "fits_us": true,
+   "re": "\\bexplained\\b|\\bexplaining\\b|\\bbreakdown\\b",
+   "why": "Promises clarity on something confusing; search-friendly."
+  },
+  {
+   "id": "story_truth",
+   "name": "The (Untold) Story / Truth About X",
+   "fits_us": true,
+   "re": "\\b(untold|true|real|full|crazy|insane|tragic|sad|incredible) story\\b|\\bstory of\\b|\\btruth (about|behind)\\b",
+   "why": "Promises the full narrative or a hidden side of a known name."
+  },
+  {
+   "id": "hidden_secret",
+   "name": "Hidden / Secret / Nobody Talks About",
+   "fits_us": true,
+   "re": "\\b(hidden|secret|nobody talks about|no one talks about|nobody noticed|forgotten|you never knew|didn't know)\\b",
+   "why": "Insider knowledge; the viewer fears missing what others know."
+  },
+  {
+   "id": "shock_change",
+   "name": "Shocked the World / Changed Football Forever",
+   "fits_us": true,
+   "re": "\\b(shocked the world|changed (football|the game|everything)|forever|destroyed|humiliated|broke the internet|nobody saw coming|unstoppable)\\b",
+   "why": "Stakes and scale in one phrase."
+  },
+  {
+   "id": "first_person_test",
+   "name": "I Scouted / I Tried / I Watched Every ...",
+   "fits_us": false,
+   "re": "^i ('?ve )?(scouted|tried|watched|ranked|analysed|analyzed|tested|played|spent|became|made|simulated|asked)\\b|^we (simulated|ranked|tried|watched)\\b",
+   "why": "Personal effort as proof; needs a creator identity (a voice persona could carry it)."
+  },
+  {
+   "id": "if_you_dont_understand",
+   "name": "If You Don't Understand X, You Don't Understand Y",
+   "fits_us": true,
+   "re": "\\bif you don'?t understand\\b",
+   "why": "Trinder's format: an unfamiliar mechanism tied to an outcome viewers want."
+  },
+  {
+   "id": "new_era",
+   "name": "The New Era of X / About to Change Forever",
+   "fits_us": true,
+   "re": "\\bnew era\\b|\\babout to change\\b|\\bnobody (even )?realizes\\b|\\bis over\\b|\\bthe end of\\b",
+   "why": "Shift narrative; urgency that the world is changing now."
+  },
+  {
+   "id": "over_under",
+   "name": "Overrated / Underrated",
+   "fits_us": true,
+   "re": "\\b(overrated|underrated|most overrated|most underrated)\\b",
+   "why": "Contrarian verdict; invites disagreement."
+  },
+  {
+   "id": "compilation",
+   "name": "Goals / Skills / Highlights compilation",
+   "fits_us": false,
+   "re": "\\b(all goals|top 10 goals|skills (&|and) goals|best goals|best skills|goals (&|and) assists|every goal)\\b",
+   "why": "Footage compilations; not replicable without match footage."
+  },
+  {
+   "id": "reacts",
+   "name": "X Reacts to Y",
+   "fits_us": false,
+   "re": "\\breacts? to\\b|\\breaction to\\b|\\breacting to\\b",
+   "why": "Reaction content; needs a presenter and footage."
+  },
+  {
+   "id": "quiz",
+   "name": "Guess the Player / Quiz",
+   "fits_us": true,
+   "re": "\\bguess\\b|\\bquiz\\b|\\bcan you name\\b",
+   "why": "Interactive; viewers play along, high retention."
+  },
+  {
+   "id": "prime_was",
+   "name": "Prime X Was Insane / This Version of X",
+   "fits_us": true,
+   "re": "\\bprime [a-z]+\\b.*\\b(was|is|were)\\b|\\bthis version of\\b|\\bwas (insane|scary|unreal|pure class|different|unbelievable)\\b",
+   "why": "Nostalgia plus a superlative verdict on a peak everyone remembers. Big outliers are footage edits; our version is the peak proven in numbers, photos and aura."
+  },
+  {
+   "id": "origins",
+   "name": "The Real Origins of X Players",
+   "fits_us": true,
+   "re": "\\b(real |untold |true )?origins? of\\b|\\bnationalit(y|ies)\\b|\\breligions?\\b|\\bheritage\\b",
+   "why": "Identity curiosity about players fans already know; a map and data payoff (a Real Data 360 series)."
+  },
+  {
+   "id": "ai_parody",
+   "name": "AI X (parody/simulation)",
+   "fits_us": true,
+   "re": "\\bai (ronaldo|messi|predicts|simulat|video|videos|moments|adventures)\\b|\\bfunniest ai\\b|\\bai\\b.*\\b(predict|simulat)",
+   "why": "Novelty: famous players in impossible AI scenes, or AI predictions. It fits an AI-anime channel, but comedy AI clips may age fast."
+  },
+  {
+   "id": "makes_no_sense",
+   "name": "The X That Makes No Sense / Nobody Can Explain",
+   "fits_us": true,
+   "re": "\\bmakes? no sense\\b|\\bnobody can explain\\b|\\bimpossible\\b|\\bcheat code\\b|\\bdoesn'?t want you to (see|know)\\b",
+   "why": "An anomaly promise: the viewer wants the explanation for something that shouldn't have happened."
+  },
+  {
+   "id": "the_x_that",
+   "name": "The [Thing] That/Who ... (essay title)",
+   "fits_us": true,
+   "re": "^the [\\w'’ -]{3,40}? (that|who|which|nobody|uefa|fifa)\\b",
+   "why": "A video-essay title: one specific object or event with a loaded relative clause."
+  },
+  {
+   "id": "records",
+   "name": "Records (impossible / broken / unbreakable)",
+   "fits_us": true,
+   "re": "\\brecords?\\b",
+   "why": "Records are pre-validated data stories with a built-in 'how' question."
+  },
+  {
+   "id": "sleep_mix",
+   "name": "Hours of X to Fall Asleep To",
+   "fits_us": true,
+   "re": "\\bfall asleep\\b|\\bsleep mix\\b|\\bto sleep to\\b|\\bfor sleep\\b|\\bhours of\\b",
+   "why": "Long, calm story compilations: huge watch time per view. We could stitch existing docs with a calm narrator."
+  },
+  {
+   "id": "name_dash_story",
+   "name": "Name - How/The Boy Who ... (biography subtitle)",
+   "fits_us": true,
+   "re": "^[^|\\-—–]{3,30} [\\-—–] (how|the|from|why)\\b",
+   "why": "Biography with a hook subtitle: a famous name plus the arc in one clause."
+  },
+  {
+   "id": "exposed",
+   "name": "Exposed / Shady Past / Dark Side",
+   "fits_us": true,
+   "re": "\\bexposed\\b|\\bshady\\b|\\bdark side\\b|\\bscandal\\b|\\bcorrupt(ion)?\\b|\\bcheat(ed|ing)?\\b",
+   "why": "Scandal and moral stakes; strong click, but needs airtight facts."
+  }
+ ]
 }
