@@ -16,10 +16,6 @@
    "top": "THEY CAME BACK AS",
    "kicker": "10 BETRAYALS",
    "palette": "violet",
-   "vs": [
-    "BARCELONA",
-    "REAL MADRID"
-   ],
    "faces": [
     {
      "who": "Luis Figo (Real Madrid kit)",
@@ -28,6 +24,38 @@
     {
      "who": "Mario Götze (Bayern kit)",
      "mood": "guilty"
+    }
+   ],
+   "row": [
+    {
+     "who": "Luis Figo",
+     "label": "FIGO",
+     "value": "£37M",
+     "mood": "smug"
+    },
+    {
+     "who": "Mario Götze",
+     "label": "GÖTZE",
+     "value": "€37M",
+     "mood": "guilty"
+    },
+    {
+     "who": "Robert Lewandowski",
+     "label": "LEWANDOWSKI",
+     "value": "FREE",
+     "mood": "cold"
+    },
+    {
+     "who": "Gonzalo Higuaín",
+     "label": "HIGUAÍN",
+     "value": "€90M",
+     "mood": "proud"
+    },
+    {
+     "who": "Sol Campbell",
+     "label": "CAMPBELL",
+     "value": "FREE",
+     "mood": "defiant"
     }
    ]
   },

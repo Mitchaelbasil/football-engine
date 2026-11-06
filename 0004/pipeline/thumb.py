@@ -1,7 +1,8 @@
 """Thumbnail templates: 3 variants (A number+face, B face+arrow, C versus), each as
    thumb_X.png       guide with labelled face spaces (what to put where)
    thumb_X_base.png  finished background + text, face space left clean for Mitchael's cut-out
-plus thumb_instructions.txt. Data: scenes.json meta.thumb = {big, top, kicker, vs:[a,b], palette, faces:[{who,mood}]}"""
+plus thumb_instructions.txt. Data: scenes.json meta.thumb = {big, top, kicker, vs:[a,b], palette, faces:[{who,mood}],
+row:[{who, label, value, mood?}]}. Variant D (T1 face-row data strip) renders when `row` is set."""
 
 import json
 import shutil
@@ -14,6 +15,8 @@ TIPS = {
     "A": "Big number/word on the left, ONE face on the right. Face slightly overlapping the text edge reads as confident.",
     "B": "Face on the left looking toward the text; the red arrow points at the face. Strongest emotion goes here.",
     "C": "Versus: one face each side, the contradiction in the middle. Both faces should look at the centre.",
+    "D": "T1 face-row data strip (best for lists: Footballers Who / N Players / Most X): one cut-out head per box, "
+         "same size, eyes level across the row; the number under each face is the hook.",
 }
 
 
@@ -32,8 +35,8 @@ def render_all(doc: dict, build: Path, out: Path) -> list:
         pg.goto((build / "thumb.html").resolve().as_uri())
         pg.wait_for_function("window.READY===true")
         pg.evaluate(FONTS)
-        for v in "ABC":
-            if v == "C" and not t.get("vs"):
+        for v in "ABCD":
+            if (v == "C" and not t.get("vs")) or (v == "D" and not t.get("row")):
                 continue
             for guide in (True, False):
                 pg.evaluate(f"draw({json.dumps({**t, 'variant': v, 'guide': guide})})")
@@ -43,11 +46,12 @@ def render_all(doc: dict, build: Path, out: Path) -> list:
         b.close()
     faces = t.get("faces") or []
     lines = ["THUMBNAIL INSTRUCTIONS", f"Title: {meta.get('title', '')}", ""]
-    for v in "ABC":
-        if v == "C" and not t.get("vs"):
+    for v in "ABCD":
+        if (v == "C" and not t.get("vs")) or (v == "D" and not t.get("row")):
             continue
         lines += [f"Variant {v}: thumb_{v}_base.png  (guide: thumb_{v}.png)", f"  {TIPS[v]}"]
-        need = faces[:2] if v == "C" else faces[:1]
+        need = ([{"who": r.get("who", ""), "mood": r.get("mood", "")} for r in t.get("row", [])] if v == "D"
+                else faces[:2] if v == "C" else faces[:1])
         for i, fc in enumerate(need, 1):
             lines.append(f"  Face {i}: {fc.get('who', '')} - {fc.get('mood', '')}")
         lines.append("")
