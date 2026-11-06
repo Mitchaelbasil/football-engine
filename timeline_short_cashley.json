@@ -1,0 +1,689 @@
+{
+ "w": 1080,
+ "h": 1920,
+ "fps": 30,
+ "total": 29.762,
+ "scenes": [
+  {
+   "id": "hook",
+   "type": "slam",
+   "palette": "madrid",
+   "start": 0.0,
+   "end": 3.276,
+   "data": {
+    "word": "\u00a355K",
+    "pre": "ASHLEY COLE \u00b7 2006"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 0.25
+    },
+    {
+     "a": "slam",
+     "t": 0.25
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "cole",
+   "type": "photo",
+   "palette": "madrid",
+   "start": 3.276,
+   "end": 10.028,
+   "data": {
+    "slot": 3,
+    "desc": "Ashley Cole in an Arsenal shirt, 2003-04",
+    "cap": "ARSENAL \u00b7 THE INVINCIBLES"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 3.724
+    },
+    {
+     "a": "cap",
+     "t": 4.824
+    },
+    {
+     "a": "crop2",
+     "t": 6.249
+    },
+    {
+     "a": "crop3",
+     "t": 8.886
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "cole-offer",
+   "type": "counter",
+   "palette": "gold",
+   "start": 10.028,
+   "end": 26.162,
+   "data": {
+    "value": 55,
+    "prefix": "\u00a3",
+    "suffix": "K",
+    "label": "A WEEK \u00b7 ARSENAL'S CONTRACT OFFER",
+    "sub": "HE JOINED CHELSEA IN 2006"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 10.601
+    },
+    {
+     "a": "sub",
+     "t": 17.242
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "palette": "violet",
+   "start": 26.162,
+   "end": 29.362,
+   "data": {
+    "line": "FULL STORY ON THE CHANNEL",
+    "title": "HOW ASHLEY COLE BECAME 'CASHLEY'"
+   },
+   "ev": [],
+   "tr": "flash",
+   "arcLabel": null,
+   "hud": false
+  }
+ ],
+ "overlays": [
+  {
+   "t": 18.675,
+   "d": 1.8,
+   "emo": "what",
+   "text": null,
+   "cap": "BELOW HIS WORTH?!",
+   "clip": null,
+   "pos": "br"
+  },
+  {
+   "t": 23.912,
+   "d": 1.8,
+   "emo": "laugh",
+   "text": null,
+   "cap": "CASHLEY.",
+   "clip": null,
+   "pos": "tl"
+  }
+ ],
+ "intros": [],
+ "beats": [
+  {
+   "t": 0.25,
+   "end": 2.866,
+   "say": "Arsenal offered him fifty-five thousand a week.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/bea99072d58cd2cf.wav",
+   "scene": 0,
+   "speaker": "H"
+  },
+  {
+   "t": 3.626,
+   "end": 9.618,
+   "say": "He came through Arsenal's academy, and played left-back for the team that went a whole league season unbeaten.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/f28dc45c54e80753.wav",
+   "scene": 1,
+   "speaker": "H"
+  },
+  {
+   "t": 10.378,
+   "end": 15.021,
+   "say": "Then Arsenal offered him a new contract. Fifty-five thousand pounds a week.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/fc6f8299de94cd07.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 15.181,
+   "end": 18.325,
+   "say": "He felt it was far below his worth, and joined Chelsea.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/586e3779b3033ac7.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 20.675,
+   "end": 23.562,
+   "say": "Arsenal fans had a new name for him. Cashley.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/4bd5bc0988bd4f8a.wav",
+   "scene": 2,
+   "speaker": "H"
+  }
+ ],
+ "words": [
+  {
+   "w": "Arsenal",
+   "s": 0.25,
+   "e": 0.706,
+   "emph": true
+  },
+  {
+   "w": "offered",
+   "s": 0.706,
+   "e": 1.007,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 1.007,
+   "e": 1.206,
+   "emph": false
+  },
+  {
+   "w": "fifty-five",
+   "s": 1.206,
+   "e": 1.906,
+   "emph": false
+  },
+  {
+   "w": "thousand",
+   "s": 1.906,
+   "e": 2.357,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 2.357,
+   "e": 2.419,
+   "emph": false
+  },
+  {
+   "w": "week",
+   "s": 2.419,
+   "e": 3.119,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 3.626,
+   "e": 3.724,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 3.724,
+   "e": 4.036,
+   "emph": false
+  },
+  {
+   "w": "through",
+   "s": 4.036,
+   "e": 4.337,
+   "emph": false
+  },
+  {
+   "w": "Arsenal's",
+   "s": 4.337,
+   "e": 4.824,
+   "emph": false
+  },
+  {
+   "w": "academy",
+   "s": 4.824,
+   "e": 5.699,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 5.824,
+   "e": 5.949,
+   "emph": false
+  },
+  {
+   "w": "played",
+   "s": 5.949,
+   "e": 6.249,
+   "emph": false
+  },
+  {
+   "w": "left-back",
+   "s": 6.249,
+   "e": 6.799,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 6.799,
+   "e": 6.912,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 6.912,
+   "e": 7.012,
+   "emph": false
+  },
+  {
+   "w": "team",
+   "s": 7.012,
+   "e": 7.374,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 7.374,
+   "e": 7.499,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 7.499,
+   "e": 7.662,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 7.662,
+   "e": 7.761,
+   "emph": false
+  },
+  {
+   "w": "whole",
+   "s": 7.761,
+   "e": 8.049,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 8.049,
+   "e": 8.374,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 8.374,
+   "e": 8.886,
+   "emph": false
+  },
+  {
+   "w": "unbeaten",
+   "s": 8.886,
+   "e": 9.874,
+   "emph": false
+  },
+  {
+   "w": "Then",
+   "s": 10.388,
+   "e": 10.601,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 10.601,
+   "e": 11.151,
+   "emph": false
+  },
+  {
+   "w": "offered",
+   "s": 11.151,
+   "e": 11.45,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 11.45,
+   "e": 11.575,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 11.575,
+   "e": 11.663,
+   "emph": false
+  },
+  {
+   "w": "new",
+   "s": 11.663,
+   "e": 11.838,
+   "emph": false
+  },
+  {
+   "w": "contract",
+   "s": 11.838,
+   "e": 12.788,
+   "emph": false
+  },
+  {
+   "w": "Fifty-five",
+   "s": 12.95,
+   "e": 13.626,
+   "emph": true
+  },
+  {
+   "w": "thousand",
+   "s": 13.626,
+   "e": 14.063,
+   "emph": false
+  },
+  {
+   "w": "pounds",
+   "s": 14.063,
+   "e": 14.426,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 14.426,
+   "e": 14.525,
+   "emph": false
+  },
+  {
+   "w": "week",
+   "s": 14.525,
+   "e": 15.238,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 15.181,
+   "e": 15.28,
+   "emph": false
+  },
+  {
+   "w": "felt",
+   "s": 15.28,
+   "e": 15.468,
+   "emph": false
+  },
+  {
+   "w": "it",
+   "s": 15.468,
+   "e": 15.542,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 15.542,
+   "e": 15.705,
+   "emph": false
+  },
+  {
+   "w": "far",
+   "s": 15.705,
+   "e": 15.98,
+   "emph": false
+  },
+  {
+   "w": "below",
+   "s": 15.98,
+   "e": 16.292,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 16.292,
+   "e": 16.455,
+   "emph": false
+  },
+  {
+   "w": "worth",
+   "s": 16.455,
+   "e": 17.005,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 17.105,
+   "e": 17.242,
+   "emph": false
+  },
+  {
+   "w": "joined",
+   "s": 17.242,
+   "e": 17.668,
+   "emph": false
+  },
+  {
+   "w": "Chelsea",
+   "s": 17.668,
+   "e": 18.58,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 20.675,
+   "e": 21.104,
+   "emph": false
+  },
+  {
+   "w": "fans",
+   "s": 21.104,
+   "e": 21.491,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 21.491,
+   "e": 21.629,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 21.629,
+   "e": 21.691,
+   "emph": false
+  },
+  {
+   "w": "new",
+   "s": 21.691,
+   "e": 21.866,
+   "emph": false
+  },
+  {
+   "w": "name",
+   "s": 21.866,
+   "e": 22.116,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 22.116,
+   "e": 22.241,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 22.241,
+   "e": 22.716,
+   "emph": false
+  },
+  {
+   "w": "Cashley",
+   "s": 22.878,
+   "e": 23.816,
+   "emph": true
+  }
+ ],
+ "micro": [
+  {
+   "t": 1.206,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 7.761,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 11.151,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 12.95,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 15.181,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 21.491,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 22.878,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 28.358,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.25,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 3.356,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 10.601,
+   "k": "ticks"
+  },
+  {
+   "t": 11.701,
+   "g": "money",
+   "align": "attack"
+  },
+  {
+   "t": 18.675,
+   "g": "reaction_what",
+   "align": "attack"
+  },
+  {
+   "t": 23.912,
+   "g": "reaction_laugh",
+   "align": "attack"
+  },
+  {
+   "t": 26.282,
+   "g": "whoosh",
+   "align": "peak"
+  }
+ ],
+ "speakers": [
+  {
+   "who": "H",
+   "t": 0.25,
+   "end": 23.562,
+   "talk": [
+    [
+     0.25,
+     2.866
+    ],
+    [
+     3.626,
+     9.618
+    ],
+    [
+     10.378,
+     15.021
+    ],
+    [
+     15.181,
+     18.325
+    ],
+    [
+     20.675,
+     23.562
+    ]
+   ]
+  }
+ ],
+ "hosts": {
+  "H": {
+   "name": "BELLA",
+   "role": "THE STORY"
+  },
+  "P": {
+   "name": "MICHAEL",
+   "role": "THE BREAKDOWN"
+  }
+ },
+ "manual_sfx": [],
+ "seed": "Footballers Who Became Villains at Their Old Clubs",
+ "cues": [
+  {
+   "t": 0.25,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 3.356,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 11.701,
+   "what": "MONEY",
+   "idea": "money"
+  },
+  {
+   "t": 18.675,
+   "what": "REACTION (what)",
+   "idea": "reaction_what"
+  },
+  {
+   "t": 23.912,
+   "what": "REACTION (laugh)",
+   "idea": "reaction_laugh"
+  },
+  {
+   "t": 26.282,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  }
+ ],
+ "beds": [
+  {
+   "t0": 0.0,
+   "t1": 26.162,
+   "mood": "mystery"
+  }
+ ],
+ "report": {
+  "changes": 23,
+  "avg_gap": 1.29,
+  "max_gap": 2.23,
+  "over_limit": [],
+  "robotic_at": [],
+  "ok": true,
+  "warnings": []
+ }
+}

@@ -1,0 +1,12 @@
+
+  Integrated loudness:
+    I:         -14.1 LUFS
+    Threshold: -24.4 LUFS
+
+  Loudness range:
+    LRA:         3.2 LU
+    Threshold: -34.4 LUFS
+    LRA low:   -16.0 LUFS
+    LRA high:  -12.8 LUFS
+[out#0/null @ 0x55cf4cc89fc0] video:4194KiB audio:32262KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=10324 fps=540 q=-0.0 Lsize=N/A time=00:05:44.12 bitrate=N/A speed=  18x elapsed=0:00:19.12    

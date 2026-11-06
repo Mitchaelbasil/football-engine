@@ -1,0 +1,825 @@
+{
+ "w": 1080,
+ "h": 1920,
+ "fps": 30,
+ "total": 32.908,
+ "scenes": [
+  {
+   "id": "hook",
+   "type": "slam",
+   "palette": "gold",
+   "start": 0.0,
+   "end": 2.538,
+   "data": {
+    "word": "STOLEN",
+    "pre": "FIGO \u00b7 2000"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 0.25
+    },
+    {
+     "a": "slam",
+     "t": 0.25
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "promise",
+   "type": "slam",
+   "palette": "gold",
+   "start": 2.538,
+   "end": 17.375,
+   "data": {
+    "pre": "REAL MADRID ELECTION \u00b7 2000",
+    "word": "THE PROMISE",
+    "fs": 260,
+    "sub": "SIGN FIGO, OR THE MEMBERS' SEASON TICKETS ARE ON ME"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 2.888
+    },
+    {
+     "a": "slam",
+     "t": 3.101
+    },
+    {
+     "a": "sub",
+     "t": 10.415
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "pig",
+   "type": "photo",
+   "palette": "clasico",
+   "start": 17.375,
+   "end": 29.308,
+   "data": {
+    "slot": 11,
+    "desc": "Figo taking a corner at the Camp Nou, November 2002",
+    "cap": "CAMP NOU \u00b7 2002"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 17.726
+    },
+    {
+     "a": "cap",
+     "t": 19.751
+    },
+    {
+     "a": "crop2",
+     "t": 22.495
+    },
+    {
+     "a": "crop3",
+     "t": 25.96
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "palette": "violet",
+   "start": 29.308,
+   "end": 32.508,
+   "data": {
+    "line": "FULL STORY ON THE CHANNEL",
+    "title": "HOW REAL MADRID STOLE FIGO"
+   },
+   "ev": [],
+   "tr": "flash",
+   "arcLabel": null,
+   "hud": false
+  }
+ ],
+ "overlays": [
+  {
+   "t": 15.125,
+   "d": 1.8,
+   "emo": "aura",
+   "text": null,
+   "cap": "IT WORKED.",
+   "clip": null,
+   "pos": "br"
+  },
+  {
+   "t": 27.058,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "A PIG'S HEAD?!",
+   "clip": null,
+   "pos": "tl"
+  }
+ ],
+ "intros": [],
+ "beats": [
+  {
+   "t": 0.25,
+   "end": 2.128,
+   "say": "How do you steal your rival's best player?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/a6a5771e039dcabc.wav",
+   "scene": 0,
+   "speaker": "H"
+  },
+  {
+   "t": 2.888,
+   "end": 7.929,
+   "say": "With a promise. Florentino Perez was running to be Real Madrid's president.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/804bb5d758a51720.wav",
+   "scene": 1,
+   "speaker": "P"
+  },
+  {
+   "t": 8.089,
+   "end": 13.008,
+   "say": "He promised the members Figo. And if he failed, he would pay for their season tickets.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1d2d9cd33a1ef7d8.wav",
+   "scene": 1,
+   "speaker": "P"
+  },
+  {
+   "t": 13.168,
+   "end": 14.775,
+   "say": "He won. And Figo came.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/3974d4e33b4284dc.wav",
+   "scene": 1,
+   "speaker": "P"
+  },
+  {
+   "t": 17.725,
+   "end": 21.143,
+   "say": "Two years later, Figo went back to the Camp Now, in white.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/8e8e92e13fd4fd84.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 21.303,
+   "end": 25.282,
+   "say": "Every time he went to take a corner, things rained down from the stands.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/84494bf3f55aed76.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 25.442,
+   "end": 26.708,
+   "say": "Including a pig's head.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1872875aa429038f.wav",
+   "scene": 2,
+   "speaker": "H"
+  }
+ ],
+ "words": [
+  {
+   "w": "How",
+   "s": 0.25,
+   "e": 0.33,
+   "emph": true
+  },
+  {
+   "w": "do",
+   "s": 0.33,
+   "e": 0.429,
+   "emph": false
+  },
+  {
+   "w": "you",
+   "s": 0.429,
+   "e": 0.517,
+   "emph": false
+  },
+  {
+   "w": "steal",
+   "s": 0.517,
+   "e": 0.754,
+   "emph": false
+  },
+  {
+   "w": "your",
+   "s": 0.754,
+   "e": 0.867,
+   "emph": false
+  },
+  {
+   "w": "rival's",
+   "s": 0.867,
+   "e": 1.292,
+   "emph": false
+  },
+  {
+   "w": "best",
+   "s": 1.292,
+   "e": 1.567,
+   "emph": false
+  },
+  {
+   "w": "player",
+   "s": 1.567,
+   "e": 2.367,
+   "emph": false
+  },
+  {
+   "w": "With",
+   "s": 2.888,
+   "e": 3.0,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 3.0,
+   "e": 3.101,
+   "emph": false
+  },
+  {
+   "w": "promise",
+   "s": 3.101,
+   "e": 4.063,
+   "emph": true
+  },
+  {
+   "w": "Florentino",
+   "s": 4.238,
+   "e": 5.051,
+   "emph": false
+  },
+  {
+   "w": "Perez",
+   "s": 5.051,
+   "e": 5.638,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 5.638,
+   "e": 5.825,
+   "emph": false
+  },
+  {
+   "w": "running",
+   "s": 5.825,
+   "e": 6.213,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 6.213,
+   "e": 6.313,
+   "emph": false
+  },
+  {
+   "w": "be",
+   "s": 6.313,
+   "e": 6.513,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 6.513,
+   "e": 6.838,
+   "emph": false
+  },
+  {
+   "w": "Madrid's",
+   "s": 6.838,
+   "e": 7.325,
+   "emph": false
+  },
+  {
+   "w": "president",
+   "s": 7.325,
+   "e": 8.238,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 8.089,
+   "e": 8.202,
+   "emph": false
+  },
+  {
+   "w": "promised",
+   "s": 8.202,
+   "e": 8.627,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 8.627,
+   "e": 8.715,
+   "emph": false
+  },
+  {
+   "w": "members",
+   "s": 8.715,
+   "e": 9.153,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 9.153,
+   "e": 9.915,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 10.04,
+   "e": 10.177,
+   "emph": false
+  },
+  {
+   "w": "if",
+   "s": 10.177,
+   "e": 10.277,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 10.277,
+   "e": 10.415,
+   "emph": false
+  },
+  {
+   "w": "failed",
+   "s": 10.415,
+   "e": 10.89,
+   "emph": true
+  },
+  {
+   "w": "he",
+   "s": 10.94,
+   "e": 11.09,
+   "emph": false
+  },
+  {
+   "w": "would",
+   "s": 11.09,
+   "e": 11.253,
+   "emph": false
+  },
+  {
+   "w": "pay",
+   "s": 11.253,
+   "e": 11.565,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 11.565,
+   "e": 11.677,
+   "emph": false
+  },
+  {
+   "w": "their",
+   "s": 11.677,
+   "e": 11.89,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 11.89,
+   "e": 12.327,
+   "emph": false
+  },
+  {
+   "w": "tickets",
+   "s": 12.327,
+   "e": 13.19,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 13.168,
+   "e": 13.306,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 13.306,
+   "e": 13.581,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 13.618,
+   "e": 13.806,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 13.806,
+   "e": 14.244,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 14.244,
+   "e": 14.981,
+   "emph": false
+  },
+  {
+   "w": "Two",
+   "s": 17.726,
+   "e": 17.901,
+   "emph": false
+  },
+  {
+   "w": "years",
+   "s": 17.901,
+   "e": 18.151,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 18.151,
+   "e": 18.676,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 18.813,
+   "e": 19.126,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 19.126,
+   "e": 19.301,
+   "emph": false
+  },
+  {
+   "w": "back",
+   "s": 19.301,
+   "e": 19.576,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 19.576,
+   "e": 19.663,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 19.663,
+   "e": 19.751,
+   "emph": false
+  },
+  {
+   "w": "Camp",
+   "s": 19.751,
+   "e": 20.076,
+   "emph": false
+  },
+  {
+   "w": "Now",
+   "s": 20.076,
+   "e": 20.401,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 20.476,
+   "e": 20.626,
+   "emph": false
+  },
+  {
+   "w": "white",
+   "s": 20.626,
+   "e": 21.376,
+   "emph": false
+  },
+  {
+   "w": "Every",
+   "s": 21.303,
+   "e": 21.595,
+   "emph": false
+  },
+  {
+   "w": "time",
+   "s": 21.595,
+   "e": 21.907,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 21.907,
+   "e": 21.982,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 21.982,
+   "e": 22.133,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 22.133,
+   "e": 22.22,
+   "emph": false
+  },
+  {
+   "w": "take",
+   "s": 22.22,
+   "e": 22.433,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 22.433,
+   "e": 22.495,
+   "emph": false
+  },
+  {
+   "w": "corner",
+   "s": 22.495,
+   "e": 23.17,
+   "emph": false
+  },
+  {
+   "w": "things",
+   "s": 23.308,
+   "e": 23.683,
+   "emph": false
+  },
+  {
+   "w": "rained",
+   "s": 23.683,
+   "e": 24.045,
+   "emph": false
+  },
+  {
+   "w": "down",
+   "s": 24.045,
+   "e": 24.345,
+   "emph": false
+  },
+  {
+   "w": "from",
+   "s": 24.345,
+   "e": 24.482,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 24.482,
+   "e": 24.583,
+   "emph": false
+  },
+  {
+   "w": "stands",
+   "s": 24.583,
+   "e": 25.495,
+   "emph": false
+  },
+  {
+   "w": "Including",
+   "s": 25.46,
+   "e": 25.898,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 25.898,
+   "e": 25.96,
+   "emph": false
+  },
+  {
+   "w": "pig's",
+   "s": 25.96,
+   "e": 26.26,
+   "emph": true
+  },
+  {
+   "w": "head",
+   "s": 26.26,
+   "e": 26.91,
+   "emph": false
+  }
+ ],
+ "micro": [
+  {
+   "t": 5.051,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 6.513,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 8.089,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 12.327,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 13.168,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 21.303,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 23.683,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 25.46,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 30.604,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.25,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 3.101,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 15.125,
+   "g": "reaction_hype",
+   "align": "attack"
+  },
+  {
+   "t": 17.455,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 27.058,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 29.428,
+   "g": "whoosh",
+   "align": "peak"
+  }
+ ],
+ "speakers": [
+  {
+   "who": "H",
+   "t": 0.25,
+   "end": 2.128,
+   "talk": [
+    [
+     0.25,
+     2.128
+    ]
+   ]
+  },
+  {
+   "who": "P",
+   "t": 2.888,
+   "end": 14.775,
+   "talk": [
+    [
+     2.888,
+     7.929
+    ],
+    [
+     8.089,
+     13.008
+    ],
+    [
+     13.168,
+     14.775
+    ]
+   ]
+  },
+  {
+   "who": "H",
+   "t": 17.725,
+   "end": 26.708,
+   "talk": [
+    [
+     17.725,
+     21.143
+    ],
+    [
+     21.303,
+     25.282
+    ],
+    [
+     25.442,
+     26.708
+    ]
+   ]
+  }
+ ],
+ "hosts": {
+  "H": {
+   "name": "BELLA",
+   "role": "THE STORY"
+  },
+  "P": {
+   "name": "MICHAEL",
+   "role": "THE BREAKDOWN"
+  }
+ },
+ "manual_sfx": [],
+ "seed": "Footballers Who Became Villains at Their Old Clubs",
+ "cues": [
+  {
+   "t": 0.25,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 3.101,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 15.125,
+   "what": "REACTION (aura)",
+   "idea": "reaction_hype"
+  },
+  {
+   "t": 17.455,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 27.058,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 29.428,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  }
+ ],
+ "beds": [
+  {
+   "t0": 0.0,
+   "t1": 17.375,
+   "mood": "tension"
+  },
+  {
+   "t0": 17.375,
+   "t1": 29.308,
+   "mood": "sad"
+  }
+ ],
+ "report": {
+  "changes": 24,
+  "avg_gap": 1.37,
+  "max_gap": 2.33,
+  "over_limit": [],
+  "robotic_at": [],
+  "ok": true,
+  "warnings": []
+ },
+ "voice_gains": {
+  "H": 1.0,
+  "P": 1.2220867193018647
+ }
+}

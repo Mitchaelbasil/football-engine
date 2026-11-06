@@ -1,0 +1,8222 @@
+{
+ "w": 1920,
+ "h": 1080,
+ "fps": 30,
+ "total": 344.133,
+ "scenes": [
+  {
+   "id": "hook",
+   "type": "slam",
+   "palette": "violet",
+   "start": 0.0,
+   "end": 3.099,
+   "data": {
+    "pre": "THE VILLAIN ARC",
+    "word": "THEY LEFT.",
+    "fs": 300
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 0.294
+    },
+    {
+     "a": "slam",
+     "t": 0.531
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "villain",
+   "type": "slam",
+   "palette": "sunset",
+   "start": 3.099,
+   "end": 7.449,
+   "data": {
+    "word": "VILLAIN",
+    "fs": 330,
+    "sub": "10 PLAYERS \u00b7 10 BETRAYALS"
+   },
+   "ev": [
+    {
+     "a": "slam",
+     "t": 3.449
+    },
+    {
+     "a": "sub",
+     "t": 4.354
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "fee",
+   "type": "counter",
+   "palette": "clasico",
+   "start": 7.449,
+   "end": 20.149,
+   "data": {
+    "value": 37,
+    "prefix": "\u00a3",
+    "suffix": "M",
+    "label": "WORLD-RECORD FEE \u00b7 JULY 2000",
+    "sub": "BARCELONA \u2192 REAL MADRID"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 8.812
+    },
+    {
+     "a": "sub",
+     "t": 12.674
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "proof",
+   "type": "checklist",
+   "palette": "mint",
+   "start": 20.149,
+   "end": 27.208,
+   "data": {
+    "items": [
+     "10 RIVAL MOVES",
+     "THE FEES",
+     "THE TIMING",
+     "WHAT HAPPENED NEXT"
+    ]
+   },
+   "ev": [
+    {
+     "a": "item0",
+     "t": 20.977
+    },
+    {
+     "a": "item1",
+     "t": 24.302
+    },
+    {
+     "a": "item2",
+     "t": 25.153
+    },
+    {
+     "a": "item3",
+     "t": 25.877
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "plan",
+   "type": "checklist",
+   "palette": "gold",
+   "start": 27.208,
+   "end": 35.478,
+   "data": {
+    "items": [
+     "A LEAK BEFORE A SEMI-FINAL",
+     "A BILLBOARD THAT BROKE A CITY",
+     "A PIG'S HEAD AT THE CAMP NOU"
+    ]
+   },
+   "ev": [
+    {
+     "a": "item0",
+     "t": 28.151
+    },
+    {
+     "a": "item1",
+     "t": 30.686
+    },
+    {
+     "a": "item2",
+     "t": 32.833
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": false
+  },
+  {
+   "id": "arc10",
+   "type": "arc",
+   "palette": "violet",
+   "start": 35.478,
+   "end": 38.587,
+   "data": {
+    "kicker": "NUMBER 10",
+    "title": [
+     "THE LEAK",
+     "BEFORE THE SEMI"
+    ],
+    "sub": "MARIO G\u00d6TZE \u00b7 DORTMUND \u2192 BAYERN \u00b7 2013"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 35.828
+    },
+    {
+     "a": "title",
+     "t": 36.713
+    },
+    {
+     "a": "sub",
+     "t": 37.125
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "golden",
+   "type": "photo",
+   "palette": "gold",
+   "start": 38.587,
+   "end": 52.016,
+   "data": {
+    "slot": 1,
+    "desc": "Mario G\u00f6tze in a Dortmund shirt, 2012-13 season",
+    "cap": "DORTMUND \u00b7 2013"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 39.749
+    },
+    {
+     "a": "cap",
+     "t": 42.437
+    },
+    {
+     "a": "crop2",
+     "t": 46.211
+    },
+    {
+     "a": "crop3",
+     "t": 50.761
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "headline",
+   "type": "slam",
+   "palette": "sunset",
+   "start": 52.016,
+   "end": 65.593,
+   "data": {
+    "pre": "BILD \u00b7 FRONT PAGE \u00b7 23 APRIL 2013",
+    "word": "G\u00d6TZE ZU DEN BAYERN",
+    "fs": 200,
+    "sub": "G\u00d6TZE TO BAYERN"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 52.366
+    },
+    {
+     "a": "slam",
+     "t": 52.897
+    },
+    {
+     "a": "sub",
+     "t": 53.797
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": false
+  },
+  {
+   "id": "clause",
+   "type": "counter",
+   "palette": "barca",
+   "start": 65.593,
+   "end": 77.805,
+   "data": {
+    "value": 37,
+    "prefix": "\u20ac",
+    "suffix": "M",
+    "label": "BUYOUT CLAUSE",
+    "sub": "TRIGGERED BY THE CLUB THEY WERE CHASING"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 66.658
+    },
+    {
+     "a": "sub",
+     "t": 75.732
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "semi",
+   "type": "timeline",
+   "palette": "madrid",
+   "start": 77.805,
+   "end": 86.156,
+   "data": {
+    "header": "UCL SEMI-FINAL \u00b7 1ST LEG \u00b7 24.04.2013",
+    "home": "DORTMUND",
+    "away": "REAL MADRID",
+    "hero": "h",
+    "events": [
+     [
+      8,
+      "LEWANDOWSKI",
+      "h"
+     ],
+     [
+      43,
+      "RONALDO",
+      "a"
+     ],
+     [
+      50,
+      "LEWANDOWSKI",
+      "h"
+     ],
+     [
+      55,
+      "LEWANDOWSKI",
+      "h"
+     ],
+     [
+      66,
+      "LEWANDOWSKI",
+      "h"
+     ]
+    ]
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 78.155
+    },
+    {
+     "a": "ev0",
+     "t": 78.659
+    },
+    {
+     "a": "ev1",
+     "t": 79.534
+    },
+    {
+     "a": "ev2",
+     "t": 81.234
+    },
+    {
+     "a": "ev3",
+     "t": 83.873
+    },
+    {
+     "a": "ev4",
+     "t": 84.623
+    },
+    {
+     "a": "final",
+     "t": 84.848
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "final",
+   "type": "slam",
+   "palette": "madrid",
+   "start": 86.156,
+   "end": 90.276,
+   "data": {
+    "pre": "WEMBLEY \u00b7 CHAMPIONS LEAGUE FINAL \u00b7 2013",
+    "word": "DORTMUND VS BAYERN",
+    "fs": 190
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 86.506
+    },
+    {
+     "a": "slam",
+     "t": 86.578
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "wembley",
+   "type": "slam",
+   "palette": "violet",
+   "start": 90.276,
+   "end": 96.325,
+   "data": {
+    "word": "2\u20131",
+    "fs": 480,
+    "sub": "BAYERN WIN \u00b7 G\u00d6TZE MISSED IT INJURED"
+   },
+   "ev": [
+    {
+     "a": "slam",
+     "t": 90.655
+    },
+    {
+     "a": "sub",
+     "t": 92.83
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "next",
+   "type": "slam",
+   "palette": "gold",
+   "start": 96.325,
+   "end": 104.712,
+   "data": {
+    "pre": "NUMBER 9",
+    "word": "LEWANDOWSKI",
+    "fs": 230,
+    "sub": "DORTMUND \u2192 BAYERN \u00b7 2014 \u00b7 FOR FREE"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 96.774
+    },
+    {
+     "a": "slam",
+     "t": 97.012
+    },
+    {
+     "a": "sub",
+     "t": 101.585
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": false
+  },
+  {
+   "id": "lewy",
+   "type": "photo",
+   "palette": "madrid",
+   "start": 104.712,
+   "end": 109.393,
+   "data": {
+    "slot": 2,
+    "desc": "Robert Lewandowski in a Bayern shirt, celebrating",
+    "cap": "BAYERN \u00b7 2014\u20132022"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 105.076
+    },
+    {
+     "a": "crop2",
+     "t": 107.326
+    },
+    {
+     "a": "cap",
+     "t": 107.776
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "lewy-goals",
+   "type": "counter",
+   "palette": "barca",
+   "start": 109.393,
+   "end": 120.874,
+   "data": {
+    "value": 344,
+    "label": "GOALS FOR BAYERN",
+    "sub": "41 IN ONE BUNDESLIGA SEASON \u00b7 GERD M\u00dcLLER'S RECORD, EQUALLED"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 109.751
+    },
+    {
+     "a": "sub",
+     "t": 114.566
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": true
+  },
+  {
+   "id": "rehook8",
+   "type": "slam",
+   "palette": "sunset",
+   "start": 120.874,
+   "end": 125.436,
+   "data": {
+    "pre": "NUMBER 8",
+    "word": "THE MONEY",
+    "fs": 300
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 121.224
+    },
+    {
+     "a": "slam",
+     "t": 123.189
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 10 \u00b7 THE LEAK BEFORE THE SEMI",
+   "hud": false
+  },
+  {
+   "id": "arc8",
+   "type": "arc",
+   "palette": "gold",
+   "start": 125.436,
+   "end": 128.096,
+   "data": {
+    "kicker": "NUMBER 8",
+    "title": [
+     "CASHLEY"
+    ],
+    "sub": "ASHLEY COLE \u00b7 ARSENAL \u2192 CHELSEA \u00b7 2006"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 125.786
+    },
+    {
+     "a": "title",
+     "t": 126.551
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 8 \u00b7 CASHLEY",
+   "hud": true
+  },
+  {
+   "id": "cole",
+   "type": "photo",
+   "palette": "madrid",
+   "start": 128.096,
+   "end": 134.847,
+   "data": {
+    "slot": 3,
+    "desc": "Ashley Cole in an Arsenal shirt, 2003-04",
+    "cap": "ARSENAL \u00b7 THE INVINCIBLES"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 128.544
+    },
+    {
+     "a": "cap",
+     "t": 129.644
+    },
+    {
+     "a": "crop2",
+     "t": 131.069
+    },
+    {
+     "a": "crop3",
+     "t": 133.706
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 8 \u00b7 CASHLEY",
+   "hud": true
+  },
+  {
+   "id": "cole-offer",
+   "type": "counter",
+   "palette": "gold",
+   "start": 134.847,
+   "end": 150.981,
+   "data": {
+    "value": 55,
+    "prefix": "\u00a3",
+    "suffix": "K",
+    "label": "A WEEK \u00b7 ARSENAL'S CONTRACT OFFER",
+    "sub": "HE JOINED CHELSEA IN 2006"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 135.421
+    },
+    {
+     "a": "sub",
+     "t": 142.061
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 8 \u00b7 CASHLEY",
+   "hud": true
+  },
+  {
+   "id": "arc7",
+   "type": "arc",
+   "palette": "barca",
+   "start": 150.981,
+   "end": 154.124,
+   "data": {
+    "kicker": "NUMBER 7",
+    "title": [
+     "WELCOME TO",
+     "MANCHESTER"
+    ],
+    "sub": "CARLOS TEVEZ \u00b7 MAN UNITED \u2192 MAN CITY \u00b7 2009"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 151.331
+    },
+    {
+     "a": "title",
+     "t": 152.331
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 7 \u00b7 WELCOME TO MANCHESTER",
+   "hud": true
+  },
+  {
+   "id": "tevez",
+   "type": "photo",
+   "palette": "barca",
+   "start": 154.124,
+   "end": 167.165,
+   "data": {
+    "slot": 4,
+    "desc": "The blue 'Welcome to Manchester' billboard of Carlos Tevez, July 2009",
+    "cap": "MANCHESTER \u00b7 JULY 2009"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 154.474
+    },
+    {
+     "a": "crop2",
+     "t": 157.405
+    },
+    {
+     "a": "crop3",
+     "t": 161.057
+    },
+    {
+     "a": "cap",
+     "t": 163.157
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 7 \u00b7 WELCOME TO MANCHESTER",
+   "hud": true
+  },
+  {
+   "id": "rehook6",
+   "type": "slam",
+   "palette": "violet",
+   "start": 167.165,
+   "end": 172.2,
+   "data": {
+    "pre": "NUMBER 6",
+    "word": "TO BEAT THEM",
+    "fs": 260
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 167.515
+    },
+    {
+     "a": "slam",
+     "t": 170.049
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 7 \u00b7 WELCOME TO MANCHESTER",
+   "hud": false
+  },
+  {
+   "id": "arc6",
+   "type": "arc",
+   "palette": "gold",
+   "start": 172.2,
+   "end": 175.535,
+   "data": {
+    "kicker": "NUMBER 6",
+    "title": [
+     "THE CAPTAIN",
+     "WHO LEFT"
+    ],
+    "sub": "ROBIN VAN PERSIE \u00b7 ARSENAL \u2192 MAN UNITED \u00b7 2012"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 172.55
+    },
+    {
+     "a": "title",
+     "t": 173.561
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 6 \u00b7 THE CAPTAIN WHO LEFT",
+   "hud": true
+  },
+  {
+   "id": "rvp",
+   "type": "photo",
+   "palette": "madrid",
+   "start": 175.535,
+   "end": 186.327,
+   "data": {
+    "slot": 5,
+    "desc": "Robin van Persie in a Manchester United shirt, 2012-13",
+    "cap": "MAN UNITED \u00b7 2012\u201313"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 176.185
+    },
+    {
+     "a": "crop2",
+     "t": 177.935
+    },
+    {
+     "a": "cap",
+     "t": 180.534
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 6 \u00b7 THE CAPTAIN WHO LEFT",
+   "hud": true
+  },
+  {
+   "id": "rvp-why",
+   "type": "counter",
+   "palette": "violet",
+   "start": 186.327,
+   "end": 197.912,
+   "data": {
+    "value": 26,
+    "label": "PREMIER LEAGUE GOALS \u00b7 2012\u201313",
+    "sub": "UNITED WIN THE TITLE \u00b7 ARSENAL FINISH 4TH"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 186.998
+    },
+    {
+     "a": "sub",
+     "t": 192.245
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 6 \u00b7 THE CAPTAIN WHO LEFT",
+   "hud": true
+  },
+  {
+   "id": "arc5",
+   "type": "arc",
+   "palette": "violet",
+   "start": 197.912,
+   "end": 201.031,
+   "data": {
+    "kicker": "NUMBER 5",
+    "title": [
+     "MADRID",
+     "TO BARCELONA"
+    ],
+    "sub": "LUIS ENRIQUE \u00b7 REAL MADRID \u2192 BARCELONA \u00b7 1996"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 198.262
+    },
+    {
+     "a": "title",
+     "t": 199.271
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 5 \u00b7 MADRID TO BARCELONA",
+   "hud": true
+  },
+  {
+   "id": "enrique",
+   "type": "photo",
+   "palette": "barca",
+   "start": 201.031,
+   "end": 214.805,
+   "data": {
+    "slot": 6,
+    "desc": "Luis Enrique in a Barcelona shirt, late 1990s",
+    "cap": "BARCELONA \u00b7 1996\u20132004"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 201.41
+    },
+    {
+     "a": "crop2",
+     "t": 204.31
+    },
+    {
+     "a": "crop3",
+     "t": 207.713
+    },
+    {
+     "a": "cap",
+     "t": 210.7
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 5 \u00b7 MADRID TO BARCELONA",
+   "hud": true
+  },
+  {
+   "id": "arc4",
+   "type": "arc",
+   "palette": "mint",
+   "start": 214.805,
+   "end": 217.605,
+   "data": {
+    "kicker": "NUMBER 4",
+    "title": [
+     "THE FREE",
+     "TRANSFER"
+    ],
+    "sub": "SOL CAMPBELL \u00b7 TOTTENHAM \u2192 ARSENAL \u00b7 2001"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 215.155
+    },
+    {
+     "a": "title",
+     "t": 216.07
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 4 \u00b7 THE FREE TRANSFER",
+   "hud": true
+  },
+  {
+   "id": "campbell",
+   "type": "photo",
+   "palette": "gold",
+   "start": 217.605,
+   "end": 229.642,
+   "data": {
+    "slot": 7,
+    "desc": "Sol Campbell in an Arsenal shirt, 2001-02",
+    "cap": "NORTH LONDON \u00b7 2001"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 218.031
+    },
+    {
+     "a": "crop2",
+     "t": 220.143
+    },
+    {
+     "a": "crop3",
+     "t": 221.861
+    },
+    {
+     "a": "cap",
+     "t": 225.186
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 4 \u00b7 THE FREE TRANSFER",
+   "hud": true
+  },
+  {
+   "id": "campbell-won",
+   "type": "checklist",
+   "palette": "mint",
+   "start": 229.642,
+   "end": 235.432,
+   "data": {
+    "items": [
+     "2 PREMIER LEAGUE TITLES",
+     "3 FA CUPS",
+     "THE INVINCIBLES \u00b7 2003\u201304"
+    ]
+   },
+   "ev": [
+    {
+     "a": "item0",
+     "t": 230.682
+    },
+    {
+     "a": "item1",
+     "t": 232.069
+    },
+    {
+     "a": "item2",
+     "t": 233.593
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 4 \u00b7 THE FREE TRANSFER",
+   "hud": true
+  },
+  {
+   "id": "rehook3",
+   "type": "slam",
+   "palette": "sunset",
+   "start": 235.432,
+   "end": 239.183,
+   "data": {
+    "pre": "THE BIGGEST LINES IN FOOTBALL",
+    "word": "TOP 3",
+    "fs": 420
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 235.782
+    },
+    {
+     "a": "slam",
+     "t": 235.838
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 4 \u00b7 THE FREE TRANSFER",
+   "hud": false
+  },
+  {
+   "id": "arc3",
+   "type": "arc",
+   "palette": "madrid",
+   "start": 239.183,
+   "end": 242.345,
+   "data": {
+    "kicker": "NUMBER 3",
+    "title": [
+     "THE CLAUSE",
+     "IN NAPLES"
+    ],
+    "sub": "GONZALO HIGUA\u00cdN \u00b7 NAPOLI \u2192 JUVENTUS \u00b7 2016"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 239.533
+    },
+    {
+     "a": "title",
+     "t": 240.482
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 3 \u00b7 THE CLAUSE IN NAPLES",
+   "hud": true
+  },
+  {
+   "id": "higuain",
+   "type": "photo",
+   "palette": "mint",
+   "start": 242.345,
+   "end": 252.956,
+   "data": {
+    "slot": 8,
+    "desc": "Gonzalo Higua\u00edn in a Napoli shirt, 2015-16",
+    "cap": "NAPOLI \u00b7 2015\u201316"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 242.942
+    },
+    {
+     "a": "crop2",
+     "t": 245.055
+    },
+    {
+     "a": "cap",
+     "t": 245.617
+    },
+    {
+     "a": "crop3",
+     "t": 247.218
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 3 \u00b7 THE CLAUSE IN NAPLES",
+   "hud": true
+  },
+  {
+   "id": "higuain-clause",
+   "type": "counter",
+   "palette": "barca",
+   "start": 252.956,
+   "end": 265.574,
+   "data": {
+    "value": 90,
+    "prefix": "\u20ac",
+    "suffix": "M",
+    "label": "RELEASE CLAUSE \u00b7 JULY 2016",
+    "sub": "THE MOST EXPENSIVE TRANSFER IN ITALIAN HISTORY"
+   },
+   "ev": [
+    {
+     "a": "count",
+     "t": 253.559
+    },
+    {
+     "a": "sub",
+     "t": 258.374
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 3 \u00b7 THE CLAUSE IN NAPLES",
+   "hud": true
+  },
+  {
+   "id": "arc2",
+   "type": "arc",
+   "palette": "gold",
+   "start": 265.574,
+   "end": 268.875,
+   "data": {
+    "kicker": "NUMBER 2",
+    "title": [
+     "FOUR CLUBS",
+     "TWO SIDES"
+    ],
+    "sub": "RONALDO NAZ\u00c1RIO \u00b7 BAR\u00c7A \u00b7 INTER \u00b7 REAL \u00b7 MILAN"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 265.924
+    },
+    {
+     "a": "title",
+     "t": 266.844
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 2 \u00b7 FOUR CLUBS TWO SIDES",
+   "hud": true
+  },
+  {
+   "id": "r9-clubs",
+   "type": "checklist",
+   "palette": "violet",
+   "start": 268.875,
+   "end": 281.04,
+   "data": {
+    "items": [
+     "BARCELONA",
+     "INTER",
+     "REAL MADRID",
+     "AC MILAN"
+    ]
+   },
+   "ev": [
+    {
+     "a": "item0",
+     "t": 269.309
+    },
+    {
+     "a": "item1",
+     "t": 270.884
+    },
+    {
+     "a": "item2",
+     "t": 271.888
+    },
+    {
+     "a": "item3",
+     "t": 273.451
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 2 \u00b7 FOUR CLUBS TWO SIDES",
+   "hud": true
+  },
+  {
+   "id": "r9-derby",
+   "type": "photo",
+   "palette": "sunset",
+   "start": 281.04,
+   "end": 289.891,
+   "data": {
+    "slot": 9,
+    "desc": "Ronaldo Naz\u00e1rio in an AC Milan shirt, Milan derby, March 2007",
+    "cap": "MILAN DERBY \u00b7 11.03.2007"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 281.502
+    },
+    {
+     "a": "crop2",
+     "t": 283.015
+    },
+    {
+     "a": "cap",
+     "t": 284.714
+    },
+    {
+     "a": "crop3",
+     "t": 287.694
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 2 \u00b7 FOUR CLUBS TWO SIDES",
+   "hud": true
+  },
+  {
+   "id": "arc1",
+   "type": "arc",
+   "palette": "sunset",
+   "start": 289.891,
+   "end": 298.398,
+   "data": {
+    "kicker": "NUMBER 1",
+    "title": [
+     "THE PIG'S",
+     "HEAD"
+    ],
+    "sub": "LU\u00cdS FIGO \u00b7 BARCELONA \u2192 REAL MADRID \u00b7 2000",
+    "intro": "ds"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 293.158
+    },
+    {
+     "a": "title",
+     "t": 293.191
+    },
+    {
+     "a": "sub",
+     "t": 293.741
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": true,
+   "intro": {
+    "kind": "ds",
+    "t": 289.891,
+    "cut": 3.267,
+    "hit": 3.5,
+    "dur": 5.83
+   }
+  },
+  {
+   "id": "figo",
+   "type": "photo",
+   "palette": "clasico",
+   "start": 298.398,
+   "end": 309.042,
+   "data": {
+    "slot": 10,
+    "desc": "Lu\u00eds Figo in a Barcelona shirt, 1999-2000",
+    "cap": "BARCELONA \u00b7 1995\u20132000"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 298.946
+    },
+    {
+     "a": "crop2",
+     "t": 300.772
+    },
+    {
+     "a": "cap",
+     "t": 303.847
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": true
+  },
+  {
+   "id": "promise",
+   "type": "slam",
+   "palette": "gold",
+   "start": 309.042,
+   "end": 323.88,
+   "data": {
+    "pre": "REAL MADRID ELECTION \u00b7 2000",
+    "word": "THE PROMISE",
+    "fs": 260,
+    "sub": "SIGN FIGO, OR THE MEMBERS' SEASON TICKETS ARE ON ME"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 309.392
+    },
+    {
+     "a": "slam",
+     "t": 309.605
+    },
+    {
+     "a": "sub",
+     "t": 316.919
+    }
+   ],
+   "tr": "flash",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": true
+  },
+  {
+   "id": "pig",
+   "type": "photo",
+   "palette": "clasico",
+   "start": 323.88,
+   "end": 335.813,
+   "data": {
+    "slot": 11,
+    "desc": "Figo taking a corner at the Camp Nou, November 2002",
+    "cap": "CAMP NOU \u00b7 2002"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 324.231
+    },
+    {
+     "a": "cap",
+     "t": 326.256
+    },
+    {
+     "a": "crop2",
+     "t": 329.0
+    },
+    {
+     "a": "crop3",
+     "t": 332.465
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": true
+  },
+  {
+   "id": "verdict",
+   "type": "slam",
+   "palette": "violet",
+   "start": 335.813,
+   "end": 343.733,
+   "data": {
+    "pre": "THE BIGGEST VILLAIN ARC IN FOOTBALL",
+    "word": "FIGO",
+    "fs": 460,
+    "sub": "WHO'S YOUR NUMBER 1? COMMENTS \u2193"
+   },
+   "ev": [
+    {
+     "a": "pre",
+     "t": 336.163
+    },
+    {
+     "a": "slam",
+     "t": 336.949
+    },
+    {
+     "a": "sub",
+     "t": 340.103
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": false
+  }
+ ],
+ "overlays": [
+  {
+   "t": 5.199,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "TRAITOR?!",
+   "clip": null,
+   "pos": "br"
+  },
+  {
+   "t": 17.899,
+   "d": 1.8,
+   "emo": "what",
+   "text": null,
+   "cap": "A PIG'S HEAD?!",
+   "clip": null,
+   "pos": "tl"
+  },
+  {
+   "t": 53.809,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "THE DAY BEFORE?!",
+   "clip": null,
+   "pos": "tr"
+  },
+  {
+   "t": 63.343,
+   "d": 1.8,
+   "emo": "what",
+   "text": null,
+   "cap": "WHY NOW?",
+   "clip": null,
+   "pos": "bl"
+  },
+  {
+   "t": 94.075,
+   "d": 1.8,
+   "emo": "sad",
+   "text": null,
+   "cap": "PAIN.",
+   "clip": null,
+   "pos": "br"
+  },
+  {
+   "t": 102.462,
+   "d": 1.8,
+   "emo": "what",
+   "text": null,
+   "cap": "AGAIN?!",
+   "clip": null,
+   "pos": "tl"
+  },
+  {
+   "t": 118.624,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "41?!",
+   "clip": null,
+   "pos": "tr"
+  },
+  {
+   "t": 143.494,
+   "d": 1.8,
+   "emo": "what",
+   "text": null,
+   "cap": "BELOW HIS WORTH?!",
+   "clip": null,
+   "pos": "bl"
+  },
+  {
+   "t": 148.731,
+   "d": 1.8,
+   "emo": "laugh",
+   "text": null,
+   "cap": "CASHLEY.",
+   "clip": null,
+   "pos": "br"
+  },
+  {
+   "t": 164.915,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "IN UNITED'S CITY?!",
+   "clip": null,
+   "pos": "tl"
+  },
+  {
+   "t": 195.662,
+   "d": 1.8,
+   "emo": "sad",
+   "text": null,
+   "cap": "PAIN.",
+   "clip": null,
+   "pos": "tr"
+  },
+  {
+   "t": 212.555,
+   "d": 1.8,
+   "emo": "hype",
+   "text": null,
+   "cap": "VILLAIN \u2192 KING",
+   "clip": null,
+   "pos": "bl"
+  },
+  {
+   "t": 227.392,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "FOR FREE?!",
+   "clip": null,
+   "pos": "br"
+  },
+  {
+   "t": 263.324,
+   "d": 1.8,
+   "emo": "what",
+   "text": null,
+   "cap": "THEIR RIVAL?!",
+   "clip": null,
+   "pos": "tl"
+  },
+  {
+   "t": 278.79,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "BOTH SIDES?!",
+   "clip": null,
+   "pos": "tr"
+  },
+  {
+   "t": 321.63,
+   "d": 1.8,
+   "emo": "aura",
+   "text": null,
+   "cap": "IT WORKED.",
+   "clip": null,
+   "pos": "bl"
+  },
+  {
+   "t": 333.563,
+   "d": 1.8,
+   "emo": "shock",
+   "text": null,
+   "cap": "A PIG'S HEAD?!",
+   "clip": null,
+   "pos": "br"
+  }
+ ],
+ "intros": [
+  {
+   "kind": "ds",
+   "t": 289.891,
+   "cut": 3.267,
+   "hit": 3.5,
+   "dur": 5.83
+  }
+ ],
+ "beats": [
+  {
+   "t": 0.25,
+   "end": 2.689,
+   "say": "Some footballers don't just leave their club.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/aeaa62976a44d790.wav",
+   "scene": 0,
+   "speaker": "H"
+  },
+  {
+   "t": 3.449,
+   "end": 4.849,
+   "say": "They come back as the villain.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/0c8a8e9f04d40b8d.wav",
+   "scene": 1,
+   "speaker": "H"
+  },
+  {
+   "t": 7.799,
+   "end": 14.019,
+   "say": "One of them cost a world-record thirty-seven million pounds to cross the biggest divide in football.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1f92a122ca3c2406.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 14.179,
+   "end": 17.549,
+   "say": "Two years later, his old fans threw a pig's head at him.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/8eb78992c1e03bbe.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 20.499,
+   "end": 24.037,
+   "say": "We tracked ten of the biggest rival moves in modern football:",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/d8d157e1f99c4423.wav",
+   "scene": 3,
+   "speaker": "H"
+  },
+  {
+   "t": 24.197,
+   "end": 26.798,
+   "say": "the fees, the timing, and what happened next.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/802b22828701a5ad.wav",
+   "scene": 3,
+   "speaker": "H"
+  },
+  {
+   "t": 27.558,
+   "end": 30.246,
+   "say": "We start with a leak on the eve of a semi-final,",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/338c5e86170d0650.wav",
+   "scene": 4,
+   "speaker": "H"
+  },
+  {
+   "t": 30.406,
+   "end": 32.075,
+   "say": "pass a billboard that broke a city,",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/28deb6f268154ba5.wav",
+   "scene": 4,
+   "speaker": "H"
+  },
+  {
+   "t": 32.235,
+   "end": 34.768,
+   "say": "and finish at the Camp Now, with a pig's head.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/44a1aa98a9962cc4.wav",
+   "scene": 4,
+   "speaker": "H"
+  },
+  {
+   "t": 35.828,
+   "end": 37.777,
+   "say": "Number ten. Mario Goetze.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/c1b0e07d0d37c95b.wav",
+   "scene": 5,
+   "speaker": "H"
+  },
+  {
+   "t": 38.937,
+   "end": 44.688,
+   "say": "He was Dortmund's golden boy. Twenty years old, raised by the club, the future of the team.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/3ce72916a34991b1.wav",
+   "scene": 6,
+   "speaker": "H"
+  },
+  {
+   "t": 44.848,
+   "end": 51.606,
+   "say": "Then, on the twenty-third of April, twenty thirteen, a German newspaper ran four words on its front page.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/56dc47f2441a8b3b.wav",
+   "scene": 6,
+   "speaker": "H"
+  },
+  {
+   "t": 52.366,
+   "end": 53.459,
+   "say": "Goetze to Byern.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/2824444bbe2fdc74.wav",
+   "scene": 7,
+   "speaker": "H"
+  },
+  {
+   "t": 55.809,
+   "end": 62.993,
+   "say": "The next night, Dortmund had a Champions League semi-final against Real Madrid. So why did the timing hurt so much?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/a9d05d34e4ecf7c2.wav",
+   "scene": 7,
+   "speaker": "H"
+  },
+  {
+   "t": 65.943,
+   "end": 71.327,
+   "say": "Because Byern didn't negotiate. They paid his thirty-seven million euro buyout clause.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/a41b427731a86e7e.wav",
+   "scene": 8,
+   "speaker": "P"
+  },
+  {
+   "t": 71.487,
+   "end": 77.395,
+   "say": "Dortmund had no say. And Byern were the exact team they were trying to knock off the top of Germany.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/50f9a82b99522329.wav",
+   "scene": 8,
+   "speaker": "P"
+  },
+  {
+   "t": 78.155,
+   "end": 83.338,
+   "say": "Dortmund answered the leak the only way they could. They beat Real Madrid four, one.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/70a433e8de4f56c5.wav",
+   "scene": 9,
+   "speaker": "P"
+  },
+  {
+   "t": 83.498,
+   "end": 85.346,
+   "say": "And one striker scored all four.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/36f4cb1480a931d9.wav",
+   "scene": 9,
+   "speaker": "P"
+  },
+  {
+   "t": 86.506,
+   "end": 89.866,
+   "say": "A month later, Dortmund met Byern in the final at Wembley.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/9fa65b81fe04fd5e.wav",
+   "scene": 10,
+   "speaker": "H"
+  },
+  {
+   "t": 90.626,
+   "end": 93.725,
+   "say": "Byern won, two, one. Goetze watched it injured.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/799cca54c7847027.wav",
+   "scene": 11,
+   "speaker": "H"
+  },
+  {
+   "t": 96.675,
+   "end": 98.528,
+   "say": "And that striker who scored all four?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/c626b68129041374.wav",
+   "scene": 12,
+   "speaker": "H"
+  },
+  {
+   "t": 98.688,
+   "end": 102.112,
+   "say": "A year later, he made the exact same move. For free.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/df1e8bf963c2d577.wav",
+   "scene": 12,
+   "speaker": "H"
+  },
+  {
+   "t": 105.062,
+   "end": 108.983,
+   "say": "Dortmund had turned him into a star. Byern collected the goals.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/5a0ab269d1faabdd.wav",
+   "scene": 13,
+   "speaker": "H"
+  },
+  {
+   "t": 109.743,
+   "end": 112.764,
+   "say": "Three hundred and forty-four of them, in eight seasons.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/2faac346681d2597.wav",
+   "scene": 14,
+   "speaker": "H"
+  },
+  {
+   "t": 112.924,
+   "end": 118.274,
+   "say": "In one season he scored forty-one in the Bundesliga, equalling Gerd Mueller's record.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1b7b3a2ad4df88fa.wav",
+   "scene": 14,
+   "speaker": "H"
+  },
+  {
+   "t": 121.224,
+   "end": 125.026,
+   "say": "But Lewandowski never said it was about money. Number eight did.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/934b5ea5278b06fe.wav",
+   "scene": 15,
+   "speaker": "H"
+  },
+  {
+   "t": 125.786,
+   "end": 127.386,
+   "say": "Number eight. Ashley Cole.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/6ebfdc8eba8d5798.wav",
+   "scene": 16,
+   "speaker": "H"
+  },
+  {
+   "t": 128.446,
+   "end": 134.438,
+   "say": "He came through Arsenal's academy, and played left-back for the team that went a whole league season unbeaten.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/f28dc45c54e80753.wav",
+   "scene": 17,
+   "speaker": "H"
+  },
+  {
+   "t": 135.197,
+   "end": 139.84,
+   "say": "Then Arsenal offered him a new contract. Fifty-five thousand pounds a week.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/fc6f8299de94cd07.wav",
+   "scene": 18,
+   "speaker": "H"
+  },
+  {
+   "t": 140.0,
+   "end": 143.144,
+   "say": "He felt it was far below his worth, and joined Chelsea.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/586e3779b3033ac7.wav",
+   "scene": 18,
+   "speaker": "H"
+  },
+  {
+   "t": 145.494,
+   "end": 148.381,
+   "say": "Arsenal fans had a new name for him. Cashley.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/4bd5bc0988bd4f8a.wav",
+   "scene": 18,
+   "speaker": "H"
+  },
+  {
+   "t": 151.331,
+   "end": 153.414,
+   "say": "Number seven. Carlos Tevez.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1385669091cb3778.wav",
+   "scene": 19,
+   "speaker": "H"
+  },
+  {
+   "t": 154.474,
+   "end": 159.446,
+   "say": "Two seasons at Manchester United. Then he crossed the city to Manchester City.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/951eb542fbdd888c.wav",
+   "scene": 20,
+   "speaker": "H"
+  },
+  {
+   "t": 159.606,
+   "end": 164.565,
+   "say": "City put him on a giant blue billboard. Three words. Welcome to Manchester.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/86683b90bac54708.wav",
+   "scene": 20,
+   "speaker": "H"
+  },
+  {
+   "t": 167.515,
+   "end": 171.79,
+   "say": "Tevez left to compete with his old club. Number six left to beat them.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/6956fbe4a3ecf2f5.wav",
+   "scene": 21,
+   "speaker": "H"
+  },
+  {
+   "t": 172.55,
+   "end": 174.825,
+   "say": "Number six. Robin van Persie.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/dce51c8632fddf7e.wav",
+   "scene": 22,
+   "speaker": "H"
+  },
+  {
+   "t": 175.885,
+   "end": 183.426,
+   "say": "He was Arsenal's captain. In August twenty twelve, Manchester United paid twenty-two and a half million pounds for him.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/50e0ac428a6bfc6c.wav",
+   "scene": 23,
+   "speaker": "H"
+  },
+  {
+   "t": 183.586,
+   "end": 185.917,
+   "say": "So why did this one hurt more than the others?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/6724d285a1346eaa.wav",
+   "scene": 23,
+   "speaker": "H"
+  },
+  {
+   "t": 186.677,
+   "end": 191.486,
+   "say": "Because he didn't just leave. He scored twenty-six league goals in his first season.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/625a79b55518573e.wav",
+   "scene": 24,
+   "speaker": "P"
+  },
+  {
+   "t": 191.646,
+   "end": 195.312,
+   "say": "Manchester United won the title. Arsenal finished fourth.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/d2b60d95d01e5533.wav",
+   "scene": 24,
+   "speaker": "P"
+  },
+  {
+   "t": 198.262,
+   "end": 200.321,
+   "say": "Number five. Luis Enrique.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/9b5bf2cf16b031c5.wav",
+   "scene": 25,
+   "speaker": "H"
+  },
+  {
+   "t": 201.381,
+   "end": 207.125,
+   "say": "Five seasons at Real Madrid. Then, in nineteen ninety-six, he signed for Barcelona.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/3d31067a37e3b6fc.wav",
+   "scene": 26,
+   "speaker": "H"
+  },
+  {
+   "t": 207.285,
+   "end": 212.205,
+   "say": "He stayed eight seasons. Years later he came back as their coach, and won the treble.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/48b470b2f258e4b5.wav",
+   "scene": 26,
+   "speaker": "H"
+  },
+  {
+   "t": 215.155,
+   "end": 216.895,
+   "say": "Number four. Sol Campbell.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/d297e4e84b0b7dd8.wav",
+   "scene": 27,
+   "speaker": "H"
+  },
+  {
+   "t": 217.955,
+   "end": 221.142,
+   "say": "He came through Tottenham's ranks and spent nine years there.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/4beacc113ee6f20a.wav",
+   "scene": 28,
+   "speaker": "H"
+  },
+  {
+   "t": 221.302,
+   "end": 227.042,
+   "say": "Then, in July two thousand and one, he walked across North London to Arsenal. For free.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/0eb7ea71137f3ae1.wav",
+   "scene": 28,
+   "speaker": "H"
+  },
+  {
+   "t": 229.992,
+   "end": 233.144,
+   "say": "At Arsenal he won two league titles, three FA Cups,",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/71b77594f6557401.wav",
+   "scene": 29,
+   "speaker": "H"
+  },
+  {
+   "t": 233.304,
+   "end": 235.022,
+   "say": "and went a whole season unbeaten.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/f88a9f801c1d5258.wav",
+   "scene": 29,
+   "speaker": "H"
+  },
+  {
+   "t": 235.782,
+   "end": 238.773,
+   "say": "The top three crossed the biggest lines in world football.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/0fc43ba62272d064.wav",
+   "scene": 30,
+   "speaker": "H"
+  },
+  {
+   "t": 239.533,
+   "end": 241.635,
+   "say": "Number three. Gonzalo Higuain.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/943212f09c808914.wav",
+   "scene": 31,
+   "speaker": "H"
+  },
+  {
+   "t": 242.695,
+   "end": 246.88,
+   "say": "In his last season at Napoli, he scored thirty-six Serie A goals.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/8d139f0689959692.wav",
+   "scene": 32,
+   "speaker": "H"
+  },
+  {
+   "t": 247.04,
+   "end": 252.546,
+   "say": "That broke a league record that had stood for sixty-six years. So why did Naples turn on him?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/d6497e29394ca1f9.wav",
+   "scene": 32,
+   "speaker": "H"
+  },
+  {
+   "t": 253.306,
+   "end": 257.883,
+   "say": "Because weeks later, Juventus paid his ninety million euro release clause.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1c3971a9d6439940.wav",
+   "scene": 33,
+   "speaker": "P"
+  },
+  {
+   "t": 258.043,
+   "end": 262.974,
+   "say": "The most expensive transfer in Italian history. To Napoli's biggest rival.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/b4ea6ccd9770feaf.wav",
+   "scene": 33,
+   "speaker": "P"
+  },
+  {
+   "t": 265.924,
+   "end": 268.165,
+   "say": "Number two. The original Ronaldo.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/83f3efd13ef76d1d.wav",
+   "scene": 34,
+   "speaker": "H"
+  },
+  {
+   "t": 269.225,
+   "end": 271.551,
+   "say": "He played for Barcelona, then Inter,",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/edf48c799770df8c.wav",
+   "scene": 35,
+   "speaker": "H"
+  },
+  {
+   "t": 271.711,
+   "end": 274.041,
+   "say": "then Real Madrid, then AC Milan.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/6deb1f5589767289.wav",
+   "scene": 35,
+   "speaker": "H"
+  },
+  {
+   "t": 274.201,
+   "end": 278.44,
+   "say": "Two of football's biggest rivalries, and he played on both sides of each.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/9bacaff0b9356be7.wav",
+   "scene": 35,
+   "speaker": "H"
+  },
+  {
+   "t": 281.39,
+   "end": 287.523,
+   "say": "In March twenty oh seven, in Milan's red and black, he scored against Inter. His old club.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/bb877b142d55eede.wav",
+   "scene": 36,
+   "speaker": "H"
+  },
+  {
+   "t": 287.683,
+   "end": 289.481,
+   "say": "Inter still won, two, one.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/2b43c633e0d5d3f6.wav",
+   "scene": 36,
+   "speaker": "H"
+  },
+  {
+   "t": 295.871,
+   "end": 297.688,
+   "say": "Number one. Luis Figo.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/d24da03b9e927e5e.wav",
+   "scene": 37,
+   "speaker": "H"
+  },
+  {
+   "t": 298.748,
+   "end": 300.482,
+   "say": "He was Barcelona's best player.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/51e8766229e1e064.wav",
+   "scene": 38,
+   "speaker": "H"
+  },
+  {
+   "t": 300.642,
+   "end": 305.834,
+   "say": "In July two thousand, Real Madrid made him the most expensive footballer in the world.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/3366125592ce22a9.wav",
+   "scene": 38,
+   "speaker": "H"
+  },
+  {
+   "t": 305.994,
+   "end": 308.632,
+   "say": "So how do you steal your biggest rival's best player?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/99552c53a4f367cd.wav",
+   "scene": 38,
+   "speaker": "H"
+  },
+  {
+   "t": 309.392,
+   "end": 314.433,
+   "say": "With a promise. Florentino Perez was running to be Real Madrid's president.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/804bb5d758a51720.wav",
+   "scene": 39,
+   "speaker": "P"
+  },
+  {
+   "t": 314.593,
+   "end": 319.513,
+   "say": "He promised the members Figo. And if he failed, he would pay for their season tickets.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1d2d9cd33a1ef7d8.wav",
+   "scene": 39,
+   "speaker": "P"
+  },
+  {
+   "t": 319.673,
+   "end": 321.28,
+   "say": "He won. And Figo came.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/3974d4e33b4284dc.wav",
+   "scene": 39,
+   "speaker": "P"
+  },
+  {
+   "t": 324.23,
+   "end": 327.648,
+   "say": "Two years later, Figo went back to the Camp Now, in white.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/8e8e92e13fd4fd84.wav",
+   "scene": 40,
+   "speaker": "H"
+  },
+  {
+   "t": 327.808,
+   "end": 331.787,
+   "say": "Every time he went to take a corner, things rained down from the stands.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/84494bf3f55aed76.wav",
+   "scene": 40,
+   "speaker": "H"
+  },
+  {
+   "t": 331.947,
+   "end": 333.213,
+   "say": "Including a pig's head.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/1872875aa429038f.wav",
+   "scene": 40,
+   "speaker": "H"
+  },
+  {
+   "t": 336.163,
+   "end": 338.303,
+   "say": "That's the biggest villain arc in football.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/0cb0f73e0a228062.wav",
+   "scene": 41,
+   "speaker": "H"
+  },
+  {
+   "t": 338.463,
+   "end": 341.323,
+   "say": "Who would you put at number one? Tell us in the comments.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/villains-opening/build/voice_kokoro_af_bella/b443416c2551ff9f.wav",
+   "scene": 41,
+   "speaker": "H"
+  }
+ ],
+ "words": [
+  {
+   "w": "Some",
+   "s": 0.294,
+   "e": 0.531,
+   "emph": false
+  },
+  {
+   "w": "footballers",
+   "s": 0.531,
+   "e": 1.357,
+   "emph": false
+  },
+  {
+   "w": "don't",
+   "s": 1.357,
+   "e": 1.569,
+   "emph": false
+  },
+  {
+   "w": "just",
+   "s": 1.569,
+   "e": 1.769,
+   "emph": false
+  },
+  {
+   "w": "leave",
+   "s": 1.769,
+   "e": 2.007,
+   "emph": true
+  },
+  {
+   "w": "their",
+   "s": 2.007,
+   "e": 2.169,
+   "emph": false
+  },
+  {
+   "w": "club",
+   "s": 2.169,
+   "e": 2.894,
+   "emph": false
+  },
+  {
+   "w": "They",
+   "s": 3.449,
+   "e": 3.579,
+   "emph": false
+  },
+  {
+   "w": "come",
+   "s": 3.579,
+   "e": 3.804,
+   "emph": false
+  },
+  {
+   "w": "back",
+   "s": 3.804,
+   "e": 4.129,
+   "emph": false
+  },
+  {
+   "w": "as",
+   "s": 4.129,
+   "e": 4.266,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 4.266,
+   "e": 4.354,
+   "emph": false
+  },
+  {
+   "w": "villain",
+   "s": 4.354,
+   "e": 5.079,
+   "emph": true
+  },
+  {
+   "w": "One",
+   "s": 7.799,
+   "e": 7.962,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 7.962,
+   "e": 8.036,
+   "emph": false
+  },
+  {
+   "w": "them",
+   "s": 8.036,
+   "e": 8.261,
+   "emph": false
+  },
+  {
+   "w": "cost",
+   "s": 8.261,
+   "e": 8.699,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 8.699,
+   "e": 8.812,
+   "emph": false
+  },
+  {
+   "w": "world-record",
+   "s": 8.812,
+   "e": 9.624,
+   "emph": false
+  },
+  {
+   "w": "thirty-seven",
+   "s": 9.624,
+   "e": 10.312,
+   "emph": true
+  },
+  {
+   "w": "million",
+   "s": 10.312,
+   "e": 10.711,
+   "emph": false
+  },
+  {
+   "w": "pounds",
+   "s": 10.711,
+   "e": 11.574,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 11.574,
+   "e": 11.724,
+   "emph": false
+  },
+  {
+   "w": "cross",
+   "s": 11.724,
+   "e": 12.124,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 12.124,
+   "e": 12.262,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 12.262,
+   "e": 12.674,
+   "emph": false
+  },
+  {
+   "w": "divide",
+   "s": 12.674,
+   "e": 13.199,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 13.199,
+   "e": 13.361,
+   "emph": false
+  },
+  {
+   "w": "football",
+   "s": 13.361,
+   "e": 14.299,
+   "emph": false
+  },
+  {
+   "w": "Two",
+   "s": 14.179,
+   "e": 14.352,
+   "emph": false
+  },
+  {
+   "w": "years",
+   "s": 14.352,
+   "e": 14.602,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 14.602,
+   "e": 15.152,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 15.277,
+   "e": 15.427,
+   "emph": false
+  },
+  {
+   "w": "old",
+   "s": 15.427,
+   "e": 15.689,
+   "emph": false
+  },
+  {
+   "w": "fans",
+   "s": 15.689,
+   "e": 16.19,
+   "emph": false
+  },
+  {
+   "w": "threw",
+   "s": 16.19,
+   "e": 16.414,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 16.414,
+   "e": 16.514,
+   "emph": false
+  },
+  {
+   "w": "pig's",
+   "s": 16.514,
+   "e": 16.902,
+   "emph": true
+  },
+  {
+   "w": "head",
+   "s": 16.902,
+   "e": 17.102,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 17.102,
+   "e": 17.19,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 17.19,
+   "e": 17.827,
+   "emph": false
+  },
+  {
+   "w": "We",
+   "s": 20.499,
+   "e": 20.59,
+   "emph": false
+  },
+  {
+   "w": "tracked",
+   "s": 20.59,
+   "e": 20.977,
+   "emph": false
+  },
+  {
+   "w": "ten",
+   "s": 20.977,
+   "e": 21.227,
+   "emph": true
+  },
+  {
+   "w": "of",
+   "s": 21.227,
+   "e": 21.302,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 21.302,
+   "e": 21.402,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 21.402,
+   "e": 21.802,
+   "emph": false
+  },
+  {
+   "w": "rival",
+   "s": 21.802,
+   "e": 22.215,
+   "emph": false
+  },
+  {
+   "w": "moves",
+   "s": 22.215,
+   "e": 22.802,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 22.802,
+   "e": 22.965,
+   "emph": false
+  },
+  {
+   "w": "modern",
+   "s": 22.965,
+   "e": 23.378,
+   "emph": false
+  },
+  {
+   "w": "football",
+   "s": 23.378,
+   "e": 24.315,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 24.197,
+   "e": 24.302,
+   "emph": false
+  },
+  {
+   "w": "fees",
+   "s": 24.302,
+   "e": 24.952,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 25.052,
+   "e": 25.153,
+   "emph": false
+  },
+  {
+   "w": "timing",
+   "s": 25.153,
+   "e": 25.577,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 25.615,
+   "e": 25.727,
+   "emph": false
+  },
+  {
+   "w": "what",
+   "s": 25.727,
+   "e": 25.877,
+   "emph": false
+  },
+  {
+   "w": "happened",
+   "s": 25.877,
+   "e": 26.227,
+   "emph": false
+  },
+  {
+   "w": "next",
+   "s": 26.227,
+   "e": 27.003,
+   "emph": false
+  },
+  {
+   "w": "We",
+   "s": 27.558,
+   "e": 27.676,
+   "emph": false
+  },
+  {
+   "w": "start",
+   "s": 27.676,
+   "e": 27.963,
+   "emph": false
+  },
+  {
+   "w": "with",
+   "s": 27.963,
+   "e": 28.063,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 28.063,
+   "e": 28.151,
+   "emph": false
+  },
+  {
+   "w": "leak",
+   "s": 28.151,
+   "e": 28.551,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 28.551,
+   "e": 28.663,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 28.663,
+   "e": 28.814,
+   "emph": false
+  },
+  {
+   "w": "eve",
+   "s": 28.814,
+   "e": 29.251,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 29.251,
+   "e": 29.339,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 29.339,
+   "e": 29.439,
+   "emph": false
+  },
+  {
+   "w": "semi-final",
+   "s": 29.439,
+   "e": 30.501,
+   "emph": false
+  },
+  {
+   "w": "pass",
+   "s": 30.406,
+   "e": 30.624,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 30.624,
+   "e": 30.686,
+   "emph": false
+  },
+  {
+   "w": "billboard",
+   "s": 30.686,
+   "e": 31.174,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 31.174,
+   "e": 31.286,
+   "emph": false
+  },
+  {
+   "w": "broke",
+   "s": 31.286,
+   "e": 31.499,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 31.499,
+   "e": 31.598,
+   "emph": false
+  },
+  {
+   "w": "city",
+   "s": 31.598,
+   "e": 32.311,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 32.235,
+   "e": 32.37,
+   "emph": false
+  },
+  {
+   "w": "finish",
+   "s": 32.37,
+   "e": 32.671,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 32.671,
+   "e": 32.745,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 32.745,
+   "e": 32.833,
+   "emph": false
+  },
+  {
+   "w": "Camp",
+   "s": 32.833,
+   "e": 33.133,
+   "emph": false
+  },
+  {
+   "w": "Now",
+   "s": 33.133,
+   "e": 33.608,
+   "emph": false
+  },
+  {
+   "w": "with",
+   "s": 33.733,
+   "e": 33.871,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 33.871,
+   "e": 33.933,
+   "emph": false
+  },
+  {
+   "w": "pig's",
+   "s": 33.933,
+   "e": 34.308,
+   "emph": true
+  },
+  {
+   "w": "head",
+   "s": 34.308,
+   "e": 34.983,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 35.85,
+   "e": 36.075,
+   "emph": false
+  },
+  {
+   "w": "ten",
+   "s": 36.075,
+   "e": 36.575,
+   "emph": false
+  },
+  {
+   "w": "Mario",
+   "s": 36.713,
+   "e": 37.125,
+   "emph": false
+  },
+  {
+   "w": "Goetze",
+   "s": 37.125,
+   "e": 37.975,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 38.937,
+   "e": 39.049,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 39.049,
+   "e": 39.224,
+   "emph": false
+  },
+  {
+   "w": "Dortmund's",
+   "s": 39.224,
+   "e": 39.749,
+   "emph": false
+  },
+  {
+   "w": "golden",
+   "s": 39.749,
+   "e": 40.124,
+   "emph": true
+  },
+  {
+   "w": "boy",
+   "s": 40.124,
+   "e": 40.824,
+   "emph": false
+  },
+  {
+   "w": "Twenty",
+   "s": 41.011,
+   "e": 41.324,
+   "emph": false
+  },
+  {
+   "w": "years",
+   "s": 41.324,
+   "e": 41.599,
+   "emph": false
+  },
+  {
+   "w": "old",
+   "s": 41.599,
+   "e": 42.074,
+   "emph": false
+  },
+  {
+   "w": "raised",
+   "s": 42.187,
+   "e": 42.624,
+   "emph": false
+  },
+  {
+   "w": "by",
+   "s": 42.624,
+   "e": 42.762,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 42.762,
+   "e": 42.861,
+   "emph": false
+  },
+  {
+   "w": "club",
+   "s": 42.861,
+   "e": 43.349,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 43.424,
+   "e": 43.562,
+   "emph": false
+  },
+  {
+   "w": "future",
+   "s": 43.562,
+   "e": 43.961,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 43.961,
+   "e": 44.036,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 44.036,
+   "e": 44.137,
+   "emph": false
+  },
+  {
+   "w": "team",
+   "s": 44.137,
+   "e": 44.924,
+   "emph": false
+  },
+  {
+   "w": "Then",
+   "s": 44.886,
+   "e": 45.311,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 45.386,
+   "e": 45.499,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 45.499,
+   "e": 45.586,
+   "emph": false
+  },
+  {
+   "w": "twenty-third",
+   "s": 45.586,
+   "e": 46.124,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 46.124,
+   "e": 46.211,
+   "emph": false
+  },
+  {
+   "w": "April",
+   "s": 46.211,
+   "e": 46.911,
+   "emph": false
+  },
+  {
+   "w": "twenty",
+   "s": 47.036,
+   "e": 47.336,
+   "emph": false
+  },
+  {
+   "w": "thirteen",
+   "s": 47.336,
+   "e": 48.186,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 48.323,
+   "e": 48.448,
+   "emph": false
+  },
+  {
+   "w": "German",
+   "s": 48.448,
+   "e": 48.861,
+   "emph": false
+  },
+  {
+   "w": "newspaper",
+   "s": 48.861,
+   "e": 49.461,
+   "emph": false
+  },
+  {
+   "w": "ran",
+   "s": 49.461,
+   "e": 49.773,
+   "emph": false
+  },
+  {
+   "w": "four",
+   "s": 49.773,
+   "e": 50.136,
+   "emph": false
+  },
+  {
+   "w": "words",
+   "s": 50.136,
+   "e": 50.498,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 50.498,
+   "e": 50.599,
+   "emph": false
+  },
+  {
+   "w": "its",
+   "s": 50.599,
+   "e": 50.761,
+   "emph": false
+  },
+  {
+   "w": "front",
+   "s": 50.761,
+   "e": 51.036,
+   "emph": false
+  },
+  {
+   "w": "page",
+   "s": 51.036,
+   "e": 51.811,
+   "emph": false
+  },
+  {
+   "w": "Goetze",
+   "s": 52.397,
+   "e": 52.772,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 52.772,
+   "e": 52.897,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 52.897,
+   "e": 53.672,
+   "emph": true
+  },
+  {
+   "w": "The",
+   "s": 55.809,
+   "e": 55.865,
+   "emph": false
+  },
+  {
+   "w": "next",
+   "s": 55.865,
+   "e": 56.165,
+   "emph": false
+  },
+  {
+   "w": "night",
+   "s": 56.165,
+   "e": 56.74,
+   "emph": false
+  },
+  {
+   "w": "Dortmund",
+   "s": 56.877,
+   "e": 57.34,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 57.34,
+   "e": 57.477,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 57.477,
+   "e": 57.565,
+   "emph": false
+  },
+  {
+   "w": "Champions",
+   "s": 57.565,
+   "e": 58.227,
+   "emph": false
+  },
+  {
+   "w": "League",
+   "s": 58.227,
+   "e": 58.527,
+   "emph": false
+  },
+  {
+   "w": "semi-final",
+   "s": 58.527,
+   "e": 59.215,
+   "emph": true
+  },
+  {
+   "w": "against",
+   "s": 59.215,
+   "e": 59.628,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 59.628,
+   "e": 59.915,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 59.915,
+   "e": 60.815,
+   "emph": false
+  },
+  {
+   "w": "So",
+   "s": 61.015,
+   "e": 61.215,
+   "emph": false
+  },
+  {
+   "w": "why",
+   "s": 61.215,
+   "e": 61.402,
+   "emph": false
+  },
+  {
+   "w": "did",
+   "s": 61.402,
+   "e": 61.527,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 61.527,
+   "e": 61.628,
+   "emph": false
+  },
+  {
+   "w": "timing",
+   "s": 61.628,
+   "e": 62.09,
+   "emph": false
+  },
+  {
+   "w": "hurt",
+   "s": 62.09,
+   "e": 62.34,
+   "emph": false
+  },
+  {
+   "w": "so",
+   "s": 62.34,
+   "e": 62.515,
+   "emph": false
+  },
+  {
+   "w": "much",
+   "s": 62.515,
+   "e": 63.19,
+   "emph": false
+  },
+  {
+   "w": "Because",
+   "s": 65.943,
+   "e": 66.196,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 66.196,
+   "e": 66.658,
+   "emph": false
+  },
+  {
+   "w": "didn't",
+   "s": 66.658,
+   "e": 66.871,
+   "emph": true
+  },
+  {
+   "w": "negotiate",
+   "s": 66.871,
+   "e": 67.908,
+   "emph": false
+  },
+  {
+   "w": "They",
+   "s": 68.008,
+   "e": 68.195,
+   "emph": false
+  },
+  {
+   "w": "paid",
+   "s": 68.195,
+   "e": 68.471,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 68.471,
+   "e": 68.67,
+   "emph": false
+  },
+  {
+   "w": "thirty-seven",
+   "s": 68.67,
+   "e": 69.395,
+   "emph": false
+  },
+  {
+   "w": "million",
+   "s": 69.395,
+   "e": 69.82,
+   "emph": false
+  },
+  {
+   "w": "euro",
+   "s": 69.82,
+   "e": 70.195,
+   "emph": false
+  },
+  {
+   "w": "buyout",
+   "s": 70.195,
+   "e": 70.671,
+   "emph": false
+  },
+  {
+   "w": "clause",
+   "s": 70.671,
+   "e": 71.508,
+   "emph": false
+  },
+  {
+   "w": "Dortmund",
+   "s": 71.507,
+   "e": 71.957,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 71.957,
+   "e": 72.182,
+   "emph": false
+  },
+  {
+   "w": "no",
+   "s": 72.182,
+   "e": 72.444,
+   "emph": false
+  },
+  {
+   "w": "say",
+   "s": 72.444,
+   "e": 73.132,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 73.282,
+   "e": 73.444,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 73.444,
+   "e": 73.907,
+   "emph": false
+  },
+  {
+   "w": "were",
+   "s": 73.907,
+   "e": 74.032,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 74.032,
+   "e": 74.194,
+   "emph": false
+  },
+  {
+   "w": "exact",
+   "s": 74.194,
+   "e": 74.719,
+   "emph": true
+  },
+  {
+   "w": "team",
+   "s": 74.719,
+   "e": 75.107,
+   "emph": false
+  },
+  {
+   "w": "they",
+   "s": 75.107,
+   "e": 75.195,
+   "emph": false
+  },
+  {
+   "w": "were",
+   "s": 75.195,
+   "e": 75.307,
+   "emph": false
+  },
+  {
+   "w": "trying",
+   "s": 75.307,
+   "e": 75.607,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 75.607,
+   "e": 75.732,
+   "emph": false
+  },
+  {
+   "w": "knock",
+   "s": 75.732,
+   "e": 76.057,
+   "emph": false
+  },
+  {
+   "w": "off",
+   "s": 76.057,
+   "e": 76.282,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 76.282,
+   "e": 76.382,
+   "emph": false
+  },
+  {
+   "w": "top",
+   "s": 76.382,
+   "e": 76.669,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 76.669,
+   "e": 76.795,
+   "emph": false
+  },
+  {
+   "w": "Germany",
+   "s": 76.795,
+   "e": 77.657,
+   "emph": false
+  },
+  {
+   "w": "Dortmund",
+   "s": 78.172,
+   "e": 78.659,
+   "emph": false
+  },
+  {
+   "w": "answered",
+   "s": 78.659,
+   "e": 79.034,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 79.034,
+   "e": 79.122,
+   "emph": false
+  },
+  {
+   "w": "leak",
+   "s": 79.122,
+   "e": 79.372,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 79.372,
+   "e": 79.534,
+   "emph": false
+  },
+  {
+   "w": "only",
+   "s": 79.534,
+   "e": 79.847,
+   "emph": false
+  },
+  {
+   "w": "way",
+   "s": 79.847,
+   "e": 80.047,
+   "emph": false
+  },
+  {
+   "w": "they",
+   "s": 80.047,
+   "e": 80.21,
+   "emph": false
+  },
+  {
+   "w": "could",
+   "s": 80.21,
+   "e": 80.872,
+   "emph": false
+  },
+  {
+   "w": "They",
+   "s": 81.035,
+   "e": 81.234,
+   "emph": false
+  },
+  {
+   "w": "beat",
+   "s": 81.234,
+   "e": 81.584,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 81.584,
+   "e": 81.897,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 81.897,
+   "e": 82.347,
+   "emph": false
+  },
+  {
+   "w": "four",
+   "s": 82.347,
+   "e": 82.772,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 82.884,
+   "e": 83.572,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 83.498,
+   "e": 83.623,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 83.623,
+   "e": 83.873,
+   "emph": false
+  },
+  {
+   "w": "striker",
+   "s": 83.873,
+   "e": 84.298,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 84.298,
+   "e": 84.623,
+   "emph": false
+  },
+  {
+   "w": "all",
+   "s": 84.623,
+   "e": 84.848,
+   "emph": false
+  },
+  {
+   "w": "four",
+   "s": 84.848,
+   "e": 85.573,
+   "emph": true
+  },
+  {
+   "w": "A",
+   "s": 86.506,
+   "e": 86.578,
+   "emph": false
+  },
+  {
+   "w": "month",
+   "s": 86.578,
+   "e": 86.878,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 86.878,
+   "e": 87.428,
+   "emph": false
+  },
+  {
+   "w": "Dortmund",
+   "s": 87.565,
+   "e": 88.053,
+   "emph": false
+  },
+  {
+   "w": "met",
+   "s": 88.053,
+   "e": 88.278,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 88.278,
+   "e": 88.665,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 88.665,
+   "e": 88.741,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 88.741,
+   "e": 88.84,
+   "emph": false
+  },
+  {
+   "w": "final",
+   "s": 88.84,
+   "e": 89.215,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 89.215,
+   "e": 89.303,
+   "emph": false
+  },
+  {
+   "w": "Wembley",
+   "s": 89.303,
+   "e": 90.128,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 90.655,
+   "e": 91.03,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 91.03,
+   "e": 91.33,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 91.418,
+   "e": 91.655,
+   "emph": true
+  },
+  {
+   "w": "one",
+   "s": 91.705,
+   "e": 92.23,
+   "emph": false
+  },
+  {
+   "w": "Goetze",
+   "s": 92.418,
+   "e": 92.83,
+   "emph": false
+  },
+  {
+   "w": "watched",
+   "s": 92.83,
+   "e": 93.143,
+   "emph": false
+  },
+  {
+   "w": "it",
+   "s": 93.143,
+   "e": 93.217,
+   "emph": false
+  },
+  {
+   "w": "injured",
+   "s": 93.217,
+   "e": 93.955,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 96.675,
+   "e": 96.774,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 96.774,
+   "e": 97.012,
+   "emph": false
+  },
+  {
+   "w": "striker",
+   "s": 97.012,
+   "e": 97.425,
+   "emph": false
+  },
+  {
+   "w": "who",
+   "s": 97.425,
+   "e": 97.537,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 97.537,
+   "e": 97.849,
+   "emph": false
+  },
+  {
+   "w": "all",
+   "s": 97.849,
+   "e": 98.05,
+   "emph": false
+  },
+  {
+   "w": "four",
+   "s": 98.05,
+   "e": 98.762,
+   "emph": false
+  },
+  {
+   "w": "A",
+   "s": 98.688,
+   "e": 98.76,
+   "emph": false
+  },
+  {
+   "w": "year",
+   "s": 98.76,
+   "e": 98.985,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 98.985,
+   "e": 99.335,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 99.41,
+   "e": 99.51,
+   "emph": false
+  },
+  {
+   "w": "made",
+   "s": 99.51,
+   "e": 99.698,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 99.698,
+   "e": 99.81,
+   "emph": false
+  },
+  {
+   "w": "exact",
+   "s": 99.81,
+   "e": 100.31,
+   "emph": false
+  },
+  {
+   "w": "same",
+   "s": 100.31,
+   "e": 100.585,
+   "emph": false
+  },
+  {
+   "w": "move",
+   "s": 100.585,
+   "e": 101.235,
+   "emph": false
+  },
+  {
+   "w": "For",
+   "s": 101.397,
+   "e": 101.585,
+   "emph": false
+  },
+  {
+   "w": "free",
+   "s": 101.585,
+   "e": 102.36,
+   "emph": true
+  },
+  {
+   "w": "Dortmund",
+   "s": 105.076,
+   "e": 105.514,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 105.514,
+   "e": 105.626,
+   "emph": false
+  },
+  {
+   "w": "turned",
+   "s": 105.626,
+   "e": 105.914,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 105.914,
+   "e": 106.039,
+   "emph": false
+  },
+  {
+   "w": "into",
+   "s": 106.039,
+   "e": 106.276,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 106.276,
+   "e": 106.388,
+   "emph": false
+  },
+  {
+   "w": "star",
+   "s": 106.388,
+   "e": 107.126,
+   "emph": false
+  },
+  {
+   "w": "Byern",
+   "s": 107.326,
+   "e": 107.776,
+   "emph": false
+  },
+  {
+   "w": "collected",
+   "s": 107.776,
+   "e": 108.238,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 108.238,
+   "e": 108.326,
+   "emph": false
+  },
+  {
+   "w": "goals",
+   "s": 108.326,
+   "e": 109.176,
+   "emph": false
+  },
+  {
+   "w": "Three",
+   "s": 109.751,
+   "e": 109.976,
+   "emph": false
+  },
+  {
+   "w": "hundred",
+   "s": 109.976,
+   "e": 110.364,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 110.364,
+   "e": 110.476,
+   "emph": false
+  },
+  {
+   "w": "forty-four",
+   "s": 110.476,
+   "e": 110.963,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 110.963,
+   "e": 111.051,
+   "emph": false
+  },
+  {
+   "w": "them",
+   "s": 111.051,
+   "e": 111.501,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 111.626,
+   "e": 111.788,
+   "emph": false
+  },
+  {
+   "w": "eight",
+   "s": 111.788,
+   "e": 112.051,
+   "emph": false
+  },
+  {
+   "w": "seasons",
+   "s": 112.051,
+   "e": 112.976,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 112.929,
+   "e": 113.054,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 113.054,
+   "e": 113.316,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 113.316,
+   "e": 114.042,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 114.042,
+   "e": 114.204,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 114.204,
+   "e": 114.566,
+   "emph": false
+  },
+  {
+   "w": "forty-one",
+   "s": 114.566,
+   "e": 115.091,
+   "emph": true
+  },
+  {
+   "w": "in",
+   "s": 115.091,
+   "e": 115.167,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 115.167,
+   "e": 115.254,
+   "emph": false
+  },
+  {
+   "w": "Bundesliga",
+   "s": 115.254,
+   "e": 116.179,
+   "emph": false
+  },
+  {
+   "w": "equalling",
+   "s": 116.341,
+   "e": 116.866,
+   "emph": false
+  },
+  {
+   "w": "Gerd",
+   "s": 116.866,
+   "e": 117.229,
+   "emph": false
+  },
+  {
+   "w": "Mueller's",
+   "s": 117.229,
+   "e": 117.704,
+   "emph": false
+  },
+  {
+   "w": "record",
+   "s": 117.704,
+   "e": 118.504,
+   "emph": false
+  },
+  {
+   "w": "But",
+   "s": 121.224,
+   "e": 121.326,
+   "emph": false
+  },
+  {
+   "w": "Lewandowski",
+   "s": 121.326,
+   "e": 122.164,
+   "emph": false
+  },
+  {
+   "w": "never",
+   "s": 122.164,
+   "e": 122.502,
+   "emph": false
+  },
+  {
+   "w": "said",
+   "s": 122.502,
+   "e": 122.726,
+   "emph": false
+  },
+  {
+   "w": "it",
+   "s": 122.726,
+   "e": 122.801,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 122.801,
+   "e": 122.901,
+   "emph": false
+  },
+  {
+   "w": "about",
+   "s": 122.901,
+   "e": 123.189,
+   "emph": false
+  },
+  {
+   "w": "money",
+   "s": 123.189,
+   "e": 123.814,
+   "emph": true
+  },
+  {
+   "w": "Number",
+   "s": 124.002,
+   "e": 124.289,
+   "emph": false
+  },
+  {
+   "w": "eight",
+   "s": 124.289,
+   "e": 124.551,
+   "emph": false
+  },
+  {
+   "w": "did",
+   "s": 124.551,
+   "e": 125.239,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 125.813,
+   "e": 126.063,
+   "emph": false
+  },
+  {
+   "w": "eight",
+   "s": 126.063,
+   "e": 126.438,
+   "emph": false
+  },
+  {
+   "w": "Ashley",
+   "s": 126.551,
+   "e": 126.938,
+   "emph": false
+  },
+  {
+   "w": "Cole",
+   "s": 126.938,
+   "e": 127.613,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 128.446,
+   "e": 128.544,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 128.544,
+   "e": 128.856,
+   "emph": false
+  },
+  {
+   "w": "through",
+   "s": 128.856,
+   "e": 129.157,
+   "emph": false
+  },
+  {
+   "w": "Arsenal's",
+   "s": 129.157,
+   "e": 129.644,
+   "emph": false
+  },
+  {
+   "w": "academy",
+   "s": 129.644,
+   "e": 130.519,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 130.644,
+   "e": 130.769,
+   "emph": false
+  },
+  {
+   "w": "played",
+   "s": 130.769,
+   "e": 131.069,
+   "emph": false
+  },
+  {
+   "w": "left-back",
+   "s": 131.069,
+   "e": 131.619,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 131.619,
+   "e": 131.732,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 131.732,
+   "e": 131.832,
+   "emph": false
+  },
+  {
+   "w": "team",
+   "s": 131.832,
+   "e": 132.194,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 132.194,
+   "e": 132.319,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 132.319,
+   "e": 132.482,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 132.482,
+   "e": 132.581,
+   "emph": false
+  },
+  {
+   "w": "whole",
+   "s": 132.581,
+   "e": 132.869,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 132.869,
+   "e": 133.194,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 133.194,
+   "e": 133.706,
+   "emph": false
+  },
+  {
+   "w": "unbeaten",
+   "s": 133.706,
+   "e": 134.694,
+   "emph": false
+  },
+  {
+   "w": "Then",
+   "s": 135.207,
+   "e": 135.421,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 135.421,
+   "e": 135.97,
+   "emph": false
+  },
+  {
+   "w": "offered",
+   "s": 135.97,
+   "e": 136.269,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 136.269,
+   "e": 136.394,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 136.394,
+   "e": 136.482,
+   "emph": false
+  },
+  {
+   "w": "new",
+   "s": 136.482,
+   "e": 136.657,
+   "emph": false
+  },
+  {
+   "w": "contract",
+   "s": 136.657,
+   "e": 137.607,
+   "emph": false
+  },
+  {
+   "w": "Fifty-five",
+   "s": 137.769,
+   "e": 138.445,
+   "emph": true
+  },
+  {
+   "w": "thousand",
+   "s": 138.445,
+   "e": 138.882,
+   "emph": false
+  },
+  {
+   "w": "pounds",
+   "s": 138.882,
+   "e": 139.245,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 139.245,
+   "e": 139.344,
+   "emph": false
+  },
+  {
+   "w": "week",
+   "s": 139.344,
+   "e": 140.058,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 140.0,
+   "e": 140.099,
+   "emph": false
+  },
+  {
+   "w": "felt",
+   "s": 140.099,
+   "e": 140.287,
+   "emph": false
+  },
+  {
+   "w": "it",
+   "s": 140.287,
+   "e": 140.361,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 140.361,
+   "e": 140.524,
+   "emph": false
+  },
+  {
+   "w": "far",
+   "s": 140.524,
+   "e": 140.799,
+   "emph": false
+  },
+  {
+   "w": "below",
+   "s": 140.799,
+   "e": 141.111,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 141.111,
+   "e": 141.274,
+   "emph": false
+  },
+  {
+   "w": "worth",
+   "s": 141.274,
+   "e": 141.824,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 141.924,
+   "e": 142.061,
+   "emph": false
+  },
+  {
+   "w": "joined",
+   "s": 142.061,
+   "e": 142.487,
+   "emph": false
+  },
+  {
+   "w": "Chelsea",
+   "s": 142.487,
+   "e": 143.399,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 145.494,
+   "e": 145.923,
+   "emph": false
+  },
+  {
+   "w": "fans",
+   "s": 145.923,
+   "e": 146.31,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 146.31,
+   "e": 146.448,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 146.448,
+   "e": 146.51,
+   "emph": false
+  },
+  {
+   "w": "new",
+   "s": 146.51,
+   "e": 146.685,
+   "emph": false
+  },
+  {
+   "w": "name",
+   "s": 146.685,
+   "e": 146.935,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 146.935,
+   "e": 147.06,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 147.06,
+   "e": 147.535,
+   "emph": false
+  },
+  {
+   "w": "Cashley",
+   "s": 147.697,
+   "e": 148.635,
+   "emph": true
+  },
+  {
+   "w": "Number",
+   "s": 151.356,
+   "e": 151.644,
+   "emph": false
+  },
+  {
+   "w": "seven",
+   "s": 151.644,
+   "e": 152.206,
+   "emph": false
+  },
+  {
+   "w": "Carlos",
+   "s": 152.331,
+   "e": 152.781,
+   "emph": false
+  },
+  {
+   "w": "Tevez",
+   "s": 152.781,
+   "e": 153.631,
+   "emph": false
+  },
+  {
+   "w": "Two",
+   "s": 154.474,
+   "e": 154.718,
+   "emph": false
+  },
+  {
+   "w": "seasons",
+   "s": 154.718,
+   "e": 155.318,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 155.318,
+   "e": 155.418,
+   "emph": false
+  },
+  {
+   "w": "Manchester",
+   "s": 155.418,
+   "e": 156.018,
+   "emph": false
+  },
+  {
+   "w": "United",
+   "s": 156.018,
+   "e": 156.868,
+   "emph": false
+  },
+  {
+   "w": "Then",
+   "s": 157.031,
+   "e": 157.268,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 157.268,
+   "e": 157.405,
+   "emph": false
+  },
+  {
+   "w": "crossed",
+   "s": 157.405,
+   "e": 157.781,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 157.781,
+   "e": 157.905,
+   "emph": false
+  },
+  {
+   "w": "city",
+   "s": 157.905,
+   "e": 158.243,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 158.243,
+   "e": 158.368,
+   "emph": false
+  },
+  {
+   "w": "Manchester",
+   "s": 158.368,
+   "e": 158.981,
+   "emph": false
+  },
+  {
+   "w": "City",
+   "s": 158.981,
+   "e": 159.718,
+   "emph": false
+  },
+  {
+   "w": "City",
+   "s": 159.657,
+   "e": 159.932,
+   "emph": false
+  },
+  {
+   "w": "put",
+   "s": 159.932,
+   "e": 160.095,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 160.095,
+   "e": 160.22,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 160.22,
+   "e": 160.319,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 160.319,
+   "e": 160.42,
+   "emph": false
+  },
+  {
+   "w": "giant",
+   "s": 160.42,
+   "e": 160.832,
+   "emph": false
+  },
+  {
+   "w": "blue",
+   "s": 160.832,
+   "e": 161.057,
+   "emph": false
+  },
+  {
+   "w": "billboard",
+   "s": 161.057,
+   "e": 161.882,
+   "emph": false
+  },
+  {
+   "w": "Three",
+   "s": 162.057,
+   "e": 162.357,
+   "emph": false
+  },
+  {
+   "w": "words",
+   "s": 162.357,
+   "e": 163.007,
+   "emph": false
+  },
+  {
+   "w": "Welcome",
+   "s": 163.157,
+   "e": 163.632,
+   "emph": true
+  },
+  {
+   "w": "to",
+   "s": 163.632,
+   "e": 163.757,
+   "emph": false
+  },
+  {
+   "w": "Manchester",
+   "s": 163.757,
+   "e": 164.782,
+   "emph": false
+  },
+  {
+   "w": "Tevez",
+   "s": 167.515,
+   "e": 167.886,
+   "emph": false
+  },
+  {
+   "w": "left",
+   "s": 167.886,
+   "e": 168.211,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 168.211,
+   "e": 168.311,
+   "emph": false
+  },
+  {
+   "w": "compete",
+   "s": 168.311,
+   "e": 168.723,
+   "emph": false
+  },
+  {
+   "w": "with",
+   "s": 168.723,
+   "e": 168.824,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 168.824,
+   "e": 168.961,
+   "emph": false
+  },
+  {
+   "w": "old",
+   "s": 168.961,
+   "e": 169.211,
+   "emph": false
+  },
+  {
+   "w": "club",
+   "s": 169.211,
+   "e": 169.886,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 170.049,
+   "e": 170.361,
+   "emph": false
+  },
+  {
+   "w": "six",
+   "s": 170.361,
+   "e": 170.774,
+   "emph": false
+  },
+  {
+   "w": "left",
+   "s": 170.774,
+   "e": 171.061,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 171.061,
+   "e": 171.186,
+   "emph": false
+  },
+  {
+   "w": "beat",
+   "s": 171.186,
+   "e": 171.411,
+   "emph": true
+  },
+  {
+   "w": "them",
+   "s": 171.411,
+   "e": 172.036,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 172.573,
+   "e": 172.861,
+   "emph": false
+  },
+  {
+   "w": "six",
+   "s": 172.861,
+   "e": 173.423,
+   "emph": false
+  },
+  {
+   "w": "Robin",
+   "s": 173.561,
+   "e": 173.948,
+   "emph": false
+  },
+  {
+   "w": "van",
+   "s": 173.948,
+   "e": 174.173,
+   "emph": false
+  },
+  {
+   "w": "Persie",
+   "s": 174.173,
+   "e": 175.048,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 175.885,
+   "e": 175.997,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 175.997,
+   "e": 176.185,
+   "emph": false
+  },
+  {
+   "w": "Arsenal's",
+   "s": 176.185,
+   "e": 176.722,
+   "emph": false
+  },
+  {
+   "w": "captain",
+   "s": 176.722,
+   "e": 177.597,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 177.76,
+   "e": 177.935,
+   "emph": false
+  },
+  {
+   "w": "August",
+   "s": 177.935,
+   "e": 178.322,
+   "emph": false
+  },
+  {
+   "w": "twenty",
+   "s": 178.322,
+   "e": 178.622,
+   "emph": false
+  },
+  {
+   "w": "twelve",
+   "s": 178.622,
+   "e": 179.347,
+   "emph": false
+  },
+  {
+   "w": "Manchester",
+   "s": 179.484,
+   "e": 180.097,
+   "emph": false
+  },
+  {
+   "w": "United",
+   "s": 180.097,
+   "e": 180.534,
+   "emph": false
+  },
+  {
+   "w": "paid",
+   "s": 180.534,
+   "e": 180.885,
+   "emph": false
+  },
+  {
+   "w": "twenty-two",
+   "s": 180.885,
+   "e": 181.585,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 181.585,
+   "e": 181.71,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 181.71,
+   "e": 181.772,
+   "emph": false
+  },
+  {
+   "w": "half",
+   "s": 181.772,
+   "e": 182.085,
+   "emph": false
+  },
+  {
+   "w": "million",
+   "s": 182.085,
+   "e": 182.472,
+   "emph": false
+  },
+  {
+   "w": "pounds",
+   "s": 182.472,
+   "e": 182.872,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 182.872,
+   "e": 183.022,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 183.022,
+   "e": 183.672,
+   "emph": false
+  },
+  {
+   "w": "So",
+   "s": 183.627,
+   "e": 183.839,
+   "emph": false
+  },
+  {
+   "w": "why",
+   "s": 183.839,
+   "e": 184.04,
+   "emph": false
+  },
+  {
+   "w": "did",
+   "s": 184.04,
+   "e": 184.165,
+   "emph": false
+  },
+  {
+   "w": "this",
+   "s": 184.165,
+   "e": 184.414,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 184.414,
+   "e": 184.652,
+   "emph": false
+  },
+  {
+   "w": "hurt",
+   "s": 184.652,
+   "e": 184.927,
+   "emph": true
+  },
+  {
+   "w": "more",
+   "s": 184.927,
+   "e": 185.115,
+   "emph": false
+  },
+  {
+   "w": "than",
+   "s": 185.115,
+   "e": 185.215,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 185.215,
+   "e": 185.352,
+   "emph": false
+  },
+  {
+   "w": "others",
+   "s": 185.352,
+   "e": 186.152,
+   "emph": false
+  },
+  {
+   "w": "Because",
+   "s": 186.677,
+   "e": 186.998,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 186.998,
+   "e": 187.148,
+   "emph": false
+  },
+  {
+   "w": "didn't",
+   "s": 187.148,
+   "e": 187.373,
+   "emph": false
+  },
+  {
+   "w": "just",
+   "s": 187.373,
+   "e": 187.635,
+   "emph": false
+  },
+  {
+   "w": "leave",
+   "s": 187.635,
+   "e": 188.398,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 188.523,
+   "e": 188.673,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 188.673,
+   "e": 189.061,
+   "emph": false
+  },
+  {
+   "w": "twenty-six",
+   "s": 189.061,
+   "e": 189.673,
+   "emph": true
+  },
+  {
+   "w": "league",
+   "s": 189.673,
+   "e": 189.948,
+   "emph": false
+  },
+  {
+   "w": "goals",
+   "s": 189.948,
+   "e": 190.335,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 190.335,
+   "e": 190.41,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 190.41,
+   "e": 190.585,
+   "emph": false
+  },
+  {
+   "w": "first",
+   "s": 190.585,
+   "e": 190.91,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 190.91,
+   "e": 191.723,
+   "emph": false
+  },
+  {
+   "w": "Manchester",
+   "s": 191.67,
+   "e": 192.245,
+   "emph": false
+  },
+  {
+   "w": "United",
+   "s": 192.245,
+   "e": 192.72,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 192.72,
+   "e": 192.933,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 192.933,
+   "e": 193.032,
+   "emph": false
+  },
+  {
+   "w": "title",
+   "s": 193.032,
+   "e": 193.695,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 193.832,
+   "e": 194.382,
+   "emph": false
+  },
+  {
+   "w": "finished",
+   "s": 194.382,
+   "e": 194.757,
+   "emph": false
+  },
+  {
+   "w": "fourth",
+   "s": 194.757,
+   "e": 195.495,
+   "emph": true
+  },
+  {
+   "w": "Number",
+   "s": 198.283,
+   "e": 198.546,
+   "emph": false
+  },
+  {
+   "w": "five",
+   "s": 198.546,
+   "e": 199.133,
+   "emph": false
+  },
+  {
+   "w": "Luis",
+   "s": 199.271,
+   "e": 199.633,
+   "emph": false
+  },
+  {
+   "w": "Enrique",
+   "s": 199.633,
+   "e": 200.533,
+   "emph": false
+  },
+  {
+   "w": "Five",
+   "s": 201.41,
+   "e": 201.747,
+   "emph": false
+  },
+  {
+   "w": "seasons",
+   "s": 201.747,
+   "e": 202.285,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 202.285,
+   "e": 202.385,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 202.385,
+   "e": 202.622,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 202.622,
+   "e": 203.485,
+   "emph": false
+  },
+  {
+   "w": "Then",
+   "s": 203.66,
+   "e": 204.085,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 204.185,
+   "e": 204.31,
+   "emph": false
+  },
+  {
+   "w": "nineteen",
+   "s": 204.31,
+   "e": 204.81,
+   "emph": false
+  },
+  {
+   "w": "ninety-six",
+   "s": 204.81,
+   "e": 205.635,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 205.71,
+   "e": 205.873,
+   "emph": false
+  },
+  {
+   "w": "signed",
+   "s": 205.873,
+   "e": 206.185,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 206.185,
+   "e": 206.31,
+   "emph": false
+  },
+  {
+   "w": "Barcelona",
+   "s": 206.31,
+   "e": 207.36,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 207.285,
+   "e": 207.388,
+   "emph": false
+  },
+  {
+   "w": "stayed",
+   "s": 207.388,
+   "e": 207.713,
+   "emph": false
+  },
+  {
+   "w": "eight",
+   "s": 207.713,
+   "e": 207.963,
+   "emph": false
+  },
+  {
+   "w": "seasons",
+   "s": 207.963,
+   "e": 208.888,
+   "emph": false
+  },
+  {
+   "w": "Years",
+   "s": 209.063,
+   "e": 209.388,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 209.388,
+   "e": 209.713,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 209.713,
+   "e": 209.813,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 209.813,
+   "e": 210.088,
+   "emph": false
+  },
+  {
+   "w": "back",
+   "s": 210.088,
+   "e": 210.375,
+   "emph": false
+  },
+  {
+   "w": "as",
+   "s": 210.375,
+   "e": 210.513,
+   "emph": false
+  },
+  {
+   "w": "their",
+   "s": 210.513,
+   "e": 210.7,
+   "emph": false
+  },
+  {
+   "w": "coach",
+   "s": 210.7,
+   "e": 211.188,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 211.288,
+   "e": 211.413,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 211.413,
+   "e": 211.601,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 211.601,
+   "e": 211.688,
+   "emph": false
+  },
+  {
+   "w": "treble",
+   "s": 211.688,
+   "e": 212.438,
+   "emph": true
+  },
+  {
+   "w": "Number",
+   "s": 215.182,
+   "e": 215.445,
+   "emph": false
+  },
+  {
+   "w": "four",
+   "s": 215.445,
+   "e": 215.933,
+   "emph": false
+  },
+  {
+   "w": "Sol",
+   "s": 216.07,
+   "e": 216.333,
+   "emph": false
+  },
+  {
+   "w": "Campbell",
+   "s": 216.333,
+   "e": 217.133,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 217.955,
+   "e": 218.031,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 218.031,
+   "e": 218.306,
+   "emph": false
+  },
+  {
+   "w": "through",
+   "s": 218.306,
+   "e": 218.519,
+   "emph": false
+  },
+  {
+   "w": "Tottenham's",
+   "s": 218.519,
+   "e": 219.131,
+   "emph": false
+  },
+  {
+   "w": "ranks",
+   "s": 219.131,
+   "e": 219.768,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 219.768,
+   "e": 219.906,
+   "emph": false
+  },
+  {
+   "w": "spent",
+   "s": 219.906,
+   "e": 220.143,
+   "emph": false
+  },
+  {
+   "w": "nine",
+   "s": 220.143,
+   "e": 220.456,
+   "emph": false
+  },
+  {
+   "w": "years",
+   "s": 220.456,
+   "e": 220.731,
+   "emph": false
+  },
+  {
+   "w": "there",
+   "s": 220.731,
+   "e": 221.406,
+   "emph": false
+  },
+  {
+   "w": "Then",
+   "s": 221.336,
+   "e": 221.661,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 221.736,
+   "e": 221.861,
+   "emph": false
+  },
+  {
+   "w": "July",
+   "s": 221.861,
+   "e": 222.223,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 222.223,
+   "e": 222.436,
+   "emph": false
+  },
+  {
+   "w": "thousand",
+   "s": 222.436,
+   "e": 222.873,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 222.873,
+   "e": 222.986,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 222.986,
+   "e": 223.511,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 223.611,
+   "e": 223.761,
+   "emph": false
+  },
+  {
+   "w": "walked",
+   "s": 223.761,
+   "e": 224.049,
+   "emph": false
+  },
+  {
+   "w": "across",
+   "s": 224.049,
+   "e": 224.411,
+   "emph": false
+  },
+  {
+   "w": "North",
+   "s": 224.411,
+   "e": 224.686,
+   "emph": false
+  },
+  {
+   "w": "London",
+   "s": 224.686,
+   "e": 225.061,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 225.061,
+   "e": 225.186,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 225.186,
+   "e": 226.111,
+   "emph": false
+  },
+  {
+   "w": "For",
+   "s": 226.299,
+   "e": 226.511,
+   "emph": false
+  },
+  {
+   "w": "free",
+   "s": 226.511,
+   "e": 227.286,
+   "emph": true
+  },
+  {
+   "w": "At",
+   "s": 229.992,
+   "e": 230.082,
+   "emph": false
+  },
+  {
+   "w": "Arsenal",
+   "s": 230.082,
+   "e": 230.545,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 230.545,
+   "e": 230.682,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 230.682,
+   "e": 230.919,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 230.919,
+   "e": 231.132,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 231.132,
+   "e": 231.357,
+   "emph": false
+  },
+  {
+   "w": "titles",
+   "s": 231.357,
+   "e": 231.957,
+   "emph": false
+  },
+  {
+   "w": "three",
+   "s": 232.069,
+   "e": 232.345,
+   "emph": false
+  },
+  {
+   "w": "FA",
+   "s": 232.345,
+   "e": 232.607,
+   "emph": false
+  },
+  {
+   "w": "Cups",
+   "s": 232.607,
+   "e": 233.357,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 233.304,
+   "e": 233.38,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 233.38,
+   "e": 233.53,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 233.53,
+   "e": 233.593,
+   "emph": false
+  },
+  {
+   "w": "whole",
+   "s": 233.593,
+   "e": 233.868,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 233.868,
+   "e": 234.293,
+   "emph": false
+  },
+  {
+   "w": "unbeaten",
+   "s": 234.293,
+   "e": 235.243,
+   "emph": true
+  },
+  {
+   "w": "The",
+   "s": 235.782,
+   "e": 235.838,
+   "emph": false
+  },
+  {
+   "w": "top",
+   "s": 235.838,
+   "e": 236.113,
+   "emph": false
+  },
+  {
+   "w": "three",
+   "s": 236.113,
+   "e": 236.413,
+   "emph": false
+  },
+  {
+   "w": "crossed",
+   "s": 236.413,
+   "e": 236.775,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 236.775,
+   "e": 236.863,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 236.863,
+   "e": 237.213,
+   "emph": true
+  },
+  {
+   "w": "lines",
+   "s": 237.213,
+   "e": 237.713,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 237.713,
+   "e": 237.838,
+   "emph": false
+  },
+  {
+   "w": "world",
+   "s": 237.838,
+   "e": 238.138,
+   "emph": false
+  },
+  {
+   "w": "football",
+   "s": 238.138,
+   "e": 239.038,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 239.557,
+   "e": 239.845,
+   "emph": false
+  },
+  {
+   "w": "three",
+   "s": 239.845,
+   "e": 240.332,
+   "emph": false
+  },
+  {
+   "w": "Gonzalo",
+   "s": 240.482,
+   "e": 240.982,
+   "emph": false
+  },
+  {
+   "w": "Higuain",
+   "s": 240.982,
+   "e": 241.857,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 242.695,
+   "e": 242.779,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 242.779,
+   "e": 242.942,
+   "emph": false
+  },
+  {
+   "w": "last",
+   "s": 242.942,
+   "e": 243.267,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 243.267,
+   "e": 243.592,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 243.592,
+   "e": 243.692,
+   "emph": false
+  },
+  {
+   "w": "Napoli",
+   "s": 243.692,
+   "e": 244.442,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 244.567,
+   "e": 244.692,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 244.692,
+   "e": 245.055,
+   "emph": false
+  },
+  {
+   "w": "thirty-six",
+   "s": 245.055,
+   "e": 245.617,
+   "emph": true
+  },
+  {
+   "w": "Serie",
+   "s": 245.617,
+   "e": 246.055,
+   "emph": false
+  },
+  {
+   "w": "A",
+   "s": 246.055,
+   "e": 246.267,
+   "emph": false
+  },
+  {
+   "w": "goals",
+   "s": 246.267,
+   "e": 247.117,
+   "emph": false
+  },
+  {
+   "w": "That",
+   "s": 247.04,
+   "e": 247.218,
+   "emph": false
+  },
+  {
+   "w": "broke",
+   "s": 247.218,
+   "e": 247.468,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 247.468,
+   "e": 247.581,
+   "emph": false
+  },
+  {
+   "w": "league",
+   "s": 247.581,
+   "e": 247.893,
+   "emph": false
+  },
+  {
+   "w": "record",
+   "s": 247.893,
+   "e": 248.318,
+   "emph": false
+  },
+  {
+   "w": "that",
+   "s": 248.318,
+   "e": 248.431,
+   "emph": false
+  },
+  {
+   "w": "had",
+   "s": 248.431,
+   "e": 248.568,
+   "emph": false
+  },
+  {
+   "w": "stood",
+   "s": 248.568,
+   "e": 248.843,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 248.843,
+   "e": 249.005,
+   "emph": false
+  },
+  {
+   "w": "sixty-six",
+   "s": 249.005,
+   "e": 249.718,
+   "emph": true
+  },
+  {
+   "w": "years",
+   "s": 249.718,
+   "e": 250.468,
+   "emph": false
+  },
+  {
+   "w": "So",
+   "s": 250.618,
+   "e": 250.93,
+   "emph": false
+  },
+  {
+   "w": "why",
+   "s": 250.93,
+   "e": 251.168,
+   "emph": false
+  },
+  {
+   "w": "did",
+   "s": 251.168,
+   "e": 251.368,
+   "emph": false
+  },
+  {
+   "w": "Naples",
+   "s": 251.368,
+   "e": 251.768,
+   "emph": false
+  },
+  {
+   "w": "turn",
+   "s": 251.768,
+   "e": 252.005,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 252.005,
+   "e": 252.168,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 252.168,
+   "e": 252.793,
+   "emph": false
+  },
+  {
+   "w": "Because",
+   "s": 253.306,
+   "e": 253.559,
+   "emph": false
+  },
+  {
+   "w": "weeks",
+   "s": 253.559,
+   "e": 253.884,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 253.884,
+   "e": 254.496,
+   "emph": false
+  },
+  {
+   "w": "Juventus",
+   "s": 254.634,
+   "e": 255.146,
+   "emph": false
+  },
+  {
+   "w": "paid",
+   "s": 255.146,
+   "e": 255.433,
+   "emph": false
+  },
+  {
+   "w": "his",
+   "s": 255.433,
+   "e": 255.621,
+   "emph": false
+  },
+  {
+   "w": "ninety",
+   "s": 255.621,
+   "e": 256.096,
+   "emph": true
+  },
+  {
+   "w": "million",
+   "s": 256.096,
+   "e": 256.546,
+   "emph": false
+  },
+  {
+   "w": "euro",
+   "s": 256.546,
+   "e": 256.871,
+   "emph": false
+  },
+  {
+   "w": "release",
+   "s": 256.871,
+   "e": 257.246,
+   "emph": false
+  },
+  {
+   "w": "clause",
+   "s": 257.246,
+   "e": 258.071,
+   "emph": false
+  },
+  {
+   "w": "The",
+   "s": 258.043,
+   "e": 258.099,
+   "emph": false
+  },
+  {
+   "w": "most",
+   "s": 258.099,
+   "e": 258.374,
+   "emph": false
+  },
+  {
+   "w": "expensive",
+   "s": 258.374,
+   "e": 259.024,
+   "emph": false
+  },
+  {
+   "w": "transfer",
+   "s": 259.024,
+   "e": 259.599,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 259.599,
+   "e": 259.699,
+   "emph": false
+  },
+  {
+   "w": "Italian",
+   "s": 259.699,
+   "e": 260.274,
+   "emph": false
+  },
+  {
+   "w": "history",
+   "s": 260.274,
+   "e": 261.024,
+   "emph": false
+  },
+  {
+   "w": "To",
+   "s": 261.161,
+   "e": 261.312,
+   "emph": false
+  },
+  {
+   "w": "Napoli's",
+   "s": 261.312,
+   "e": 261.974,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 261.974,
+   "e": 262.437,
+   "emph": false
+  },
+  {
+   "w": "rival",
+   "s": 262.437,
+   "e": 263.224,
+   "emph": true
+  },
+  {
+   "w": "Number",
+   "s": 265.944,
+   "e": 266.232,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 266.232,
+   "e": 266.694,
+   "emph": false
+  },
+  {
+   "w": "The",
+   "s": 266.844,
+   "e": 266.969,
+   "emph": false
+  },
+  {
+   "w": "original",
+   "s": 266.969,
+   "e": 267.394,
+   "emph": false
+  },
+  {
+   "w": "Ronaldo",
+   "s": 267.394,
+   "e": 268.394,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 269.225,
+   "e": 269.309,
+   "emph": false
+  },
+  {
+   "w": "played",
+   "s": 269.309,
+   "e": 269.609,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 269.609,
+   "e": 269.734,
+   "emph": false
+  },
+  {
+   "w": "Barcelona",
+   "s": 269.734,
+   "e": 270.534,
+   "emph": false
+  },
+  {
+   "w": "then",
+   "s": 270.659,
+   "e": 270.884,
+   "emph": false
+  },
+  {
+   "w": "Inter",
+   "s": 270.884,
+   "e": 271.784,
+   "emph": false
+  },
+  {
+   "w": "then",
+   "s": 271.713,
+   "e": 271.888,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 271.888,
+   "e": 272.113,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 272.113,
+   "e": 272.813,
+   "emph": false
+  },
+  {
+   "w": "then",
+   "s": 272.938,
+   "e": 273.113,
+   "emph": false
+  },
+  {
+   "w": "AC",
+   "s": 273.113,
+   "e": 273.451,
+   "emph": false
+  },
+  {
+   "w": "Milan",
+   "s": 273.451,
+   "e": 274.288,
+   "emph": false
+  },
+  {
+   "w": "Two",
+   "s": 274.201,
+   "e": 274.426,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 274.426,
+   "e": 274.551,
+   "emph": false
+  },
+  {
+   "w": "football's",
+   "s": 274.551,
+   "e": 275.138,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 275.138,
+   "e": 275.501,
+   "emph": false
+  },
+  {
+   "w": "rivalries",
+   "s": 275.501,
+   "e": 276.451,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 276.551,
+   "e": 276.663,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 276.663,
+   "e": 276.751,
+   "emph": false
+  },
+  {
+   "w": "played",
+   "s": 276.751,
+   "e": 277.063,
+   "emph": false
+  },
+  {
+   "w": "on",
+   "s": 277.063,
+   "e": 277.201,
+   "emph": false
+  },
+  {
+   "w": "both",
+   "s": 277.201,
+   "e": 277.514,
+   "emph": true
+  },
+  {
+   "w": "sides",
+   "s": 277.514,
+   "e": 277.888,
+   "emph": false
+  },
+  {
+   "w": "of",
+   "s": 277.888,
+   "e": 277.976,
+   "emph": false
+  },
+  {
+   "w": "each",
+   "s": 277.976,
+   "e": 278.676,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 281.402,
+   "e": 281.502,
+   "emph": false
+  },
+  {
+   "w": "March",
+   "s": 281.502,
+   "e": 281.802,
+   "emph": false
+  },
+  {
+   "w": "twenty",
+   "s": 281.802,
+   "e": 282.09,
+   "emph": false
+  },
+  {
+   "w": "oh",
+   "s": 282.09,
+   "e": 282.239,
+   "emph": false
+  },
+  {
+   "w": "seven",
+   "s": 282.239,
+   "e": 282.827,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 282.927,
+   "e": 283.015,
+   "emph": false
+  },
+  {
+   "w": "Milan's",
+   "s": 283.015,
+   "e": 283.539,
+   "emph": false
+  },
+  {
+   "w": "red",
+   "s": 283.539,
+   "e": 283.877,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 283.877,
+   "e": 284.002,
+   "emph": false
+  },
+  {
+   "w": "black",
+   "s": 284.002,
+   "e": 284.477,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 284.552,
+   "e": 284.714,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 284.714,
+   "e": 285.089,
+   "emph": false
+  },
+  {
+   "w": "against",
+   "s": 285.089,
+   "e": 285.427,
+   "emph": false
+  },
+  {
+   "w": "Inter",
+   "s": 285.427,
+   "e": 286.327,
+   "emph": false
+  },
+  {
+   "w": "His",
+   "s": 286.502,
+   "e": 286.702,
+   "emph": false
+  },
+  {
+   "w": "old",
+   "s": 286.702,
+   "e": 286.99,
+   "emph": true
+  },
+  {
+   "w": "club",
+   "s": 286.99,
+   "e": 287.727,
+   "emph": false
+  },
+  {
+   "w": "Inter",
+   "s": 287.694,
+   "e": 288.044,
+   "emph": false
+  },
+  {
+   "w": "still",
+   "s": 288.044,
+   "e": 288.294,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 288.294,
+   "e": 288.594,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 288.707,
+   "e": 288.969,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 289.044,
+   "e": 289.694,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 295.891,
+   "e": 296.116,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 296.116,
+   "e": 296.591,
+   "emph": false
+  },
+  {
+   "w": "Luis",
+   "s": 296.728,
+   "e": 297.091,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 297.091,
+   "e": 297.916,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 298.748,
+   "e": 298.809,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 298.809,
+   "e": 298.946,
+   "emph": false
+  },
+  {
+   "w": "Barcelona's",
+   "s": 298.946,
+   "e": 299.621,
+   "emph": false
+  },
+  {
+   "w": "best",
+   "s": 299.621,
+   "e": 299.921,
+   "emph": false
+  },
+  {
+   "w": "player",
+   "s": 299.921,
+   "e": 300.721,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 300.647,
+   "e": 300.772,
+   "emph": false
+  },
+  {
+   "w": "July",
+   "s": 300.772,
+   "e": 301.16,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 301.16,
+   "e": 301.372,
+   "emph": false
+  },
+  {
+   "w": "thousand",
+   "s": 301.372,
+   "e": 302.222,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 302.36,
+   "e": 302.622,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 302.622,
+   "e": 303.122,
+   "emph": false
+  },
+  {
+   "w": "made",
+   "s": 303.122,
+   "e": 303.309,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 303.309,
+   "e": 303.485,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 303.485,
+   "e": 303.572,
+   "emph": false
+  },
+  {
+   "w": "most",
+   "s": 303.572,
+   "e": 303.847,
+   "emph": false
+  },
+  {
+   "w": "expensive",
+   "s": 303.847,
+   "e": 304.56,
+   "emph": false
+  },
+  {
+   "w": "footballer",
+   "s": 304.56,
+   "e": 305.134,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 305.134,
+   "e": 305.209,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 305.209,
+   "e": 305.297,
+   "emph": false
+  },
+  {
+   "w": "world",
+   "s": 305.297,
+   "e": 306.072,
+   "emph": true
+  },
+  {
+   "w": "So",
+   "s": 306.011,
+   "e": 306.111,
+   "emph": false
+  },
+  {
+   "w": "how",
+   "s": 306.111,
+   "e": 306.248,
+   "emph": false
+  },
+  {
+   "w": "do",
+   "s": 306.248,
+   "e": 306.349,
+   "emph": false
+  },
+  {
+   "w": "you",
+   "s": 306.349,
+   "e": 306.474,
+   "emph": false
+  },
+  {
+   "w": "steal",
+   "s": 306.474,
+   "e": 306.836,
+   "emph": true
+  },
+  {
+   "w": "your",
+   "s": 306.836,
+   "e": 306.998,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 306.998,
+   "e": 307.361,
+   "emph": false
+  },
+  {
+   "w": "rival's",
+   "s": 307.361,
+   "e": 307.811,
+   "emph": false
+  },
+  {
+   "w": "best",
+   "s": 307.811,
+   "e": 308.086,
+   "emph": false
+  },
+  {
+   "w": "player",
+   "s": 308.086,
+   "e": 308.886,
+   "emph": false
+  },
+  {
+   "w": "With",
+   "s": 309.392,
+   "e": 309.504,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 309.504,
+   "e": 309.605,
+   "emph": false
+  },
+  {
+   "w": "promise",
+   "s": 309.605,
+   "e": 310.567,
+   "emph": true
+  },
+  {
+   "w": "Florentino",
+   "s": 310.742,
+   "e": 311.555,
+   "emph": false
+  },
+  {
+   "w": "Perez",
+   "s": 311.555,
+   "e": 312.142,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 312.142,
+   "e": 312.329,
+   "emph": false
+  },
+  {
+   "w": "running",
+   "s": 312.329,
+   "e": 312.717,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 312.717,
+   "e": 312.817,
+   "emph": false
+  },
+  {
+   "w": "be",
+   "s": 312.817,
+   "e": 313.017,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 313.017,
+   "e": 313.342,
+   "emph": false
+  },
+  {
+   "w": "Madrid's",
+   "s": 313.342,
+   "e": 313.829,
+   "emph": false
+  },
+  {
+   "w": "president",
+   "s": 313.829,
+   "e": 314.742,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 314.593,
+   "e": 314.706,
+   "emph": false
+  },
+  {
+   "w": "promised",
+   "s": 314.706,
+   "e": 315.131,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 315.131,
+   "e": 315.219,
+   "emph": false
+  },
+  {
+   "w": "members",
+   "s": 315.219,
+   "e": 315.657,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 315.657,
+   "e": 316.419,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 316.544,
+   "e": 316.681,
+   "emph": false
+  },
+  {
+   "w": "if",
+   "s": 316.681,
+   "e": 316.781,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 316.781,
+   "e": 316.919,
+   "emph": false
+  },
+  {
+   "w": "failed",
+   "s": 316.919,
+   "e": 317.394,
+   "emph": true
+  },
+  {
+   "w": "he",
+   "s": 317.444,
+   "e": 317.594,
+   "emph": false
+  },
+  {
+   "w": "would",
+   "s": 317.594,
+   "e": 317.757,
+   "emph": false
+  },
+  {
+   "w": "pay",
+   "s": 317.757,
+   "e": 318.069,
+   "emph": false
+  },
+  {
+   "w": "for",
+   "s": 318.069,
+   "e": 318.181,
+   "emph": false
+  },
+  {
+   "w": "their",
+   "s": 318.181,
+   "e": 318.394,
+   "emph": false
+  },
+  {
+   "w": "season",
+   "s": 318.394,
+   "e": 318.831,
+   "emph": false
+  },
+  {
+   "w": "tickets",
+   "s": 318.831,
+   "e": 319.694,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 319.673,
+   "e": 319.811,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 319.811,
+   "e": 320.086,
+   "emph": false
+  },
+  {
+   "w": "And",
+   "s": 320.123,
+   "e": 320.311,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 320.311,
+   "e": 320.749,
+   "emph": false
+  },
+  {
+   "w": "came",
+   "s": 320.749,
+   "e": 321.486,
+   "emph": false
+  },
+  {
+   "w": "Two",
+   "s": 324.231,
+   "e": 324.406,
+   "emph": false
+  },
+  {
+   "w": "years",
+   "s": 324.406,
+   "e": 324.656,
+   "emph": false
+  },
+  {
+   "w": "later",
+   "s": 324.656,
+   "e": 325.181,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 325.318,
+   "e": 325.631,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 325.631,
+   "e": 325.806,
+   "emph": false
+  },
+  {
+   "w": "back",
+   "s": 325.806,
+   "e": 326.081,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 326.081,
+   "e": 326.168,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 326.168,
+   "e": 326.256,
+   "emph": false
+  },
+  {
+   "w": "Camp",
+   "s": 326.256,
+   "e": 326.581,
+   "emph": false
+  },
+  {
+   "w": "Now",
+   "s": 326.581,
+   "e": 326.906,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 326.981,
+   "e": 327.131,
+   "emph": false
+  },
+  {
+   "w": "white",
+   "s": 327.131,
+   "e": 327.881,
+   "emph": false
+  },
+  {
+   "w": "Every",
+   "s": 327.808,
+   "e": 328.1,
+   "emph": false
+  },
+  {
+   "w": "time",
+   "s": 328.1,
+   "e": 328.412,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 328.412,
+   "e": 328.487,
+   "emph": false
+  },
+  {
+   "w": "went",
+   "s": 328.487,
+   "e": 328.638,
+   "emph": false
+  },
+  {
+   "w": "to",
+   "s": 328.638,
+   "e": 328.725,
+   "emph": false
+  },
+  {
+   "w": "take",
+   "s": 328.725,
+   "e": 328.938,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 328.938,
+   "e": 329.0,
+   "emph": false
+  },
+  {
+   "w": "corner",
+   "s": 329.0,
+   "e": 329.675,
+   "emph": false
+  },
+  {
+   "w": "things",
+   "s": 329.813,
+   "e": 330.188,
+   "emph": false
+  },
+  {
+   "w": "rained",
+   "s": 330.188,
+   "e": 330.55,
+   "emph": false
+  },
+  {
+   "w": "down",
+   "s": 330.55,
+   "e": 330.85,
+   "emph": false
+  },
+  {
+   "w": "from",
+   "s": 330.85,
+   "e": 330.987,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 330.987,
+   "e": 331.088,
+   "emph": false
+  },
+  {
+   "w": "stands",
+   "s": 331.088,
+   "e": 332.0,
+   "emph": false
+  },
+  {
+   "w": "Including",
+   "s": 331.965,
+   "e": 332.403,
+   "emph": false
+  },
+  {
+   "w": "a",
+   "s": 332.403,
+   "e": 332.465,
+   "emph": false
+  },
+  {
+   "w": "pig's",
+   "s": 332.465,
+   "e": 332.765,
+   "emph": true
+  },
+  {
+   "w": "head",
+   "s": 332.765,
+   "e": 333.415,
+   "emph": false
+  },
+  {
+   "w": "That's",
+   "s": 336.163,
+   "e": 336.461,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 336.461,
+   "e": 336.586,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 336.586,
+   "e": 336.949,
+   "emph": false
+  },
+  {
+   "w": "villain",
+   "s": 336.949,
+   "e": 337.286,
+   "emph": true
+  },
+  {
+   "w": "arc",
+   "s": 337.286,
+   "e": 337.549,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 337.549,
+   "e": 337.686,
+   "emph": false
+  },
+  {
+   "w": "football",
+   "s": 337.686,
+   "e": 338.536,
+   "emph": false
+  },
+  {
+   "w": "Who",
+   "s": 338.465,
+   "e": 338.59,
+   "emph": false
+  },
+  {
+   "w": "would",
+   "s": 338.59,
+   "e": 338.715,
+   "emph": false
+  },
+  {
+   "w": "you",
+   "s": 338.715,
+   "e": 338.865,
+   "emph": false
+  },
+  {
+   "w": "put",
+   "s": 338.865,
+   "e": 339.053,
+   "emph": false
+  },
+  {
+   "w": "at",
+   "s": 339.053,
+   "e": 339.127,
+   "emph": false
+  },
+  {
+   "w": "number",
+   "s": 339.127,
+   "e": 339.39,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 339.39,
+   "e": 339.94,
+   "emph": false
+  },
+  {
+   "w": "Tell",
+   "s": 340.103,
+   "e": 340.328,
+   "emph": false
+  },
+  {
+   "w": "us",
+   "s": 340.328,
+   "e": 340.478,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 340.478,
+   "e": 340.552,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 340.552,
+   "e": 340.64,
+   "emph": false
+  },
+  {
+   "w": "comments",
+   "s": 340.64,
+   "e": 341.515,
+   "emph": false
+  }
+ ],
+ "micro": [
+  {
+   "t": 1.769,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 9.624,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 10.711,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 14.179,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 16.514,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 22.215,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 29.439,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 33.933,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 41.599,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 43.961,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 44.886,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 48.448,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 56.877,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 58.527,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 59.628,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 61.015,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 68.008,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 70.195,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 71.507,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 73.282,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 74.194,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 81.897,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 88.278,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 98.688,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 99.81,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 111.788,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 112.929,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 116.866,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 132.581,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 135.97,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 137.769,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 140.0,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 145.923,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 147.697,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 155.418,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 159.657,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 168.311,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 179.484,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 182.472,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 183.627,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 184.652,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 189.061,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 190.585,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 191.67,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 193.832,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 194.757,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 202.622,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 206.31,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 209.388,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 223.761,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 224.411,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 236.863,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 248.568,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 250.618,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 255.621,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 257.246,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 259.024,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 261.161,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 262.437,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 274.201,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 275.501,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 276.751,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 286.702,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 290.298,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 295.891,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 296.728,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 302.622,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 306.011,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 306.474,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 308.086,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 311.555,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 313.342,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 315.657,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 318.831,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 319.673,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 327.808,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 330.188,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 331.965,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 338.465,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 340.64,
+   "k": "punch",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 341.897,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.531,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 3.449,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 5.199,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 8.812,
+   "k": "ticks"
+  },
+  {
+   "t": 9.912,
+   "g": "money",
+   "align": "attack"
+  },
+  {
+   "t": 17.899,
+   "g": "reaction_what",
+   "align": "attack"
+  },
+  {
+   "t": 20.977,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 24.302,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 25.153,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 25.877,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 28.151,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 30.686,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 32.833,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 35.598,
+   "g": "whoosh",
+   "align": "peak"
+  },
+  {
+   "t": 36.713,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 38.667,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 52.897,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 53.809,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 63.343,
+   "g": "reaction_what",
+   "align": "attack"
+  },
+  {
+   "t": 66.658,
+   "k": "ticks"
+  },
+  {
+   "t": 67.758,
+   "g": "money",
+   "align": "attack"
+  },
+  {
+   "t": 86.578,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 90.655,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 94.075,
+   "g": "reaction_sad",
+   "align": "attack"
+  },
+  {
+   "t": 97.012,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 102.462,
+   "g": "reaction_what",
+   "align": "attack"
+  },
+  {
+   "t": 104.792,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 109.751,
+   "k": "ticks"
+  },
+  {
+   "t": 118.624,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 123.189,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 125.556,
+   "g": "whoosh",
+   "align": "peak"
+  },
+  {
+   "t": 126.551,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 128.176,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 135.421,
+   "k": "ticks"
+  },
+  {
+   "t": 136.521,
+   "g": "money",
+   "align": "attack"
+  },
+  {
+   "t": 143.494,
+   "g": "reaction_what",
+   "align": "attack"
+  },
+  {
+   "t": 148.731,
+   "g": "reaction_laugh",
+   "align": "attack"
+  },
+  {
+   "t": 152.331,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 154.204,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 164.915,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 170.049,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 172.32,
+   "g": "whoosh",
+   "align": "peak"
+  },
+  {
+   "t": 173.561,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 175.615,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 186.998,
+   "k": "ticks"
+  },
+  {
+   "t": 195.662,
+   "g": "reaction_sad",
+   "align": "attack"
+  },
+  {
+   "t": 199.271,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 201.111,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 212.555,
+   "g": "reaction_hype",
+   "align": "attack"
+  },
+  {
+   "t": 214.925,
+   "g": "whoosh",
+   "align": "peak"
+  },
+  {
+   "t": 216.07,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 217.685,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 227.392,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 230.682,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 232.069,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 233.593,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 235.838,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 240.482,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 242.425,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 253.559,
+   "k": "ticks"
+  },
+  {
+   "t": 254.659,
+   "g": "money",
+   "align": "attack"
+  },
+  {
+   "t": 263.324,
+   "g": "reaction_what",
+   "align": "attack"
+  },
+  {
+   "t": 265.694,
+   "g": "whoosh",
+   "align": "peak"
+  },
+  {
+   "t": 266.844,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 269.309,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 270.884,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 271.888,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 273.451,
+   "g": "list",
+   "align": "attack"
+  },
+  {
+   "t": 278.79,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 281.12,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 298.478,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 309.605,
+   "g": "impact",
+   "align": "attack"
+  },
+  {
+   "t": 321.63,
+   "g": "reaction_hype",
+   "align": "attack"
+  },
+  {
+   "t": 323.96,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 333.563,
+   "g": "reaction_shock",
+   "align": "attack"
+  },
+  {
+   "t": 336.949,
+   "g": "impact",
+   "align": "attack"
+  }
+ ],
+ "speakers": [
+  {
+   "who": "H",
+   "t": 0.25,
+   "end": 62.993,
+   "talk": [
+    [
+     0.25,
+     2.689
+    ],
+    [
+     3.449,
+     4.849
+    ],
+    [
+     7.799,
+     14.019
+    ],
+    [
+     14.179,
+     17.549
+    ],
+    [
+     20.499,
+     24.037
+    ],
+    [
+     24.197,
+     26.798
+    ],
+    [
+     27.558,
+     30.246
+    ],
+    [
+     30.406,
+     32.075
+    ],
+    [
+     32.235,
+     34.768
+    ],
+    [
+     35.828,
+     37.777
+    ],
+    [
+     38.937,
+     44.688
+    ],
+    [
+     44.848,
+     51.606
+    ],
+    [
+     52.366,
+     53.459
+    ],
+    [
+     55.809,
+     62.993
+    ]
+   ]
+  },
+  {
+   "who": "P",
+   "t": 65.943,
+   "end": 85.346,
+   "talk": [
+    [
+     65.943,
+     71.327
+    ],
+    [
+     71.487,
+     77.395
+    ],
+    [
+     78.155,
+     83.338
+    ],
+    [
+     83.498,
+     85.346
+    ]
+   ]
+  },
+  {
+   "who": "H",
+   "t": 86.506,
+   "end": 185.917,
+   "talk": [
+    [
+     86.506,
+     89.866
+    ],
+    [
+     90.626,
+     93.725
+    ],
+    [
+     96.675,
+     98.528
+    ],
+    [
+     98.688,
+     102.112
+    ],
+    [
+     105.062,
+     108.983
+    ],
+    [
+     109.743,
+     112.764
+    ],
+    [
+     112.924,
+     118.274
+    ],
+    [
+     121.224,
+     125.026
+    ],
+    [
+     125.786,
+     127.386
+    ],
+    [
+     128.446,
+     134.438
+    ],
+    [
+     135.197,
+     139.84
+    ],
+    [
+     140.0,
+     143.144
+    ],
+    [
+     145.494,
+     148.381
+    ],
+    [
+     151.331,
+     153.414
+    ],
+    [
+     154.474,
+     159.446
+    ],
+    [
+     159.606,
+     164.565
+    ],
+    [
+     167.515,
+     171.79
+    ],
+    [
+     172.55,
+     174.825
+    ],
+    [
+     175.885,
+     183.426
+    ],
+    [
+     183.586,
+     185.917
+    ]
+   ]
+  },
+  {
+   "who": "P",
+   "t": 186.677,
+   "end": 195.312,
+   "talk": [
+    [
+     186.677,
+     191.486
+    ],
+    [
+     191.646,
+     195.312
+    ]
+   ]
+  },
+  {
+   "who": "H",
+   "t": 198.262,
+   "end": 252.546,
+   "talk": [
+    [
+     198.262,
+     200.321
+    ],
+    [
+     201.381,
+     207.125
+    ],
+    [
+     207.285,
+     212.205
+    ],
+    [
+     215.155,
+     216.895
+    ],
+    [
+     217.955,
+     221.142
+    ],
+    [
+     221.302,
+     227.042
+    ],
+    [
+     229.992,
+     233.144
+    ],
+    [
+     233.304,
+     235.022
+    ],
+    [
+     235.782,
+     238.773
+    ],
+    [
+     239.533,
+     241.635
+    ],
+    [
+     242.695,
+     246.88
+    ],
+    [
+     247.04,
+     252.546
+    ]
+   ]
+  },
+  {
+   "who": "P",
+   "t": 253.306,
+   "end": 262.974,
+   "talk": [
+    [
+     253.306,
+     257.883
+    ],
+    [
+     258.043,
+     262.974
+    ]
+   ]
+  },
+  {
+   "who": "H",
+   "t": 265.924,
+   "end": 308.632,
+   "talk": [
+    [
+     265.924,
+     268.165
+    ],
+    [
+     269.225,
+     271.551
+    ],
+    [
+     271.711,
+     274.041
+    ],
+    [
+     274.201,
+     278.44
+    ],
+    [
+     281.39,
+     287.523
+    ],
+    [
+     287.683,
+     289.481
+    ],
+    [
+     295.871,
+     297.688
+    ],
+    [
+     298.748,
+     300.482
+    ],
+    [
+     300.642,
+     305.834
+    ],
+    [
+     305.994,
+     308.632
+    ]
+   ]
+  },
+  {
+   "who": "P",
+   "t": 309.392,
+   "end": 321.28,
+   "talk": [
+    [
+     309.392,
+     314.433
+    ],
+    [
+     314.593,
+     319.513
+    ],
+    [
+     319.673,
+     321.28
+    ]
+   ]
+  },
+  {
+   "who": "H",
+   "t": 324.23,
+   "end": 341.323,
+   "talk": [
+    [
+     324.23,
+     327.648
+    ],
+    [
+     327.808,
+     331.787
+    ],
+    [
+     331.947,
+     333.213
+    ],
+    [
+     336.163,
+     338.303
+    ],
+    [
+     338.463,
+     341.323
+    ]
+   ]
+  }
+ ],
+ "hosts": {
+  "H": {
+   "name": "BELLA",
+   "role": "THE STORY"
+  },
+  "P": {
+   "name": "MICHAEL",
+   "role": "THE BREAKDOWN"
+  }
+ },
+ "manual_sfx": [],
+ "seed": "Footballers Who Became Villains at Their Old Clubs",
+ "cues": [
+  {
+   "t": 0.531,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 3.449,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 5.199,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 9.912,
+   "what": "MONEY",
+   "idea": "money"
+  },
+  {
+   "t": 17.899,
+   "what": "REACTION (what)",
+   "idea": "reaction_what"
+  },
+  {
+   "t": 20.977,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 24.302,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 25.153,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 25.877,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 28.151,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 30.686,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 32.833,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 35.598,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  },
+  {
+   "t": 36.713,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 38.667,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 52.897,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 53.809,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 63.343,
+   "what": "REACTION (what)",
+   "idea": "reaction_what"
+  },
+  {
+   "t": 67.758,
+   "what": "MONEY",
+   "idea": "money"
+  },
+  {
+   "t": 86.578,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 90.655,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 94.075,
+   "what": "REACTION (sad)",
+   "idea": "reaction_sad"
+  },
+  {
+   "t": 97.012,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 102.462,
+   "what": "REACTION (what)",
+   "idea": "reaction_what"
+  },
+  {
+   "t": 104.792,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 118.624,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 123.189,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 125.556,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  },
+  {
+   "t": 126.551,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 128.176,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 136.521,
+   "what": "MONEY",
+   "idea": "money"
+  },
+  {
+   "t": 143.494,
+   "what": "REACTION (what)",
+   "idea": "reaction_what"
+  },
+  {
+   "t": 148.731,
+   "what": "REACTION (laugh)",
+   "idea": "reaction_laugh"
+  },
+  {
+   "t": 152.331,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 154.204,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 164.915,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 170.049,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 172.32,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  },
+  {
+   "t": 173.561,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 175.615,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 195.662,
+   "what": "REACTION (sad)",
+   "idea": "reaction_sad"
+  },
+  {
+   "t": 199.271,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 201.111,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 212.555,
+   "what": "REACTION (hype)",
+   "idea": "reaction_hype"
+  },
+  {
+   "t": 214.925,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  },
+  {
+   "t": 216.07,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 217.685,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 227.392,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 230.682,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 232.069,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 233.593,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 235.838,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 240.482,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 242.425,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 254.659,
+   "what": "MONEY",
+   "idea": "money"
+  },
+  {
+   "t": 263.324,
+   "what": "REACTION (what)",
+   "idea": "reaction_what"
+  },
+  {
+   "t": 265.694,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  },
+  {
+   "t": 266.844,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 269.309,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 270.884,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 271.888,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 273.451,
+   "what": "LIST ITEM",
+   "idea": "list"
+  },
+  {
+   "t": 278.79,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 281.12,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 298.478,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 309.605,
+   "what": "SLAM",
+   "idea": "impact"
+  },
+  {
+   "t": 321.63,
+   "what": "REACTION (aura)",
+   "idea": "reaction_hype"
+  },
+  {
+   "t": 323.96,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 333.563,
+   "what": "REACTION (shock)",
+   "idea": "reaction_shock"
+  },
+  {
+   "t": 336.949,
+   "what": "SLAM",
+   "idea": "impact"
+  }
+ ],
+ "beds": [
+  {
+   "t0": 0.0,
+   "t1": 27.208,
+   "mood": "tension"
+  },
+  {
+   "t0": 27.208,
+   "t1": 35.478,
+   "mood": "mystery"
+  },
+  {
+   "t0": 35.478,
+   "t1": 77.805,
+   "mood": "tension"
+  },
+  {
+   "t0": 77.805,
+   "t1": 86.156,
+   "mood": "hype"
+  },
+  {
+   "t0": 86.156,
+   "t1": 96.325,
+   "mood": "sad"
+  },
+  {
+   "t0": 96.325,
+   "t1": 125.436,
+   "mood": "tension"
+  },
+  {
+   "t0": 125.436,
+   "t1": 150.981,
+   "mood": "mystery"
+  },
+  {
+   "t0": 150.981,
+   "t1": 172.2,
+   "mood": "tension"
+  },
+  {
+   "t0": 172.2,
+   "t1": 186.327,
+   "mood": "mystery"
+  },
+  {
+   "t0": 186.327,
+   "t1": 197.912,
+   "mood": "sad"
+  },
+  {
+   "t0": 197.912,
+   "t1": 235.432,
+   "mood": "tension"
+  },
+  {
+   "t0": 235.432,
+   "t1": 239.183,
+   "mood": "epic"
+  },
+  {
+   "t0": 239.183,
+   "t1": 265.574,
+   "mood": "tension"
+  },
+  {
+   "t0": 265.574,
+   "t1": 289.891,
+   "mood": "mystery"
+  },
+  {
+   "t0": 289.891,
+   "t1": 309.042,
+   "mood": "epic"
+  },
+  {
+   "t0": 309.042,
+   "t1": 323.88,
+   "mood": "tension"
+  },
+  {
+   "t0": 323.88,
+   "t1": 335.813,
+   "mood": "sad"
+  },
+  {
+   "t0": 335.813,
+   "t1": 343.733,
+   "mood": "triumph"
+  }
+ ],
+ "report": {
+  "changes": 271,
+  "avg_gap": 1.27,
+  "max_gap": 2.34,
+  "over_limit": [],
+  "robotic_at": [],
+  "ok": true,
+  "warnings": []
+ },
+ "voice_gains": {
+  "H": 1.0,
+  "P": 1.2937443922397889
+ }
+}
