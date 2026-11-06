@@ -71,3 +71,23 @@ def video(build: Path, total: float, fps: int, w: int, h: int, out: Path, worker
     lst.write_text("".join(f"file '{Path(p).name}'\n" for p in parts))
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(out)], check=True, cwd=build)
     return out
+
+
+def overlay_intros(video_in: Path, intros: list, assets: Path, w: int, h: int, out: Path) -> Path:
+    """Composite the arc-intro smoke clip (16x9 or 9x16 by frame shape) over the start of each intro arc scene."""
+    clip = Path(assets) / "arc-intro" / f"arcintro_{intros[0]['kind']}_smoke_{'9x16' if h > w else '16x9'}.mp4"
+    if not clip.exists():
+        print(f"  intro: {clip.name} missing - arc cards play without it")
+        return video_in
+    args, fc, last = ["ffmpeg", "-y", "-v", "error", "-i", str(video_in)], [], "0:v"
+    for k, it in enumerate(intros, 1):
+        t0, t1 = it["t"], it["t"] + it["cut"]
+        args += ["-i", str(clip)]
+        fc.append(f"[{k}:v]scale={w}:{h},fps=30,setpts=PTS-STARTPTS+{t0}/TB[c{k}]")
+        fc.append(f"[{last}][c{k}]overlay=enable='between(t,{t0},{t1 - 0.001})':eof_action=pass[v{k}]")
+        last = f"v{k}"
+    args += ["-filter_complex", ";".join(fc), "-map", f"[{last}]", "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+             "-pix_fmt", "yuv420p", str(out)]
+    subprocess.run(args, check=True)
+    print(f"  intro: {len(intros)} arc intro(s) composited")
+    return out

@@ -87,6 +87,8 @@ def render_full(tl, build: Path, out_mp4: Path):
     if len(tl.get("voice_gains", {})) > 1:
         print(f"voice levels[{build.name}]: " + ", ".join(f"{k} x{g:.2f}" for k, g in tl["voice_gains"].items()))
     silent = render.video(build, tl["total"], tl["fps"], tl["w"], tl["h"], build / "video.mp4")
+    if tl.get("intros"):
+        silent = render.overlay_intros(silent, tl["intros"], ASSETS, tl["w"], tl["h"], build / "video_intro.mp4")
     mixer.mix(tl, build / "voice.wav", build / "mix.wav", ASSETS, SFX_OFF)
     if tl.get("sfx_used"):
         (build / "sfx_used.txt").write_text("\n".join(tl["sfx_used"]))
@@ -105,6 +107,8 @@ def short_docs(doc: dict) -> list:
     out = []
     for sp in specs:
         scenes = [copy.deepcopy(by_id[i]) for i in sp["scenes"]]
+        for sc in scenes:  # Shorts can't spend 6 s on a title card
+            (sc.get("data") or {}).pop("intro", None)
         if bed_at.get(sp["scenes"][0]) and "bed" not in scenes[0]:
             scenes[0]["bed"] = bed_at[sp["scenes"][0]]
         if sp.get("hook"):  # Shorts must open on a hook: one spoken line over a word slam
@@ -139,6 +143,11 @@ def main():
     vd = a.video_dir.resolve()
     doc = json.loads((vd / "scenes.json").read_text())
     SFX_OFF = tuple(x for x in (a.sfx_off.split(",") + doc.get("meta", {}).get("sfx_off", [])) if x)
+    for sc in doc["scenes"]:  # arc intro ("intro": "ds") needs its clip; "ds" in sfx_off is the claims switch
+        k = (sc.get("data") or {}).get("intro")
+        if k and (k in SFX_OFF or not (ASSETS and (ASSETS / "arc-intro" / f"arcintro_{k}_smoke_16x9.mp4").exists())):
+            sc["data"].pop("intro")
+            print(f"  intro off for '{sc.get('id')}' ({'switched off' if k in SFX_OFF else 'clip not in assets'})")
     if a.voice == "chatterbox":  # voice every sentence (main + Shorts hooks) in ONE Kaggle job; fall back to Kokoro if it fails
         allb = plan.doc_beats(doc)
         if a.shorts:

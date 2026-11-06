@@ -29,6 +29,7 @@ BEAT_GAP = 0.16
 REACT_DUR = 1.8
 TRANSITIONS = ["zoom", "slide", "rise", "flash"]
 REACT_POS = ["br", "tl", "tr", "bl"]
+INTRO = {"cut": 3.267, "hit": 3.50, "dur": 5.83}  # Demon Slayer title smoke: clip ends at cut, title hit in its audio
 HANDOFF = 0.55         # min silence between the last word of one host and the first of the other
 TAG_IN = 0.25          # name tag starts entering this long before the new speaker's first word
 
@@ -63,8 +64,13 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
     last_spk, last_end = None, -1e9
     for si, sc in enumerate(doc["scenes"]):
         start = cur
-        cur += sc.get("pre", 0.35 if si else 0.25)
-        evs = []
+        evs, intro = [], (sc.get("data") or {}).get("intro") if sc["type"] == "arc" else None
+        if intro:  # smoke clip, hard cut to the arc card, title slams on the audio hit; narration waits for the decay
+            evs += [{"a": "open", "t": round(start + INTRO["cut"], 3)}, {"a": "title", "t": round(start + INTRO["hit"] - 0.2, 3)},
+                    {"a": "sub", "t": round(start + INTRO["hit"] + 0.35, 3)}]
+            cur = start + INTRO["dur"] + 0.15
+        else:
+            cur += sc.get("pre", 0.35 if si else 0.25)
         if not sc.get("beats"):  # silent scene (e.g. Shorts end card)
             cur += sc.get("dur", 2.5)
         for b in sc.get("beats", []):
@@ -100,6 +106,9 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
             if b.get("react"):  # narration pauses for the reaction; it never spills into the next scene
                 o = overlays[-1]
                 cur = max(cur, o["t"] + o["d"] + 0.2)
+        if intro:  # the intro already opened the card: later open/title/sub cues would count as changes nobody sees
+            first = {}
+            evs = [e for e in evs if e["a"] not in ("open", "title", "sub") or first.setdefault(e["a"], e) is e]
         end = cur + sc.get("post", 0.25)
         if sc["type"] == "arc":
             d = sc.get("data", {})
@@ -107,10 +116,12 @@ def build_timeline(doc: dict, voice: list, w: int = 1920, h: int = 1080, fps: in
         scenes.append({"id": sc.get("id", f"s{si}"), "type": sc["type"], "palette": sc.get("palette", "madrid"),
                        "start": round(start, 3), "end": round(end, 3), "data": sc.get("data", {}), "ev": evs,
                        "tr": sc.get("tr") or TRANSITIONS[si % len(TRANSITIONS)] if si else "zoom",
-                       "arcLabel": sc.get("arcLabel", arc_label), "hud": sc.get("hud", True)})
+                       "arcLabel": sc.get("arcLabel", arc_label), "hud": sc.get("hud", True),
+                       **({"intro": {"kind": intro, "t": round(start, 3), **INTRO}} if intro else {})})
         cur = end
     total = round(cur + 0.4, 3)
     tl = {"w": w, "h": h, "fps": fps, "total": total, "scenes": scenes, "overlays": overlays,
+          "intros": [s["intro"] for s in scenes if s.get("intro")],
           "beats": beats_out, "words": words_all, "micro": [], "sfx": sfx,
           "speakers": speaker_runs(beats_out), "hosts": hosts_meta(doc), "manual_sfx": manual,
           "seed": doc.get("meta", {}).get("title", "")}
@@ -148,6 +159,8 @@ def fixed_changes(tl) -> list:
         ch += [r["t"] - TAG_IN for r in tl["speakers"][1:]]
     for o in tl["overlays"]:
         ch += [o["t"], o["t"] + o["d"]]
+    for i in tl.get("intros", []):  # the smoke clip is moving footage: it counts as change
+        ch += [i["t"] + 1.1, i["t"] + 2.2]
     return ch
 
 
@@ -318,7 +331,7 @@ def _plan_sfx(tl, doc=None):
         cues.append({"t": round(t, 3), "what": what or g.upper(), "idea": g})
 
     for i, sc in enumerate(tl["scenes"]):
-        if i and sc["type"] in ("arc", "endcard") and sc["start"] - last_whoosh >= 40:
+        if i and sc["type"] in ("arc", "endcard") and sc["start"] - last_whoosh >= 40 and not sc.get("intro"):
             add(sc["start"] + 0.12, "whoosh", "peak", "TRANSITION"); last_whoosh = sc["start"]
         if sc["type"] == "photo":
             add(sc["start"] + 0.08, "photo", what="PHOTO")
@@ -332,6 +345,8 @@ def _plan_sfx(tl, doc=None):
                 s.append({"t": t, "k": "ticks"})
             elif a.startswith("item"):
                 add(t, "list", what="LIST ITEM")
+            if a == "title" and sc.get("intro"):
+                continue  # the intro's own audio carries the title hit
             if a in SFX_ON:
                 add(t, SFX_ON[a], "onset" if SFX_ON[a] in ("scouter", "aura") else "attack", a.upper())
             elif a == "charge":  # riser: its peak lands on the burst that follows

@@ -1,0 +1,200 @@
+{
+ "meta": {
+  "title": "arc intro test",
+  "note": "Full script (6 Nov 2026) for Gate-PASS idea 'villain-returns' (format footballers_who, lift 1.95x). Sources: Götze €37m clause + Bild 23 Apr 2013 (Irish Times); Figo £37m world record 24 Jul 2000, pig's head 2002 (Sports Mole); Pérez election promise (Duke WCWP); Lewandowski free 2014, 344 goals, 41 = Müller record (ESPN); Cole 2006, £55k offer, 'Cashley' (SI); Tevez billboard 2009 (FourFourTwo); RvP £22.5m, 26 goals, title (FourFourTwo); Campbell free 3 Jul 2001, 2 PL + 3 FA Cups, Invincibles (Sports Mole); Higuaín €90m clause, 36 goals record (ESPN); Luis Enrique Real→Barça 1996, 8 seasons (FC Barcelona); Ronaldo Milan derby 11 Mar 2007, Inter won 2-1 (SempreMilan).",
+  "idea": {
+   "id": "villain-returns",
+   "format": "footballers_who",
+   "title": "Footballers Who Became Villains at Their Old Clubs",
+   "thumb_text": "VILLAIN ARC",
+   "promise": "Some footballers don't just leave their club. They come back as the villain.",
+   "proof": "We tracked ten of the biggest rival moves in modern football",
+   "plan": "We start with a leak on the eve of a semi-final"
+  },
+  "thumb": {
+   "big": "VILLAIN ARC",
+   "top": "THEY CAME BACK AS",
+   "kicker": "10 BETRAYALS",
+   "palette": "violet",
+   "faces": [
+    {
+     "who": "Luis Figo (Real Madrid kit)",
+     "mood": "smug, looking back"
+    },
+    {
+     "who": "Mario Götze (Bayern kit)",
+     "mood": "guilty"
+    }
+   ],
+   "row": [
+    {
+     "who": "Luis Figo",
+     "label": "FIGO",
+     "value": "£37M",
+     "mood": "smug"
+    },
+    {
+     "who": "Mario Götze",
+     "label": "GÖTZE",
+     "value": "€37M",
+     "mood": "guilty"
+    },
+    {
+     "who": "Robert Lewandowski",
+     "label": "LEWANDOWSKI",
+     "value": "FREE",
+     "mood": "cold"
+    },
+    {
+     "who": "Gonzalo Higuaín",
+     "label": "HIGUAÍN",
+     "value": "€90M",
+     "mood": "proud"
+    },
+    {
+     "who": "Sol Campbell",
+     "label": "CAMPBELL",
+     "value": "FREE",
+     "mood": "defiant"
+    }
+   ]
+  },
+  "hosts": {
+   "H": {
+    "name": "BELLA",
+    "role": "THE STORY"
+   },
+   "P": {
+    "name": "MICHAEL",
+    "role": "THE BREAKDOWN"
+   }
+  },
+  "sources": [
+   "Götze €37m clause, Bild front page 23 Apr 2013: https://www.irishtimes.com/sport/soccer/champions-league/dortmund-stung-by-timing-of-gotze-s-bayern-deal-1.1370124",
+   "Lewandowski at Bayern (free 2014, 344 goals, 41-goal season): https://global.espn.com/football/story/_/id/37630221/barcelona-bound-lewandowski-outscored-messi-ronaldo-8-years-bayern-munich",
+   "Ashley Cole, Chelsea move and 'Cashley': https://www.si.com/soccer/2019/02/05/ashley-cole-concedes-he-was-young-naive-stupid-when-he-swapped-arsenal-chelsea",
+   "Tevez 'Welcome to Manchester' billboard: https://fourfourtwo.com/news/on-this-day-in-2009-manchester-city-announce-deal-to-sign-carlos-tevez-1626093592000",
+   "Van Persie 2012-13 (fee, 26 goals, title): https://www.fourfourtwo.com/features/greatest-individual-seasons-fergie-rips-man-united-rulebook-robin-van-persie-201213",
+   "Luis Enrique to Barcelona 1996: https://www.fcbarcelona.com/en/news/1066203/twenty-years-since-luis-enrique-signed-for-fc-barcelona",
+   "Sol Campbell to Arsenal 2001: https://www.sportsmole.co.uk/football/arsenal/transfer-talk/feature/on-this-day-sol-campbell-completes-move-to-arsenal-from-tottenham_453799.html",
+   "Higuaín €90m clause and 36-goal record: https://global.espn.com/football/soccer-transfers/story/2917385/juventus-sign-striker-gonzalo-higuain-from-napoli",
+   "Ronaldo's Milan derby goal, 11 Mar 2007: https://sempremilan.com/crossing-the-divide-ronaldos-rossoneri-tale-and-what-might-have-been",
+   "Figo to Real Madrid, world record, pig's head: https://www.sportsmole.co.uk/football/real-madrid/on-this-day/feature/on-this-day-luis-figo-joins-real-madrid-from-barcelona-in-world-record-transfer_407713.html",
+   "Pérez's Figo election promise: https://sites.duke.edu/wcwp/2020/04/13/figos-transfer/"
+  ]
+ },
+ "scenes": [
+  {
+   "id": "r9-derby",
+   "type": "photo",
+   "palette": "sunset",
+   "data": {
+    "slot": 9,
+    "desc": "Ronaldo Nazário in an AC Milan shirt, Milan derby, March 2007",
+    "cap": "MILAN DERBY · 11.03.2007"
+   },
+   "beats": [
+    {
+     "say": "In March twenty oh seven, in Milan's red and black, he scored against Inter. His old club.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "March"
+      },
+      {
+       "a": "crop2",
+       "at": "Milan's"
+      },
+      {
+       "a": "cap",
+       "at": "scored"
+      }
+     ],
+     "emph": [
+      "old"
+     ]
+    },
+    {
+     "say": "Inter still won, two, one.",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "Inter"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arc1",
+   "type": "arc",
+   "palette": "sunset",
+   "data": {
+    "kicker": "NUMBER 1",
+    "title": [
+     "THE PIG'S",
+     "HEAD"
+    ],
+    "sub": "LUÍS FIGO · BARCELONA → REAL MADRID · 2000",
+    "intro": "ds"
+   },
+   "beats": [
+    {
+     "say": "Number one. Luis Figo.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Luis"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "epic"
+  },
+  {
+   "id": "figo",
+   "type": "photo",
+   "palette": "clasico",
+   "data": {
+    "slot": 10,
+    "desc": "Luís Figo in a Barcelona shirt, 1999-2000",
+    "cap": "BARCELONA · 1995–2000"
+   },
+   "beats": [
+    {
+     "say": "He was Barcelona's best player.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Barcelona's"
+      }
+     ]
+    },
+    {
+     "say": "In July two thousand, Real Madrid made him the most expensive footballer in the world.",
+     "do": [
+      {
+       "a": "crop2",
+       "at": "July"
+      },
+      {
+       "a": "cap",
+       "at": "expensive"
+      }
+     ],
+     "emph": [
+      "world"
+     ]
+    },
+    {
+     "say": "So how do you steal your biggest rival's best player?",
+     "emph": [
+      "steal"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -251,6 +251,19 @@ def mix(tl: dict, voice_wav: Path, out: Path, assets=None, off=()):
     lo, hi = np.clip(idx - w // 2, 0, N), np.clip(idx + w // 2, 0, N)
     env = np.clip((c[hi] - c[lo]) / w / (level * .5), 0, 1)  # moving average (cumsum: O(N))
     music = _bed(N, tl.get("beds", []), lib, level, env)
+    for it in tl.get("intros", []):  # arc intro: its own audio, music out underneath
+        i0, i1 = int(it["t"] * SR), min(N, int((it["t"] + it["dur"]) * SR))
+        f = Path(assets) / "arc-intro" / f"arcintro_{it['kind']}_audio.wav" if assets else None
+        if f and f.exists():
+            a = _read(f)[:N - i0]
+            act = a[np.abs(a) > 1e-4]
+            a = a * (level * 10 ** (-1 / 20) / (float(np.sqrt(np.mean(act ** 2))) if len(act) else 1.0))
+            sfx[i0:i0 + len(a)] += a
+            used.append(f"{it['t']:7.2f}  arc_intro        {f.name}")
+        r = int(0.3 * SR)
+        gate = np.ones(N); gate[i0:i1] = 0
+        gate[max(0, i0 - r):i0] = np.linspace(1, 0, i0 - max(0, i0 - r)); gate[i1:i1 + r] = np.linspace(0, 1, len(gate[i1:i1 + r]))
+        music *= gate
     m = voice + music + sfx
     sf.write(out, m.astype(np.float32), SR, subtype="FLOAT")
     tl["sfx_used"] = used
