@@ -29,6 +29,7 @@ The 0004 script writer (a scheduled task or a `0004:` chat) reads this file, `00
     - 4–6 cut-out player faces in a row, each with a name label and one big number, flag or trophy count underneath
     - yellow/red labels on a saturated background
     - This is the GOAT stats, Real Data 360 and Sportivion look (outliers from 50× to 1,500×). It fits our data mechanism exactly.
+    - **Built** as engine thumbnail variant **D**: set `meta.thumb.row = [{who, label, value, mood}]` with 4–5 entries.
   - **T2, one face plus a verdict.** For Rise and Fall, Exposed and The Day:
     - one large face, often split bright/dark or with a red/green arrow
     - 2–3 words in caps ("GONE FOREVER", "THEY SUCK.", "EXPLOITED")
