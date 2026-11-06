@@ -203,7 +203,8 @@ function photoInner(d, w, h) {
 TPL.photo = {
   build(L, d) {
     const r = { d }, w = d.w || (PORT ? W - 100 : 1500), h = d.h || (PORT ? Math.round((W - 100) * 1.3) : 840); r.w = w; r.h = h;
-    r.crops = d.crops || [[.5, .5, 1.08], [.36, .42, 1.38], [.64, .56, 1.26]];
+    // a skipped slot's location card has centred text: re-frame gently so it never pans off the card
+    r.crops = d.crops || ((d.src || d.preview) ? [[.5, .5, 1.08], [.36, .42, 1.38], [.64, .56, 1.26]] : [[.5, .5, 1.0], [.5, .46, 1.07], [.5, .53, 1.03]]);
     r.card = E(L, `<div style="width:${w}px;height:${h}px;overflow:hidden;border-radius:26px;border:10px solid #fff;box-shadow:0 30px 80px rgba(20,33,92,.28);background:#fff"><div class="pin" style="transform-origin:50% 50%">${photoInner(d, w, h)}</div></div>`, { y: CY + 15 });
     r.pin = r.card.querySelector('.pin');
     r.cap = fit(E(L, d.cap || '', { c: 'pill pg', x: CX + w / 2 - 40, y: CY + 15 + h / 2 - 10, a: 'r',  /* right side: the host tag owns bottom-left */ st: { fontSize: '26px' } }), w - 80);
