@@ -1,8 +1,9 @@
 """Thumbnail templates: 3 variants (A number+face, B face+arrow, C versus), each as
    thumb_X.png       guide with labelled face spaces (what to put where)
-   thumb_X_base.png  finished background + text, face space left clean for Mitchael's cut-out
+   thumb_X_base.png  finished background + text; faces from the Drive photos folder (face_N) are composited in,
+                     otherwise the face space is left clean for Mitchael's cut-out
 plus thumb_instructions.txt. Data: scenes.json meta.thumb = {big, top, kicker, vs:[a,b], palette, faces:[{who,mood}],
-row:[{who, label, value, mood?}]}. Variant D (T1 face-row data strip) renders when `row` is set."""
+row:[{who, label, value, mood?, src?}]}; faces[i].src / row[i].src are set by photos.py pull. Variant D (T1 face-row data strip) renders when `row` is set."""
 
 import json
 import shutil
@@ -40,6 +41,7 @@ def render_all(doc: dict, build: Path, out: Path) -> list:
                 continue
             for guide in (True, False):
                 pg.evaluate(f"draw({json.dumps({**t, 'variant': v, 'guide': guide})})")
+                pg.wait_for_function("[...document.images].every(i => i.complete)", timeout=15000)
                 f = out / f"thumb_{v}{'' if guide else '_base'}.png"
                 pg.screenshot(path=str(f))
                 files.append(f)
@@ -55,6 +57,8 @@ def render_all(doc: dict, build: Path, out: Path) -> list:
         for i, fc in enumerate(need, 1):
             lines.append(f"  Face {i}: {fc.get('who', '')} - {fc.get('mood', '')}")
         lines.append("")
+    if any(x.get("src") for x in (t.get("row") or []) + faces):
+        lines += ["Faces from the photos folder are already in the _base.png files: those are the finished thumbnails.", ""]
     lines += ["How: open the _base.png in your editor, drop a background-removed face where the guide shows,",
               "make the head fill that space, eyes on the top third. Don't cover the big number.",
               "Upload 3 variants to YouTube Studio Test & Compare and let the data pick."]

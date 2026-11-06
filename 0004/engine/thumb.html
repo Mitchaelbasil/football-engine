@@ -35,7 +35,11 @@ function lines() {
 }
 function slot(x, y, w, h, face, n, guide) {
   if (guide) return el(`<b>FACE ${n}</b><span>${face.who || ''}</span><span style="opacity:.75">${face.mood || ''}</span><span style="font-size:16px;opacity:.6">cut-out · head fills the box · eyes on the top third</span>`, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' }, 'slot guide');
-  return el('', { left: x - 40 + 'px', top: y - 20 + 'px', width: w + 80 + 'px', height: h + 40 + 'px' }, 'glow');
+  const g = el('', { left: x - 40 + 'px', top: y - 20 + 'px', width: w + 80 + 'px', height: h + 40 + 'px' }, 'glow');
+  // a supplied face (cut-out PNG from the photos folder): head fills the box, eyes on the top third
+  if (face.src) el(`<img src="${face.src}" style="width:${w}px;height:${h}px;object-fit:cover;object-position:50% 0%;display:block;filter:drop-shadow(0 10px 18px rgba(20,33,92,.35)) saturate(1.15) contrast(1.05)">`,
+    { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
+  return g;
 }
 window.draw = function (T) {
   c.innerHTML = '';
@@ -54,14 +58,15 @@ window.draw = function (T) {
     if (T.top) fitW(el(T.top, { left: '600px', top: '80px', fontSize: '40px' }, 'pill'), 640);
     fitW(el(T.big, { left: '590px', top: '170px', fontSize: '330px' }, 'big'), 660);
     el(`<svg width="220" height="140" viewBox="0 0 220 140"><path d="M200 20 C 140 30, 80 60, 40 110" stroke="#e3165b" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M15 120 L 70 125 L 40 75 Z" fill="#e3165b"/></svg>`, { left: '520px', top: '520px' });
-    el(`<div style="font-family:Anton;font-size:58px;color:#ffd23f;-webkit-text-stroke:8px #14215c;paint-order:stroke fill;transform:rotate(-8deg)">EHHH?!</div>`, { left: '1040px', top: '590px' });
+    if (T.sticker) el(`<div style="font-family:Anton;font-size:58px;color:#ffd23f;-webkit-text-stroke:8px #14215c;paint-order:stroke fill;transform:rotate(-8deg)">${T.sticker}</div>`, { left: '1040px', top: '590px' });
+    if (T.kicker) fitW(el(T.kicker, { left: '780px', top: '605px', fontSize: '34px', background: '#e3165b' }, 'pill'), 460);
   } else if (T.variant === 'D') {
     // T1 face-row data strip (0006 galleries: GOAT stats / Real Data 360 / Sportivion look)
     const row = (T.row || []).slice(0, 5), n = Math.max(row.length, 1), gap = 14, w = (1280 - 40 - gap * (n - 1)) / n;
     fitW(el(T.big || '', { left: '30px', top: '18px', fontSize: '150px' }, 'big'), 1220);
     row.forEach((r, i) => {
       const x = 20 + i * (w + gap);
-      slot(x, 200, w, 330, { who: r.who, mood: r.mood || '' }, i + 1, g);
+      slot(x, 200, w, 330, { who: r.who, mood: r.mood || '', src: r.src }, i + 1, g);
       fitW(el(r.label || r.who || '', { left: x + 'px', top: '545px', width: w - 20 + 'px', fontSize: '26px' }, 'lab'), w - 20);
       fitW(el(r.value || '', { left: x + 'px', top: '598px', width: w + 'px', fontSize: '96px' }, 'num'), w);
     });

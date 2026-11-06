@@ -27,6 +27,7 @@ env:
   GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  U2NET_HOME: /home/runner/.u2net
 
 jobs:
   render:
@@ -54,6 +55,7 @@ jobs:
           pip install -q torch --index-url https://download.pytorch.org/whl/cpu
           pip install -q -r 0004/requirements.txt
           python -m playwright install --with-deps chromium > /dev/null
+          pip install -q "rembg[cpu]==2.0.87"  # thumbnail face cut-outs (model cached below)
       - name: Restore Drive assets
         if: env.VIDEO != ''
         uses: actions/cache@v4
@@ -61,6 +63,12 @@ jobs:
           path: assets
           key: assets-${{ github.run_id }}
           restore-keys: assets-
+      - name: Restore cut-out model
+        if: env.VIDEO != ''
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: rembg-u2net_human_seg
       - name: Sync assets + pull photos
         if: env.VIDEO != ''
         run: |

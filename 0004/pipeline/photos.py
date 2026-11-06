@@ -46,6 +46,31 @@ def slots(doc: dict) -> list:
     return sorted(out)
 
 
+FACE_RE = re.compile(r"face[\s_-]*0*(\d+)", re.I)
+
+
+def face_slots(doc: dict) -> list:
+    """[(n, who, mood)] for the thumbnail's face boxes: variant D's row if set, else meta.thumb.faces."""
+    t = doc.get("meta", {}).get("thumb") or {}
+    return [(i, f.get("who", ""), f.get("mood", "")) for i, f in enumerate(t.get("row") or t.get("faces") or [], 1)]
+
+
+def cut_out(src: Path, dest: Path) -> Path:
+    """Background removal for a face photo (skipped when the file already has transparency), cropped to the subject."""
+    from PIL import Image
+    im = Image.open(src)
+    if im.mode in ("RGBA", "LA") and im.getextrema()[-1][0] < 250:
+        out = im.convert("RGBA")
+    else:
+        from rembg import new_session, remove
+        out = remove(im.convert("RGB"), session=new_session("u2net_human_seg")).convert("RGBA")
+    box = out.getchannel("A").point(lambda a: 255 if a > 40 else 0).getbbox()
+    if box:
+        out = out.crop(box)
+    out.save(dest)
+    return dest
+
+
 def render_after(created: dt.datetime) -> dt.datetime:
     local = created.astimezone(LAGOS)
     if local.hour < 15:
@@ -111,6 +136,11 @@ def intake(video: str, at: str = "") -> None:
              "Skipped slots fall back to a clean location card.", ""]
     for n, desc, cap, sid, line in sl:
         lines += [f"slot_{n:02d}  {desc}", f"         caption: {cap} | scene '{sid}' | line: \"{line}\"", ""]
+    fs = face_slots(doc)
+    if fs:
+        lines += ["THUMBNAIL FACES - name them face_1, face_2 ... Head-and-shoulders photo, face clearly visible.",
+                  "The background is removed automatically (or drop a cut-out PNG). These go straight into the thumbnail.", ""]
+        lines += [f"face_{n}  {who} - {mood}" for n, who, mood in fs] + [""]
     media = MediaInMemoryUpload("\n".join(lines).encode("utf-8"), mimetype="text/plain")
     sid = _find(dr, "SLOTS", vf)
     if sid:
@@ -119,7 +149,7 @@ def intake(video: str, at: str = "") -> None:
         dr.files().create(body={"name": "SLOTS", "parents": [vf], "mimeType": "application/vnd.google-apps.document"},
                           media_body=media).execute()
     st = read_status(dr, vf)
-    srev = _rev(sl)
+    srev = _rev([sl, face_slots(doc)])
     new_script = not st or (st.get("state") == "rendered" and st.get("rev") != _rev(doc.get("scenes", [])))
     if new_script:  # first intake, or a new script after a render: start the clock
         created = now()
@@ -134,6 +164,9 @@ def intake(video: str, at: str = "") -> None:
         msg = [f"<b>📸 Photo slots: {html.escape(doc.get('meta', {}).get('title', video))}</b>",
                f"{len(sl)} slots. Render at {when} (Lagos) with whatever is filled.", ""]
         msg += [f"slot_{n:02d}: {html.escape(desc)}" for n, desc, *_ in sl]
+        if face_slots(doc):
+            msg += ["", "<b>Thumbnail faces</b> (head and shoulders; background removed for you):"]
+            msg += [f"face_{n}: {html.escape(who)} - {html.escape(mood)}" for n, who, mood in face_slots(doc)]
         msg += ["", f'<a href="https://drive.google.com/drive/folders/{pf}">Open the photos folder</a>']
         send_message("\n".join(msg))
     print(f"intake {video}: {len(sl)} slots, state {st['state']}, render_after {st['render_after']}, telegram {changed}")
@@ -185,28 +218,38 @@ def pull(video: str) -> None:
                             fields="files(id, name)").execute().get("files", [])
     local = VIDEOS / video / "photos"
     local.mkdir(exist_ok=True)
-    got = {}
+    got, faces = {}, {}
     for f in files:
-        m = SLOT_RE.search(f["name"])
         ext = Path(f["name"]).suffix.lower()
-        if not m or ext not in IMG_EXT:
+        m, fm = SLOT_RE.search(f["name"]), FACE_RE.search(f["name"])
+        if ext not in IMG_EXT or not (m or fm):
             continue
-        dest = local / f"slot_{int(m.group(1)):02d}{ext}"
+        dest = local / (f"slot_{int(m.group(1)):02d}{ext}" if m else f"face_{int(fm.group(1))}_src{ext}")
         with open(dest, "wb") as fh:
             dl = MediaIoBaseDownload(fh, dr.files().get_media(fileId=f["id"]))
             done = False
             while not done:
                 _, done = dl.next_chunk()
-        got[int(m.group(1))] = dest
+        if m:
+            got[int(m.group(1))] = dest
+        else:
+            try:
+                faces[int(fm.group(1))] = cut_out(dest, local / f"face_{int(fm.group(1))}.png")
+            except Exception as e:  # a bad face file must not stop the render
+                print(f"face_{fm.group(1)}: cut-out failed ({e}) - box stays empty")
     p = VIDEOS / video / "scenes.json"
     doc = json.loads(p.read_text(encoding="utf-8"))
     for s in doc.get("scenes", []):
         d = s.get("data", {})
         if s.get("type") in ("photo", "aura") and d.get("slot") in got:
             d["src"] = got[d["slot"]].resolve().as_uri()
+    t = doc.get("meta", {}).get("thumb") or {}
+    for i, f in enumerate(t.get("row") or t.get("faces") or [], 1):
+        if i in faces:
+            f["src"] = faces[i].resolve().as_uri()
     p.write_text(json.dumps(doc, indent=1, ensure_ascii=False), encoding="utf-8")
     want = [n for n, *_ in slots(doc)]
-    print(f"photos {video}: {len(got)}/{len(want)} slots filled {sorted(got)}")
+    print(f"photos {video}: {len(got)}/{len(want)} slots filled {sorted(got)}; faces {len(faces)}/{len(face_slots(doc))}")
 
 
 def done(video: str, ok: str = "ok", link: str = "") -> None:
