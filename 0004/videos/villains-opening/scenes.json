@@ -1,7 +1,7 @@
 {
  "meta": {
   "title": "Footballers Who Became Villains at Their Old Clubs",
-  "note": "Growth-plan test (6 Nov 2026): opening ~100 s of the first Gate-PASS idea (0006 ideas.json 'villain-returns', format footballers_who, lift 1.95x). Promise-Proof-Plan, then #10 Götze. Sources: Götze €37m clause + Bild 23 Apr 2013 (Irish Times); Figo £37m world record 24 Jul 2000, pig's head 2002 (Sports Mole); Lewandowski free 2014 (ESPN).",
+  "note": "Full script (6 Nov 2026) for Gate-PASS idea 'villain-returns' (format footballers_who, lift 1.95x). Sources: Götze €37m clause + Bild 23 Apr 2013 (Irish Times); Figo £37m world record 24 Jul 2000, pig's head 2002 (Sports Mole); Pérez election promise (Duke WCWP); Lewandowski free 2014, 344 goals, 41 = Müller record (ESPN); Cole 2006, £55k offer, 'Cashley' (SI); Tevez billboard 2009 (FourFourTwo); RvP £22.5m, 26 goals, title (FourFourTwo); Campbell free 3 Jul 2001, 2 PL + 3 FA Cups, Invincibles (Sports Mole); Higuaín €90m clause, 36 goals record (ESPN); Luis Enrique Real→Barça 1996, 8 seasons (FC Barcelona); Ronaldo Milan derby 11 Mar 2007, Inter won 2-1 (SempreMilan).",
   "idea": {
    "id": "villain-returns",
    "format": "footballers_who",
@@ -613,7 +613,1108 @@
     }
    ],
    "bed": "tension"
+  },
+  {
+   "id": "lewy",
+   "type": "photo",
+   "palette": "madrid",
+   "data": {
+    "slot": 2,
+    "desc": "Robert Lewandowski in a Bayern shirt, celebrating",
+    "cap": "BAYERN · 2014–2022"
+   },
+   "beats": [
+    {
+     "say": "Dortmund had turned him into a star. Bayern collected the goals.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Dortmund"
+      },
+      {
+       "a": "crop2",
+       "at": "Bayern"
+      },
+      {
+       "a": "cap",
+       "at": "collected"
+      }
+     ]
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "lewy-goals",
+   "type": "counter",
+   "palette": "barca",
+   "data": {
+    "value": 344,
+    "label": "GOALS FOR BAYERN",
+    "sub": "41 IN ONE BUNDESLIGA SEASON · GERD MÜLLER'S RECORD, EQUALLED"
+   },
+   "beats": [
+    {
+     "say": "Three hundred and forty-four of them, in eight seasons.",
+     "do": [
+      {
+       "a": "count",
+       "at": "Three"
+      }
+     ]
+    },
+    {
+     "say": "In one season he scored forty-one in the Bundesliga, equalling Gerd Mueller's record.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "forty-one"
+      }
+     ],
+     "emph": [
+      "forty-one"
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "41?!"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rehook8",
+   "type": "slam",
+   "palette": "sunset",
+   "hud": false,
+   "data": {
+    "pre": "NUMBER 8",
+    "word": "THE MONEY",
+    "fs": 300
+   },
+   "beats": [
+    {
+     "say": "But Lewandowski never said it was about money. Number eight did.",
+     "do": [
+      {
+       "a": "pre",
+       "at": "But"
+      },
+      {
+       "a": "slam",
+       "at": "money"
+      }
+     ],
+     "emph": [
+      "money"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arc8",
+   "type": "arc",
+   "palette": "gold",
+   "data": {
+    "kicker": "NUMBER 8",
+    "title": [
+     "CASHLEY"
+    ],
+    "sub": "ASHLEY COLE · ARSENAL → CHELSEA · 2006"
+   },
+   "beats": [
+    {
+     "say": "Number eight. Ashley Cole.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Ashley"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "mystery"
+  },
+  {
+   "id": "cole",
+   "type": "photo",
+   "palette": "madrid",
+   "data": {
+    "slot": 3,
+    "desc": "Ashley Cole in an Arsenal shirt, 2003-04",
+    "cap": "ARSENAL · THE INVINCIBLES"
+   },
+   "beats": [
+    {
+     "say": "He came through Arsenal's academy, and played left-back for the team that went a whole league season unbeaten.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "came"
+      },
+      {
+       "a": "cap",
+       "at": "academy"
+      },
+      {
+       "a": "crop2",
+       "at": "left-back"
+      },
+      {
+       "a": "crop3",
+       "at": "unbeaten"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cole-offer",
+   "type": "counter",
+   "palette": "gold",
+   "data": {
+    "value": 55,
+    "prefix": "£",
+    "suffix": "K",
+    "label": "A WEEK · ARSENAL'S CONTRACT OFFER",
+    "sub": "HE JOINED CHELSEA IN 2006"
+   },
+   "beats": [
+    {
+     "say": "Then Arsenal offered him a new contract. Fifty-five thousand pounds a week.",
+     "do": [
+      {
+       "a": "count",
+       "at": "Arsenal"
+      }
+     ],
+     "emph": [
+      "Fifty-five",
+      "Fifty"
+     ]
+    },
+    {
+     "say": "He felt it was far below his worth, and joined Chelsea.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "joined"
+      }
+     ],
+     "react": {
+      "emo": "what",
+      "cap": "BELOW HIS WORTH?!"
+     }
+    },
+    {
+     "say": "Arsenal fans had a new name for him. Cashley.",
+     "emph": [
+      "Cashley"
+     ],
+     "react": {
+      "emo": "laugh",
+      "cap": "CASHLEY."
+     },
+     "hold": 0.4
+    }
+   ]
+  },
+  {
+   "id": "arc7",
+   "type": "arc",
+   "palette": "barca",
+   "data": {
+    "kicker": "NUMBER 7",
+    "title": [
+     "WELCOME TO",
+     "MANCHESTER"
+    ],
+    "sub": "CARLOS TEVEZ · MAN UNITED → MAN CITY · 2009"
+   },
+   "beats": [
+    {
+     "say": "Number seven. Carlos Tevez.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Carlos"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "tevez",
+   "type": "photo",
+   "palette": "barca",
+   "data": {
+    "slot": 4,
+    "desc": "The blue 'Welcome to Manchester' billboard of Carlos Tevez, July 2009",
+    "cap": "MANCHESTER · JULY 2009"
+   },
+   "beats": [
+    {
+     "say": "Two seasons at Manchester United. Then he crossed the city to Manchester City.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Two"
+      },
+      {
+       "a": "crop2",
+       "at": "crossed"
+      }
+     ]
+    },
+    {
+     "say": "City put him on a giant blue billboard. Three words. Welcome to Manchester.",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "billboard"
+      },
+      {
+       "a": "cap",
+       "at": "Welcome"
+      }
+     ],
+     "emph": [
+      "Welcome"
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "IN UNITED'S CITY?!"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rehook6",
+   "type": "slam",
+   "palette": "violet",
+   "hud": false,
+   "data": {
+    "pre": "NUMBER 6",
+    "word": "TO BEAT THEM",
+    "fs": 260
+   },
+   "beats": [
+    {
+     "say": "Tevez left to compete with his old club. Number six left to beat them.",
+     "do": [
+      {
+       "a": "pre",
+       "at": "Tevez"
+      },
+      {
+       "a": "slam",
+       "at": "Number"
+      }
+     ],
+     "emph": [
+      "beat"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arc6",
+   "type": "arc",
+   "palette": "gold",
+   "data": {
+    "kicker": "NUMBER 6",
+    "title": [
+     "THE CAPTAIN",
+     "WHO LEFT"
+    ],
+    "sub": "ROBIN VAN PERSIE · ARSENAL → MAN UNITED · 2012"
+   },
+   "beats": [
+    {
+     "say": "Number six. Robin van Persie.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Robin"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "mystery"
+  },
+  {
+   "id": "rvp",
+   "type": "photo",
+   "palette": "madrid",
+   "data": {
+    "slot": 5,
+    "desc": "Robin van Persie in a Manchester United shirt, 2012-13",
+    "cap": "MAN UNITED · 2012–13"
+   },
+   "beats": [
+    {
+     "say": "He was Arsenal's captain. In August twenty twelve, Manchester United paid twenty-two and a half million pounds for him.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Arsenal's"
+      },
+      {
+       "a": "crop2",
+       "at": "August"
+      },
+      {
+       "a": "cap",
+       "at": "paid"
+      }
+     ]
+    },
+    {
+     "say": "So why did this one hurt more than the others?",
+     "emph": [
+      "hurt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rvp-why",
+   "type": "counter",
+   "palette": "violet",
+   "speaker": "P",
+   "data": {
+    "value": 26,
+    "label": "PREMIER LEAGUE GOALS · 2012–13",
+    "sub": "UNITED WIN THE TITLE · ARSENAL FINISH 4TH"
+   },
+   "beats": [
+    {
+     "say": "Because he didn't just leave. He scored twenty-six league goals in his first season.",
+     "do": [
+      {
+       "a": "count",
+       "at": "he"
+      }
+     ],
+     "emph": [
+      "twenty-six",
+      "twenty"
+     ]
+    },
+    {
+     "say": "Manchester United won the title. Arsenal finished fourth.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "United"
+      }
+     ],
+     "emph": [
+      "fourth"
+     ],
+     "react": {
+      "emo": "sad",
+      "cap": "PAIN."
+     }
+    }
+   ],
+   "bed": "sad"
+  },
+  {
+   "id": "arc5",
+   "type": "arc",
+   "palette": "violet",
+   "data": {
+    "kicker": "NUMBER 5",
+    "title": [
+     "MADRID",
+     "TO BARCELONA"
+    ],
+    "sub": "LUIS ENRIQUE · REAL MADRID → BARCELONA · 1996"
+   },
+   "beats": [
+    {
+     "say": "Number five. Luis Enrique.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Luis"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "enrique",
+   "type": "photo",
+   "palette": "barca",
+   "data": {
+    "slot": 6,
+    "desc": "Luis Enrique in a Barcelona shirt, late 1990s",
+    "cap": "BARCELONA · 1996–2004"
+   },
+   "beats": [
+    {
+     "say": "Five seasons at Real Madrid. Then, in nineteen ninety-six, he signed for Barcelona.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Five"
+      },
+      {
+       "a": "crop2",
+       "at": "nineteen"
+      }
+     ]
+    },
+    {
+     "say": "He stayed eight seasons. Years later he came back as their coach, and won the treble.",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "eight"
+      },
+      {
+       "a": "cap",
+       "at": "coach"
+      }
+     ],
+     "emph": [
+      "treble"
+     ],
+     "react": {
+      "emo": "hype",
+      "cap": "VILLAIN → KING"
+     }
+    }
+   ]
+  },
+  {
+   "id": "arc4",
+   "type": "arc",
+   "palette": "mint",
+   "data": {
+    "kicker": "NUMBER 4",
+    "title": [
+     "THE FREE",
+     "TRANSFER"
+    ],
+    "sub": "SOL CAMPBELL · TOTTENHAM → ARSENAL · 2001"
+   },
+   "beats": [
+    {
+     "say": "Number four. Sol Campbell.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Sol"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "campbell",
+   "type": "photo",
+   "palette": "gold",
+   "data": {
+    "slot": 7,
+    "desc": "Sol Campbell in an Arsenal shirt, 2001-02",
+    "cap": "NORTH LONDON · 2001"
+   },
+   "beats": [
+    {
+     "say": "He came through Tottenham's ranks and spent nine years there.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "came"
+      },
+      {
+       "a": "crop2",
+       "at": "nine"
+      }
+     ]
+    },
+    {
+     "say": "Then, in July two thousand and one, he walked across North London to Arsenal. For free.",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "July"
+      },
+      {
+       "a": "cap",
+       "at": "Arsenal"
+      }
+     ],
+     "emph": [
+      "free"
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "FOR FREE?!"
+     }
+    }
+   ]
+  },
+  {
+   "id": "campbell-won",
+   "type": "checklist",
+   "palette": "mint",
+   "data": {
+    "items": [
+     "2 PREMIER LEAGUE TITLES",
+     "3 FA CUPS",
+     "THE INVINCIBLES · 2003–04"
+    ]
+   },
+   "beats": [
+    {
+     "say": "At Arsenal he won two league titles, three FA Cups,",
+     "do": [
+      {
+       "a": "item0",
+       "at": "won"
+      },
+      {
+       "a": "item1",
+       "at": "three"
+      }
+     ]
+    },
+    {
+     "say": "and went a whole season unbeaten.",
+     "do": [
+      {
+       "a": "item2",
+       "at": "whole"
+      }
+     ],
+     "emph": [
+      "unbeaten"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rehook3",
+   "type": "slam",
+   "palette": "sunset",
+   "hud": false,
+   "data": {
+    "pre": "THE BIGGEST LINES IN FOOTBALL",
+    "word": "TOP 3",
+    "fs": 420
+   },
+   "beats": [
+    {
+     "say": "The top three crossed the biggest lines in world football.",
+     "do": [
+      {
+       "a": "pre",
+       "at": "The"
+      },
+      {
+       "a": "slam",
+       "at": "top"
+      }
+     ],
+     "emph": [
+      "biggest"
+     ]
+    }
+   ],
+   "bed": "epic"
+  },
+  {
+   "id": "arc3",
+   "type": "arc",
+   "palette": "madrid",
+   "data": {
+    "kicker": "NUMBER 3",
+    "title": [
+     "THE CLAUSE",
+     "IN NAPLES"
+    ],
+    "sub": "GONZALO HIGUAÍN · NAPOLI → JUVENTUS · 2016"
+   },
+   "beats": [
+    {
+     "say": "Number three. Gonzalo Higuain.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Gonzalo"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "higuain",
+   "type": "photo",
+   "palette": "mint",
+   "data": {
+    "slot": 8,
+    "desc": "Gonzalo Higuaín in a Napoli shirt, 2015-16",
+    "cap": "NAPOLI · 2015–16"
+   },
+   "beats": [
+    {
+     "say": "In his last season at Napoli, he scored thirty-six Serie A goals.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "last"
+      },
+      {
+       "a": "crop2",
+       "at": "thirty-six"
+      },
+      {
+       "a": "cap",
+       "at": "Serie"
+      }
+     ],
+     "emph": [
+      "thirty-six"
+     ]
+    },
+    {
+     "say": "That broke a league record that had stood for sixty-six years. So why did Naples turn on him?",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "broke"
+      }
+     ],
+     "emph": [
+      "sixty-six"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "higuain-clause",
+   "type": "counter",
+   "palette": "barca",
+   "data": {
+    "value": 90,
+    "prefix": "€",
+    "suffix": "M",
+    "label": "RELEASE CLAUSE · JULY 2016",
+    "sub": "THE MOST EXPENSIVE TRANSFER IN ITALIAN HISTORY"
+   },
+   "beats": [
+    {
+     "say": "Because weeks later, Juventus paid his ninety million euro release clause.",
+     "do": [
+      {
+       "a": "count",
+       "at": "weeks"
+      }
+     ],
+     "emph": [
+      "ninety"
+     ]
+    },
+    {
+     "say": "The most expensive transfer in Italian history. To Napoli's biggest rival.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "expensive"
+      }
+     ],
+     "emph": [
+      "rival"
+     ],
+     "react": {
+      "emo": "what",
+      "cap": "THEIR RIVAL?!"
+     }
+    }
+   ],
+   "speaker": "P"
+  },
+  {
+   "id": "arc2",
+   "type": "arc",
+   "palette": "gold",
+   "data": {
+    "kicker": "NUMBER 2",
+    "title": [
+     "FOUR CLUBS",
+     "TWO SIDES"
+    ],
+    "sub": "RONALDO NAZÁRIO · BARÇA · INTER · REAL · MILAN"
+   },
+   "beats": [
+    {
+     "say": "Number two. The original Ronaldo.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "The"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "mystery"
+  },
+  {
+   "id": "r9-clubs",
+   "type": "checklist",
+   "palette": "violet",
+   "data": {
+    "items": [
+     "BARCELONA",
+     "INTER",
+     "REAL MADRID",
+     "AC MILAN"
+    ]
+   },
+   "beats": [
+    {
+     "say": "He played for Barcelona, then Inter,",
+     "do": [
+      {
+       "a": "item0",
+       "at": "played"
+      },
+      {
+       "a": "item1",
+       "at": "Inter"
+      }
+     ]
+    },
+    {
+     "say": "then Real Madrid, then AC Milan.",
+     "do": [
+      {
+       "a": "item2",
+       "at": "Real"
+      },
+      {
+       "a": "item3",
+       "at": "Milan"
+      }
+     ]
+    },
+    {
+     "say": "Two of football's biggest rivalries, and he played on both sides of each.",
+     "emph": [
+      "both"
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "BOTH SIDES?!"
+     }
+    }
+   ]
+  },
+  {
+   "id": "r9-derby",
+   "type": "photo",
+   "palette": "sunset",
+   "data": {
+    "slot": 9,
+    "desc": "Ronaldo Nazário in an AC Milan shirt, Milan derby, March 2007",
+    "cap": "MILAN DERBY · 11.03.2007"
+   },
+   "beats": [
+    {
+     "say": "In March twenty oh seven, in Milan's red and black, he scored against Inter. His old club.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "March"
+      },
+      {
+       "a": "crop2",
+       "at": "Milan's"
+      },
+      {
+       "a": "cap",
+       "at": "scored"
+      }
+     ],
+     "emph": [
+      "old"
+     ]
+    },
+    {
+     "say": "Inter still won, two, one.",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "Inter"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arc1",
+   "type": "arc",
+   "palette": "sunset",
+   "data": {
+    "kicker": "NUMBER 1",
+    "title": [
+     "THE PIG'S",
+     "HEAD"
+    ],
+    "sub": "LUÍS FIGO · BARCELONA → REAL MADRID · 2000"
+   },
+   "beats": [
+    {
+     "say": "Number one. Luis Figo.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Luis"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "epic"
+  },
+  {
+   "id": "figo",
+   "type": "photo",
+   "palette": "clasico",
+   "data": {
+    "slot": 10,
+    "desc": "Luís Figo in a Barcelona shirt, 1999-2000",
+    "cap": "BARCELONA · 1995–2000"
+   },
+   "beats": [
+    {
+     "say": "He was Barcelona's best player.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Barcelona's"
+      }
+     ]
+    },
+    {
+     "say": "In July two thousand, Real Madrid made him the most expensive footballer in the world.",
+     "do": [
+      {
+       "a": "crop2",
+       "at": "July"
+      },
+      {
+       "a": "cap",
+       "at": "expensive"
+      }
+     ],
+     "emph": [
+      "world"
+     ]
+    },
+    {
+     "say": "So how do you steal your biggest rival's best player?",
+     "emph": [
+      "steal"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "promise",
+   "type": "slam",
+   "palette": "gold",
+   "speaker": "P",
+   "data": {
+    "pre": "REAL MADRID ELECTION · 2000",
+    "word": "THE PROMISE",
+    "fs": 260,
+    "sub": "SIGN FIGO, OR THE MEMBERS' SEASON TICKETS ARE ON ME"
+   },
+   "beats": [
+    {
+     "say": "With a promise. Florentino Perez was running to be Real Madrid's president.",
+     "do": [
+      {
+       "a": "pre",
+       "at": "With"
+      },
+      {
+       "a": "slam",
+       "at": "promise"
+      }
+     ],
+     "emph": [
+      "promise"
+     ]
+    },
+    {
+     "say": "He promised the members Figo. And if he failed, he would pay for their season tickets.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "failed"
+      }
+     ],
+     "emph": [
+      "failed"
+     ]
+    },
+    {
+     "say": "He won. And Figo came.",
+     "react": {
+      "emo": "aura",
+      "cap": "IT WORKED."
+     },
+     "hold": 0.3
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "pig",
+   "type": "photo",
+   "palette": "clasico",
+   "data": {
+    "slot": 11,
+    "desc": "Figo taking a corner at the Camp Nou, November 2002",
+    "cap": "CAMP NOU · 2002"
+   },
+   "beats": [
+    {
+     "say": "Two years later, Figo went back to the Camp Now, in white.",
+     "do": [
+      {
+       "a": "crop1",
+       "at": "Two"
+      },
+      {
+       "a": "cap",
+       "at": "Camp"
+      }
+     ]
+    },
+    {
+     "say": "Every time he went to take a corner, things rained down from the stands.",
+     "do": [
+      {
+       "a": "crop2",
+       "at": "corner"
+      }
+     ]
+    },
+    {
+     "say": "Including a pig's head.",
+     "do": [
+      {
+       "a": "crop3",
+       "at": "pig's"
+      }
+     ],
+     "emph": [
+      "pig's"
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "A PIG'S HEAD?!"
+     },
+     "hold": 0.5
+    }
+   ],
+   "bed": "sad"
+  },
+  {
+   "id": "verdict",
+   "type": "slam",
+   "palette": "violet",
+   "hud": false,
+   "data": {
+    "pre": "THE BIGGEST VILLAIN ARC IN FOOTBALL",
+    "word": "FIGO",
+    "fs": 460,
+    "sub": "WHO'S YOUR NUMBER 1? COMMENTS ↓"
+   },
+   "beats": [
+    {
+     "say": "That's the biggest villain arc in football.",
+     "do": [
+      {
+       "a": "pre",
+       "at": "That's"
+      },
+      {
+       "a": "slam",
+       "at": "villain"
+      }
+     ],
+     "emph": [
+      "villain"
+     ]
+    },
+    {
+     "say": "Who would you put at number one? Tell us in the comments.",
+     "do": [
+      {
+       "a": "sub",
+       "at": "Tell"
+      }
+     ],
+     "hold": 2.0
+    }
+   ],
+   "bed": "triumph"
   }
  ],
- "shorts": []
+ "shorts": [
+  {
+   "name": "cashley",
+   "scenes": [
+    "cole",
+    "cole-offer"
+   ],
+   "title": "HOW ASHLEY COLE BECAME 'CASHLEY'",
+   "hook": {
+    "say": "Arsenal offered him fifty-five thousand a week.",
+    "word": "£55K",
+    "pre": "ASHLEY COLE · 2006",
+    "at": "Arsenal"
+   }
+  },
+  {
+   "name": "promise",
+   "scenes": [
+    "promise",
+    "pig"
+   ],
+   "title": "HOW REAL MADRID STOLE FIGO",
+   "hook": {
+    "say": "How do you steal your rival's best player?",
+    "word": "STOLEN",
+    "pre": "FIGO · 2000",
+    "at": "How"
+   }
+  }
+ ]
 }
