@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 6 * * 1" # Mondays 07:00 Lagos
   workflow_dispatch:
+  push: # Claude sessions commit this file instead of dispatching
+    paths:
+      - 0005/requests/run.json
 
 concurrency:
   group: 0005-analytics

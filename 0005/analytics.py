@@ -25,6 +25,10 @@ from googleapiclient.http import MediaInMemoryUpload  # noqa: E402
 from shared.google_client import build_service  # noqa: E402
 from shared.telegram import send_message  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import reach as reach_mod  # noqa: E402
+import verdicts as vmod  # noqa: E402
+
 DRIVE_ROOT = "football-engine"
 DRIVE_SUB = "0005"
 SHEET_NAME = "0005 Channel Analytics"
@@ -58,6 +62,12 @@ PIPE_HEADERS = [
     "Avg view % (mean)", "Net subs", "Subs per 1k views", "Best video", "Best views",
 ]
 HISTORY_HEADERS = ["Snapshot", "Video ID", "Pipeline", "Format", "Views", "Watch min", "Net subs"]
+VERDICT_HEADERS = [
+    "Published", "Video", "Title format(s)", "Age (d)", "Views 48h", "Views 7d", "Views 28d",
+    "Views", "Impressions", "CTR", "Avg view %", "Subs per 1k", "Own outlier score",
+    "Bottleneck", "Verdict", "Next action",
+]
+REACH_HEADERS = ["Date", "Video ID", "Impressions", "CTR"]
 
 
 # ---------- parsing ----------
@@ -233,7 +243,7 @@ def ensure_tabs(sheets, sid: str) -> dict:
     meta = sheets.spreadsheets().get(spreadsheetId=sid, fields="sheets.properties").execute()
     tabs = {s["properties"]["title"]: s["properties"]["sheetId"] for s in meta["sheets"]}
     reqs = []
-    wanted = ["Videos", "Pipelines", "History"]
+    wanted = ["Videos", "Pipelines", "History", "Verdicts", "Reach daily"]
     if not any(t in tabs for t in wanted) and "Sheet1" in tabs:
         reqs.append({"updateSheetProperties": {
             "properties": {"sheetId": tabs["Sheet1"], "title": "Videos"}, "fields": "title"}})
@@ -246,9 +256,33 @@ def ensure_tabs(sheets, sid: str) -> dict:
     return tabs
 
 
-def write_sheet(sheets, sid: str, rows: list, pipes: list, today: dt.date) -> None:
+def read_reach(sheets, sid: str) -> list:
+    ensure_tabs(sheets, sid)
+    got = sheets.spreadsheets().values().get(
+        spreadsheetId=sid, range="Reach daily", valueRenderOption="UNFORMATTED_VALUE").execute()
+    out = []
+    for row in got.get("values", [])[1:]:
+        if len(row) >= 4:
+            out.append((str(row[0]).lstrip("'"), str(row[1]).lstrip("'"), int(row[2] or 0), float(row[3] or 0)))
+    return out
+
+
+def write_sheet(sheets, sid: str, rows: list, pipes: list, today: dt.date,
+                verdict_rows: list = (), reach_daily: list = ()) -> None:
     tabs = ensure_tabs(sheets, sid)
     vals = sheets.spreadsheets().values()
+    extra = {
+        "Verdicts": [VERDICT_HEADERS] + [[
+            v["published"], link(yt_url(v["id"]), v["title"]), v["formats"], v["age"], *v["w"],
+            v["views"], v["imp"], v["ctr"], v["avp"], v["spk"], v["own"], v["bottleneck"],
+            v["verdict"], v["next"]] for v in verdict_rows],
+        "Reach daily": [REACH_HEADERS] + [["'" + d, "'" + v, i, round(c, 4)]
+                                          for d, v, i, c in sorted(reach_daily)],
+    }
+    for tab, data in extra.items():
+        vals.clear(spreadsheetId=sid, range=tab).execute()
+        vals.update(spreadsheetId=sid, range=f"{tab}!A1", valueInputOption="USER_ENTERED",
+                    body={"values": data}).execute()
 
     video_rows = [VIDEO_HEADERS] + [[
         r["published"].isoformat(), link(yt_url(r["id"]), r["title"]), "'" + r["pipeline"],
@@ -282,7 +316,7 @@ def write_sheet(sheets, sid: str, rows: list, pipes: list, today: dt.date) -> No
                 body={"values": hist}).execute()
 
     fmt = []
-    for t in ("Videos", "Pipelines", "History"):
+    for t in ("Videos", "Pipelines", "History", "Verdicts", "Reach daily"):
         fmt += [
             {"updateSheetProperties": {"properties": {"sheetId": tabs[t],
              "gridProperties": {"frozenRowCount": 1}}, "fields": "gridProperties.frozenRowCount"}},
@@ -306,7 +340,8 @@ def _a(r: dict) -> str:
     return f'<a href="{yt_url(r["id"])}">{html.escape(r["title"])}</a>'
 
 
-def render_summary(channel: dict, rows: list, pipes: list, today: dt.date) -> str:
+def render_summary(channel: dict, rows: list, pipes: list, today: dt.date,
+                   verdict_rows: list = (), reach_status: str = "", queue: list = ()) -> str:
     pub = [r for r in rows if r["privacy"] == "public"]
     new = [r for r in pub if (today - r["published"]).days <= 7]
     views_7d = sum(r["views_7d"] for r in pub)
@@ -329,6 +364,16 @@ def render_summary(channel: dict, rows: list, pipes: list, today: dt.date) -> st
         f"Net subs last 7d: {subs_7d:+,}</p>",
         "<p><i>Analytics lag ~2 days, so the newest uploads look small. "
         "Shorts = duration up to 3 min. Avg view % above 100 on Shorts = loops.</i></p>",
+        "<h2>Verdicts: long-form (growth plan Phases 7-8)</h2>",
+        f"<p><i>Reach data: {html.escape(reach_status)}</i></p>",
+        _table(["Published", "Video", "Format(s)", "Views 7d", "Impressions", "CTR",
+                "Avg view %", "Bottleneck", "Verdict", "Next action"],
+               [[v["published"], _a(v), html.escape(v["formats"]), v["w"][1], v["imp"], v["ctr"],
+                 v["avp"], html.escape(v["bottleneck"]), f"<b>{v['verdict']}</b>",
+                 html.escape(v["next"])] for v in verdict_rows])
+        if verdict_rows else "<p>No public long-form videos.</p>",
+        "<h3>Double-down queue</h3>" + ("".join(f"<p>{html.escape(q)}</p>" for q in queue)
+                                         if queue else "<p>-</p>"),
         "<h2>By pipeline</h2>",
         _table(["Pipeline", "Format", "Videos", "Total views", "Median views", "Median views/day",
                 "Avg view %", "Net subs", "Subs/1k", "Best video"],
@@ -389,10 +434,44 @@ def main() -> None:
     root = find_or_create(drive, DRIVE_ROOT, FOLDER_MIME, "root")
     folder = find_or_create(drive, DRIVE_SUB, FOLDER_MIME, root)
     sid = find_or_create(drive, SHEET_NAME, SHEET_MIME, folder)
-    write_sheet(sheets, sid, rows, pipes, today)
+
+    # v3: impressions + CTR (Reporting API), first-48h/7d/28d windows, verdicts
+    daily = read_reach(sheets, sid)
+    try:
+        new_daily, reach_status = reach_mod.fetch(build_service("youtubereporting", "v1"),
+                                                  {d for d, *_ in daily})
+    except Exception as exc:
+        new_daily, reach_status = [], f"Reporting API error: {type(exc).__name__}"
+    daily = sorted(set(daily) | set(new_daily))
+    reach_tot = reach_mod.totals(daily)
+    print(f"Reach: {reach_status}; {len(daily)} daily rows")
+    win = vmod.window_views(yta, rows, today)
+    own = vmod.own_scores(rows)
+    verdict_rows = []
+    for r in rows:
+        if r["format"] != "Long" or r["privacy"] != "public":
+            continue
+        rt = reach_tot.get(r["id"])
+        b, v, nxt = vmod.verdict(r, rt, own.get(r["id"]))
+        w = win.get(r["id"], {})
+        verdict_rows.append({
+            "id": r["id"], "title": r["title"], "published": r["published"].isoformat(),
+            "formats": vmod.classify_formats(r["title"]), "age": r["age"],
+            "w": [("" if w.get(n) is None else w.get(n)) for n in vmod.WINDOWS], "views": r["views"],
+            "imp": rt["impressions"] if rt else "", "ctr": f"{rt['ctr']:.1%}" if rt else "",
+            "avp": r["avg_view_pct"], "spk": r["subs_per_1k"], "own": own.get(r["id"]) or "",
+            "bottleneck": b, "verdict": v, "next": nxt,
+        })
+    queue = vmod.queue_suggestions(
+        sheets, drive, lambda dr, name: (dr.files().list(
+            q=f"name = '{_q(name)}' and mimeType = '{SHEET_MIME}' and trashed = false",
+            fields="files(id)", pageSize=1).execute().get("files") or [{}])[0].get("id"))
+    print(f"Verdicts: {len(verdict_rows)} long-form videos")
+
+    write_sheet(sheets, sid, rows, pipes, today, verdict_rows, daily)
     sheet_url = f"https://docs.google.com/spreadsheets/d/{sid}"
     doc_url = write_doc(drive, folder, f"0005 Weekly - {today.isoformat()}",
-                        render_summary(channel, rows, pipes, today))
+                        render_summary(channel, rows, pipes, today, verdict_rows, reach_status, queue))
     print("Sheet and summary doc written")
 
     pub = [r for r in rows if r["privacy"] == "public"]
@@ -404,6 +483,9 @@ def main() -> None:
     ]
     if best and best["views_7d"]:
         lines.append(f"Top this week: {html.escape(best['title'])} ({best['views_7d']:,})")
+    for v in verdict_rows[:3]:
+        lines.append(f"{v['verdict']}: {html.escape(v['title'])} ({html.escape(v['bottleneck'])})")
+    lines.append(f"Reach: {html.escape(reach_status)}")
     lines += ["", f'<a href="{sheet_url}">Sheet</a> · <a href="{doc_url}">Summary</a>']
     send_message("\n".join(lines))
     print("Telegram sent")
