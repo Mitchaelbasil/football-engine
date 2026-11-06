@@ -1,0 +1,591 @@
+{
+ "meta": {
+  "title": "Footballers Who Became Villains at Their Old Clubs",
+  "note": "Growth-plan test (6 Nov 2026): opening ~100 s of the first Gate-PASS idea (0006 ideas.json 'villain-returns', format footballers_who, lift 1.95x). Promise-Proof-Plan, then #10 Götze. Sources: Götze €37m clause + Bild 23 Apr 2013 (Irish Times); Figo £37m world record 24 Jul 2000, pig's head 2002 (Sports Mole); Lewandowski free 2014 (ESPN).",
+  "idea": {
+   "id": "villain-returns",
+   "format": "footballers_who",
+   "title": "Footballers Who Became Villains at Their Old Clubs",
+   "thumb_text": "VILLAIN ARC",
+   "promise": "Some footballers don't just leave their club. They come back as the villain.",
+   "proof": "We tracked ten of the biggest rival moves in modern football",
+   "plan": "We start with a leak on the eve of a semi-final"
+  },
+  "thumb": {
+   "big": "VILLAIN ARC",
+   "top": "THEY CAME BACK AS",
+   "kicker": "10 BETRAYALS",
+   "palette": "violet",
+   "vs": [
+    "BARCELONA",
+    "REAL MADRID"
+   ],
+   "faces": [
+    {
+     "who": "Luis Figo (Real Madrid kit)",
+     "mood": "smug, looking back"
+    },
+    {
+     "who": "Mario Götze (Bayern kit)",
+     "mood": "guilty"
+    }
+   ]
+  },
+  "hosts": {
+   "H": {
+    "name": "BELLA",
+    "role": "THE STORY"
+   },
+   "P": {
+    "name": "MICHAEL",
+    "role": "THE BREAKDOWN"
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "type": "slam",
+   "palette": "violet",
+   "hud": false,
+   "data": {
+    "pre": "THE VILLAIN ARC",
+    "word": "THEY LEFT.",
+    "fs": 300
+   },
+   "beats": [
+    {
+     "say": "Some footballers don't just leave their club.",
+     "emph": [
+      "leave"
+     ],
+     "do": [
+      {
+       "a": "pre",
+       "at": "Some"
+      },
+      {
+       "a": "slam",
+       "at": "footballers"
+      }
+     ]
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "villain",
+   "type": "slam",
+   "palette": "sunset",
+   "hud": false,
+   "data": {
+    "word": "VILLAIN",
+    "fs": 330,
+    "sub": "10 PLAYERS · 10 BETRAYALS"
+   },
+   "beats": [
+    {
+     "say": "They come back as the villain.",
+     "emph": [
+      "villain"
+     ],
+     "do": [
+      {
+       "a": "slam",
+       "at": "They"
+      },
+      {
+       "a": "sub",
+       "at": "villain"
+      }
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "TRAITOR?!"
+     },
+     "hold": 0.4
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "fee",
+   "type": "counter",
+   "palette": "clasico",
+   "hud": false,
+   "data": {
+    "value": 37,
+    "prefix": "£",
+    "suffix": "M",
+    "label": "WORLD-RECORD FEE · JULY 2000",
+    "sub": "BARCELONA → REAL MADRID"
+   },
+   "beats": [
+    {
+     "say": "One of them cost a world-record thirty-seven million pounds to cross the biggest divide in football.",
+     "emph": [
+      "thirty-seven",
+      "thirty"
+     ],
+     "do": [
+      {
+       "a": "count",
+       "at": "world"
+      },
+      {
+       "a": "sub",
+       "at": "divide"
+      }
+     ]
+    },
+    {
+     "say": "Two years later, his old fans threw a pig's head at him.",
+     "emph": [
+      "pig's"
+     ],
+     "react": {
+      "emo": "what",
+      "cap": "A PIG'S HEAD?!"
+     }
+    }
+   ]
+  },
+  {
+   "id": "proof",
+   "type": "checklist",
+   "palette": "mint",
+   "hud": false,
+   "data": {
+    "items": [
+     "10 RIVAL MOVES",
+     "THE FEES",
+     "THE TIMING",
+     "WHAT HAPPENED NEXT"
+    ]
+   },
+   "beats": [
+    {
+     "say": "We tracked ten of the biggest rival moves in modern football:",
+     "emph": [
+      "ten"
+     ],
+     "do": [
+      {
+       "a": "item0",
+       "at": "ten"
+      }
+     ]
+    },
+    {
+     "say": "the fees, the timing, and what happened next.",
+     "do": [
+      {
+       "a": "item1",
+       "at": "fees"
+      },
+      {
+       "a": "item2",
+       "at": "timing"
+      },
+      {
+       "a": "item3",
+       "at": "happened"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "plan",
+   "type": "checklist",
+   "palette": "gold",
+   "hud": false,
+   "data": {
+    "items": [
+     "A LEAK BEFORE A SEMI-FINAL",
+     "A BILLBOARD THAT BROKE A CITY",
+     "A PIG'S HEAD AT THE CAMP NOU"
+    ]
+   },
+   "beats": [
+    {
+     "say": "We start with a leak on the eve of a semi-final,",
+     "do": [
+      {
+       "a": "item0",
+       "at": "leak"
+      }
+     ]
+    },
+    {
+     "say": "pass a billboard that broke a city,",
+     "do": [
+      {
+       "a": "item1",
+       "at": "billboard"
+      }
+     ]
+    },
+    {
+     "say": "and finish at the Camp Now, with a pig's head.",
+     "emph": [
+      "pig's"
+     ],
+     "do": [
+      {
+       "a": "item2",
+       "at": "Camp"
+      }
+     ],
+     "hold": 0.3
+    }
+   ],
+   "bed": "mystery"
+  },
+  {
+   "id": "arc10",
+   "type": "arc",
+   "palette": "violet",
+   "data": {
+    "kicker": "NUMBER 10",
+    "title": [
+     "THE LEAK",
+     "BEFORE THE SEMI"
+    ],
+    "sub": "MARIO GÖTZE · DORTMUND → BAYERN · 2013"
+   },
+   "beats": [
+    {
+     "say": "Number ten. Mario Goetze.",
+     "do": [
+      "open",
+      {
+       "a": "title",
+       "at": "Mario"
+      },
+      {
+       "a": "sub",
+       "at": "Goetze"
+      }
+     ],
+     "hold": 0.4
+    }
+   ],
+   "bed": "tension"
+  },
+  {
+   "id": "golden",
+   "type": "photo",
+   "palette": "gold",
+   "data": {
+    "slot": 1,
+    "desc": "Mario Götze in a Dortmund shirt, 2012-13 season",
+    "cap": "DORTMUND · 2013"
+   },
+   "beats": [
+    {
+     "say": "He was Dortmund's golden boy. Twenty years old, raised by the club, the future of the team.",
+     "emph": [
+      "golden"
+     ],
+     "do": [
+      {
+       "a": "crop1",
+       "at": "golden"
+      },
+      {
+       "a": "cap",
+       "at": "raised",
+       "dt": 0.25
+      }
+     ]
+    },
+    {
+     "say": "Then, on the twenty-third of April, twenty thirteen, a German newspaper ran four words on its front page.",
+     "do": [
+      {
+       "a": "crop2",
+       "at": "April"
+      },
+      {
+       "a": "crop3",
+       "at": "front"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "headline",
+   "type": "slam",
+   "palette": "sunset",
+   "hud": false,
+   "data": {
+    "pre": "BILD · FRONT PAGE · 23 APRIL 2013",
+    "word": "GÖTZE ZU DEN BAYERN",
+    "fs": 200,
+    "sub": "GÖTZE TO BAYERN"
+   },
+   "beats": [
+    {
+     "say": "Goetze to Byern.",
+     "emph": [
+      "Byern"
+     ],
+     "do": [
+      "pre",
+      {
+       "a": "slam",
+       "at": "Byern"
+      },
+      {
+       "a": "sub",
+       "at": "Byern",
+       "dt": 0.9
+      }
+     ],
+     "react": {
+      "emo": "shock",
+      "cap": "THE DAY BEFORE?!"
+     },
+     "hold": 0.6
+    },
+    {
+     "say": "The next night, Dortmund had a Champions League semi-final against Real Madrid. So why did the timing hurt so much?",
+     "emph": [
+      "semi-final"
+     ],
+     "react": {
+      "emo": "what",
+      "cap": "WHY NOW?"
+     }
+    }
+   ]
+  },
+  {
+   "id": "clause",
+   "type": "counter",
+   "palette": "barca",
+   "speaker": "P",
+   "data": {
+    "value": 37,
+    "prefix": "€",
+    "suffix": "M",
+    "label": "BUYOUT CLAUSE",
+    "sub": "TRIGGERED BY THE CLUB THEY WERE CHASING"
+   },
+   "beats": [
+    {
+     "say": "Because Bayern didn't negotiate. They paid his thirty-seven million euro buyout clause.",
+     "emph": [
+      "didn't"
+     ],
+     "do": [
+      {
+       "a": "count",
+       "at": "Bayern"
+      }
+     ]
+    },
+    {
+     "say": "Dortmund had no say. And Bayern were the exact team they were trying to knock off the top of Germany.",
+     "emph": [
+      "exact"
+     ],
+     "do": [
+      {
+       "a": "sub",
+       "at": "knock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "semi",
+   "type": "timeline",
+   "palette": "madrid",
+   "speaker": "P",
+   "data": {
+    "header": "UCL SEMI-FINAL · 1ST LEG · 24.04.2013",
+    "home": "DORTMUND",
+    "away": "REAL MADRID",
+    "hero": "h",
+    "events": [
+     [
+      8,
+      "LEWANDOWSKI",
+      "h"
+     ],
+     [
+      43,
+      "RONALDO",
+      "a"
+     ],
+     [
+      50,
+      "LEWANDOWSKI",
+      "h"
+     ],
+     [
+      55,
+      "LEWANDOWSKI",
+      "h"
+     ],
+     [
+      66,
+      "LEWANDOWSKI",
+      "h"
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "say": "Dortmund answered the leak the only way they could. They beat Real Madrid four, one.",
+     "do": [
+      "open",
+      {
+       "a": "ev0",
+       "at": "answered"
+      },
+      {
+       "a": "ev1",
+       "at": "only"
+      },
+      {
+       "a": "ev2",
+       "at": "beat"
+      }
+     ]
+    },
+    {
+     "say": "And one striker scored all four.",
+     "emph": [
+      "four"
+     ],
+     "do": [
+      {
+       "a": "ev3",
+       "at": "striker"
+      },
+      {
+       "a": "ev4",
+       "at": "all"
+      },
+      {
+       "a": "final",
+       "at": "four"
+      }
+     ],
+     "hold": 0.4
+    }
+   ],
+   "bed": "hype"
+  },
+  {
+   "id": "final",
+   "type": "slam",
+   "palette": "madrid",
+   "data": {
+    "pre": "WEMBLEY · CHAMPIONS LEAGUE FINAL · 2013",
+    "word": "DORTMUND VS BAYERN",
+    "fs": 190
+   },
+   "beats": [
+    {
+     "say": "A month later, Dortmund met Bayern in the final at Wembley.",
+     "do": [
+      {
+       "a": "pre",
+       "at": "A"
+      },
+      {
+       "a": "slam",
+       "at": "month"
+      }
+     ]
+    }
+   ],
+   "bed": "sad"
+  },
+  {
+   "id": "wembley",
+   "type": "slam",
+   "palette": "violet",
+   "data": {
+    "word": "2–1",
+    "fs": 480,
+    "sub": "BAYERN WIN · GÖTZE MISSED IT INJURED"
+   },
+   "beats": [
+    {
+     "say": "Bayern won, two, one. Goetze watched it injured.",
+     "emph": [
+      "two"
+     ],
+     "do": [
+      {
+       "a": "slam",
+       "at": "Bayern"
+      },
+      {
+       "a": "sub",
+       "at": "Goetze"
+      }
+     ],
+     "react": {
+      "emo": "sad",
+      "cap": "PAIN."
+     }
+    }
+   ],
+   "bed": "sad"
+  },
+  {
+   "id": "next",
+   "type": "slam",
+   "palette": "gold",
+   "hud": false,
+   "data": {
+    "pre": "NUMBER 9",
+    "word": "LEWANDOWSKI",
+    "fs": 230,
+    "sub": "DORTMUND → BAYERN · 2014 · FOR FREE"
+   },
+   "beats": [
+    {
+     "say": "And that striker who scored all four?",
+     "do": [
+      {
+       "a": "pre",
+       "at": "that"
+      },
+      {
+       "a": "slam",
+       "at": "striker"
+      }
+     ]
+    },
+    {
+     "say": "A year later, he made the exact same move. For free.",
+     "emph": [
+      "free"
+     ],
+     "do": [
+      {
+       "a": "sub",
+       "at": "free"
+      }
+     ],
+     "hold": 1.6,
+     "react": {
+      "emo": "what",
+      "cap": "AGAIN?!"
+     }
+    }
+   ],
+   "bed": "tension"
+  }
+ ],
+ "shorts": []
+}
