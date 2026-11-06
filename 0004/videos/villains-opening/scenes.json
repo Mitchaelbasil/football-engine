@@ -417,7 +417,7 @@
    },
    "beats": [
     {
-     "say": "Because Bayern didn't negotiate. They paid his thirty-seven million euro buyout clause.",
+     "say": "Because Byern didn't negotiate. They paid his thirty-seven million euro buyout clause.",
      "emph": [
       "didn't"
      ],
@@ -429,7 +429,7 @@
      ]
     },
     {
-     "say": "Dortmund had no say. And Bayern were the exact team they were trying to knock off the top of Germany.",
+     "say": "Dortmund had no say. And Byern were the exact team they were trying to knock off the top of Germany.",
      "emph": [
       "exact"
      ],
@@ -534,7 +534,7 @@
    },
    "beats": [
     {
-     "say": "A month later, Dortmund met Bayern in the final at Wembley.",
+     "say": "A month later, Dortmund met Byern in the final at Wembley.",
      "do": [
       {
        "a": "pre",
@@ -544,7 +544,8 @@
        "a": "slam",
        "at": "month"
       }
-     ]
+     ],
+     "emph": []
     }
    ],
    "bed": "sad"
@@ -560,14 +561,14 @@
    },
    "beats": [
     {
-     "say": "Bayern won, two, one. Goetze watched it injured.",
+     "say": "Byern won, two, one. Goetze watched it injured.",
      "emph": [
       "two"
      ],
      "do": [
       {
        "a": "slam",
-       "at": "Bayern"
+       "at": "Byern"
       },
       {
        "a": "sub",
@@ -638,7 +639,7 @@
    },
    "beats": [
     {
-     "say": "Dortmund had turned him into a star. Bayern collected the goals.",
+     "say": "Dortmund had turned him into a star. Byern collected the goals.",
      "do": [
       {
        "a": "crop1",
@@ -646,13 +647,14 @@
       },
       {
        "a": "crop2",
-       "at": "Bayern"
+       "at": "Byern"
       },
       {
        "a": "cap",
        "at": "collected"
       }
-     ]
+     ],
+     "emph": []
     }
    ],
    "bed": "tension"
