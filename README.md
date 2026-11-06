@@ -5,7 +5,7 @@
 | Folder | Purpose |
 | --- | --- |
 | `shared/` | Code and utilities shared across modules |
-| `0001/` – `0005/` | Individual modules |
+| `0001/` – `0006/` | Individual modules |
 | `.github/workflows/` | GitHub Actions workflows |
 
 ## Secrets

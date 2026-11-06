@@ -1,0 +1,54 @@
+name: 0006 demand map
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # 10:00 Lagos, after the YouTube quota resets (00:00 Pacific)
+  workflow_dispatch:
+    inputs:
+      max_units:
+        description: "YouTube quota units to spend (max 9500)"
+        default: "9000"
+  push: # Claude sessions can't dispatch: they commit this file instead ({"max_units", "note"})
+    paths:
+      - 0006/requests/run.json
+
+concurrency:
+  group: 0006-demand-map
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: 0006/requirements.txt
+      - run: pip install -r 0006/requirements.txt
+      - name: Resolve budget
+        id: cfg
+        env:
+          EVENT: ${{ github.event_name }}
+          INPUT_UNITS: ${{ inputs.max_units }}
+        run: |
+          if [ "$EVENT" = "push" ]; then
+            units=$(python -c "import json; print(int(json.load(open('0006/requests/run.json')).get('max_units', 1500)))")
+          elif [ -n "$INPUT_UNITS" ]; then
+            units=$(python -c "import sys; print(int(sys.argv[1]))" "$INPUT_UNITS")
+          else
+            units=9000
+          fi
+          echo "units=$units" >> "$GITHUB_OUTPUT"
+      - run: python 0006/demand_map.py --max-units "${{ steps.cfg.outputs.units }}"
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

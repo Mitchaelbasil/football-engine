@@ -46,3 +46,6 @@ Thumbs.db
 # 0004 build outputs
 0004/videos/*/build/
 0004/videos/*/out/
+
+# 0006 local state (the real DB lives on Drive)
+0006/*.sqlite
