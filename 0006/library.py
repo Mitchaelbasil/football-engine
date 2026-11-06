@@ -135,9 +135,10 @@ def idea_rows(pool: list, stats: dict, base_rate: float, formats: list, link) ->
         return [["No ideas.json yet"]]
     ideas = json.loads(IDEAS_FILE.read_text(encoding="utf-8")).get("ideas", [])
     names = {f["id"]: f["name"] for f in formats}
+    rx = {f["id"]: f["rx"] for f in formats}
     out = [["Gate", "Idea", "Subject terms", "Format", "Subject outliers", "Subject channels",
             "Subject hit rate", "Format hit rate", "Format lift", "Why it fails", "Title options",
-            "Thumbnail", "Angle (mechanism -> outcome)", "Evidence"]]
+            "Title check", "Thumbnail", "Angle (mechanism -> outcome)", "Evidence"]]
     for idea in ideas:
         terms = [t.lower() for t in idea.get("subject_terms", [])]
         rows = [r for r in pool if any(t in r["title"].lower() for t in terms)]
@@ -157,16 +158,37 @@ def idea_rows(pool: list, stats: dict, base_rate: float, formats: list, link) ->
             "PASS" if not fails else "FAIL", idea.get("idea", ""), ", ".join(terms),
             names.get(idea.get("format"), idea.get("format", "?")), w, chans,
             round(rate, 3) if n else "", round(fs["rate"], 3), round(fs["lift"], 2),
-            "; ".join(fails), " || ".join(idea.get("titles", [])), idea.get("thumbnail", ""),
+            "; ".join(fails), " || ".join(idea.get("titles", [])),
+            " || ".join(title_check(t, rx.get(idea.get("format"))) for t in idea.get("titles", [])),
+            idea.get("thumbnail", ""),
             idea.get("angle", ""), _examples(wins, link),
         ])
     return out
 
 
-def export_text(pool: list, limit: int = 400) -> str:
+def title_check(title: str, fmt_rx) -> str:
+    """Packaging lint from the Features tab: short, no '?' or '!', and it must use its format."""
+    issues = []
+    if len(title) > 60:
+        issues.append(f"{len(title)} chars (>60 truncates on mobile)")
+    if "?" in title:
+        issues.append("question mark (lift 0.69)")
+    if "!" in title:
+        issues.append("'!' (lift 0.73)")
+    if fmt_rx is not None and not fmt_rx.search(LEAD_RE.sub("", title)):
+        issues.append("doesn't use its format")
+    return "ok" if not issues else "; ".join(issues)
+
+
+def table_text(name: str, rows: list) -> str:
+    return f"## {name}\n" + "\n".join("\t".join(str(c) for c in r) for r in rows) + "\n"
+
+
+def export_text(pool: list, limit: int = 400, tables: dict = None) -> str:
     """Plain-text dump of the strongest creator outliers, for Claude's format/idea review."""
     wins = sorted([r for r in pool if r["win"]], key=lambda r: r["score"], reverse=True)[:limit]
-    lines = ["score\tviews\tmin\tformats\tchannel\ttitle"]
+    head = "".join(table_text(k, v) for k, v in (tables or {}).items())
+    lines = [head + "## Top creator outliers", "score\tviews\tmin\tformats\tchannel\ttitle"]
     for r in wins:
         lines.append(f"{r['score']:g}\t{r['views']}\t{r['duration'] // 60}\t"
                      f"{','.join(r.get('formats', [])) or '-'}\t{r['ctitle']}\t{r['title']}")

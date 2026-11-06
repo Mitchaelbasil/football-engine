@@ -675,10 +675,15 @@ def sheet_data(db, runs: list) -> dict:
     formats = lib.load_formats()
     pool = lib.creator_pool(db, OUTLIER, MIN_OUTLIER_VIEWS, HIGH_VOLUME, replicable)
     fmt_rows, fstats, base = lib.format_rows(pool, formats, link)
-    return {"Ideas": lib.idea_rows(pool, fstats, base, formats, link), "Formats": fmt_rows,
-            "Outliers": out_rows, "Topics": top_rows, "Features": lib.feature_rows(pool),
-            "Channels": ch_rows, "Adjacent": adj_rows, "Log": log_rows,
-            "_export": lib.export_text(pool)}
+    idea_rows = lib.idea_rows(pool, fstats, base, formats, link)
+    feat_rows = lib.feature_rows(pool)
+    plain = lambda rows: [[c if not str(c).startswith("=") else "" for c in r] for r in rows]  # noqa: E731
+    export = lib.export_text(pool, tables={
+        "Ideas": [r[:11] for r in plain(idea_rows)], "Formats": [r[:9] for r in fmt_rows],
+        "Features": feat_rows, "Topics": [r[:6] for r in top_rows[:120]]})
+    return {"Ideas": idea_rows, "Formats": fmt_rows, "Outliers": out_rows, "Topics": top_rows,
+            "Features": feat_rows, "Channels": ch_rows, "Adjacent": adj_rows, "Log": log_rows,
+            "_export": export}
 
 
 def write_export(drive, folder: str, text: str) -> None:

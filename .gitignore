@@ -49,3 +49,6 @@ Thumbs.db
 
 # 0006 local state (the real DB lives on Drive)
 0006/*.sqlite
+
+# 0006 feed simulator output
+.feedsim/
