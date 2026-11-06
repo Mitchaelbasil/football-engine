@@ -67,6 +67,13 @@ def make(doc: dict, voice_backend: str, build: Path, size, allow_invalid=False):
           f"robotic runs {len(rep['robotic_at'])}, micro {len(tl['micro'])}, airtime {hosts}, ok={rep['ok']}")
     for w in rep["warnings"]:
         print("  warn:", w)
+    if not rep["ok"]:
+        # say where the plan failed, in script terms, so the scenes can be fixed without the timeline file
+        for t in rep["robotic_at"] + [o if isinstance(o, (int, float)) else o[0] for o in rep.get("over_limit", [])]:
+            sc = next((s["id"] for s in tl["scenes"] if s["start"] <= t < s["end"]), "?")
+            near = " ".join(f"{w['w']}@{w['s']:.2f}" for w in tl["words"] if t - 2.5 <= w["s"] <= t + 6)
+            chg = [round(c, 2) for c in plan.all_changes(tl) if t - 0.5 <= c <= t + 6.5]
+            print(f"  plan issue @{t:.2f}s in scene '{sc}': changes {chg} | words {near}")
     if not rep["ok"] and not allow_invalid:
         sys.exit(f"motion plan failed validation: {rep}")
     return tl
