@@ -1,1 +1,7 @@
-{"video": "villains-opening", "voice": "kokoro:af_bella", "note": "villains full script (#10-#1): first full video on the growth system", "telegram": false, "rev": 9}
+{
+ "video": "_introtest",
+ "voice": "kokoro:af_bella",
+ "note": "arc intro test (DS smoke on #1)",
+ "telegram": false,
+ "rev": 10
+}
