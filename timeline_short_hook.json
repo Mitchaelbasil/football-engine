@@ -1,0 +1,646 @@
+{
+ "w": 1080,
+ "h": 1920,
+ "fps": 30,
+ "total": 25.872,
+ "scenes": [
+  {
+   "id": "r9-derby",
+   "type": "photo",
+   "palette": "sunset",
+   "start": 0.0,
+   "end": 8.75,
+   "data": {
+    "slot": 9,
+    "desc": "Ronaldo Naz\u00e1rio in an AC Milan shirt, Milan derby, March 2007",
+    "cap": "MILAN DERBY \u00b7 11.03.2007"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 0.362
+    },
+    {
+     "a": "crop2",
+     "t": 1.875
+    },
+    {
+     "a": "cap",
+     "t": 3.574
+    },
+    {
+     "a": "crop3",
+     "t": 6.553
+    }
+   ],
+   "tr": "zoom",
+   "arcLabel": null,
+   "hud": true
+  },
+  {
+   "id": "arc1",
+   "type": "arc",
+   "palette": "sunset",
+   "start": 8.75,
+   "end": 11.628,
+   "data": {
+    "kicker": "NUMBER 1",
+    "title": [
+     "THE PIG'S",
+     "HEAD"
+    ],
+    "sub": "LU\u00cdS FIGO \u00b7 BARCELONA \u2192 REAL MADRID \u00b7 2000"
+   },
+   "ev": [
+    {
+     "a": "open",
+     "t": 9.1
+    },
+    {
+     "a": "title",
+     "t": 9.958
+    }
+   ],
+   "tr": "slide",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": true
+  },
+  {
+   "id": "figo",
+   "type": "photo",
+   "palette": "clasico",
+   "start": 11.628,
+   "end": 22.272,
+   "data": {
+    "slot": 10,
+    "desc": "Lu\u00eds Figo in a Barcelona shirt, 1999-2000",
+    "cap": "BARCELONA \u00b7 1995\u20132000"
+   },
+   "ev": [
+    {
+     "a": "crop1",
+     "t": 12.176
+    },
+    {
+     "a": "crop2",
+     "t": 14.001
+    },
+    {
+     "a": "cap",
+     "t": 17.076
+    }
+   ],
+   "tr": "rise",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": true
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "palette": "violet",
+   "start": 22.272,
+   "end": 25.472,
+   "data": {
+    "line": "FULL STORY ON THE CHANNEL",
+    "title": "arc intro test"
+   },
+   "ev": [],
+   "tr": "flash",
+   "arcLabel": "NUMBER 1 \u00b7 THE PIG'S HEAD",
+   "hud": false
+  }
+ ],
+ "overlays": [],
+ "intros": [],
+ "beats": [
+  {
+   "t": 0.25,
+   "end": 6.382,
+   "say": "In March twenty oh seven, in Milan's red and black, he scored against Inter. His old club.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_introtest/build/voice_kokoro_af_bella/bb877b142d55eede.wav",
+   "scene": 0,
+   "speaker": "H"
+  },
+  {
+   "t": 6.542,
+   "end": 8.34,
+   "say": "Inter still won, two, one.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_introtest/build/voice_kokoro_af_bella/2b43c633e0d5d3f6.wav",
+   "scene": 0,
+   "speaker": "H"
+  },
+  {
+   "t": 9.1,
+   "end": 10.918,
+   "say": "Number one. Luis Figo.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_introtest/build/voice_kokoro_af_bella/d24da03b9e927e5e.wav",
+   "scene": 1,
+   "speaker": "H"
+  },
+  {
+   "t": 11.978,
+   "end": 13.711,
+   "say": "He was Barcelona's best player.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_introtest/build/voice_kokoro_af_bella/51e8766229e1e064.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 13.871,
+   "end": 19.064,
+   "say": "In July two thousand, Real Madrid made him the most expensive footballer in the world.",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_introtest/build/voice_kokoro_af_bella/3366125592ce22a9.wav",
+   "scene": 2,
+   "speaker": "H"
+  },
+  {
+   "t": 19.224,
+   "end": 21.862,
+   "say": "So how do you steal your biggest rival's best player?",
+   "wav": "/home/runner/work/football-engine/football-engine/0004/videos/_introtest/build/voice_kokoro_af_bella/99552c53a4f367cd.wav",
+   "scene": 2,
+   "speaker": "H"
+  }
+ ],
+ "words": [
+  {
+   "w": "In",
+   "s": 0.262,
+   "e": 0.362,
+   "emph": false
+  },
+  {
+   "w": "March",
+   "s": 0.362,
+   "e": 0.662,
+   "emph": false
+  },
+  {
+   "w": "twenty",
+   "s": 0.662,
+   "e": 0.95,
+   "emph": false
+  },
+  {
+   "w": "oh",
+   "s": 0.95,
+   "e": 1.099,
+   "emph": false
+  },
+  {
+   "w": "seven",
+   "s": 1.099,
+   "e": 1.687,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 1.787,
+   "e": 1.875,
+   "emph": false
+  },
+  {
+   "w": "Milan's",
+   "s": 1.875,
+   "e": 2.399,
+   "emph": false
+  },
+  {
+   "w": "red",
+   "s": 2.399,
+   "e": 2.737,
+   "emph": false
+  },
+  {
+   "w": "and",
+   "s": 2.737,
+   "e": 2.862,
+   "emph": false
+  },
+  {
+   "w": "black",
+   "s": 2.862,
+   "e": 3.337,
+   "emph": false
+  },
+  {
+   "w": "he",
+   "s": 3.412,
+   "e": 3.574,
+   "emph": false
+  },
+  {
+   "w": "scored",
+   "s": 3.574,
+   "e": 3.949,
+   "emph": false
+  },
+  {
+   "w": "against",
+   "s": 3.949,
+   "e": 4.287,
+   "emph": false
+  },
+  {
+   "w": "Inter",
+   "s": 4.287,
+   "e": 5.187,
+   "emph": false
+  },
+  {
+   "w": "His",
+   "s": 5.362,
+   "e": 5.562,
+   "emph": false
+  },
+  {
+   "w": "old",
+   "s": 5.562,
+   "e": 5.85,
+   "emph": true
+  },
+  {
+   "w": "club",
+   "s": 5.85,
+   "e": 6.587,
+   "emph": false
+  },
+  {
+   "w": "Inter",
+   "s": 6.553,
+   "e": 6.903,
+   "emph": false
+  },
+  {
+   "w": "still",
+   "s": 6.903,
+   "e": 7.153,
+   "emph": false
+  },
+  {
+   "w": "won",
+   "s": 7.153,
+   "e": 7.453,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 7.566,
+   "e": 7.828,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 7.903,
+   "e": 8.553,
+   "emph": false
+  },
+  {
+   "w": "Number",
+   "s": 9.121,
+   "e": 9.346,
+   "emph": false
+  },
+  {
+   "w": "one",
+   "s": 9.346,
+   "e": 9.821,
+   "emph": false
+  },
+  {
+   "w": "Luis",
+   "s": 9.958,
+   "e": 10.321,
+   "emph": false
+  },
+  {
+   "w": "Figo",
+   "s": 10.321,
+   "e": 11.146,
+   "emph": false
+  },
+  {
+   "w": "He",
+   "s": 11.978,
+   "e": 12.039,
+   "emph": false
+  },
+  {
+   "w": "was",
+   "s": 12.039,
+   "e": 12.176,
+   "emph": false
+  },
+  {
+   "w": "Barcelona's",
+   "s": 12.176,
+   "e": 12.851,
+   "emph": false
+  },
+  {
+   "w": "best",
+   "s": 12.851,
+   "e": 13.151,
+   "emph": false
+  },
+  {
+   "w": "player",
+   "s": 13.151,
+   "e": 13.951,
+   "emph": false
+  },
+  {
+   "w": "In",
+   "s": 13.876,
+   "e": 14.001,
+   "emph": false
+  },
+  {
+   "w": "July",
+   "s": 14.001,
+   "e": 14.389,
+   "emph": false
+  },
+  {
+   "w": "two",
+   "s": 14.389,
+   "e": 14.601,
+   "emph": false
+  },
+  {
+   "w": "thousand",
+   "s": 14.601,
+   "e": 15.451,
+   "emph": false
+  },
+  {
+   "w": "Real",
+   "s": 15.589,
+   "e": 15.851,
+   "emph": false
+  },
+  {
+   "w": "Madrid",
+   "s": 15.851,
+   "e": 16.351,
+   "emph": false
+  },
+  {
+   "w": "made",
+   "s": 16.351,
+   "e": 16.538,
+   "emph": false
+  },
+  {
+   "w": "him",
+   "s": 16.538,
+   "e": 16.714,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 16.714,
+   "e": 16.801,
+   "emph": false
+  },
+  {
+   "w": "most",
+   "s": 16.801,
+   "e": 17.076,
+   "emph": false
+  },
+  {
+   "w": "expensive",
+   "s": 17.076,
+   "e": 17.789,
+   "emph": false
+  },
+  {
+   "w": "footballer",
+   "s": 17.789,
+   "e": 18.363,
+   "emph": false
+  },
+  {
+   "w": "in",
+   "s": 18.363,
+   "e": 18.438,
+   "emph": false
+  },
+  {
+   "w": "the",
+   "s": 18.438,
+   "e": 18.526,
+   "emph": false
+  },
+  {
+   "w": "world",
+   "s": 18.526,
+   "e": 19.301,
+   "emph": true
+  },
+  {
+   "w": "So",
+   "s": 19.241,
+   "e": 19.341,
+   "emph": false
+  },
+  {
+   "w": "how",
+   "s": 19.341,
+   "e": 19.478,
+   "emph": false
+  },
+  {
+   "w": "do",
+   "s": 19.478,
+   "e": 19.579,
+   "emph": false
+  },
+  {
+   "w": "you",
+   "s": 19.579,
+   "e": 19.704,
+   "emph": false
+  },
+  {
+   "w": "steal",
+   "s": 19.704,
+   "e": 20.066,
+   "emph": true
+  },
+  {
+   "w": "your",
+   "s": 20.066,
+   "e": 20.228,
+   "emph": false
+  },
+  {
+   "w": "biggest",
+   "s": 20.228,
+   "e": 20.591,
+   "emph": false
+  },
+  {
+   "w": "rival's",
+   "s": 20.591,
+   "e": 21.041,
+   "emph": false
+  },
+  {
+   "w": "best",
+   "s": 21.041,
+   "e": 21.316,
+   "emph": false
+  },
+  {
+   "w": "player",
+   "s": 21.316,
+   "e": 22.116,
+   "emph": false
+  }
+ ],
+ "micro": [
+  {
+   "t": 5.562,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 15.851,
+   "k": "accent",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 19.241,
+   "k": "pull",
+   "dir": 1,
+   "auto": true
+  },
+  {
+   "t": 19.704,
+   "k": "punch",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 21.316,
+   "k": "accent",
+   "dir": -1,
+   "auto": true
+  },
+  {
+   "t": 23.784,
+   "k": "sweep",
+   "dir": 1,
+   "auto": true
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.08,
+   "g": "photo",
+   "align": "attack"
+  },
+  {
+   "t": 8.87,
+   "g": "whoosh",
+   "align": "peak"
+  },
+  {
+   "t": 9.958,
+   "g": "title",
+   "align": "attack"
+  },
+  {
+   "t": 11.708,
+   "g": "photo",
+   "align": "attack"
+  }
+ ],
+ "speakers": [
+  {
+   "who": "H",
+   "t": 0.25,
+   "end": 21.862,
+   "talk": [
+    [
+     0.25,
+     6.382
+    ],
+    [
+     6.542,
+     8.34
+    ],
+    [
+     9.1,
+     10.918
+    ],
+    [
+     11.978,
+     13.711
+    ],
+    [
+     13.871,
+     19.064
+    ],
+    [
+     19.224,
+     21.862
+    ]
+   ]
+  }
+ ],
+ "hosts": {
+  "H": {
+   "name": "BELLA",
+   "role": "THE STORY"
+  },
+  "P": {
+   "name": "MICHAEL",
+   "role": "THE BREAKDOWN"
+  }
+ },
+ "manual_sfx": [],
+ "seed": "arc intro test",
+ "cues": [
+  {
+   "t": 0.08,
+   "what": "PHOTO",
+   "idea": "photo"
+  },
+  {
+   "t": 8.87,
+   "what": "TRANSITION",
+   "idea": "whoosh"
+  },
+  {
+   "t": 9.958,
+   "what": "TITLE",
+   "idea": "title"
+  },
+  {
+   "t": 11.708,
+   "what": "PHOTO",
+   "idea": "photo"
+  }
+ ],
+ "beds": [
+  {
+   "t0": 8.75,
+   "t1": 22.272,
+   "mood": "epic"
+  }
+ ],
+ "report": {
+  "changes": 19,
+  "avg_gap": 1.36,
+  "max_gap": 2.2,
+  "over_limit": [],
+  "robotic_at": [],
+  "ok": true,
+  "warnings": []
+ }
+}

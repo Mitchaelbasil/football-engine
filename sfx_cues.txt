@@ -1,0 +1,5 @@
+SFX PLAYED (time, group, file from Drive 0004/sfx)
+
+0:00.08  photo photo_fx_camera_shutter.wav
+0:17.34  photo photo_doc_camera_shutter.wav
+0:08.75  arc_intro arcintro_ds_audio.wav
