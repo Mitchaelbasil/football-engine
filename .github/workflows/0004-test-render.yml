@@ -42,7 +42,8 @@ jobs:
         continue-on-error: true
         run: python 0004/pipeline/preflight.py "$VID"
       - name: Install system deps
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg > /dev/null
+        timeout-minutes: 10
+        run: sudo apt-get update -qq -o Acquire::Retries=3 && sudo apt-get install -y -qq -o Acquire::Retries=3 espeak-ng ffmpeg > /dev/null
       - name: Install Python deps
         run: |
           pip install -q torch --index-url https://download.pytorch.org/whl/cpu
