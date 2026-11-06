@@ -1,0 +1,53 @@
+name: 0004 photo intake
+
+# A new or edited script -> Drive photo slots + SLOTS doc + Telegram list + render clock (3c).
+on:
+  push:
+    paths:
+      - "0004/videos/*/scenes.json"
+      - 0004/requests/intake.json
+  workflow_dispatch:
+    inputs:
+      video:
+        description: "Folder under 0004/videos"
+        required: true
+
+concurrency:
+  group: 0004-intake
+  cancel-in-progress: false
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - name: Which videos
+        run: |
+          V="${{ inputs.video }}"
+          if [ -z "$V" ]; then
+            V=$(git diff --name-only HEAD~1 HEAD -- '0004/videos/*/scenes.json' | cut -d/ -f3 | grep -v '^_' | sort -u | tr '\n' ' ')
+            if git diff --name-only HEAD~1 HEAD | grep -q '^0004/requests/intake.json$'; then V="$V $(jq -r '.video' 0004/requests/intake.json)"; fi
+          fi
+          echo "VIDEOS=$(echo $V | tr ' ' '\n' | sort -u | tr '\n' ' ')" >> $GITHUB_ENV
+      - uses: actions/setup-python@v6
+        if: env.VIDEOS != ' ' && env.VIDEOS != ''
+        with:
+          python-version: "3.12"
+      - name: Intake
+        if: env.VIDEOS != ' ' && env.VIDEOS != ''
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          pip install -q google-api-python-client==2.151.0 google-auth==2.36.0
+          for v in $VIDEOS; do
+            python 0004/pipeline/preflight.py "0004/videos/$v" | sed 's/^/::warning title=preflight $v::/' || true
+            AT=""; [ "$(jq -r '.video' 0004/requests/intake.json 2>/dev/null)" = "$v" ] && AT=$(jq -r '.render_at // ""' 0004/requests/intake.json)
+            python 0004/pipeline/photos.py intake "$v" $AT | sed 's/^/::notice title=intake::/'
+          done

@@ -1,0 +1,87 @@
+name: 0004 scheduled render
+
+# 3d: every hour, render the first video whose photo window has closed (photos.py due), with whatever
+# slots Mitchael filled. Delivers to Drive football-engine/0004/videos/<video>/out + Telegram.
+on:
+  schedule:
+    - cron: "20 * * * *"
+  workflow_dispatch:
+    inputs:
+      video:
+        description: "Force-render this folder now"
+        default: ""
+  push:  # Claude sessions commit this file to force a render ({"video": "...", "note": "..."})
+    paths:
+      - 0004/requests/render.json
+
+concurrency:
+  group: 0004-scheduled-render
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+  GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: 0004/requirements.txt
+      - name: Anything due
+        run: |
+          pip install -q google-api-python-client==2.151.0 google-auth==2.36.0
+          F="${{ inputs.video }}"
+          [ "${{ github.event_name }}" = "push" ] && F=$(jq -r '.video // ""' 0004/requests/render.json)
+          V=$(python 0004/pipeline/photos.py due $F)
+          echo "VIDEO=$V" >> $GITHUB_ENV; echo "VID=0004/videos/$V" >> $GITHUB_ENV
+          [ -n "$V" ] && echo "::notice title=render::$V" || echo "nothing due"
+      - name: Install deps
+        if: env.VIDEO != ''
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg > /dev/null
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q -r 0004/requirements.txt
+          python -m playwright install --with-deps chromium > /dev/null
+      - name: Restore Drive assets
+        if: env.VIDEO != ''
+        uses: actions/cache@v4
+        with:
+          path: assets
+          key: assets-${{ github.run_id }}
+          restore-keys: assets-
+      - name: Sync assets + pull photos
+        if: env.VIDEO != ''
+        run: |
+          python 0004/pipeline/assets.py --doc "$VID/scenes.json" --out assets | tail -3
+          python 0004/pipeline/photos.py pull "$VIDEO" | sed 's/^/::notice title=photos::/'
+      - name: Build
+        if: env.VIDEO != ''
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        run: |
+          set -o pipefail
+          source 0004/pipeline/kaggle_auth.sh
+          python 0004/pipeline/build.py "$VID" --voice kokoro:af_bella --assets assets --video --shorts --thumbs 2>&1 | tee build.log
+          grep -E '^(plan\[|  plan issue)' build.log | while read -r l; do echo "::notice title=plan::$l"; done || true
+          python 0004/pipeline/describe.py "$VID"
+      - name: Deliver
+        if: always() && env.VIDEO != ''
+        run: |
+          if [ -f "$VID/out/final.mp4" ]; then OK=ok; NOTE="🎬 Ready to upload: $(jq -r '.meta.title' $VID/scenes.json)"; else OK=fail; NOTE="❌ Render failed: $VIDEO (retries next hour, 3 tries max)"; fi
+          grep -q 'VOICE FALLBACK' build.log 2>/dev/null && NOTE="$NOTE (⚠️ fallback voice)"
+          N=$(ls "$VID"/photos/slot_* 2>/dev/null | wc -l); NOTE="$NOTE · $N photo slots filled"
+          LINK=$(python 0004/pipeline/deliver.py --drive-path "football-engine/0004/videos/$VIDEO/out" --note "$NOTE" \
+            "$VID"/out/*.mp4 "$VID"/out/thumb_*.png "$VID"/out/*.txt build.log | tail -1)
+          python 0004/pipeline/photos.py done "$VIDEO" "$OK" "$LINK" | sed 's/^/::notice title=status::/'
