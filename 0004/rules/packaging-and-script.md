@@ -24,6 +24,18 @@ The 0004 script writer (a scheduled task or a `0004:` chat) reads this file, `00
 - **Text: 3 words or fewer**, and complementary to the title, never a repeat of it.
 - **One focal subject plus one number or symbol.** Saturated colours: Daylight palette, pushed brighter at thumbnail size.
 - **Run the feed simulator on every thumbnail and title pair before upload.** It picks the variant that stands out in a real feed.
+- **Three proven templates** (thumbnail galleries in Drive `football-engine/0006/gallery/`, top outliers per format):
+  - **T1, face-row data strip.** For "Footballers Who", "N Players" and "Most X" lists:
+    - 4–6 cut-out player faces in a row, each with a name label and one big number, flag or trophy count underneath
+    - yellow/red labels on a saturated background
+    - This is the GOAT stats, Real Data 360 and Sportivion look (outliers from 50× to 1,500×). It fits our data mechanism exactly.
+  - **T2, one face plus a verdict.** For Rise and Fall, Exposed and The Day:
+    - one large face, often split bright/dark or with a red/green arrow
+    - 2–3 words in caps ("GONE FOREVER", "THEY SUCK.", "EXPLOITED")
+  - **T3, illustrated character.** For full stories:
+    - cartoon or anime-style player art (FDOR "Neymar Jr Full Story" 3.9M views; HitoCast)
+    - This is direct evidence that our anime identity can sell in the thumbnail. The art must be ours or licensed.
+- **"Prime X Was …" outliers are almost all raw match-footage frames with no text.** We can't use footage, so this format's lift is partly theirs, not ours. Use T2 with a photo Mitchael supplies, and treat early results as a test.
 
 ## 3. The first 30–45 seconds: Promise → Proof → Plan
 1. **Promise (first sentence, ≤ 10 s).** Restate exactly what the title and thumbnail promised, over the *same* image and number the thumbnail shows. The viewer must feel they clicked the right video.
