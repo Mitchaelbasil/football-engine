@@ -444,6 +444,12 @@ def main() -> None:
         new_daily, reach_status = [], f"Reporting API error: {type(exc).__name__}"
     daily = sorted(set(daily) | set(new_daily))
     reach_tot = reach_mod.totals(daily)
+    manual = Path(__file__).resolve().parent / "manual_reach.json"
+    if manual.exists():
+        import json
+        for vid, m in json.loads(manual.read_text(encoding="utf-8")).items():
+            if not vid.startswith("_") and vid not in reach_tot:
+                reach_tot[vid] = {"impressions": m["impressions"], "ctr": m["ctr"]}
     print(f"Reach: {reach_status}; {len(daily)} daily rows")
     win = vmod.window_views(yta, rows, today)
     own = vmod.own_scores(rows)

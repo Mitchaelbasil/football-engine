@@ -38,6 +38,9 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: 0004/requirements.txt
+      - name: Preflight (packaging + Promise-Proof-Plan; warnings only)
+        continue-on-error: true
+        run: python 0004/pipeline/preflight.py "$VID"
       - name: Install system deps
         run: sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg > /dev/null
       - name: Install Python deps

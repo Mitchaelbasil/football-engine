@@ -1,0 +1,12 @@
+{
+  "_note": "Paste into scenes.json under meta.idea. Every field is checked by 0004/pipeline/preflight.py. The idea id must exist in 0006/ideas.json with Gate PASS in the 0006 Demand Map sheet.",
+  "idea": {
+    "id": "pilot-repackage",
+    "format": "prime_was",
+    "title": "Prime Ronaldo Scored 60 Goals and Still Lost",
+    "thumb_text": "STILL LOST",
+    "promise": "In 2012, prime Ronaldo scored sixty goals and still lost.",
+    "proof": "We rebuilt that season from every match he played.",
+    "plan": "First the record, then the man who beat it, then the night it all slipped away."
+  }
+}
