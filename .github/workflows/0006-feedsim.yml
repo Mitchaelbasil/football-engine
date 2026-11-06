@@ -5,6 +5,7 @@ on:
   push: # Claude sessions commit this file instead of dispatching
     paths:
       - 0006/requests/feedsim.json
+      - 0006/requests/gallery.json
 
 concurrency:
   group: 0006-feedsim
@@ -19,6 +20,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -27,7 +30,13 @@ jobs:
       - run: |
           pip install -r 0006/requirements.txt playwright==1.49.1
           python -m playwright install --with-deps chromium
-      - run: python 0006/feedsim.py
+      - name: Feed test or thumbnail gallery
+        run: |
+          if git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -q 0006/requests/gallery.json; then
+            python 0006/feedsim.py --gallery
+          else
+            python 0006/feedsim.py
+          fi
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}

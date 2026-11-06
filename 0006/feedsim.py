@@ -104,14 +104,14 @@ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hi
 </style></head><body><div class="grid">{''.join(cards)}</div></body></html>"""
 
 
-def render(html_doc: str, out: Path, mode: str) -> None:
+def render(html_doc: str, out: Path, mode: str, full: bool = False) -> None:
     from playwright.sync_api import sync_playwright
     w, h = (390, 1500) if mode == "mobile" else (1366, 1100)
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(viewport={"width": w, "height": h}, device_scale_factor=2 if mode == "mobile" else 1)
         pg.set_content(html_doc, wait_until="networkidle")
-        pg.screenshot(path=str(out), full_page=False)
+        pg.screenshot(path=str(out), full_page=full)
         b.close()
 
 
@@ -163,5 +163,49 @@ def main() -> None:
         print(f"Telegram failed: {type(exc).__name__}")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "--gallery" not in sys.argv:
     main()
+
+
+# ---------- thumbnail gallery (Phase 2: thumbnail patterns per title format) ----------
+
+def gallery_main(req_path: Path, out_dir: Path, db_path: Path) -> None:
+    import library as lib
+    req = json.loads(req_path.read_text(encoding="utf-8"))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    from shared.google_client import build_service
+    from shared.drive import upload
+    drive = build_service("drive", "v3")
+    root = dm.find_or_create(drive, dm.DRIVE_ROOT, dm.FOLDER_MIME, "root")
+    folder = dm.find_or_create(drive, dm.DRIVE_SUB, dm.FOLDER_MIME, root)
+    if not dm.pull_db(drive, folder, db_path):
+        raise SystemExit("No Demand Map DB on Drive yet")
+    db = dm.open_db(db_path)
+    formats = {f["id"]: f for f in lib.load_formats()}
+    pool = lib.creator_pool(db, dm.OUTLIER, dm.MIN_OUTLIER_VIEWS, dm.HIGH_VOLUME, dm.replicable)
+    gal = dm.find_or_create(drive, "gallery", dm.FOLDER_MIME, folder)
+    per = int(req.get("per", 12))
+    for fid in req.get("formats", []):
+        f = formats.get(fid)
+        if not f:
+            continue
+        wins = sorted([r for r in pool if r["win"] and f["rx"].search(lib.LEAD_RE.sub("", r["title"]))],
+                      key=lambda r: r["score"], reverse=True)
+        seen, picks = set(), []
+        for r in wins:  # at most 2 per channel, so one channel's style doesn't dominate
+            if sum(1 for p in picks if p["channel"] == r["channel"]) >= 2:
+                continue
+            picks.append(r)
+            if len(picks) >= per:
+                break
+        cards = [card(r["title"], r["ctitle"], f"{r['score']:g}x · {fmt_views(r['views'])}",
+                      f"https://i.ytimg.com/vi/{r['id']}/hqdefault.jpg",
+                      f"{r['duration'] // 60}:{r['duration'] % 60:02d}") for r in picks]
+        out = out_dir / f"gallery_{fid}.png"
+        render(page(cards, "desktop"), out, "desktop", full=True)
+        upload(drive, out, gal)
+        print(f"Gallery {fid}: {len(picks)} thumbnails")
+
+
+if __name__ == "__main__" and "--gallery" in sys.argv:
+    gallery_main(HERE / "requests" / "gallery.json", ROOT / ".feedsim", HERE / dm.DB_NAME)
