@@ -1,1 +1,1 @@
-{"max_units": 8000, "note": "v2 filters: soccer-only guard, 10k-view floor, high-volume feeds and highlights excluded from outputs; fresh DB"}
+{"sheet_only": true, "max_units": 200, "note": "rebuild sheet: football-only Outliers, Adjacent tab, creators first, fixed length format"}

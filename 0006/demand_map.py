@@ -595,29 +595,37 @@ def link(url: str, text: str) -> str:
     return f'=HYPERLINK("{url}","{str(text).replace(chr(34), chr(34) * 2)[:250]}")'
 
 
-def sheet_data(db, runs: list) -> dict:
-    out_rows = [["Thumb", "Score", "Title", "Channel", "Views", "Channel median", "Length (min)",
-                 "Published", "Subs", "Niche", "Found via"]]
+def outlier_rows(db, niche: str, limit: int) -> list:
+    rows = [["Thumb", "Score", "Title", "Channel", "Views", "Channel median", "Length (min)",
+             "Published", "Subs", "Found via"]]
     for r in db.execute(
             "SELECT v.*, c.title AS ctitle, c.median, c.subs FROM videos v "
-            "JOIN channels c ON c.id=v.channel WHERE v.score >= ? AND v.views >= ? "
-            "AND c.sample <= ? ORDER BY v.score DESC", (OUTLIER, MIN_OUTLIER_VIEWS, HIGH_VOLUME)):
+            "JOIN channels c ON c.id=v.channel WHERE v.niche=? AND v.score >= ? AND v.views >= ? "
+            "AND c.sample <= ? ORDER BY v.score DESC",
+            (niche, OUTLIER, MIN_OUTLIER_VIEWS, HIGH_VOLUME)):
         if not replicable(r["title"]):
             continue
-        if len(out_rows) > SHEET_OUTLIER_ROWS:
+        if len(rows) > limit:
             break
-        out_rows.append([
+        rows.append([
             f'=IMAGE("https://i.ytimg.com/vi/{r["id"]}/mqdefault.jpg")', r["score"],
             link(f"https://www.youtube.com/watch?v={r['id']}", r["title"]),
             link(f"https://www.youtube.com/channel/{r['channel']}", r["ctitle"]),
             r["views"], round(r["median"] or 0), round(r["duration"] / 60, 1), r["published"][:10],
-            r["subs"], r["niche"], txt(r["found_via"]),
+            r["subs"], txt(r["found_via"]),
         ])
+    return rows
+
+
+def sheet_data(db, runs: list) -> dict:
+    out_rows = outlier_rows(db, "football", SHEET_OUTLIER_ROWS)
+    adj_rows = outlier_rows(db, "adjacent", 300)
 
     ch_rows = [["Channel", "Niche", "Subs", "Long-form (12m)", "Median views", "Outliers (3x+)",
                 "Hit rate", "Best score", "Depth", "Found via", "Status", "Crawled", "Type"]]
     for r in db.execute("SELECT * FROM channels WHERE status IN ('done','thin') "
-                        "ORDER BY outliers DESC, best DESC"):
+                        "ORDER BY (COALESCE(sample, 0) > ?), niche != 'football', outliers DESC, "
+                        "best DESC", (HIGH_VOLUME,)):
         hit = round(r["outliers"] / r["scored"], 3) if r["scored"] else ""
         ch_rows.append([
             link(f"https://www.youtube.com/channel/{r['id']}", r["title"]), r["niche"], r["subs"],
@@ -647,12 +655,13 @@ def sheet_data(db, runs: list) -> dict:
         b = max(w)
         topics.append((n_ch, len(w), p, total[p], statistics.median(s for s, *_ in w), b))
     topics.sort(key=lambda t: (t[0], t[1]), reverse=True)
-    sig = {(t[1], t[3]): [] for t in topics}
+    # drop "fifa world" when "fifa world cup" carries (almost) the same videos
+    by_wins = {}
     for t in topics:
-        sig[(t[1], t[3])].append(t[2])
-    # drop "fifa world" when "fifa world cup" carries exactly the same videos
-    topics = [t for t in topics if not any(t[2] != q and f" {t[2]} " in f" {q} "
-                                           for q in sig[(t[1], t[3])])]
+        by_wins.setdefault(t[1], []).append(t)
+    topics = [t for t in topics if not any(
+        o[2] != t[2] and f" {t[2]} " in f" {o[2]} " and o[3] >= 0.9 * t[3]
+        for o in by_wins[t[1]])]
     for n_ch, n_w, p, tot, med, b in topics[:500]:
         top_rows.append([txt(p), n_ch, n_w, tot, round(n_w / tot, 3), round(med, 2),
                          link(f"https://www.youtube.com/watch?v={b[2]}", b[3])])
@@ -662,7 +671,8 @@ def sheet_data(db, runs: list) -> dict:
     for r in runs:
         log_rows.append([r["started"], r["units"], r["searches"], r["channels"], r["scored"],
                          r["new_outliers"], r["stack"], r["seeds_left"], r["stop"]])
-    return {"Outliers": out_rows, "Channels": ch_rows, "Topics": top_rows, "Log": log_rows}
+    return {"Outliers": out_rows, "Topics": top_rows, "Channels": ch_rows,
+            "Adjacent": adj_rows, "Log": log_rows}
 
 
 def write_sheet(drive, sheets, folder: str, data: dict) -> str:
@@ -680,6 +690,9 @@ def write_sheet(drive, sheets, folder: str, data: dict) -> str:
         meta = sheets.spreadsheets().get(spreadsheetId=sid, fields="sheets.properties").execute()
         tabs = {s["properties"]["title"]: s["properties"]["sheetId"] for s in meta["sheets"]}
 
+    sheets.spreadsheets().batchUpdate(spreadsheetId=sid, body={"requests": [
+        {"updateCells": {"range": {"sheetId": tabs[t]}, "fields": "userEnteredFormat"}}
+        for t in data]}).execute()
     vals = sheets.spreadsheets().values()
     for tab, rows in data.items():
         vals.clear(spreadsheetId=sid, range=tab).execute()
@@ -695,19 +708,24 @@ def write_sheet(drive, sheets, folder: str, data: dict) -> str:
              "cell": {"userEnteredFormat": {"textFormat": {"bold": True}}},
              "fields": "userEnteredFormat.textFormat.bold"}},
         ]
-    n = len(data["Outliers"])
-    fmt += [
-        {"updateDimensionProperties": {"range": {"sheetId": tabs["Outliers"], "dimension": "COLUMNS",
+    for tab in ("Outliers", "Adjacent"):
+        fmt += image_layout(tabs[tab], len(data[tab]))
+    sheets.spreadsheets().batchUpdate(spreadsheetId=sid, body={"requests": fmt}).execute()
+    return f"https://docs.google.com/spreadsheets/d/{sid}"
+
+
+def image_layout(sheet_id: int, n: int) -> list:
+    fmt = [
+        {"updateDimensionProperties": {"range": {"sheetId": sheet_id, "dimension": "COLUMNS",
          "startIndex": 0, "endIndex": 1}, "properties": {"pixelSize": 128}, "fields": "pixelSize"}},
-        {"updateDimensionProperties": {"range": {"sheetId": tabs["Outliers"], "dimension": "COLUMNS",
+        {"updateDimensionProperties": {"range": {"sheetId": sheet_id, "dimension": "COLUMNS",
          "startIndex": 2, "endIndex": 3}, "properties": {"pixelSize": 420}, "fields": "pixelSize"}},
     ]
     if n > 1:
-        fmt.append({"updateDimensionProperties": {"range": {"sheetId": tabs["Outliers"],
+        fmt.append({"updateDimensionProperties": {"range": {"sheetId": sheet_id,
                     "dimension": "ROWS", "startIndex": 1, "endIndex": n},
                     "properties": {"pixelSize": 72}, "fields": "pixelSize"}})
-    sheets.spreadsheets().batchUpdate(spreadsheetId=sid, body={"requests": fmt}).execute()
-    return f"https://docs.google.com/spreadsheets/d/{sid}"
+    return fmt
 
 
 # ---------- main ----------
@@ -732,6 +750,7 @@ def main() -> None:
     ap.add_argument("--max-units", type=int, default=9000)
     ap.add_argument("--db", type=Path, default=HERE / DB_NAME)
     ap.add_argument("--offline", action="store_true", help="local DB only: no Drive, Sheet, Telegram")
+    ap.add_argument("--sheet-only", action="store_true", help="rebuild the sheet from the DB; no crawl")
     args = ap.parse_args()
     budget = max(200, min(args.max_units, 9500))
     today = now_utc()
@@ -746,6 +765,13 @@ def main() -> None:
         print("Resumed DB from Drive" if pull_db(drive, folder, args.db) else "Starting new DB")
 
     db = open_db(args.db)
+    if args.sheet_only:
+        runs = [dict(r) for r in db.execute("SELECT * FROM runs ORDER BY started DESC LIMIT 200")]
+        data = sheet_data(db, runs)
+        db.close()
+        write_sheet(drive, sheets, folder, data)
+        print("Sheet rebuilt (no crawl)")
+        return
     load_seeds(db, today)
     print(f"Expired {expire_old(db, today)} videos older than {EXPIRE_DAYS} days")
 

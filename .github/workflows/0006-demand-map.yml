@@ -37,15 +37,20 @@ jobs:
           EVENT: ${{ github.event_name }}
           INPUT_UNITS: ${{ inputs.max_units }}
         run: |
+          extra=""
           if [ "$EVENT" = "push" ]; then
             units=$(python -c "import json; print(int(json.load(open('0006/requests/run.json')).get('max_units', 1500)))")
+            if python -c "import json, sys; sys.exit(0 if json.load(open('0006/requests/run.json')).get('sheet_only') else 1)"; then
+              extra="--sheet-only"
+            fi
           elif [ -n "$INPUT_UNITS" ]; then
             units=$(python -c "import sys; print(int(sys.argv[1]))" "$INPUT_UNITS")
           else
             units=9000
           fi
           echo "units=$units" >> "$GITHUB_OUTPUT"
-      - run: python 0006/demand_map.py --max-units "${{ steps.cfg.outputs.units }}"
+          echo "extra=$extra" >> "$GITHUB_OUTPUT"
+      - run: python 0006/demand_map.py --max-units "${{ steps.cfg.outputs.units }}" ${{ steps.cfg.outputs.extra }}
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
