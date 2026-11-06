@@ -1,7 +1,7 @@
 {
- "video": "_introtest",
+ "video": "villains-opening",
  "voice": "kokoro:af_bella",
- "note": "arc intro test (DS smoke on #1)",
+ "note": "villains v2: DS intro on #1, gentle fallback cards, Byern respelling, description",
  "telegram": false,
- "rev": 10
+ "rev": 11
 }
