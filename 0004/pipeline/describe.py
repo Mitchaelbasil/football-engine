@@ -17,17 +17,30 @@ def mmss(t: float) -> str:
     return f"{t // 3600}:{t % 3600 // 60:02d}:{t % 60:02d}" if t >= 3600 else f"{t // 60}:{t % 60:02d}"
 
 
+def name_case(x: str) -> str:
+    """Title case that keeps name particles low: Robin van Persie, Kevin De Bruyne stays as data gives it."""
+    return " ".join(w.lower() if i and w.lower() in ("van", "von", "der", "den", "da", "di", "dos", "del") else w
+                    for i, w in enumerate(x.title().split()))
+
+
 def chapters(tl: dict, doc: dict) -> list:
+    """Arc cards, plus 'NUMBER N' slams for countdown entries that have no arc card of their own."""
+    import re
     by_id = {s["id"]: s for s in doc.get("scenes", [])}
+    num = lambda x: (re.match(r"NUMBER (\d+)", str(x or "").upper()) or [None, None])[1]
+    arc_nums = {num(s.get("data", {}).get("kicker")) for s in doc.get("scenes", []) if s.get("type") == "arc"}
     out = [(0.0, "Intro")]
     for s in tl.get("scenes", []):
         src = by_id.get(s["id"], {})
-        if src.get("type") != "arc":
-            continue
         d = src.get("data", {})
-        title = " ".join(d.get("title", [])) if isinstance(d.get("title"), list) else str(d.get("title", ""))
-        name = (d.get("sub") or "").split("·")[0].strip().title()
-        label = f"{d.get('kicker', '').title()}: {name}" if name else title.title()
+        if src.get("type") == "arc":
+            title = " ".join(d.get("title", [])) if isinstance(d.get("title"), list) else str(d.get("title", ""))
+            name = name_case((d.get("sub") or "").split("·")[0].strip())
+            label = f"{d.get('kicker', '').title()}: {name}" if name else title.title()
+        elif src.get("type") == "slam" and num(d.get("pre")) and num(d.get("pre")) not in arc_nums and d.get("sub"):
+            label = f"{d['pre'].title()}: {str(d.get('word', '')).title()}"
+        else:
+            continue
         if s["start"] - out[-1][0] >= 10:
             out.append((s["start"], label.replace("Number ", "#")))
     return out if len(out) >= 3 else []
