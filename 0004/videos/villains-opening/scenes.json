@@ -383,7 +383,7 @@
      "do": [
       {
        "a": "count",
-       "at": "Bayern"
+       "at": "didn't"
       }
      ]
     },
@@ -530,7 +530,7 @@
       },
       {
        "a": "sub",
-       "at": "Goetze"
+       "at": "watched"
       }
      ],
      "react": {
