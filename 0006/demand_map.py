@@ -671,11 +671,33 @@ def sheet_data(db, runs: list) -> dict:
     for r in runs:
         log_rows.append([r["started"], r["units"], r["searches"], r["channels"], r["scored"],
                          r["new_outliers"], r["stack"], r["seeds_left"], r["stop"]])
-    return {"Outliers": out_rows, "Topics": top_rows, "Channels": ch_rows,
-            "Adjacent": adj_rows, "Log": log_rows}
+    import library as lib
+    formats = lib.load_formats()
+    pool = lib.creator_pool(db, OUTLIER, MIN_OUTLIER_VIEWS, HIGH_VOLUME, replicable)
+    fmt_rows, fstats, base = lib.format_rows(pool, formats, link)
+    return {"Ideas": lib.idea_rows(pool, fstats, base, formats, link), "Formats": fmt_rows,
+            "Outliers": out_rows, "Topics": top_rows, "Features": lib.feature_rows(pool),
+            "Channels": ch_rows, "Adjacent": adj_rows, "Log": log_rows,
+            "_export": lib.export_text(pool)}
+
+
+def write_export(drive, folder: str, text: str) -> None:
+    """Top creator outliers as plain text in Drive (refreshed every run) for Claude's reviews."""
+    from googleapiclient.http import MediaInMemoryUpload
+    name = "0006 export - top outliers.txt"
+    media = MediaInMemoryUpload(text.encode("utf-8"), mimetype="text/plain")
+    fid = find(drive, name, folder)
+    if fid:
+        drive.files().update(fileId=fid, media_body=media).execute()
+    else:
+        drive.files().create(body={"name": name, "parents": [folder]}, media_body=media,
+                             fields="id").execute()
 
 
 def write_sheet(drive, sheets, folder: str, data: dict) -> str:
+    export = data.pop("_export", None)
+    if export:
+        write_export(drive, folder, export)
     sid = find_or_create(drive, SHEET_NAME, SHEET_MIME, folder)
     meta = sheets.spreadsheets().get(spreadsheetId=sid, fields="sheets.properties").execute()
     tabs = {s["properties"]["title"]: s["properties"]["sheetId"] for s in meta["sheets"]}
