@@ -46,6 +46,9 @@ SHORT_MAX_SECONDS = 180    # Shorts can run up to 3 min
 MIN_SAMPLE = 5             # long-form videos needed for a valid channel median
 OUTLIER = 3.0
 STRONG = 5.0
+MIN_OUTLIER_VIEWS = 10_000 # an outlier must also prove absolute demand
+HIGH_VOLUME = 150          # >150 long-form uploads a year = broadcaster/news/podcast feed
+DB_VERSION = 2             # bump to start a fresh DB when scoring or filters change
 MAX_DEPTH = 2              # 0 seed search, 1 channel from a search, 2 featured channel
 CHANNELS_PER_SEARCH = 25
 MAX_UPLOADS = 300          # playlist items read per channel
@@ -57,8 +60,19 @@ COST = {"search": 100}     # every other call we make costs 1 unit
 
 DUR_RE = re.compile(r"P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$")
 FOOTBALL_TOPIC = "Association_football"
+OTHER_SPORT_TOPICS = {
+    "American_football", "Rugby_football", "Rugby_union", "Rugby_league", "Basketball",
+    "Baseball", "Tennis", "Cricket", "Boxing", "Mixed_martial_arts", "Golf", "Motorsport",
+    "Ice_hockey", "Volleyball", "Athletics_(sport)", "Professional_wrestling",
+}
+NOT_SOCCER_RE = re.compile(
+    r"\b(nfl|ncaa|college football|super bowl|fantasy football|quarterback|touchdowns?|"
+    r"rugby|cfb|gridiron|packers|cowboys|patriots|giants|steelers|chiefs)\b", re.I)
+NOT_REPLICABLE_RE = re.compile(
+    r"\b(highlights|full match|full game|live|livestream|watchalong|post[- ]match|"
+    r"press conference|presser|matchday|line ?ups?)\b", re.I)
 FOOTBALL_RE = re.compile(
-    r"\b(football|soccer|futbol|fútbol|futebol|calcio|fc|premier league|la ?liga|serie a|"
+    r"\b(soccer|futbol|fútbol|futebol|calcio|fc|premier league|la ?liga|serie a|"
     r"bundesliga|ligue 1|champions league|ucl|epl|world cup|ballon d.or|messi|ronaldo|cr7|"
     r"haaland|mbapp[eé]|neymar|yamal|bellingham|real madrid|barcelona|man(chester)? (united|city)|"
     r"arsenal|liverpool|chelsea|tottenham|juventus|bayern|psg|ac milan|inter milan)\b",
@@ -103,10 +117,23 @@ def parse_duration(s: str) -> int:
 
 
 def is_football(ch: dict) -> bool:
-    topics = " ".join(ch.get("topics") or [])
+    """Soccer-only channels. Multi-sport broadcasters and American football are out."""
+    topics = {t.rsplit("/", 1)[-1] for t in ch.get("topics") or []}
     if FOOTBALL_TOPIC in topics:
-        return True
-    return bool(FOOTBALL_RE.search(f"{ch.get('title', '')} {ch.get('description', '')}"))
+        return not (topics & OTHER_SPORT_TOPICS)
+    text = f"{ch.get('title', '')} {ch.get('description', '')}"
+    if topics & OTHER_SPORT_TOPICS or NOT_SOCCER_RE.search(text):
+        return False
+    return bool(FOOTBALL_RE.search(text))
+
+
+def is_outlier(score, views) -> bool:
+    return score is not None and score >= OUTLIER and (views or 0) >= MIN_OUTLIER_VIEWS
+
+
+def replicable(title: str) -> bool:
+    """Match footage, live streams and pressers can't be remade by a faceless channel."""
+    return not NOT_REPLICABLE_RE.search(title or "")
 
 
 def score_videos(videos: list, today: dt.datetime) -> tuple:
@@ -257,10 +284,11 @@ class YT:
             out += sec.get("contentDetails", {}).get("channels", []) or []
         return [c for c in dict.fromkeys(out) if c != channel_id]
 
-    def search(self, term: str, after: dt.datetime) -> list:
+    def search(self, term: str, after: dt.datetime, region: str = None) -> list:
+        kw = {"regionCode": region} if region else {}
         resp = self.run(self.s.search().list(
             part="snippet", q=term, type="video", maxResults=50, order="relevance",
-            publishedAfter=iso(after), relevanceLanguage="en"), cost=COST["search"])
+            publishedAfter=iso(after), relevanceLanguage="en", **kw), cost=COST["search"])
         return [it["id"]["videoId"] for it in (resp or {}).get("items", [])
                 if it.get("id", {}).get("videoId")]
 
@@ -281,6 +309,7 @@ CREATE TABLE IF NOT EXISTS stack(id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT
 CREATE TABLE IF NOT EXISTS runs(started TEXT, units INTEGER, searches INTEGER,
   channels INTEGER, scored INTEGER, new_outliers INTEGER, stack INTEGER, seeds_left INTEGER,
   stop TEXT);
+CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
 CREATE INDEX IF NOT EXISTS videos_channel ON videos(channel);
 CREATE INDEX IF NOT EXISTS videos_score ON videos(score);
 """
@@ -290,6 +319,15 @@ def open_db(path: Path) -> sqlite3.Connection:
     db = sqlite3.connect(str(path))
     db.row_factory = sqlite3.Row
     db.executescript(SCHEMA)
+    row = db.execute("SELECT value FROM meta WHERE key='version'").fetchone()
+    has_data = db.execute("SELECT COUNT(*) FROM seeds").fetchone()[0]
+    if has_data and (not row or int(row[0]) != DB_VERSION):
+        db.close()
+        path.unlink()
+        print(f"DB version changed: starting fresh (v{DB_VERSION})")
+        return open_db(path)
+    db.execute("INSERT OR REPLACE INTO meta VALUES('version', ?)", (str(DB_VERSION),))
+    db.commit()
     return db
 
 
@@ -355,7 +393,9 @@ def next_node(db: sqlite3.Connection, today: dt.datetime):
 
 def do_search(db, yt: YT, node: dict, today: dt.datetime, stats: dict) -> None:
     term, niche = node["ref"], node["niche"]
-    ids = yt.search(term, today - dt.timedelta(days=SEARCH_WINDOW_DAYS))
+    # GB region so "football" means soccer, not the NFL
+    ids = yt.search(term, today - dt.timedelta(days=SEARCH_WINDOW_DAYS),
+                    "GB" if niche == "football" else None)
     stats["searches"] += 1
     db.execute("UPDATE seeds SET status='done', searched=? WHERE term=?", (iso(today), term))
     hits = [v for v in yt.videos(ids) if v["duration"] > SHORT_MAX_SECONDS]
@@ -412,7 +452,9 @@ def do_channel(db, yt: YT, node: dict, today: dt.datetime, stats: dict) -> None:
     stats["channels"] += 1
 
     before = {r["id"] for r in db.execute(
-        "SELECT id FROM videos WHERE channel=? AND score >= ?", (cid, OUTLIER))}
+        "SELECT id FROM videos WHERE channel=? AND score >= ? AND views >= ?",
+        (cid, OUTLIER, MIN_OUTLIER_VIEWS))}
+    views = {v["id"]: v["views"] for v in vids}
     for v in vids:
         s = scores.get(v["id"])
         db.execute(
@@ -424,10 +466,9 @@ def do_channel(db, yt: YT, node: dict, today: dt.datetime, stats: dict) -> None:
             (v["id"], cid, v["title"], iso(v["published"]), v["duration"], v["views"],
              v["likes"], v["comments"], s, niche, via, iso(today)))
     scored = [s for s in scores.values() if s is not None]
-    outliers = [s for s in scored if s >= OUTLIER]
+    outliers = [vid for vid, s in scores.items() if is_outlier(s, views.get(vid))]
     stats["scored"] += len(scored)
-    stats["new_outliers"] += len({vid for vid, s in scores.items()
-                                  if s is not None and s >= OUTLIER} - before)
+    stats["new_outliers"] += len(set(outliers) - before)
     db.execute(
         "UPDATE channels SET median=?, sample=?, scored=?, outliers=?, best=?, status=?, crawled=? "
         "WHERE id=?",
@@ -435,7 +476,8 @@ def do_channel(db, yt: YT, node: dict, today: dt.datetime, stats: dict) -> None:
          "done" if med is not None else "thin", iso(today), cid))
     db.commit()
 
-    if expand and niche == "football" and outliers and depth < MAX_DEPTH:
+    if expand and niche == "football" and outliers and depth < MAX_DEPTH \
+            and sample <= HIGH_VOLUME:
         for fid in reversed(yt.featured(cid)):
             if not channel_fresh(db, fid, today):
                 push(db, "channel", fid, depth + 1, niche, via)
@@ -444,9 +486,12 @@ def do_channel(db, yt: YT, node: dict, today: dt.datetime, stats: dict) -> None:
 
 def expand_seeds(db, today: dt.datetime) -> int:
     rows = db.execute("SELECT v.title, v.channel FROM videos v JOIN channels c ON c.id=v.channel "
-                      "WHERE v.score >= ? AND v.niche='football'", (OUTLIER,)).fetchall()
+                      "WHERE v.score >= ? AND v.views >= ? AND v.niche='football' "
+                      "AND c.sample <= ?", (OUTLIER, MIN_OUTLIER_VIEWS, HIGH_VOLUME)).fetchall()
     chans = {}
     for r in rows:
+        if not replicable(r["title"]):
+            continue
         for p in phrases(r["title"]):
             chans.setdefault(p, set()).add(r["channel"])
     existing = [r["term"] for r in db.execute("SELECT term FROM seeds")]
@@ -550,27 +595,27 @@ def link(url: str, text: str) -> str:
     return f'=HYPERLINK("{url}","{str(text).replace(chr(34), chr(34) * 2)[:250]}")'
 
 
-def mmss(sec: int) -> str:
-    return f"{sec // 60}:{sec % 60:02d}"
-
-
 def sheet_data(db, runs: list) -> dict:
-    out_rows = [["Thumb", "Score", "Title", "Channel", "Views", "Channel median", "Length",
+    out_rows = [["Thumb", "Score", "Title", "Channel", "Views", "Channel median", "Length (min)",
                  "Published", "Subs", "Niche", "Found via"]]
     for r in db.execute(
             "SELECT v.*, c.title AS ctitle, c.median, c.subs FROM videos v "
-            "JOIN channels c ON c.id=v.channel WHERE v.score >= ? ORDER BY v.score DESC LIMIT ?",
-            (OUTLIER, SHEET_OUTLIER_ROWS)):
+            "JOIN channels c ON c.id=v.channel WHERE v.score >= ? AND v.views >= ? "
+            "AND c.sample <= ? ORDER BY v.score DESC", (OUTLIER, MIN_OUTLIER_VIEWS, HIGH_VOLUME)):
+        if not replicable(r["title"]):
+            continue
+        if len(out_rows) > SHEET_OUTLIER_ROWS:
+            break
         out_rows.append([
             f'=IMAGE("https://i.ytimg.com/vi/{r["id"]}/mqdefault.jpg")', r["score"],
             link(f"https://www.youtube.com/watch?v={r['id']}", r["title"]),
             link(f"https://www.youtube.com/channel/{r['channel']}", r["ctitle"]),
-            r["views"], round(r["median"] or 0), mmss(r["duration"]), r["published"][:10],
+            r["views"], round(r["median"] or 0), round(r["duration"] / 60, 1), r["published"][:10],
             r["subs"], r["niche"], txt(r["found_via"]),
         ])
 
     ch_rows = [["Channel", "Niche", "Subs", "Long-form (12m)", "Median views", "Outliers (3x+)",
-                "Hit rate", "Best score", "Depth", "Found via", "Status", "Crawled"]]
+                "Hit rate", "Best score", "Depth", "Found via", "Status", "Crawled", "Type"]]
     for r in db.execute("SELECT * FROM channels WHERE status IN ('done','thin') "
                         "ORDER BY outliers DESC, best DESC"):
         hit = round(r["outliers"] / r["scored"], 3) if r["scored"] else ""
@@ -578,15 +623,19 @@ def sheet_data(db, runs: list) -> dict:
             link(f"https://www.youtube.com/channel/{r['id']}", r["title"]), r["niche"], r["subs"],
             r["sample"], round(r["median"] or 0), r["outliers"], hit, r["best"], r["depth"],
             txt(r["found_via"]), r["status"], (r["crawled"] or "")[:10],
+            "high-volume feed" if (r["sample"] or 0) > HIGH_VOLUME else "creator",
         ])
 
     # Topics: phrase hit rates over every scored football video, not just winners.
     total, wins, best = {}, {}, {}
-    for r in db.execute("SELECT id, title, channel, score FROM videos "
-                        "WHERE niche='football' AND score IS NOT NULL"):
+    for r in db.execute("SELECT v.id, v.title, v.channel, v.score, v.views FROM videos v "
+                        "JOIN channels c ON c.id=v.channel WHERE v.niche='football' "
+                        "AND v.score IS NOT NULL AND c.sample <= ?", (HIGH_VOLUME,)):
+        if not replicable(r["title"]):
+            continue
         for p in phrases(r["title"]):
             total[p] = total.get(p, 0) + 1
-            if r["score"] >= OUTLIER:
+            if is_outlier(r["score"], r["views"]):
                 wins.setdefault(p, []).append((r["score"], r["channel"], r["id"], r["title"]))
     top_rows = [["Phrase", "Outlier channels", "Outliers", "Videos using it", "Hit rate",
                  "Median outlier score", "Best example"]]
@@ -598,6 +647,12 @@ def sheet_data(db, runs: list) -> dict:
         b = max(w)
         topics.append((n_ch, len(w), p, total[p], statistics.median(s for s, *_ in w), b))
     topics.sort(key=lambda t: (t[0], t[1]), reverse=True)
+    sig = {(t[1], t[3]): [] for t in topics}
+    for t in topics:
+        sig[(t[1], t[3])].append(t[2])
+    # drop "fifa world" when "fifa world cup" carries exactly the same videos
+    topics = [t for t in topics if not any(t[2] != q and f" {t[2]} " in f" {q} "
+                                           for q in sig[(t[1], t[3])])]
     for n_ch, n_w, p, tot, med, b in topics[:500]:
         top_rows.append([txt(p), n_ch, n_w, tot, round(n_w / tot, 3), round(med, 2),
                          link(f"https://www.youtube.com/watch?v={b[2]}", b[3])])
@@ -661,8 +716,10 @@ def counts(db) -> dict:
     one = lambda q, *a: db.execute(q, a).fetchone()[0]  # noqa: E731
     return {
         "videos": one("SELECT COUNT(*) FROM videos WHERE score IS NOT NULL"),
-        "outliers": one("SELECT COUNT(*) FROM videos WHERE score >= ?", OUTLIER),
-        "strong": one("SELECT COUNT(*) FROM videos WHERE score >= ?", STRONG),
+        "outliers": one("SELECT COUNT(*) FROM videos WHERE score >= ? AND views >= ?",
+                        OUTLIER, MIN_OUTLIER_VIEWS),
+        "strong": one("SELECT COUNT(*) FROM videos WHERE score >= ? AND views >= ?",
+                      STRONG, MIN_OUTLIER_VIEWS),
         "channels": one("SELECT COUNT(*) FROM channels WHERE status IN ('done','thin') "
                         "AND niche='football'"),
         "stack": one("SELECT COUNT(*) FROM stack"),

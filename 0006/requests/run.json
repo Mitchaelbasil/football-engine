@@ -1,1 +1,1 @@
-{"max_units": 1500, "note": "first live test run"}
+{"max_units": 8000, "note": "v2 filters: soccer-only guard, 10k-view floor, high-volume feeds and highlights excluded from outputs; fresh DB"}
